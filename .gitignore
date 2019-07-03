@@ -15,6 +15,7 @@ web/WEB-INF/classes/
 .classpath
 .project
 bin/
+target/
 
 # for mac 
 .DS_Store
