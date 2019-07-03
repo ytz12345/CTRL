@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.bupt.ctrl.model.UserHasCourse">
+        <table name="user_has_course" schema="sdrb" catalog=""/>
+        <attributes>
+            <basic name="userTeachorstudy">
+                <column name="User_Teachorstudy"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

@@ -1,65 +1,91 @@
 package com.bupt.ctrl.model;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class User {
-    private Integer userId;
-
     private String userName;
-
     private String userPassword;
-
-    private Integer userIdentity;
-
+    private int userIdentity;
     private String userIntro;
+    private int userId;
 
-    public User(Integer userId, String userName, String userPassword, Integer userIdentity, String userIntro) {
-        this.userId = userId;
-        this.userName = userName;
-        this.userPassword = userPassword;
-        this.userIdentity = userIdentity;
-        this.userIntro = userIntro;
-    }
-
-    public User() {
-        super();
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
+    @Basic
+    @Column(name = "User_Name")
     public String getUserName() {
         return userName;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+        this.userName = userName;
     }
 
+    @Basic
+    @Column(name = "User_Password")
     public String getUserPassword() {
         return userPassword;
     }
 
     public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword == null ? null : userPassword.trim();
+        this.userPassword = userPassword;
     }
 
-    public Integer getUserIdentity() {
+    @Basic
+    @Column(name = "User_Identity")
+    public int getUserIdentity() {
         return userIdentity;
     }
 
-    public void setUserIdentity(Integer userIdentity) {
+    public void setUserIdentity(int userIdentity) {
         this.userIdentity = userIdentity;
     }
 
+    @Basic
+    @Column(name = "User_Intro")
     public String getUserIntro() {
         return userIntro;
     }
 
     public void setUserIntro(String userIntro) {
-        this.userIntro = userIntro == null ? null : userIntro.trim();
+        this.userIntro = userIntro;
+    }
+
+    @Id
+    @Column(name = "User_id")
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (userIdentity != user.userIdentity) return false;
+        if (userId != user.userId) return false;
+        if (userName != null ? !userName.equals(user.userName) : user.userName != null) return false;
+        if (userPassword != null ? !userPassword.equals(user.userPassword) : user.userPassword != null) return false;
+        if (userIntro != null ? !userIntro.equals(user.userIntro) : user.userIntro != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = userName != null ? userName.hashCode() : 0;
+        result = 31 * result + (userPassword != null ? userPassword.hashCode() : 0);
+        result = 31 * result + userIdentity;
+        result = 31 * result + (userIntro != null ? userIntro.hashCode() : 0);
+        result = 31 * result + userId;
+        return result;
     }
 }

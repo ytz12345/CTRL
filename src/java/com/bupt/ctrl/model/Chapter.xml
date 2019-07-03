@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.bupt.ctrl.model.Chapter">
+        <table name="chapter" schema="sdrb" catalog=""/>
+        <attributes>
+            <id name="chapterId">
+                <column name="Chapter_id"/>
+            </id>
+            <basic name="chapterNum">
+                <column name="Chapter_Num"/>
+            </basic>
+            <basic name="chapterName">
+                <column name="Chapter_Name"/>
+            </basic>
+            <basic name="chapterVideo">
+                <column name="Chapter_Video"/>
+            </basic>
+            <basic name="chapterPpt">
+                <column name="Chapter_PPT"/>
+            </basic>
+            <basic name="chapterIntro">
+                <column name="Chapter_Intro"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>
