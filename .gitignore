@@ -1,0 +1,22 @@
+# for idea/
+.idea/dataSources.local.xml
+.idea/dataSources.xml
+.idea/deployment.xml
+.idea/vcs.xml
+.idea/webServers.xml
+.idea/workspace.xml
+.idea/dataSources/*
+out/
+web/WEB-INF/lib/*
+web/WEB-INF/classes/
+
+# for eclipse:
+.settings/
+.classpath
+.project
+bin/
+
+# for mac 
+.DS_Store
+
+
