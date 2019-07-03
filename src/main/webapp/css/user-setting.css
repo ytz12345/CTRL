@@ -1,0 +1,351 @@
+.content {
+    width: 70%;
+    margin-left: 15%;
+    min-height: 1200px;
+    padding: 30px;
+    position: relative;
+    background-color: #fff;
+    opacity:0.9;
+}
+.person-center .main {
+    float: right;
+    width: 742px;
+    position: relative;
+    padding-left: 0px;
+}
+
+.main, .sidebar {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+.personal-settings .main-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #d0d6dc;
+}
+.personal-settings .main-body {
+    background-color: #f5f5f6;
+    height: 1050px;
+    padding-top: 10px;
+}
+.main-body {
+    margin-top: 10px;
+    position: relative;
+}
+.input-group {
+    margin-bottom: 10px;
+}
+.p-basic-data .input-label {
+    width: 105px;
+}
+
+.input-label {
+    float: left;
+    font-size: 14px;
+    line-height: 30px;
+    padding-right: 8px;
+    text-align: right;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+}
+user agent stylesheet
+label {
+    cursor: default;
+}
+.input-cr {
+    line-height: 30px;
+    font-size: 14px;
+    margin-right: 20px;
+}
+.input-cr .input-c, .input-cr .input-r {
+    vertical-align: -8px;
+}
+
+.input-r {
+    background-position: -336px 0;
+}
+.input-r.selected {
+    background-position: -360px 0;
+}
+.input-c, .input-r {
+    width: 24px;
+    height: 24px;
+    margin-right: 3px;
+}
+.i-search, .icon-lock, .icon-date, .icon-clock, .icon-cycle,.icon-date01, .icon-clock01, .icon-cycle01, .line-top, .line-bottom, .side-dot, .input-c, .input-r, .pagination .page-num a, .icon-panel, .icon-edit, .icon-sort, .icon-arrow, .test-title .test-no, .icon-back, .ui-datepicker .ui-datepicker-prev span, .ui-datepicker .ui-datepicker-next span, .steps-num, .icon-date02, .icon-attach, .icon-snotice, .icon-report01, .icon-window, .icon-window01, .icon-date04, .icon-view04, .introjs-helperNumberLayer {
+    display: inline-block;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-image: url(../images/sprite.png);
+}
+.dk-selected {
+    position: relative;
+    overflow: hidden;
+    padding: 0 1.5em 0 .5em;
+    width: 100%;
+    height: 30px;
+    border: 1px solid #beccdb;
+    border-radius: 2px;
+    background-color: white;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 29px;
+    -prefix-text-overflow: ellipsis;
+}
+.dk-select, .dk-select-multi {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    border-radius: 2px;
+    vertical-align: middle;
+    line-height: 30px;
+    cursor: pointer;
+}
+input, button, textarea, select, optgroup, option {
+    font-family: inherit;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+}
+button, select {
+    text-transform: none;
+}
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+[role=button], a, area, button, input:not([type=range]), label, select, summary, textarea {
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+}
+select {
+    border-radius: 0px;
+    border-color: rgb(169, 169, 169);
+}
+select {
+    -webkit-appearance: menulist;
+    box-sizing: border-box;
+    align-items: center;
+    white-space: pre;
+    -webkit-rtl-ordering: logical;
+    color: black;
+    background-color: white;
+    cursor: default;
+    border-width: 1px;
+    border-style: solid;
+    border-color: initial;
+    border-image: initial;
+}
+input, textarea, select, button {
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+}
+input, textarea, select, button, meter, progress {
+    -webkit-writing-mode: horizontal-tb !important;
+}
+.p-basic-data .select {
+    width: 100px;
+    height: 30px;
+}
+.dk-select, .dk-select-multi {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    border-radius: 2px;
+    vertical-align: middle;
+    line-height: 30px;
+    cursor: pointer;
+}
+.dk-selected {
+    position: relative;
+    overflow: hidden;
+    padding: 0 1.5em 0 .5em;
+    width: 100%;
+    height: 30px;
+    border: 1px solid #beccdb;
+    border-radius: 2px;
+    background-color: white;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 29px;
+    -prefix-text-overflow: ellipsis;
+}
+.dk-select .dk-select-options {
+    position: absolute;
+    left: 0;
+    display: none;
+    max-height: 195px;
+}
+
+.dk-select-options {
+    z-index: 100;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: 0;
+    padding: 3px;
+    width: 100%;
+    max-height: 306px;
+    border: 1px solid #434d57;
+    border-radius: .4em;
+    background-color: #434d57;
+    list-style: none;
+}
+.dk-option {
+    padding: 0 .5em;
+    border-radius: 2px;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.dk-option-selected {
+    background-color: #19c880;
+    color: #fff;
+}
+.p-basic-data .input-text {
+    width: 340px;
+}
+.input-text {
+    height: 30px;
+    width: 290px;
+    line-height: 18px;
+}
+.input-text, .input-area {
+    float: left;
+    padding: 5px 8px;
+    line-height: 20px;
+    border: 1px solid #beccdb;
+    border-radius: 2px;
+    resize: none;
+    color: #434d57;
+    font-size: 13px;
+    transition: border-color .3s;
+}
+.personal-settings .btn-area {
+    padding: 20px;
+}
+
+.btn-area {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+.btn-icon:hover {
+    background-color: #616f7e;
+}
+.btn-icon {
+    position: relative;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 40px;
+    text-align: center;
+    min-width: 90px;
+    background-color: #434d57;
+    color: #fff;
+    white-space: nowrap;
+    font-size: 14px;
+    border-radius: 2px;
+    overflow: hidden;
+    transition: all .3s;
+    -ms-transition: all .3s;
+    vertical-align: middle;
+}
+.btn-icon:hover .icon-btn {
+    background-color: #19c880;
+}
+.icon-btn {
+    position: absolute;
+    height: 30px;
+    line-height: 30px;
+    width: 40px;
+    background-color: #17a369;
+    left: 0;
+    top: 0;
+    text-align: center;
+    transition: all .3s;
+    -ms-transition: all .3s;
+    font-size: 0;
+}
+.to-down, .icon-btn i, .icon-play, .link-action i, .icon-close, .icon-new, .c-state, .icon-time, .icon-favor, .view-share i, .icon-lang, .icon-subtitle, .icon-rcourse, .icon-help, .icon-add, .icon-radioed, .icon-radioing, .icon-radio, .icon-edit, .icon-del, .icon-drag, .icon-edit01, .icon-del01, .icon-drag01, .icon-arrow01, .icon-note, .icon-doc, .icon-edit02, .icon-play01, .icon-cai, .icon-textbook, .icon-doc01, .i-learn, .i-quiz, .i-map, .icon-mark, .faq-item i, .icon-download, .icon-vplay, .icon-vnext, .icon-vprev, .icon-vmore, .vs-feedback, .vs-correct, .q-mark, .icon-tip, .p-no, .icon-report, .icon-praise, .icon-step, .icon-edit03, .icon-del03, .icon-move03, .icon-cedit, .icon-save, .icon-edit04, .icon-delete, .icon-mod, .icon-code, .icon-type, .icon-prop, .icon-edit11, .icon-state, .icon-upload, .icon-shift, .icon-person, .icon-select, .icon-cart, .icon-login, .icon-school, .icon-baidu, .icon-login01.icon-activity, .icon-regist, .icon-regist01, .icon-strength, .icon-mail, .icon-mail01, .icon-error, .icon-right, .icon-actno, .icon-actno01, .icon-set01, .icon-mail02, .icon-card, .icon-refresh, .icon-remove, .icon-time02, .icon-bbs, .icon-email, .icon-export, .icon-note01, .icon-time01, .icon-copy, .icon-del00, .icon-place, .icon-filter, .icon-plus, .icon-minus, .icon-time03, .icon-lock01, .icon-view, .icon-person01, .icon-arrow03, .icon-each, .icon-calculator, .icon-submit, .icon-help01, .icon-rule, .icon-recover, .icon-ask, .icon-topmost, .icon-col, .icon-set-host, .icon-off, .icon-topmost01, .icon-earth, .icon-point, .icon-applying, .i-set, .icon-post, .icon-download01, .icon-play03, .icon-pen, .i-watch, .icon-progress, .icon-complain, .icon-note02, .icon-note03, .icon-attr, .icon-score, .icon-case, .icon-new-course, .icon-glass, .icon-commit, .i-search01, .icon-shaft, .icon-cend, .icon-col01, .icon-dot, .icon-gender, .icon-school01, .icon-auth, .icon-lrecord, .icon-upload01, .icon-login-top, .i-count, .icon-add01, .icon-cert01, .icon-help03, .icon-computer, .icon-target, .icon-study, .icon-textbook01, .icon-e-point, .icon-q-mark, .icon-add02, .icon-bbs-c, .icon-bbs-d, .i-notice, .icon-v-state, .view-state-v, .icon-personid, .icon-mvh, .help-no, .icon-arrow02, .icon-read, .icon-plane, .icon-flag, .cm-arrow, .line-arrow, .icon-dateset, .i-edit01, .icon-intro01, .icon-intro02, .icon-alarm01, .icon-chapter01, .icon-top, .icon-uptop, .icon-common01, .icon-move, .faq-thank-max, .faq-correct-max, .faq-q-max, .icon-search01, .slidesjs-pagination-item a, .video-slides .slidesjs-previous, .video-slides .slidesjs-next, .icon-view02, .bar-arrow, .icon-report-m, .icon-shutup, .cm-tag-rect, .km-index, .icon-notice01, .icon-qq01, .icon-move02, .icon-tip-max, .icon-play-done, .icon-doc-done, .icon-note-done, .icon-edit-done, .cm-tag-pb, .icon-hot, .icon-hcn, .icon-slideDown, .icon-slideUp, .icon-logo-min, .icon-edit12, .icon-view11, .icon-each11, .icon-arrow11, .icon-time11, .icon-ctag, .icon-hacn, .icon-applying01, .icon-mulbuild, .icon-build, .icon-timg, .icon-ck, .icon-query, .icon-search-min, .icon-person02, .cert-link, .icon-view01, .icon-ccheck, .icon-view03, .icon-order-detail, .icon-cost, .icon-add03, .icon-score-publish, .icon-business, .c-attach, .icon-attach01, .icon-attach01-done, .icon-info, .icon-ruanko, .icon-case01, .icon-audit, .icon-hvideo, .icon-type-video, .icon-type-case, .icon-type-doc, .icon-qqserver, .icon-authcomm, .v-error, .v-right, .icon-qq, .icon-wechat, .icon-acert, .icon-download02, .icon-tip-focus, .icon-plearn, .icon-plearn01, .icon-refresh01, .icon-case-done, .icon-standard, .icon-talk, .icon-talk01, .icon-elite, .icon-elite01, .icon-pass, .icon-pass01, .icon-rview, .icon-upload02, .icon-lock-01, .icon-stop01, .icon-play04, .c-exp, .icon-doc-s, .icon-play-s, .icon-edit-s, .icon-note-s, .icon-lab01, .icon-attach-s, .icon-play08, .c-live, .icon-live-s, .icon-live, .icon-live01, .icon-live02, .icon-lab02, .icon-sandbox01, .icon-live-done, .icon-live-white, .icon-sandbox, .icon-sandbox-s, .icon-sandbox-done, .icon-sandbox-white, .icon-chat, .icon-hammer {
+    display: inline-block;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-image: url(../images/sprite.png);
+}
+
+.i-save {
+    width: 16px;
+    height: 16px;
+    background-position: -16px -64px;
+    margin-top: 8px;
+}
+.p-basic-data .input-area {
+    width: 536px;
+    min-height: 120px;
+}
+
+.input-area {
+    min-height: 120px;
+    width: 525px;
+}
+input, button, textarea, select, optgroup, option {
+    font-family: inherit;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+}
+.input-group:after {
+    display: block;
+    content: "";
+    height: 0;
+    clear: both;
+    overflow: hidden;
+}
+.input-label b {
+    font-family: 宋体;
+    color: rgb(244, 130, 130);
+    padding-right: 5px;
+}
+b, strong {
+    font-weight: bolder;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+user agent stylesheet
+strong, b {
+    font-weight: bold;
+}
+.p-pwd-set .input-label {
+    width: 85px;
+    margin-left: 20px;
+}
+.icon-tip {
+    width: 16px;
+    height: 16px;
+    background-position: -384px -64px;
+}
+.public-pwd-tip {
+    line-height: 18px;
+    padding-left: 120px;
+    margin-top: -10px;
+    margin-bottom: 5px;
+    font-size: 12px;
+}

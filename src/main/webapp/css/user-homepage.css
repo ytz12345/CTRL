@@ -1,0 +1,515 @@
+.content {
+    width: 70%;
+    margin-left: 15%;
+    min-height: 1200px;
+    padding: 30px;
+    position: relative;
+    background-color: #fff;
+    opacity:0.9;
+}
+.person-center .user-sidebar {
+    float: left;
+    width: 208px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+script {
+    display: none;
+}
+.user-sidebar{
+    font-size: 12px;
+    padding: 0px;
+}
+.user-sidebar .panel {
+    margin-bottom: 10px;
+}
+.user-sidebar .model-title {
+    padding: 0 32px;
+    width: 208px;
+    position: relative;
+}
+.model-title {
+    color: #fff;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 0px;
+}
+.model-user .model-title {
+    background-color: #53606d;
+}
+.model-user .model-intro {
+    padding: 0 10px;
+    width: 208px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: #fff;
+    background-color: #616f7e;
+}
+
+
+.substr {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.panel-body {
+    min-height: 40px;
+    background-color: #f5f5f6;
+    overflow: hidden;
+}
+
+.model-user .model-img {
+    background-color: #17a369;
+}
+.model-img {
+    display: table-cell;
+    width: 208px;
+    height: 117px;
+    text-align: center;
+    vertical-align: middle;
+}
+:link, :visited, ins {
+    text-decoration: none;
+}
+.nav-text.current {
+    background-color: #17a369;
+}
+
+.nav-item a {
+    background-color: #19c880;
+    display: block;
+    color: #fff;
+    position: relative;
+    height: 60px;
+    line-height: 60px;
+    padding: 0 35px 0 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 208px;
+    font-size: 16px;
+    transition: all .2s;
+    -ms-transition: all .2s;
+}
+.icon-nav {
+    display: inline-block;
+    vertical-align: middle;
+    width: 35px;
+    height: 35px;
+    margin-right: 12px;
+}
+
+.icon-nav, .icon-panel ,.icon-search{
+    background-image:url(../images/sprite-sidebar.png);
+}
+.icon-course {
+     background-position: 0 0;
+ }
+.icon-notes {
+    background-position: -35px 0;
+}
+.icon-msg {
+    background-position: 0 -35px;
+}
+.icon-set {
+    background-position: -35px -35px;
+}
+.navItem .sub-nav {
+    display: block;
+}
+
+ol, ul {
+    list-style: none;
+    margin:0;
+    padding:0;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+}
+.view-img {
+    position: relative;
+    width: 224px;
+    height: 184px;
+    display: block;
+    background-color: #f5f5f6;
+    overflow: hidden;
+}
+.view-img img {
+    width: 224px;
+    height: 184px;
+    position: relative;
+    z-index: 1;
+    transition: all .8s;
+}
+fieldset, img {
+    border: 0;
+    vertical-align: middle;
+}
+.view-shadow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: -100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 9;
+}
+.view-action {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 24px;
+}
+.view-tips {
+    position: relative;
+    color: #d0d0d0;
+    font-size: 14px;
+}
+.icon-play {
+    width: 32px;
+    height: 32px;
+    background-position: -32px -128px;
+    margin-right: 5px;
+}
+.view-intro {
+    display: table-cell;
+    padding: 12px 30px;
+    vertical-align: top;
+    width: 498px;
+    height:116px;
+    background-color: #f5f5f6;
+    position: relative;
+    transition: all .3s;
+    -ms-transition: all .3s;
+}
+.view-intro .view-title {
+    width: auto;
+    padding: 0;
+    line-height: 30px;
+    overflow: hidden;
+}
+.view-title {
+    color: #1e7e34;
+    font-size: 20px;
+    padding: 0 15px;
+    width: 194px;
+}
+.substr {
+    width: 3em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.view-intro .cview-time {
+    color: #000;
+    width: auto;
+    float: none;
+    position: relative;
+    top: 1px;
+}
+.cview-time {
+    padding-left: 10px;
+    font-size: 14px;
+}
+.main{
+    float: left;
+    padding-left: 50px;
+}
+.main-body {
+    width:500px;
+    margin-top: 10px;
+    position: relative;
+}
+.tab-view:first-child {
+    display: block;
+}
+.tab-view {
+    display: none;
+}
+.view-item {
+    margin-bottom: 10px;
+}
+.soon-item{
+    margin-bottom: 10px;
+}
+.finished-item {
+    margin-bottom: 10px;
+}
+.view {
+    position: relative;
+}
+.view-show {
+    display: table-cell;
+    position: relative;
+}
+.view-intro .view-subtitle {
+    width: auto;
+    background-color: transparent;
+    color: #19c880;
+    padding: 0;
+    height: 24px;
+    line-height: 24px;
+}
+.view-subtitle {
+    padding: 0 15px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 13px;
+    background-color: #19c880;
+    color: #fff;
+    width: 194px;
+}
+.link-action {
+    color: #1e7e34;
+    font-size: 14px;
+}
+:link, :visited, ins {
+    text-decoration: none;
+}
+.view-subtitle .user-min {
+    position: relative;
+}
+.user-min {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 1px solid #616f7e;
+    margin-right: 5px;
+    position: relative;
+}
+.view-intro .show-school {
+    width: 170px;
+}
+.view-intro .show-tname, .view-intro .show-school {
+    float: none;
+    background-color: transparent;
+    color: #434d57;
+    padding-left: 0;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    font-size: 12px;
+}
+.show-school {
+    float: right;
+    height: 30px;
+    width: 104px;
+}
+.show-tname, .show-school {
+    height: 30px;
+    background-color: #434d57;
+    color: #fff;
+    line-height: 30px;
+    padding: 0 10px;
+    text-align: center;
+}
+.substr {
+    width: 3em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.view-handle .view-tip:first-child {
+    margin-left: 0;
+    margin-top: auto;
+}
+.view-handle .view-tip {
+    padding-left: 0;
+    margin-left: 15px;
+    line-height: 24px;
+}
+.view-tip:first-child {
+    margin-top: 20px;
+}
+.view-tip {
+    line-height: 30px;
+    padding-left: 60px;
+}
+.view-handle .view-tip i {
+    margin-right: 0;
+}
+.icon-clock01 {
+    background-position: -144px 0;
+}
+.icon-lock, .icon-date, .icon-clock, .icon-cycle, .icon-date01, .icon-clock01, .icon-cycle01 {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+.icon-cycle01 {
+    background-position: -168px 0;
+}
+.btn-group {
+    display: inline-block;
+    border-radius: 2px;
+    height: 30px;
+    vertical-align: middle;
+}
+.btn-item.current {
+    padding: 2px 0 2px 1px;
+    position: relative;
+    top: -2px;
+    border-radius: 2px;
+    margin-right: -1px;
+    background-color: #19c880;
+    border-left: 0;
+}
+.btn-item:first-child {
+    border-left: 0;
+    border-radius: 2px 0 0 2px;
+}
+
+.btn-item {
+    height: 30px;
+    line-height: 29px;
+    float: left;
+    text-align: center;
+    border: 0;
+    width: 88px;
+    background-color: #17a369;
+    font-size: 14px;
+    color: #fff;
+    border-left: 1px solid #19c880;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    transition: background-color,color .3s;
+}
+.btn-item {
+    height: 30px;
+    line-height: 29px;
+    float: left;
+    text-align: center;
+    border: 0;
+    width: 88px;
+    background-color: #17a369;
+    font-size: 14px;
+    color: #fff;
+    border-left: 1px solid #19c880;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    transition: background-color,color .3s;
+}
+.btn-item.last {
+    border-radius: 0 2px 2px 0;
+}
+.person-center .main-header .search-box {
+    float: right;
+}
+.search-box {
+    display: inline-block;
+    vertical-align: middle;
+}
+.search {
+    float: left;
+    border: 1px solid #beccdb;
+    border-radius: 2px;
+    overflow: hidden;
+    transition: all .3s;
+    -ms-transition: all .3s;
+}
+.input-search {
+    padding: 5px 10px;
+    height: 18px;
+    line-height: 18px;
+    width: 220px;
+    font-size: 13px;
+    border: 0;
+    float: left;
+    color: #19c880;
+    margin-top: 5px;
+}
+input, button, textarea, select, optgroup, option {
+    font-family: inherit;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+}
+.icon-search {
+    float: right;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    font-size: 0;
+}
+.i-search {
+    width: 24px;
+    height: 24px;
+    margin-top: 2px;
+    display: inline-block;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-image: url(https://static.cnmooc.org/theme/default/images/sprite.png?c10f4345bd);
+    background-position: -384px 0;
+}
+.pagination {
+    text-align: right;
+    margin: 10px 0;
+}
+.pagination ul {
+    display: inline-block;
+    border-radius: 2px;
+}
+.pagination .page-dropdown {
+    background-color: #fff;
+    font-size: 14px;
+    line-height: 30px;
+    overflow: visible;
+    margin-right: 10px;
+}
+.pagination li {
+    float: left;
+    height: 30px;
+    background-color: #92a9c0;
+    padding: 0 3px;
+}
+.factor-item {
+    line-height: 30px;
+    font-size: 14px;
+    float: left;
+}
+.pagination .page-prev {
+    margin-right: 1px;
+    padding: 0;
+}
+.pagination .page-next {
+    margin-left: 1px;
+    padding: 0;
+}
+.pagination .page-action {
+    background-color: transparent;
+    margin-left: 8px;
+}
+.pagination .input-page {
+    font-size: 14px;
+    text-align: center;
+    width: 32px;
+    padding: 5px 3px;
+}
+.input-text {
+    height: 18px;
+    width: 290px;
+    line-height: 18px;
+}
+.input-text, .input-area {
+    float: left;
+    padding: 5px 8px;
+    line-height: 20px;
+    border: 1px solid #beccdb;
+    border-radius: 2px;
+    resize: none;
+    color: #434d57;
+    font-size: 13px;
+    transition: border-color .3s;
+}
+.pagination .page-total {
+    line-height: 30px;
+    font-size: 14px;
+}
+.hidden-course{
+    display: none;
+}
