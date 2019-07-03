@@ -12,10 +12,13 @@
 
 
     <package name="user" extends="struts-default" namespace="/">
+
+        <!--
         <action name="user_*" class="userAction" method="{1}">
 
             <result name="success">/test.jsp</result>
-            <allowed-methods>m1,saveUser</allowed-methods><!-- struts 2.5 之后，使用通配符必须加上这一行 ，否则无法使用通配符访问-->
+            <allowed-methods>m1,saveUser</allowed-methods>
         </action>
+        -->
     </package>
 </struts>

@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.bupt.ctrl.model.User" table="user" schema="sdrb">
+        <id name="userId" column="User_id"/>
+        <property name="userName" column="User_Name"/>
+        <property name="userPassword" column="User_Password"/>
+        <property name="userIdentity" column="User_Identity"/>
+        <property name="userIntro" column="User_Intro"/>
+    </class>
+</hibernate-mapping>

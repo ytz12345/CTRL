@@ -78,7 +78,7 @@
 
                 <prop key="hibernate.max_fetch_depth">3</prop>
                 <prop key="hibernate.connection.url" >jdbc:mysql://47.93.11.203:3306/sdrb</prop>
-                <prop key="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</prop>
+                <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
             </props>
 
         </property>
