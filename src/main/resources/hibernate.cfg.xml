@@ -1,0 +1,14 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<mapping resource="com/bupt/ctrl/mapper/Course.hbm.xml"/>
+		<mapping resource="com/bupt/ctrl/mapper/User.hbm.xml"/>
+		<mapping resource="com/bupt/ctrl/mapper/Chapter.hbm.xml"/>
+		<mapping resource="com/bupt/ctrl/mapper/UserHasChapter.hbm.xml"/>
+		<mapping resource="com/bupt/ctrl/mapper/UserHasCourse.hbm.xml"/>
+		<mapping resource="com/bupt/ctrl/mapper/Comment.hbm.xml"/>
+	</session-factory>
+</hibernate-configuration>

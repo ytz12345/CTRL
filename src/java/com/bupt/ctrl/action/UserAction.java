@@ -2,13 +2,13 @@ package com.bupt.ctrl.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.bupt.ctrl.model.User;
-import com.bupt.ctrl.service.UserService;
+import com.bupt.ctrl.service.impl.UserServiceImpl;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import javax.annotation.Resource;
 
-@Controller("userAction")
+@Controller
 @Scope("prototype")
 public class UserAction extends ActionSupport{
 
@@ -17,7 +17,7 @@ public class UserAction extends ActionSupport{
 
     //依赖service
     @Resource
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
 
     //实现要存放到值栈中对象的get方法
     public User getUser() {
@@ -25,14 +25,14 @@ public class UserAction extends ActionSupport{
     }
 
     public String m1(){
-        user =  userService.getUser(1);
+        user =  userServiceImpl.getUser(1);
 
         return SUCCESS;
     }
 
     public String saveUser(){
         User user = new User();
-        userService.saveUser(user);
+        userServiceImpl.saveUser(user);
 
         return SUCCESS;
     }
