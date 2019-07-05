@@ -3714,7 +3714,7 @@
                      &&
                      this.placeholder[intersection == 1 ? "next" : "prev"]()[0] != itemElement //no useless actions that have been done before
                      &&
-                     !$.ui.contains(this.placeholder[0], itemElement) //no web if the item moved is the parent of the item checked
+                     !$.ui.contains(this.placeholder[0], itemElement) //no controller if the item moved is the parent of the item checked
                      &&
                      (this.options.type == 'semi-dynamic' ? !$.ui.contains(this.element[0], itemElement) : true)
                      //&& itemElement.parentNode == this.placeholder[0].parentNode // only rearrange items within the same container

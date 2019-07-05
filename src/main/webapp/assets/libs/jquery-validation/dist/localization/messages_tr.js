@@ -16,7 +16,7 @@ $.extend( $.validator.messages, {
 	required: "Bu alanın doldurulması zorunludur.",
 	remote: "Lütfen bu alanı düzeltin.",
 	email: "Lütfen geçerli bir e-posta adresi giriniz.",
-	url: "Lütfen geçerli bir web adresi (URL) giriniz.",
+	url: "Lütfen geçerli bir controller adresi (URL) giriniz.",
 	date: "Lütfen geçerli bir tarih giriniz.",
 	dateISO: "Lütfen geçerli bir tarih giriniz(ISO formatında)",
 	number: "Lütfen geçerli bir sayı giriniz.",

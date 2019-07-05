@@ -395,7 +395,7 @@
                                         <div class="view-img" href="javascript:void(0)">
                                             <img src="images/ZYNCJZ.jpg">
                                             <a class="view-shadow" href="https://www.cnmooc.org/portal/session/index/11846.mooc" style="top: 0px; left: -982px;">
-                                                <div class="view-tips view-web">
+                                                <div class="view-tips view-controller">
                                                     <i class="icon-play"></i>去学习
                                                 </div>
                                             </a>
@@ -414,7 +414,7 @@
 
 
                                         <h4 class="view-subtitle">
-                                            <span class="show-tname substr" style="width:180px;"><a class="link-web" href="/portal/teacher/11846/524530.mooc" title="江主席"><img src="images/JZM.jpg" class="user-min">江泽民</a></span>
+                                            <span class="show-tname substr" style="width:180px;"><a class="link-controller" href="/portal/teacher/11846/524530.mooc" title="江主席"><img src="images/JZM.jpg" class="user-min">江泽民</a></span>
                                             <span class="show-school substr"></span>
                                         </h4>
                                         <!-- 学期学习 -->
@@ -430,8 +430,8 @@
 
 
                                             <div class="link-group">
-                                                <a class="link-web courseDetail" href="/portal/session/11846-study.mooc">课程详情</a>
-                                                <a class="link-web totalReport" href="/portal/session/to/studystatistics-11846.mooc">学习统计</a>
+                                                <a class="link-controller courseDetail" href="/portal/session/11846-study.mooc">课程详情</a>
+                                                <a class="link-controller totalReport" href="/portal/session/to/studystatistics-11846.mooc">学习统计</a>
 
                                             </div>
                                         </div>
@@ -478,7 +478,7 @@
                                         <div class="view-img" href="javascript:void(0)">
                                             <img src="images/ZYCSBL.jpg">
                                             <a class="view-shadow" href="https://www.cnmooc.org/portal/session/index/11846.mooc" style="top: 0px; left: -982px;">
-                                                <div class="view-tips view-web">
+                                                <div class="view-tips view-controller">
                                                     <i class="icon-play"></i>去学习
                                                 </div>
                                             </a>
@@ -497,7 +497,7 @@
 
 
                                         <h4 class="view-subtitle">
-                                            <span class="show-tname substr" style="width:180px;"><a class="link-web" href="/portal/teacher/11846/524530.mooc" title="江主席"><img src="images/JZM.jpg" class="user-min">江泽民</a></span>
+                                            <span class="show-tname substr" style="width:180px;"><a class="link-controller" href="/portal/teacher/11846/524530.mooc" title="江主席"><img src="images/JZM.jpg" class="user-min">江泽民</a></span>
                                             <span class="show-school substr"></span>
                                         </h4>
                                         <!-- 学期学习 -->
@@ -513,8 +513,8 @@
 
 
                                             <div class="link-group">
-                                                <a class="link-web courseDetail" href="/portal/session/11846-study.mooc">课程详情</a>
-                                                <a class="link-web totalReport" href="/portal/session/to/studystatistics-11846.mooc">学习统计</a>
+                                                <a class="link-controller courseDetail" href="/portal/session/11846-study.mooc">课程详情</a>
+                                                <a class="link-controller totalReport" href="/portal/session/to/studystatistics-11846.mooc">学习统计</a>
 
                                             </div>
                                         </div>
@@ -571,7 +571,7 @@
                                                                 <li class="page-next">
                                                                     <a href="javascript:void(0);" id="page-next" pagenum="1">›</a>
                                                                 </li>
-                                                                <li class="page-web">
+                                                                <li class="page-controller">
                                                                     <input type="text" class="input-text input-page" title="Enter Search" _type="changeIndex">
                                                                     <span class="page-total">/1 页 </span>
                                                                 </li>
