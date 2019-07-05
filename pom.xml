@@ -207,7 +207,7 @@
     </dependencies>
 
     <build>
-        <finalName>rentHomeProj</finalName>
+        <finalName>CTRL</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
