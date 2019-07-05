@@ -23,11 +23,15 @@
      -->
     <mvc:default-servlet-handler/>
 
-
+    <!-- 3.配置视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
     <!-- 3.配置jsp 显示ViewResolver -->
     <!-- 即return的时候默认返回/XXX/XXXXX.jsp -->
     <!-- 模板解析器  -->
-    <bean id="templateResolver"
+    <!--<bean id="templateResolver"
           class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
         <property name="prefix" value="/WEB-INF/" />
         <property name="suffix" value=".html" />
@@ -43,16 +47,16 @@
 
     <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
         <property name="templateEngine" ref="templateEngine" />
-        <!-- <property name="viewNames" value="*.html"/>-->
+        &lt;!&ndash; <property name="viewNames" value="*.html"/>&ndash;&gt;
         <property name="characterEncoding" value="UTF-8"/>
     </bean>
-    <!-- SpringMVC上传文件时，需要配置MultipartResolver处理器 -->
+    &lt;!&ndash; SpringMVC上传文件时，需要配置MultipartResolver处理器 &ndash;&gt;
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="defaultEncoding" value="UTF-8" />
-        <!-- 指定所上传文件的总大小,单位字节。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->
+        &lt;!&ndash; 指定所上传文件的总大小,单位字节。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 &ndash;&gt;
         <property name="maxUploadSize" value="10240000" />
-    </bean>
+    </bean>-->
     <!-- 4.扫描web相关的bean -->
     <context:component-scan base-package="com.bupt.ctrl.controller" />
 
