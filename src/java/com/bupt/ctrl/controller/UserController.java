@@ -1,6 +1,7 @@
 package com.bupt.ctrl.controller;
 
-import com.bupt.ctrl.service.UserService;
+import com.bupt.ctrl.model.*;
+import com.bupt.ctrl.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,21 +18,20 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "register", method = RequestMethod.POST)
     @ResponseBody
     private String register(Model model) {
         System.out.println("sign up !!!");
         logger.info("into");
         return "success";
     }
-
-    /*@RequestMapping(value = "login", method = RequestMethod.POST)
+    /*
+    @RequestMapping(value = "login", method = RequestMethod.POST)
     @ResponseBody
     private String login(User user) {
         Map<String,Object> map=userService.checkUserLogin(user);
         return JSON.toJSONString(map);
     }
-
     @RequestMapping(value = "/personedit/{userid}", method = RequestMethod.POST)
     @ResponseBody
     public String personedit(@PathVariable("userid") int userid,

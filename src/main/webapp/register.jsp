@@ -100,15 +100,10 @@
                         <div id="form-register">
                             <form action="register" name="register" method="post" onsubmit="return isValidate()" >
                                 <h2 id="register-heading">请注册</h2>
-                                <%
-                                    UserDao userDao = new UserDao();
-                                    int number = userDao.CoutNumber() + 1;
-                                %>
-                                <input type="hidden" name="user.userid" value="<%=number%>" id="userid">
                                 <label class="register-lable">用户名：</label>
-                                <input class="register-input" type="text" name="user.username" id="username" placeholder="Username">
+                                <input class="register-input" type="text" name="userName" id="username" placeholder="Username">
                                 <label class="register-lable">设置密码：</label>
-                                <input class="register-input" type="password" name="user.password" id="userpassword" placeholder="Password">
+                                <input class="register-input" type="password" name="password" id="userPassword" placeholder="Password">
                                 <label class="register-lable">确认密码：</label>
                                 <input class="register-input" type="password" name="userpass1" id="userpass1" placeholder="Password">
                                 <label class="radio-inline"><input type="radio" name="optradio" checked>Option 1</label>
