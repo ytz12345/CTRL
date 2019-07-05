@@ -1037,7 +1037,7 @@
             input.style.left = template.offsetLeft + "px";
         };
         var valueBuffer;
-        if (actionObj !== undefined) switch (actionObj.action) {
+        if (actionObj !== undefined) switch (com.bupt.ctrl.controller) {
           case "isComplete":
             return el = actionObj.el, isComplete(getBuffer());
 

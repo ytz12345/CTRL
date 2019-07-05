@@ -2,9 +2,11 @@ package com.bupt.ctrl.service;
 
 import com.bupt.ctrl.model.User;
 
+import java.util.Map;
+
 public interface UserService {
 
-    User getUser(int uid);
+    User getUserByID(Integer uid);
 
-    void saveUser(User user);
+    public Map<String, Object> saveUser(User record);
 }

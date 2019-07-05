@@ -1,27 +1,46 @@
 package com.bupt.ctrl.service.impl;
 
-import com.bupt.ctrl.dao.impl.UserDaoImpl;
+import com.bupt.ctrl.common.CommonEnum;
+import com.bupt.ctrl.dao.UserMapper;
 import com.bupt.ctrl.model.User;
+import com.bupt.ctrl.model.UserExample;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements com.bupt.ctrl.service.UserService {
+    private Logger logger= LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    private UserMapper userMapper;
 
-    //依赖Dao
-    @Resource
-    private UserDaoImpl userDaoImpl;
-    // 注入事务管理
-    @Transactional(rollbackFor={Exception.class, RuntimeException.class})
-    public User getUser(int uid) {
-        return userDaoImpl.getUserByID(uid);
+    @Override
+    public User getUserByID(Integer uid) {
+        return userMapper.selectByPrimaryKey(uid);
     }
 
-    @Transactional(rollbackFor={Exception.class, RuntimeException.class})
-    public void saveUser(User user) {
-        userDaoImpl.saveUser(user);
+    @Override
+    public Map<String, Object> saveUser(User record) {
+        Map<String,Object> map=new HashMap<String,Object>();
+        int num = userMapper.insertSelective(record);
+        //失败
+        if (num == 0) {
+            map.put("rescode", CommonEnum.REQUEST_FAILED.getCode());
+            map.put("resmsg", CommonEnum.REQUEST_FAILED.getMsg());
+            return map;
+        }
+        //成功
+        map.put("rescode", CommonEnum.REQUEST_SUCCESS.getCode());
+        map.put("resmsg",CommonEnum.REQUEST_SUCCESS.getMsg());
+        UserExample suithouse = new UserExample();
+        List<User> list = userMapper.selectByExample(suithouse);
+        map.put("houseId",list.get(list.size()-1).getUserId());
+        return map;
     }
 }
 

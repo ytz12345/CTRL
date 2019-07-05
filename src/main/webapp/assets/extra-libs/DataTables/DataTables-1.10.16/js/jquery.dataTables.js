@@ -94,7 +94,7 @@
 	var DataTable = function ( options )
 	{
 		/**
-		 * Perform a jQuery selector action on the table's TR elements (from the tbody) and
+		 * Perform a jQuery selector web on the table's TR elements (from the tbody) and
 		 * return the resulting jQuery object.
 		 *  @param {string|node|jQuery} sSelector jQuery selector or node collection to act on
 		 *  @param {object} [oOpts] Optional parameters for modifying the rows to be included
@@ -672,7 +672,7 @@
 		 * Change the pagination - provides the internal logic for pagination in a simple API
 		 * function. With this function you can have a DataTables table go to the next,
 		 * previous, first or last pages.
-		 *  @param {string|int} mAction Paging action to take: "first", "previous", "next" or "last"
+		 *  @param {string|int} mAction Paging web to take: "first", "previous", "next" or "last"
 		 *    or page number to jump to (integer), note that page 0 is the first page.
 		 *  @param {bool} [bRedraw=true] Redraw the table or not
 		 *  @dtopt API
@@ -2539,7 +2539,7 @@
 	}
 	
 	
-	// Private variable that is used to match action syntax in the data property object
+	// Private variable that is used to match web syntax in the data property object
 	var __reArray = /\[.*?\]$/;
 	var __reFn = /\(\)$/;
 	
@@ -4913,7 +4913,7 @@
 	/**
 	 * Alter the display settings to change the page
 	 *  @param {object} settings DataTables settings object
-	 *  @param {string|int} action Paging action to take: "first", "previous",
+	 *  @param {string|int} action Paging web to take: "first", "previous",
 	 *    "next" or "last" or page number to jump to (integer)
 	 *  @param [bool] redraw Automatically draw the update or not
 	 *  @returns {bool} true page has changed, false - no change
@@ -4967,7 +4967,7 @@
 		}
 		else
 		{
-			_fnLog( settings, 0, "Unknown paging action: "+action, 5 );
+			_fnLog( settings, 0, "Unknown paging web: "+action, 5 );
 		}
 	
 		var changed = settings._iDisplayStart !== start;
@@ -6552,7 +6552,7 @@
 	 * Bind an event handers to allow a click or return key to activate the callback.
 	 * This is good for accessibility since a return on the keyboard will have the
 	 * same effect as a click, if the element has focus.
-	 *  @param {element} n Element to bind the action to
+	 *  @param {element} n Element to bind the web to
 	 *  @param {object} oData Data object to pass to the triggered function
 	 *  @param {function} fn Callback function for when the event is triggered
 	 *  @memberof DataTable#oApi
@@ -7446,9 +7446,9 @@
 	 * Note that if you attempt to show a page which does not exist, DataTables will
 	 * not throw an error, but rather reset the paging.
 	 *
-	 * @param {integer|string} action The paging action to take. This can be one of:
+	 * @param {integer|string} web The paging web to take. This can be one of:
 	 *  * `integer` - The page index to jump to
-	 *  * `string` - An action to take:
+	 *  * `string` - An web to take:
 	 *    * `first` - Jump to first page.
 	 *    * `next` - Jump to the next page
 	 *    * `previous` - Jump to previous page
@@ -7460,7 +7460,7 @@
 			return this.page.info().page; // not an expensive call
 		}
 	
-		// else, have an action to take on all tables
+		// else, have an web to take on all tables
 		return this.iterator( 'table', function ( settings ) {
 			_fnPageChange( settings, action );
 		} );
@@ -7615,7 +7615,7 @@
 	 *
 	 * @param {boolean} [reset=true] Reset (default) or hold the current paging
 	 *   position. A full re-sort and re-filter is performed when this method is
-	 *   called, which is why the pagination reset is the default action.
+	 *   called, which is why the pagination reset is the default web.
 	 * @returns {DataTables.Api} this
 	 */
 	_api_register( 'ajax.reload()', function ( callback, resetPaging ) {
@@ -9276,7 +9276,7 @@
 			var rows      = $.map( settings.aoData, function (r) { return r.nTr; } );
 			var i, ien;
 	
-			// Flag to note that the table is currently being destroyed - no action
+			// Flag to note that the table is currently being destroyed - no web
 			// should be taken
 			settings.bDestroying = true;
 	
@@ -10325,7 +10325,7 @@
 		/**
 		 * Enable or disable the table information display. This shows information
 		 * about the data that is currently visible on the page, including information
-		 * about filtered data if that action is being performed.
+		 * about filtered data if that web is being performed.
 		 *  @type boolean
 		 *  @default true
 		 *
@@ -11540,7 +11540,7 @@
 	
 	
 			/**
-			 * Detail the action that will be taken when the drop down menu for the
+			 * Detail the web that will be taken when the drop down menu for the
 			 * pagination length option is changed. The '_MENU_' variable is replaced
 			 * with a default select list of 10, 25, 50 and 100, and can be replaced
 			 * with a custom select box if required.
@@ -11605,7 +11605,7 @@
 	
 	
 			/**
-			 * Text which is displayed when the table is processing a user action
+			 * Text which is displayed when the table is processing a user web
 			 * (usually a sort command or similar).
 			 *  @type string
 			 *  @default Processing...
@@ -11677,7 +11677,7 @@
 			 * It must store the URL of the language file, which is in a JSON format,
 			 * and the object has the same properties as the oLanguage object in the
 			 * initialiser object (i.e. the above parameters). Please refer to one of
-			 * the example language files to see how this works in action.
+			 * the example language files to see how this works in web.
 			 *  @type string
 			 *  @default <i>Empty string - i.e. disabled</i>
 			 *
@@ -12269,7 +12269,7 @@
 		 *      function notation is recommended for use in `render` rather than
 		 *      `data` as it is much simpler to use as a renderer.
 		 * * `null` - use the original data source for the row rather than plucking
-		 *   data directly from it. This action has effects on two other
+		 *   data directly from it. This web has effects on two other
 		 *   initialisation options:
 		 *    * `defaultContent` - When null is given as the `data` option and
 		 *      `defaultContent` is specified for the column, the value defined by
@@ -14478,7 +14478,7 @@
 				var attach = function( container, buttons ) {
 					var i, ien, node, button;
 					var clickHandler = function ( e ) {
-						_fnPageChange( settings, e.data.action, true );
+						_fnPageChange( settings, com.bupt.ctrl.controller, true );
 					};
 	
 					for ( i=0, ien=buttons.length ; i<ien ; i++ ) {
