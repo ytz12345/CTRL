@@ -44,6 +44,9 @@ public interface UserMapper {
      *
      * @mbggenerated Fri Jul 05 08:34:32 CST 2019
      */
+
+    User findByName(String userName);
+
     int insertSelective(User record);
 
     /**

@@ -6,6 +6,10 @@ import java.util.Map;
 
 public interface UserService {
 
+    void register(User user);
+
+    User checkLogin(String userName, String password);
+
     User getUserByID(Integer uid);
 
     public Map<String, Object> saveUser(User record);

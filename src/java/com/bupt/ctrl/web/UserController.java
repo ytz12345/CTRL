@@ -12,16 +12,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 @Controller
-@RequestMapping("user")
+@RequestMapping("/user")
 @CrossOrigin(origins = "*", maxAge = 3600)
+
+@SessionAttributes("user")
 public class UserController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -30,10 +35,41 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
-    private String register(Model model) {
-        System.out.println("sign up !!!");
+    private ModelAndView register(User user, HttpSession httpSession) {
         logger.info("into");
-        return "success";
+
+        ModelAndView mav = new ModelAndView("redirect:/register-success.jsp");//指定跳转页面
+        user.setUserIdentity(0);//待修改与页面交互
+        userService.register(user);
+
+        mav.addObject("message","test");
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/checkLogin", method = RequestMethod.POST)
+    @ResponseBody
+    private ModelAndView checkLogin(User user, Model model){
+        user = userService.checkLogin(user.getUserName(), user.getUserPassword());
+
+        ModelAndView mav = new ModelAndView("redirect:/index.jsp");
+        if(user != null){
+            mav.addObject("user", user);
+        }else{
+            mav.setViewName("redirect:/login_failure.jsp");//登录失败跳转到失败界面
+        }
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/outLogin")
+    @ResponseBody
+    private ModelAndView outLogin(HttpSession session){
+        ModelAndView mav = new ModelAndView("redirect:/index.jsp");
+
+        session.invalidate();//注销
+
+        return mav;
     }
 
     /*@RequestMapping(value = "login", method = RequestMethod.POST)

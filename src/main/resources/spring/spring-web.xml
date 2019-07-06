@@ -29,8 +29,8 @@
     <!-- 模板解析器  -->
     <bean id="templateResolver"
           class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
-        <property name="prefix" value="/WEB-INF/" />
-        <property name="suffix" value=".html" />
+        <property name="prefix" value="/" />
+        <!-- <property name="suffix" value=".jsp" />-->
         <property name="templateMode" value="HTML5" />
         <property name="characterEncoding" value="UTF-8" />
         <property name="cacheable" value="false" />
