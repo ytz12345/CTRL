@@ -9,6 +9,7 @@
 out/
 web/WEB-INF/lib/*
 web/WEB-INF/classes/
+src/java/com/bupt/ctrl/test/*
 
 # for eclipse:
 .settings/
