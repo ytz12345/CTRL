@@ -7,7 +7,7 @@
     <title>注册成功页面</title>
 </head>
 <body>
-    <p>hello ${message} </p>
+    <p>登录成功！</p>
    点击<a href="index.jsp">登录</a>
 </body>
 </html>

@@ -35,14 +35,13 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
-    private ModelAndView register(User user, HttpSession httpSession) {
+    private ModelAndView register(User user) {
         logger.info("into");
 
-        ModelAndView mav = new ModelAndView("redirect:/register-success.jsp");//指定跳转页面
         user.setUserIdentity(0);//待修改与页面交互
         userService.register(user);
 
-        mav.addObject("message","test");
+        ModelAndView mav = new ModelAndView("redirect:/register-success.jsp");//指定跳转页面
 
         return mav;
     }
