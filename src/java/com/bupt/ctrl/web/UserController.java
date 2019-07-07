@@ -23,7 +23,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 @Controller
-@RequestMapping("/user")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class UserController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());

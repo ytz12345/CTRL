@@ -31,7 +31,7 @@
                             <c:when test="${ sessionScope.user != null }">
                                 <ul class="flex justify-content-center align-items-center py-2 pt-md-0" style="list-style: none">
                                     <li><a href="#">${sessionScope.user.userName}</a></li>
-                                    <li><a href="${pageContext.request.contextPath}/user/outLogin.action" style="font-size: 6px">logout</a></li>
+                                    <li><a href="outLogin" style="font-size: 6px">logout</a></li>
                                 </ul>
                             </c:when>
                             <c:otherwise>
@@ -48,7 +48,7 @@
                                                 <!-- 模态框主体 -->
                                                 <div class="modal-body">
                                                     <div id="form-login">
-                                                        <form action="${pageContext.request.contextPath}/user/checkLogin" method="post">
+                                                        <form action="checkLogin" method="post">
 
                                                             <label class="login-lable">用户名：</label>
                                                             <div class="input-group input-group-sm">
@@ -86,7 +86,7 @@
                                                 <!-- 模态框主体 -->
                                                 <div class="modal-body">
                                                     <div id="form-register">
-                                                        <form action="${pageContext.request.contextPath}/user/register.action" name="register" method="post" onsubmit="return isValidate()" >
+                                                        <form action="register" name="register" method="post" onsubmit="return isValidate()" >
                                                             <label class="register-lable">用户名：</label>
                                                             <div class="input-group input-group-sm">
                                                                 <input type="text" class="form-control" name="userName" id="username" placeholder="Username">
