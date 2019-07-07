@@ -12,4 +12,7 @@ public interface CourseService {
 
     //根据名字匹配来获得课程，用于搜索
     public List<Course> getCourseByName(String str);
+
+    //根据课程id获得课程实例
+    public Course getCourseByID(Integer course_id);
 }

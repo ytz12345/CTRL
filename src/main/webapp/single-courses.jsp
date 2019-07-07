@@ -1,6 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -101,32 +102,31 @@
             </div><!-- .container -->
         </div><!-- .nav-bar -->
     </header><!-- .site-header -->
-    <%
-        int course_id = Integer.parseInt(request.getParameter("course_id"));
-        CourseDao courseDao = new CourseDao();
-        Course course = courseDao.find(course_id);
-    %>
+
     <div class="page-header-overlay">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <header class="entry-header">
-                        <h1 class="entry-title"><%=course.getCourse_Name()%></h1>
+                        <h1 class="entry-title">${course.courseName}</h1>
 
                         <div class="ratings flex justify-content-center align-items-center">
-                            <s:if test="#session.user.User_Identity == 2">
+                            <c:choose>
+                                <c:when test="${sessionScope.user.userIdentity} == 2">
 
-                                <a href="#" data-toggle="modal" data-target="#modifyCourseName"><span style="color: white">更改课程名</span></a>
+                                    <a href="#" data-toggle="modal" data-target="#modifyCourseName"><span style="color: white">更改课程名</span></a>
 
-                            </s:if>
-                            <s:else>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <span>(4 votes)</span>
-                            </s:else>
+                                </c:when>
+                                <c:otherwise>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-o"></i>
+                                    <span>(4 votes)</span>
+                                </c:otherwise>
+
+                            </c:choose>
                         </div><!-- .ratings/admin -->
                         <!-- 课程名修改框 -->
                         <div class="modal fade" style="margin-top: 10%" id="modifyCourseName">
@@ -141,7 +141,7 @@
 
                                     <!-- 模态框主体 -->
                                     <div class="modal-body">
-                                        <form action="modifyCourseName?modify_id=<%=course.getCourse_Id()%>" method="post" role="form">
+                                        <form action="modifyCourseName?modify_id=${course.courseId}" method="post" role="form">
                                             <div class="form-group">
                                                 <input name="newCourseName" type="text" class="form-control" placeholder="输入新的课程名">
                                             </div>
@@ -171,7 +171,7 @@
     <div class="row">
         <div class="col-12 offset-lg-1 col-lg-10">
             <div class="featured-image">
-                <img src="<%=course.getCourse_Image()%>" alt="">
+                <img src="${course.courseImage}" alt="">
 
                 <div class="course-cost">Free</div>
             </div>
@@ -188,7 +188,7 @@
 
                         <div class="author-wrap">
                             <label class="m-0">Teacher</label>
-                            <div class="author-name"><a href="#"><%=course.getCourse_Teacher()%></a></div>
+                            <div class="author-name"><a href="#">${course.courseTeacher}</a></div>
                         </div><!-- .author-wrap -->
                     </div><!-- .course-author -->
 
@@ -198,12 +198,16 @@
                     </div><!-- .course-students -->
 
                     <div class="buy-course mt-3">
-                        <s:if test="#session.user.User_Identity == 2">
-                            <a class="btn" href="#" data-toggle="modal" data-target="#modifyCourseImage">更改封面</a>
-                        </s:if>
-                        <s:else>
-                            <a class="btn" href="#">ADD to cart</a>
-                        </s:else>
+                        <c:choose>
+
+                            <c:when test="${sessionScope.user.userIdentity} == 2">
+                                <a class="btn" href="#" data-toggle="modal" data-target="#modifyCourseImage">更改封面</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a class="btn" href="#">ADD to cart</a>
+                            </c:otherwise>
+
+                        </c:choose>
                     </div><!-- .buy-course/admin -->
                     <!-- 封面更改-模态框 -->
                     <div class="modal fade" style="margin-top: 10%" id="modifyCourseImage">
@@ -218,7 +222,7 @@
 
                                 <!-- 模态框主体 -->
                                 <div class="modal-body">
-                                    <form action="modifyCourseImage?modify_id=<%=course.getCourse_Id()%>" method="post" role="form" enctype="multipart/form-data" >
+                                    <form action="modifyCourseImage?modify_id=${course.courseId}" method="post" role="form" enctype="multipart/form-data" >
                                         <div class="form-group">
                                             <input type="file" name="newCourseImage" id="course-img-modify"/>
                                         </div>
@@ -244,29 +248,35 @@
                 </div><!-- .course-info -->
 
                 <div class="single-course-cont-section">
-                    <s:if test="#session.user.User_Identity == 2">
-                        <a href="#" data-toggle="modal" data-target="#modifyCourseIntro"><h2>课程介绍</h2></a>
-                    </s:if>
-                    <s:else>
-                        <h2>What Will I Learn?</h2>
-                    </s:else>
+                    <c:choose>
+                        <c:when test="${sessionScope.user.userIdentity} == 2">
+                            <a href="#" data-toggle="modal" data-target="#modifyCourseIntro"><h2>课程介绍</h2></a>
+                        </c:when>
+                        <c:otherwise>
+                            <h2>What Will I Learn?</h2>
+                        </c:otherwise>
+                    </c:choose>
+
 
                     <ul class="p-0 m-0 green-ticked">
-                        <li><%=course.getCourse_Intro()%></li>
+                        <li>${course.courseIntro}</li>
                     </ul>
 
                     <div class="single-course-accordion-cont mt-3">
                         <header class="entry-header flex flex-wrap justify-content-between align-items-center">
-                            <s:if test="#session.user.User_Identity == 2">
-                                <h2>章节管理</h2>
-                                <div>
-                                    <a href="#" data-toggle="modal" data-target="#addChapter"><span>添加章节</span></a>
-                                </div>
-                            </s:if>
-                            <s:else>
-                                <h2>Curriculum For This Course</h2>
-                                <div class="number-of-lectures">12 Lectures</div>
-                            </s:else>
+                            <c:choose>
+                                <c:when test="${sessionScope.user.userIdentity} == 2">
+                                    <h2>章节管理</h2>
+                                    <div>
+                                        <a href="#" data-toggle="modal" data-target="#addChapter"><span>添加章节</span></a>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <h2>Curriculum For This Course</h2>
+                                    <div class="number-of-lectures">12 Lectures</div>
+                                </c:otherwise>
+                            </c:choose>
+
 
                             <%--                            <div class="total-lectures-time">10:10:10</div>--%>
 
@@ -283,7 +293,7 @@
 
                                     <!-- 模态框主体 -->
                                     <div class="modal-body">
-                                        <form action="addChapter?add_id=<%=course.getCourse_Id()%>" method="post" enctype="multipart/form-data" role="form">
+                                        <form action="addChapter?add_id=${course.courseId}" method="post" enctype="multipart/form-data" role="form">
                                             <div class="form-group">
                                                 <label class="col-sm-4 control-label">章节名称</label>
                                                 <div class="col-sm-8">
@@ -320,32 +330,34 @@
 
                         <div class="entry-contents">
                             <div class="accordion-wrap type-accordion">
-                                <%
-                                    ChapterDao chapterDao = new ChapterDao();
-                                    ArrayList<Chapter> ChapterArrayList = chapterDao.getSpecifcChapter(course_id);
-                                    if(ChapterArrayList != null && ChapterArrayList.size()>0)
-                                    {
-                                        for(int i = 0; i < ChapterArrayList.size(); i++)
-                                        {
-                                            Chapter chapter = ChapterArrayList.get(i);
-                                %>
-                                <h3 class="entry-title flex flex-wrap justify-content-between align-items-lg-center active">
-                                    <span class="arrow-r"><i class="fa fa-plus"></i><i class="fa fa-minus"></i></span>
-                                    <span class="lecture-group-title">章节<%=chapter.getChapter_Num()%></span>
-                                    <span class="number-of-lectures"></span>
-                                    <span class="total-lectures-time"></span>
-                                </h3>
+<%--                                <%--%>
+<%--                                    ChapterDao chapterDao = new ChapterDao();--%>
+<%--                                    ArrayList<Chapter> ChapterArrayList = chapterDao.getSpecifcChapter(course_id);--%>
+<%--                                    if(ChapterArrayList != null && ChapterArrayList.size()>0)--%>
+<%--                                    {--%>
+<%--                                        for(int i = 0; i < ChapterArrayList.size(); i++)--%>
+<%--                                        {--%>
+<%--                                            Chapter chapter = ChapterArrayList.get(i);--%>
+<%--                                %>--%>
+                                <c:forEach items="${chapterList}" var="chapter">
+                                    <h3 class="entry-title flex flex-wrap justify-content-between align-items-lg-center active">
+                                        <span class="arrow-r"><i class="fa fa-plus"></i><i class="fa fa-minus"></i></span>
+                                        <span class="lecture-group-title">章节${chapter.chapterNum}</span>
+                                        <span class="number-of-lectures"></span>
+                                        <span class="total-lectures-time"></span>
+                                    </h3>
 
-                                <div class="entry-content">
-                                    <ul class="p-0 m-0">
-                                        <li class="flex flex-column flex-lg-row align-items-lg-center">
-                                            <span class="lecture-title"><a href="single-chapter.jsp?chapter_id=<%=chapter.getChapter_id()%>&user_id=<S:property value="#session.user.User_id"/>"><%=chapter.getChapter_Name()%></a></span><span class="lectures-preview"></span><span class="lectures-time text-left text-lg-right"></span></li>
-                                    </ul>
-                                </div>
-                                <%
-                                        }
-                                    }
-                                %>
+                                    <div class="entry-content">
+                                        <ul class="p-0 m-0">
+                                            <li class="flex flex-column flex-lg-row align-items-lg-center">
+                                                <span class="lecture-title"><a href="singleChapter?chapter_id=${chapter.chapterId}&user_id=${sessionScope.user.userId}">${chapter.chapterName}</a></span><span class="lectures-preview"></span><span class="lectures-time text-left text-lg-right"></span></li>
+                                        </ul>
+                                    </div>
+                                </c:forEach>
+<%--                                <%--%>
+<%--                                        }--%>
+<%--                                    }--%>
+<%--                                %>--%>
                             </div>
                         </div><!-- .entry-contents -->
                     </div><!-- .single-course-accordion-cont  -->
@@ -362,7 +374,7 @@
 
                                 <!-- 模态框主体 -->
                                 <div class="modal-body">
-                                    <form action="modifyCourseIntro?modify_id=<%=course.getCourse_Id()%>" method="post" role="form">
+                                    <form action="modifyCourseIntro?modify_id=${course.courseId}" method="post" role="form">
                                         <div class="form-group">
                                             <textarea name="newCourseIntro" class="form-control" rows="3" placeholder="输入新的课程介绍"></textarea>
                                         </div>

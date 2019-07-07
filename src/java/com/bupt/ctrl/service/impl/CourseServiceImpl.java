@@ -29,4 +29,8 @@ public class CourseServiceImpl implements CourseService {
         criteria.andCoursePassEqualTo(1);
         return courseMapper.selectByExample(courseExample);
     }
+
+    public Course getCourseByID(Integer course_id){
+        return courseMapper.selectByPrimaryKey(course_id);
+    }
 }
