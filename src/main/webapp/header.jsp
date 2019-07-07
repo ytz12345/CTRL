@@ -44,7 +44,7 @@
 
                 <div class="col-12 col-lg-6 d-flex flex-wrap justify-content-center justify-content-lg-end align-items-center">
                     <div class="header-bar-search">
-                        <form action="selectCourse" class="flex align-items-stretch" method="post">
+                        <form action="selectCoursesByName" class="flex align-items-stretch" method="post">
                             <input type="search" placeholder="What would you like to learn?" name="str">
                             <button type="submit" class="flex justify-content-center align-items-center"><i class="fa fa-search"></i></button>
                         </form>

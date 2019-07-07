@@ -1,19 +1,13 @@
-<%@ page import="dao.ChapterDao" %>
-<%@ page import="model.Chapter" %>
-<%@ page import="dao.CourseDao" %>
-<%@ page import="model.Course" %>
-<%@ page import="dao.CommentDao" %>
-<%@ page import="model.Comment" %>
-<%@ page import="dao.UserDao" %>
-<%@ page import="model.User" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.PriorityQueue"%>
 <%@ page import="java.util.Comparator"%>
 <%@ page import="java.sql.Timestamp"%>
 <%@ page import="java.util.Map"%>
-<%@ page import="com.opensymphony.xwork2.ActionContext"%>
+<%@ page import="com.bupt.ctrl.dao.UserMapper" %>
+<%@ page import="com.bupt.ctrl.controller.ChapterController" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" autoFlush="false" buffer="256kb"
          pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,15 +36,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="single-blog-post">
-    <%
-        class CmpComent implements Comparator<Comment>
-        {
-            @Override
-            public int compare(Comment c1, Comment c2) {
-                return (int) (c1.getComment_Time().getTime() - c2.getComment_Time().getTime());
-            }
-        };
-    %>
+<%--    <%--%>
+<%--        class CmpComent implements Comparator<Comment>--%>
+<%--        {--%>
+<%--            @Override--%>
+<%--            public int compare(Comment c1, Comment c2) {--%>
+<%--                return (int) (c1.getComment_Time().getTime() - c2.getComment_Time().getTime());--%>
+<%--            }--%>
+<%--        };--%>
+<%--    %>--%>
     <div class="page-header">
         <header class="site-header">
 
@@ -90,33 +84,33 @@
                 </div><!-- .container -->
             </div><!-- .nav-bar -->
         </header><!-- .site-header -->
-        <input type="hidden" id="login_User_id" value="<S:property value="#session.user.User_id"/>">
-        <%
-            ActionContext actionContext = ActionContext.getContext();
-            Map session2 = actionContext.getSession();
-            int chapter_id = Integer.parseInt(request.getParameter("chapter_id"));
-            String login = request.getParameter("user_id");
-            int login_id = 0;
-            if(login != "")login_id = Integer.parseInt(request.getParameter("user_id"));
-            System.out.println(login_id);
-            ChapterDao chapterDao = new ChapterDao();
-            Chapter chapter = chapterDao.findChapter(chapter_id);
-            CourseDao courseDao = new CourseDao();
-            Course course = courseDao.find(chapter.getCourse_Course_Id());
-            CommentDao commentDao =  new CommentDao();
-            ArrayList<Comment> CommentArrayList = commentDao.getChapterComment(chapter_id);
-        %>
+        <input type="hidden" id="login_User_id" value="${sessionScope.user.userId}">
+<%--        <%--%>
+<%--            ActionContext actionContext = ActionContext.getContext();--%>
+<%--            Map session2 = actionContext.getSession();--%>
+<%--            int chapter_id = Integer.parseInt(request.getParameter("chapter_id"));--%>
+<%--            String login = request.getParameter("user_id");--%>
+<%--            int login_id = 0;--%>
+<%--            if(login != "")login_id = Integer.parseInt(request.getParameter("user_id"));--%>
+<%--            System.out.println(login_id);--%>
+<%--            ChapterDao chapterDao = new ChapterDao();--%>
+<%--            Chapter chapter = chapterDao.findChapter(chapter_id);--%>
+<%--            CourseDao courseDao = new CourseDao();--%>
+<%--            Course course = courseDao.find(chapter.getCourse_Course_Id());--%>
+<%--            CommentDao commentDao =  new CommentDao();--%>
+<%--            ArrayList<Comment> CommentArrayList = commentDao.getChapterComment(chapter_id);--%>
+<%--        %>--%>
         <div class="page-header-overlay">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <header class="entry-header">
-                            <h1 class="entry-title"><%=chapter.getChapter_Name()%></h1>
+                            <h1 class="entry-title">${chapter.chapterName}</h1>
 
                             <div class="entry-meta flex justify-content-center align-items-center">
-                                <div class="post-author"><a href="#"><%=course.getCourse_Teacher()%></a></div>
+                                <div class="post-author"><a href="#">${course.courseTeacher}</a></div>
 
-                                <div class="post-comments"><a href="#">评论数：<%=CommentArrayList.size()%></a></div>
+                                <div class="post-comments"><a href="#">评论数：${commentNum}</a></div>
                             </div><!-- .entry-meta -->
                         </header><!-- .entry-header -->
                     </div><!-- .col -->
@@ -130,7 +124,7 @@
             <div class="col-12 offset-lg-1 col-lg-10">
                 <div class="featured-image">
                     <video width="940" height="530" controls="controls">
-                        <source src="<%=chapter.getChapter_Video()%>" type="video/mp4" />
+                        <source src="${chapter.chapterVideo}" type="video/mp4" />
                     </video>
                     <!-- 修改为视频 -->
                 </div><!-- .featured-image -->
@@ -167,176 +161,194 @@
 
                 <div class="post-comments-wrap">
                     <div class="post-comments">
-                        <h3 class="comments-title"><span class="comments-number"><%=CommentArrayList.size()%> Comments</span></h3>
+                        <h3 class="comments-title"><span class="comments-number">${commentNum} Comments</span></h3>
 
                         <ol class="comment-courseList">
-                            <%
-                                if(CommentArrayList != null && CommentArrayList.size()>0)
-                                {
-                                    UserDao userDao = new UserDao();
-                                    for(int i = 0; i < CommentArrayList.size(); i++)
-                                    {
-                                        PriorityQueue<Comment> CommentQueue = new PriorityQueue<Comment>(10, new CmpComent());
-                                        Comment comment = CommentArrayList.get(i);
-                                        User user = userDao.findUser(comment.getUser_User_id());
-                                        if(comment.getComment_To() == 0)
-                                        {
-                            %>
-                            <li class="comment">
-                                <article class="comment-body">
-                                    <figure class="comment-author-avatar">
-                                        <img src="images/c-1.png" alt="">
-                                    </figure>
+<%--                            <%--%>
+<%--                                if(CommentArrayList != null && CommentArrayList.size()>0)--%>
+<%--                                {--%>
+<%--                                    UserDao userDao = new UserDao();--%>
+<%--                                    for(int i = 0; i < CommentArrayList.size(); i++)--%>
+<%--                                    {--%>
+<%--                                        PriorityQueue<Comment> CommentQueue = new PriorityQueue<Comment>(10, new CmpComent());--%>
+<%--                                        Comment comment = CommentArrayList.get(i);--%>
+<%--                                        User user = userDao.findUser(comment.getUser_User_id());--%>
+<%--                                        if(comment.getComment_To() == 0)--%>
+<%--                                        {--%>
+<%--                            %>--%>
+                            <c:forEach items="${groupCommentList}" var="parent">
+                                <li class="comment">
+                                    <article class="comment-body">
+                                        <figure class="comment-author-avatar">
+                                            <img src="images/c-1.png" alt="">
+                                        </figure>
 
-                                    <div class="comment-wrap">
-                                        <div class="comment-author">
+                                        <div class="comment-wrap">
+                                            <div class="comment-author">
                                             <span class="comment-meta d-block">
-                                                <a href="#"><%=comment.getComment_Time()%></a>
+                                                <a href="#">${parent.parentCommentAndUser.comment.commentTime}</a>
                                             </span>
 
-                                            <span class="fn">
-                                                <a href="#"><%=user.getUser_Name()%></a>
+                                                <span class="fn">
+                                                <a href="#">${parent.parentCommentAndUser.user.userName}</a>
                                             </span>
-                                        </div>
+                                            </div>
 
-                                        <p><%=comment.getComment_Content()%></p>
-                                        <div class="reply">
-                                            <div class="panel panel-default" style="display: inline-block;">
-                                                <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                        <a data-toggle="collapse" data-parent="#accordion"
-                                                           href="#<%=comment.getComment_id()%>">
-                                                            reply
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="<%=comment.getComment_id()%>" class="panel-collapse collapse in">
-                                                    <div class="panel-body">
+                                            <p>${parent.parentCommentAndUser.comment.commentContent}</p>
+                                            <div class="reply">
+                                                <div class="panel panel-default" style="display: inline-block;">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                            <a data-toggle="collapse" data-parent="#accordion"
+                                                               href="#${parent.parentCommentAndUser.comment.commentId}">
+                                                                reply
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="${parent.parentCommentAndUser.comment.commentId}" class="panel-collapse collapse in">
+                                                        <div class="panel-body">
 
-                                                        <div class="comments-form">
-                                                            <div class="comment-respond">
-                                                                <h3 class="comment-reply-title">Leave a Reply</h3>
+                                                            <div class="comments-form">
+                                                                <div class="comment-respond">
+                                                                    <h3 class="comment-reply-title">Leave a Reply</h3>
 
-                                                                <form action="leavecomment" class="comment-form" method="post">
-                                                                    <textarea rows="6" name="comment.Comment_Content" id="commentcontent" placeholder="Messages"></textarea>
-                                                                    <input type="hidden" name="comment.Comment_Time" value="<%=new Timestamp(System.currentTimeMillis())%>">
-                                                                    <input type="hidden" name="comment.Comment_To" value="<%=comment.getComment_id()%>">
-                                                                    <input type="hidden" name="comment.Chapter_Chapter_id" value="<%=chapter_id%>">
-                                                                    <input type="hidden" name="comment.User_User_id" value="<S:property value="#session.user.User_id"/>">
-                                                                    <input type="hidden" name="login_id" value="<%=login_id%>">
-                                                                    <input type="submit" value="send comment">
-                                                                </form><!-- .comment-form -->
-                                                            </div><!-- .comment-respond -->
-                                                        </div><!-- .comments-form -->
+                                                                    <form action="leavecomment" class="comment-form" method="post">
+                                                                        <textarea rows="6" name="comment.Comment_Content" id="commentcontent" placeholder="Messages"></textarea>
+                                                                        <input type="hidden" name="comment.Comment_Time" value="<%=new Timestamp(System.currentTimeMillis())%>">
+                                                                        <input type="hidden" name="comment.Comment_To" value="${parent.parentCommentAndUser.comment.commentId}">
+                                                                        <input type="hidden" name="comment.Chapter_Chapter_id" value="${chapter.chapterId}">
+                                                                        <input type="hidden" name="comment.User_User_id" value="${sessionScope.user.userId}">
+                                                                        <input type="hidden" name="login_id" value="${sessionScope.user.userId}"> <%--这里的userId本来是login id--%>
+                                                                        <input type="submit" value="send comment">
+                                                                    </form><!-- .comment-form -->
+                                                                </div><!-- .comment-respond -->
+                                                            </div><!-- .comments-form -->
+                                                        </div>
                                                     </div>
                                                 </div>
+<%--                                                <%--%>
+<%--                                                    int adminJudge = 0;--%>
+<%--                                                    if(login_id != 0){--%>
+<%--                                                        User LoginUser = userDao.findUser(login_id);--%>
+<%--                                                        if(LoginUser.getUser_Identity() == 0) adminJudge = 1;--%>
+<%--                                                    }--%>
+<%--                                                    if(comment.getUser_User_id() == login_id || adminJudge == 1){--%>
+<%--                                                %>--%>
+                                                <c:choose>
+                                                    <c:when test="${sessionScope.user.userId} == ${parent.parentCommentAndUser.comment.userUserId}">
+                                                        <a href="delete-comment.jsp?comment_id=${parent.parentCommentAndUser.comment.commentId}&user_id=${sessionScope.user.userId}" style="background:red;color:#fff">delete</a><%--这里的userId本来是login id--%>
+                                                    </c:when>
+                                                </c:choose>
+<%--                                                <%--%>
+<%--                                                    }--%>
+<%--                                                %>--%>
                                             </div>
-                                            <%
-                                                int adminJudge = 0;
-                                                if(login_id != 0){
-                                                    User LoginUser = userDao.findUser(login_id);
-                                                    if(LoginUser.getUser_Identity() == 0) adminJudge = 1;
-                                                }
-                                                if(comment.getUser_User_id() == login_id || adminJudge == 1){
-                                            %>
-                                            <a href="delete-comment.jsp?comment_id=<%=comment.getComment_id()%>&user_id=<%=login_id%>" style="background:red;color:#fff">delete</a>
-                                            <%
-                                                }
-                                            %>
                                         </div>
-                                    </div>
 
-                                    <div class="clearfix"></div>
-                                </article>
-                                        <%
-                                            CommentQueue.offer(comment);
-                                            while(!CommentQueue.isEmpty())
-                                            {
-                                                Comment comment2 = CommentQueue.poll();
-                                                CommentDao commentDao1 = new CommentDao();
-                                                ArrayList<Comment> CommentArrayListReply = commentDao1.getCommentReply(comment2.getComment_id());
-                                                if(CommentArrayListReply != null && CommentArrayListReply.size() > 0)
-                                                {
-                                                    for(int j = 0; j < CommentArrayListReply.size(); j ++)  CommentQueue.offer(CommentArrayListReply.get(j));
-                                                }
-                                                if(comment2 != comment)
-                                                {
-                                                    User user2 = userDao.findUser(comment2.getUser_User_id());
-                                                    User previousUser = userDao.findUser(commentDao.find(comment2.getComment_To()).getUser_User_id()); //回复的User
-                                        %>
-                                <ol class="children">
-                                    <li class="comment">
-                                        <article class="comment-body">
-                                            <figure class="comment-author-avatar">
-                                                <img src="images/c-1.png" alt="">
-                                            </figure>
+                                        <div class="clearfix"></div>
+                                    </article>
+<%--                                    <%--%>
+<%--                                        CommentQueue.offer(comment);--%>
+<%--                                        while(!CommentQueue.isEmpty())--%>
+<%--                                        {--%>
+<%--                                            Comment comment2 = CommentQueue.poll();--%>
+<%--                                            CommentDao commentDao1 = new CommentDao();--%>
+<%--                                            ArrayList<Comment> CommentArrayListReply = commentDao1.getCommentReply(comment2.getComment_id());--%>
+<%--                                            if(CommentArrayListReply != null && CommentArrayListReply.size() > 0)--%>
+<%--                                            {--%>
+<%--                                                for(int j = 0; j < CommentArrayListReply.size(); j ++)  CommentQueue.offer(CommentArrayListReply.get(j));--%>
+<%--                                            }--%>
+<%--                                            if(comment2 != comment)--%>
+<%--                                            {--%>
+<%--                                                User user2 = userDao.findUser(comment2.getUser_User_id());--%>
+<%--                                                User previousUser = userDao.findUser(commentDao.find(comment2.getComment_To()).getUser_User_id()); //回复的User--%>
+<%--                                    %>--%>
+                                    <c:choose>
+                                        <c:when test="${parent.sonCommentAndUser.size() > 0}">
+                                            <c:forEach items="${parent.sonCommentAndUser}" var="son">
+                                                <ol class="children">
+                                                    <li class="comment">
+                                                        <article class="comment-body">
+                                                            <figure class="comment-author-avatar">
+                                                                <img src="images/c-1.png" alt="">
+                                                            </figure>
 
-                                            <div class="comment-wrap">
-                                                <div class="comment-author">
+                                                            <div class="comment-wrap">
+                                                                <div class="comment-author">
                                                     <span class="comment-meta d-block">
-                                                        <a href="#"><%=comment2.getComment_Time()%></a>
+                                                        <a href="#">${son.comment.commentTime}</a>
                                                     </span>
 
-                                                    <span class="fn">
-                                                        <a href="#"><%=user2.getUser_Name()%></a><a>    Reply To    </a><a href="#"><%=previousUser.getUser_Name()%></a>
+                                                                    <span class="fn">
+                                                        <a href="#">${son.user.userName}</a><a>    Reply To    </a><a href="#">${son.previousUser.userName}</a>
                                                     </span>
-                                                </div>
+                                                                </div>
 
-                                                <p><%=comment2.getComment_Content()%></p>
+                                                                <p>${son.comment.commentContent}</p>
 
 
-                                                <div class="reply">
-                                                    <div class="panel panel-default"  style="display: inline-block;">
-                                                        <div class="panel-heading">
-                                                            <h4 class="panel-title">
-                                                                <a data-toggle="collapse" data-parent="#accordion"
-                                                                   href="#<%=comment2.getComment_id()%>">reply
-                                                                </a>
-                                                            </h4>
-                                                        </div>
-                                                        <div id="<%=comment2.getComment_id()%>" class="panel-collapse collapse in">
-                                                            <div class="panel-body">
-                                                                <div class="comments-form">
-                                                                    <div class="comment-respond">
-                                                                        <h3 class="comment-reply-title">Leave a Reply</h3>
+                                                                <div class="reply">
+                                                                    <div class="panel panel-default"  style="display: inline-block;">
+                                                                        <div class="panel-heading">
+                                                                            <h4 class="panel-title">
+                                                                                <a data-toggle="collapse" data-parent="#accordion"
+                                                                                   href="#${son.comment.commentId}">reply
+                                                                                </a>
+                                                                            </h4>
+                                                                        </div>
+                                                                        <div id="${son.comment.commentId}" class="panel-collapse collapse in">
+                                                                            <div class="panel-body">
+                                                                                <div class="comments-form">
+                                                                                    <div class="comment-respond">
+                                                                                        <h3 class="comment-reply-title">Leave a Reply</h3>
 
-                                                                        <form action="leavecomment" class="comment-form" method="post">
-                                                                            <textarea rows="6" name="comment.Comment_Content" id="commentcontent" placeholder="Messages"></textarea>
-                                                                            <input type="hidden" name="comment.Comment_Time" value="<%=new Timestamp(System.currentTimeMillis())%>">
-                                                                            <input type="hidden" name="comment.Comment_To" value="<%=comment2.getComment_id()%>">
-                                                                            <input type="hidden" name="comment.Chapter_Chapter_id" value="<%=chapter_id%>">
-                                                                            <input type="hidden" name="comment.User_User_id" value="<S:property value="#session.user.User_id"/>">
-                                                                            <input type="hidden" name="login_id" value="<%=login_id%>">
-                                                                            <input type="submit" value="send comment">
-                                                                        </form><!-- .comment-form -->
-                                                                    </div><!-- .comment-respond -->
-                                                                </div><!-- .comments-form -->
+                                                                                        <form action="leavecomment" class="comment-form" method="post">
+                                                                                            <textarea rows="6" name="comment.Comment_Content" id="commentcontent" placeholder="Messages"></textarea>
+                                                                                            <input type="hidden" name="comment.Comment_Time" value="<%=new Timestamp(System.currentTimeMillis())%>">
+                                                                                            <input type="hidden" name="comment.Comment_To" value="${son.comment.commentId}">
+                                                                                            <input type="hidden" name="comment.Chapter_Chapter_id" value="${chapter.chapterId}">
+                                                                                            <input type="hidden" name="comment.User_User_id" value="${sessionScope.user.userId}">
+                                                                                            <input type="hidden" name="login_id" value="${sessionScope.user.userId}"><%--这里的userId本来是login id--%>
+                                                                                            <input type="submit" value="send comment">
+                                                                                        </form><!-- .comment-form -->
+                                                                                    </div><!-- .comment-respond -->
+                                                                                </div><!-- .comments-form -->
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                        <%--                                                            <%--%>
+                                                                        <%--                                                                if(comment2.getUser_User_id() == login_id || adminJudge == 1){--%>
+                                                                        <%--                                                            %>--%>
+                                                                    <c:choose>
+                                                                        <c:when test="${sessionScope.user.userId} == ${son.comment.userUserId}">
+                                                                            <a href="delete-comment.jsp?comment_id=${son.comment.commentId}&user_id=${sessionScope.user.userId}" style="background:red;color:#fff">delete</a><%--这里的userId本来是login id--%>
+                                                                        </c:when>
+
+                                                                    </c:choose>
+                                                                        <%--                                                                }--%>
+                                                                        <%--                                                            %>--%>
+                                                                </div>
+
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <%
-                                                        if(comment2.getUser_User_id() == login_id || adminJudge == 1){
-                                                    %>
-                                                    <a href="delete-comment.jsp?comment_id=<%=comment2.getComment_id()%>&user_id=<%=login_id%>" style="background:red;color:#fff">delete</a>
-                                                    <%
-                                                        }
-                                                    %>
-                                                </div>
 
-                                            </div>
+                                                            <div class="clearfix"></div>
+                                                        </article>
+                                                    </li>
+                                                </ol>
+                                            </c:forEach>
 
-                                            <div class="clearfix"></div>
-                                        </article>
-                                    </li>
-                                </ol>
-                            </li>
-                            <%
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            %>
+                                        </c:when>
+                                    </c:choose>
+                                </li>
+
+                            </c:forEach>
+<%--                            <%--%>
+<%--                                                }--%>
+<%--                                            }--%>
+<%--                                        }--%>
+<%--                                    }--%>
+<%--                                }--%>
+<%--                            %>--%>
                         </ol><!-- .comment-courseList -->
                     </div><!-- .post-comments -->
 
@@ -348,9 +360,9 @@
                                 <textarea rows="6" name="comment.Comment_Content" id="commentcontent" placeholder="Messages"></textarea>
                                 <input type="hidden" name="comment.Comment_Time" value="<%=new Timestamp(System.currentTimeMillis())%>">
                                 <input type="hidden" name="comment.Comment_To" value="<%=0%>">
-                                <input type="hidden" name="comment.Chapter_Chapter_id" value="<%=chapter_id%>">
-                                <input type="hidden" name="comment.User_User_id" value="<S:property value="#session.user.User_id"/>">
-                                <input type="hidden" name="login_id" value="<%=login_id%>">
+                                <input type="hidden" name="comment.Chapter_Chapter_id" value="${chapter.chapterId}">
+                                <input type="hidden" name="comment.User_User_id" value="${sessionScope.user.userId}">
+                                <input type="hidden" name="login_id" value="${sessionScope.user.userId}"><%--这里的userId本来是login id--%>
                                 <input type="submit" value="send comment">
                             </form><!-- .comment-form -->
                         </div><!-- .comment-respond -->

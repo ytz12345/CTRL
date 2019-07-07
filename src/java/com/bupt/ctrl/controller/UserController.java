@@ -30,6 +30,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    //注册
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
     private ModelAndView register(User user) {
@@ -42,6 +43,7 @@ public class UserController {
         return mav;
     }
 
+    //登录
     @RequestMapping(value = "/checkLogin", method = RequestMethod.POST)
     @ResponseBody
     private ModelAndView checkLogin(User user, HttpSession session){
@@ -58,6 +60,7 @@ public class UserController {
         return mav;
     }
 
+    //注销登录
     @RequestMapping(value = "/outLogin")
     @ResponseBody
     private ModelAndView outLogin(HttpSession session){

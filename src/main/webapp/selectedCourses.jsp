@@ -1,5 +1,4 @@
-<%@ page import="dao.CourseDao" %>
-<%@ page import="model.Course" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
@@ -100,40 +99,24 @@
             <div class="col-12 col-lg-12">
                 <div class="featured-courses courses-wrap">
                     <div class="row mx-m-25">
-                        <%
-                            CourseDao courseDao = new CourseDao();
-                            String selectedCourse = request.getParameter("str");
-                            System.out.println(selectedCourse);
-                            ArrayList<Course> CourseArrayList = courseDao.getSelectedCourse(selectedCourse);
-                            System.out.println("s " + CourseArrayList.size());
-                            //ArrayList<Course> CourseArrayList = courseDao.getAllCourse();
-                            if(CourseArrayList!=null&&CourseArrayList.size()>0)
-                            {
-                                for(int i = 0; i < CourseArrayList.size(); i++)
-                                {
-                                    Course course = CourseArrayList.get(i);
-                        %>
-                        <div class="col-12 col-md-4 px-25">
-                            <div class="course-content">
-                                <figure class="course-thumbnail">
-                                    <a href="single-courses.jsp?course_id=<%=course.getCourse_Id()%>"><img src="<%=course.getCourse_Image()%>" alt=""></a>
-                                </figure>
+                        <c:forEach items="${courses}" var="course">
+                            <div class="col-12 col-md-4 px-25">
+                                <div class="course-content">
+                                    <figure class="course-thumbnail">
+                                        <a href="single-courses.jsp?course_id=${course.courseId}"><img src="${course.courseImage}" alt=""></a>
+                                    </figure>
 
-                                <div class="course-content-wrap">
-                                    <header class="entry-header">
-                                        <h2 class="entry-title"><a href="single-courses.jsp?course_id=<%=course.getCourse_Id()%>"><%=course.getCourse_Name()%></a></h2>
+                                    <div class="course-content-wrap">
+                                        <header class="entry-header">
+                                            <h2 class="entry-title"><a href="single-courses.jsp?course_id=${course.courseId}">${course.courseName}</a></h2>
 
-                                        <div class="entry-meta flex flex-wrap align-items-center">
-                                            <div class="course-author"><a href="#"><%=course.getCourse_Teacher()%></a></div>
+                                            <div class="entry-meta flex flex-wrap align-items-center">
+                                                <div class="course-author"><a href="#">${course.courseTeacher}</a></div>
 
-                                            <div class="course-date"><%=course.getCourse_Date()%></div>
-                                        </div>
-                                    </header>
-                                    <!--
-                                    <footer class="entry-footer flex flex-wrap justify-content-between align-items-center">
-                                        <div class="course-cost">
-                                            $45 <span class="price-drop">$68</span>
-                                        </div>-->
+                                                <div class="course-date">${course.courseDate}</div>
+                                            </div>
+                                        </header>
+
 
                                         <div class="course-ratings flex justify-content-end align-items-center">
                                             <span class="fa fa-star checked"></span>
@@ -143,14 +126,11 @@
                                             <span class="fa fa-star-o"></span>
                                             <span class="course-ratings-count">(4 votes)</span>
                                         </div>
-                                    </footer>
+                                        </footer>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <%
-                                }
-                            }
-                        %>
+                        </c:forEach>
                     </div>
                 </div>
 
