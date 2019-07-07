@@ -25,6 +25,22 @@ public class UserServiceImpl implements com.bupt.ctrl.service.UserService {
     }
 
     @Override
+    public void register(User user){
+        userMapper.insert(user);
+    }
+
+    @Override
+    public User checkLogin(String userName, String password){
+        User user = userMapper.findByName(userName);
+
+        if(user != null && user.getUserPassword().equals(password)){
+            return user;
+        }
+
+        return null;
+    }
+
+    @Override
     public Map<String, Object> saveUser(User record) {
         Map<String,Object> map=new HashMap<String,Object>();
         int num = userMapper.insertSelective(record);

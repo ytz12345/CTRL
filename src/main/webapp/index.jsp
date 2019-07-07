@@ -25,6 +25,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
     <div class="hero-content">

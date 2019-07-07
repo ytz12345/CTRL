@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
     <meta charset="utf-8">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
     <script src="https://?ile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
@@ -22,7 +27,6 @@
             }else{
                 return true;
             }
-
         }</script>
 </head>
 <div class="top-header-bar">
@@ -47,99 +51,101 @@
                     </div><!-- .header-bar-search -->
 
                     <div class="header-bar-menu">
-                        <s:if test="#session.user == null">
-                            <ul class="flex justify-content-center align-items-center py-2 pt-md-0">
-                                <li><a href="#" data-toggle="modal" data-target="#myModal">Login</a></li>
-                                <div class="modal fade" id="myModal">
-                                    <div class="modal-dialog modal-sm">
-                                        <div class="modal-content">
-                                            <!-- 模态框头部 -->
-                                            <div class="modal-header">
-                                                <h2 class="modal-title">请登录</h2>
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            </div>
-                                            <!-- 模态框主体 -->
-                                            <div class="modal-body">
-                                                <div id="form-login">
-                                                    <form action="logincheck" method="post">
+                        <c:choose>
+                            <c:when test="${ sessionScope.user != null }">
+                                <ul class="flex justify-content-center align-items-center py-2 pt-md-0" style="list-style: none">
+                                    <li><a href="#">${sessionScope.user.userName}</a></li>
+                                    <li><a href="outLogin" style="font-size: 6px">logout</a></li>
+                                </ul>
+                            </c:when>
+                            <c:otherwise>
+                                <ul class="flex justify-content-center align-items-center py-2 pt-md-0">
+                                    <li><a href="#" data-toggle="modal" data-target="#myModal">Login</a></li>
+                                    <div class="modal fade" id="myModal">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+                                                <!-- 模态框头部 -->
+                                                <div class="modal-header">
+                                                    <h2 class="modal-title">请登录</h2>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <!-- 模态框主体 -->
+                                                <div class="modal-body">
+                                                    <div id="form-login">
+                                                        <form action="checkLogin" method="post">
 
-                                                        <label class="login-lable">用户名：</label>
-                                                        <div class="input-group input-group-sm">
-                                                            <input type="text" class="form-control" name="user.User_Name" placeholder="Username">
-                                                        </div>
-                                                        <br />
-                                                        <label class="login-lable">密码：</label>
-                                                        <div class="input-group input-group-sm">
-                                                            <input type="password" class="form-control" name="user.User_Password" placeholder="Password">
-                                                        </div>
-                                                        <br />
-                                                        <div class="modal-footer">
-                                                            <input class="btn btn-primary" id="login-btn" type="submit" value="登录">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                                                        </div>
-                                                    </form>
-                                                </div><!-- #form-login -->
-                                            </div>
+                                                            <label class="login-lable">用户名：</label>
+                                                            <div class="input-group input-group-sm">
+                                                                <input type="text" class="form-control" name="userName" placeholder="Username">
+                                                            </div>
+                                                            <br />
+                                                            <label class="login-lable">密码：</label>
+                                                            <div class="input-group input-group-sm">
+                                                                <input type="password" class="form-control" name="userPassword" placeholder="Password">
+                                                            </div>
+                                                            <br />
+                                                            <div class="modal-footer">
+                                                                <input class="btn btn-primary" id="login-btn" type="submit" value="登录">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                                            </div>
+                                                        </form>
+                                                    </div><!-- #form-login -->
+                                                </div>
 
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-<%--                                <li><a href="register.jsp">Register</a></li>--%>
-<%--                                <li><a href="register.jsp">Register</a></li>--%>
-                                <li><a href="#" data-toggle="modal" data-target="#myModal2">Register</a></li>
-                                <!-- 模态框 -->
-                                <div class="modal fade" id="myModal2">
-                                    <div class="modal-dialog modal-sm">
-                                        <div class="modal-content">
-                                            <!-- 模态框头部 -->
-                                            <div class="modal-header">
-                                                <h2 class="modal-title">请注册</h2>
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <%--                                <li><a href="register.jsp">Register</a></li>--%>
+    <%--                                <li><a href="register.jsp">Register</a></li>--%>
+                                    <li><a href="#" data-toggle="modal" data-target="#myModal2">Register</a></li>
+                                    <!-- 模态框 -->
+                                    <div class="modal fade" id="myModal2">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+                                                <!-- 模态框头部 -->
+                                                <div class="modal-header">
+                                                    <h2 class="modal-title">请注册</h2>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <!-- 模态框主体 -->
+                                                <div class="modal-body">
+                                                    <div id="form-register">
+                                                        <form action="register" name="register" method="post" onsubmit="return isValidate()" >
+                                                            <label class="register-lable">用户名：</label>
+                                                            <div class="input-group input-group-sm">
+                                                                <input type="text" class="form-control" name="userName" id="username" placeholder="Username">
+                                                            </div>
+                                                            <br />
+                                                            <label class="register-lable">设置密码：</label>
+                                                            <div class="input-group input-group-sm">
+                                                                <input type="password" class="form-control" name="userPassword" id="userpassword" placeholder="Password">
+                                                            </div>
+                                                            <br />
+                                                            <label class="register-lable">确认密码：</label>
+                                                            <div class="input-group input-group-sm">
+                                                                <input type="password" class="form-control" name="userpass1" id="userpass1" placeholder="Password">
+                                                            </div>
+                                                            <br />
+
+                                                            <label class="radio-inline"><input type="radio" name="userIdentity" value="1" checked>学生&nbsp&nbsp&nbsp</label>
+                                                            <label class="radio-inline"><input type="radio" name="userIdentity" value="2">教师</label>
+
+                                                            <div class="modal-footer">
+                                                                <input class="btn btn-primary" id="register-btn" type="submit" value="注册">
+
+                                                                <input class="btn btn-secondary" id="reset-btn" type="reset" value="重置">
+                                                            </div>
+
+                                                        </form>
+                                                    </div><!-- #form-login -->
+                                                </div><!-- .hero-content-wrap -->
                                             </div>
-                                            <!-- 模态框主体 -->
-                                            <div class="modal-body">
-                                                <div id="form-register">
-                                                    <form action="register" name="register" method="post" onsubmit="return isValidate()" >
-                                                        <label class="register-lable">用户名：</label>
-                                                        <div class="input-group input-group-sm">
-                                                            <input type="text" class="form-control" name="user.User_Name" id="username" placeholder="Username">
-                                                        </div>
-                                                        <br />
-                                                        <label class="register-lable">设置密码：</label>
-                                                        <div class="input-group input-group-sm">
-                                                            <input type="password" class="form-control" name="user.User_Password" id="userpassword" placeholder="Password">
-                                                        </div>
-                                                        <br />
-                                                        <label class="register-lable">确认密码：</label>
-                                                        <div class="input-group input-group-sm">
-                                                            <input type="password" class="form-control" name="userpass1" id="userpass1" placeholder="Password">
-                                                        </div>
-                                                        <br />
-
-                                                        <label class="radio-inline"><input type="radio" name="user.User_Identity" value="1" checked>学生&nbsp&nbsp&nbsp</label>
-                                                        <label class="radio-inline"><input type="radio" name="user.User_Identity" value="2">教师</label>
-
-                                                        <div class="modal-footer">
-                                                            <input class="btn btn-primary" id="register-btn" type="submit" value="注册">
-
-                                                            <input class="btn btn-secondary" id="reset-btn" type="reset" value="重置">
-                                                        </div>
-
-                                                    </form>
-                                                </div><!-- #form-login -->
-                                            </div><!-- .hero-content-wrap -->
                                         </div>
                                     </div>
-                                </div>
 
-                            </ul>
-                        </s:if>
-                        <s:else>
-                            <ul class="flex justify-content-center align-items-center py-2 pt-md-0">
-                                <li>Welcome!</li>
-                                <li><a href=getcourselist?u2_id=<s:property value="#session.user.User_id"/>><s:property value="#session.user.User_Name"/></a></li>
-                            </ul>
-                        </s:else>
+                                </ul>
+                            </c:otherwise>
+                        </c:choose>
                     </div><!-- .header-bar-menu -->
                 </div><!-- .col -->
             </div><!-- .row -->
