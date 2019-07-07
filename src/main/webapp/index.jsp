@@ -25,6 +25,28 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://?ile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        function isValidate(form) {
+            var username=document.getElementById("username").value;
+            var userpass=document.getElementById("userpassword").value;
+            var userpass1=document.getElementById("userpass1").value;
+            user.Identity=$('input:radio[name="Identity"]:checked').val();
+            if(userpass != userpass1){
+                alert("两次输入的密码不一致，请重新输入！");
+                return false;
+            }else if(userpass.length<=0 || username.length<=0) {
+                alert("用户名以及密码不能为空，请重新输入！");
+                return false;
+            }else{
+                return true;
+            }
+
+        }</script>
 </head>
 <body>
     <div class="hero-content">

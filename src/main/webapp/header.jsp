@@ -1,30 +1,9 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
     <meta charset="utf-8">
-    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
-    <script src="https://?ile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-        function isValidate(form) {
-            var username=document.getElementById("username").value;
-            var userpass=document.getElementById("userpassword").value;
-            var userpass1=document.getElementById("userpass1").value;
-            user.Identity=$('input:radio[name="Identity"]:checked').val();
-            if(userpass != userpass1){
-                alert("两次输入的密码不一致，请重新输入！");
-                return false;
-            }else if(userpass.length<=0 || username.length<=0) {
-                alert("用户名以及密码不能为空，请重新输入！");
-                return false;
-            }else{
-                return true;
-            }
-
-        }</script>
 </head>
 <div class="top-header-bar">
         <div class="container-fluid">
@@ -49,7 +28,13 @@
 
                     <div class="header-bar-menu">
                         <c:choose>
-                            <c:when test="${empty user}">
+                            <c:when test="${ sessionScope.user != null }">
+                                <ul class="flex justify-content-center align-items-center py-2 pt-md-0" style="list-style: none">
+                                    <li><a href="#">${sessionScope.user.userName}</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/user/outLogin.action" style="font-size: 6px">logout</a></li>
+                                </ul>
+                            </c:when>
+                            <c:otherwise>
                                 <ul class="flex justify-content-center align-items-center py-2 pt-md-0">
                                     <li><a href="#" data-toggle="modal" data-target="#myModal">Login</a></li>
                                     <div class="modal fade" id="myModal">
@@ -118,8 +103,8 @@
                                                             </div>
                                                             <br />
 
-                                                            <label class="radio-inline"><input type="radio" name="user.User_Identity" value="1" checked>学生&nbsp&nbsp&nbsp</label>
-                                                            <label class="radio-inline"><input type="radio" name="user.User_Identity" value="2">教师</label>
+                                                            <label class="radio-inline"><input type="radio" name="userIdentity" value="1" checked>学生&nbsp&nbsp&nbsp</label>
+                                                            <label class="radio-inline"><input type="radio" name="userIdentity" value="2">教师</label>
 
                                                             <div class="modal-footer">
                                                                 <input class="btn btn-primary" id="register-btn" type="submit" value="注册">
@@ -135,13 +120,7 @@
                                     </div>
 
                                 </ul>
-                            </c:when>
-                            <c:when test="${ sessionScope.user != null }">
-                                <ul class="flex justify-content-center align-items-center py-2 pt-md-0">
-                                    <li><a href="#"> ${sessionScope.user.userName}</a></li>
-                                    <li><a href="${pageContext.request.contextPath}/user/outLogin.action">注销</a></li>
-                                </ul>
-                            </c:when>
+                            </c:otherwise>
                         </c:choose>
                     </div><!-- .header-bar-menu -->
                 </div><!-- .col -->
