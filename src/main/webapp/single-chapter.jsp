@@ -4,6 +4,7 @@
 <%@ page import="java.sql.Timestamp"%>
 <%@ page import="java.util.Map"%>
 <%@ page import="com.bupt.ctrl.dao.UserMapper" %>
+<%@ page import="com.bupt.ctrl.controller.ChapterController" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" autoFlush="false" buffer="256kb"
          pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
