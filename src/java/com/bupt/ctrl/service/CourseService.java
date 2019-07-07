@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface CourseService {
     public List<Course>  getAllPass();
+    public Course getCourse(Integer course_id);
 }
