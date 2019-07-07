@@ -14,10 +14,18 @@ public class CourseServiceImpl implements CourseService {
 
     @Autowired
     CourseMapper courseMapper;
-    //获得所有课程
+
     public List<Course> getAllPass() {
         CourseExample courseExample = new CourseExample();
         CourseExample.Criteria criteria = courseExample.createCriteria();
+        criteria.andCoursePassEqualTo(1);
+        return courseMapper.selectByExample(courseExample);
+    }
+
+    public List<Course> getCourseByName(String str) {
+        CourseExample courseExample = new CourseExample();
+        CourseExample.Criteria criteria = courseExample.createCriteria();
+        criteria.andCourseNameLike("%" + str + "%");
         criteria.andCoursePassEqualTo(1);
         return courseMapper.selectByExample(courseExample);
     }
