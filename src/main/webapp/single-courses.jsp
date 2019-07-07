@@ -1,7 +1,3 @@
-<%@ page import="dao.CourseDao" %>
-<%@ page import="dao.ChapterDao" %>
-<%@ page import="model.Course" %>
-<%@ page import="model.Chapter" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>

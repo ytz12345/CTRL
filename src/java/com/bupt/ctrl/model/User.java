@@ -42,10 +42,12 @@ public class User {
     private String userIntro;
 
     public User() {
-
     }
 
-    public User(Integer userId, String userName, String userPassword, Integer userIdentity, String userIntro) {
+    public User(Integer userId, String userName,
+                String userPassword,
+                Integer userIdentity,
+                String userIntro) {
         this.userId = userId;
         this.userName = userName;
         this.userPassword = userPassword;
