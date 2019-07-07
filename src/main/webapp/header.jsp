@@ -54,7 +54,7 @@
                         <c:choose>
                             <c:when test="${ sessionScope.user != null }">
                                 <ul class="flex justify-content-center align-items-center py-2 pt-md-0" style="list-style: none">
-                                    <li><a href="#">${sessionScope.user.userName}</a></li>
+                                    <li><a href="course-create.jsp">${sessionScope.user.userName}</a></li>
                                     <li><a href="outLogin" style="font-size: 6px">logout</a></li>
                                 </ul>
                             </c:when>
