@@ -140,7 +140,7 @@
 
                                     <!-- 模态框主体 -->
                                     <div class="modal-body">
-                                        <form action="modifyCourseName?modify_id=${course.courseId}" method="post" role="form">
+                                        <form action="modifyCourseName?course_id=${course.courseId}" method="post" role="form">
                                             <div class="form-group">
                                                 <input name="newCourseName" type="text" class="form-control" placeholder="输入新的课程名">
                                             </div>
@@ -416,7 +416,7 @@
 
                                 <!-- 模态框主体 -->
                                 <div class="modal-body">
-                                    <form action="modifyCourseIntro?modify_id=${course.courseId}" method="post" role="form">
+                                    <form action="modifyCourseIntro?course_id=${course.courseId}" method="post" role="form">
                                         <div class="form-group">
                                             <textarea name="newCourseIntro" class="form-control" rows="3" placeholder="输入新的课程介绍"></textarea>
                                         </div>

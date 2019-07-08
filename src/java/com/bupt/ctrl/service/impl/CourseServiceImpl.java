@@ -76,4 +76,24 @@ public class CourseServiceImpl implements CourseService {
     public Course getCourseByID(Integer course_id){
         return courseMapper.selectByPrimaryKey(course_id);
     }
+
+    //修改课程名
+    public int updateCourseName(Course course){
+        CourseExample courseExample = new CourseExample();
+        CourseExample.Criteria criteria = courseExample.createCriteria();
+
+        criteria.andCourseIdEqualTo(course.getCourseId());
+        courseMapper.updateByExampleSelective(course,courseExample);
+        return 1;
+    }
+
+    //修改课程名
+    public int updateCourseIntro(Course course){
+        CourseExample courseExample = new CourseExample();
+        CourseExample.Criteria criteria = courseExample.createCriteria();
+
+        criteria.andCourseIdEqualTo(course.getCourseId());
+        courseMapper.updateByExampleSelective(course,courseExample);
+        return 1;
+    }
 }
