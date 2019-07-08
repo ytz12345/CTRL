@@ -90,4 +90,8 @@ public class CommentServiceImpl implements CommentService {
     public int deleteComment(Integer comment_id){
         return commentMapper.deleteByPrimaryKey(comment_id);
     }
+
+    public void deleteCommentByUser(Integer uid){
+        commentMapper.deleteCommentByUser(uid);
+    }
 }

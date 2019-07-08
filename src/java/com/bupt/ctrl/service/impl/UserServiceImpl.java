@@ -4,6 +4,9 @@ import com.bupt.ctrl.common.CommonEnum;
 import com.bupt.ctrl.dao.UserMapper;
 import com.bupt.ctrl.model.User;
 import com.bupt.ctrl.model.UserExample;
+import com.bupt.ctrl.service.CommentService;
+import com.bupt.ctrl.service.UserHasChapterService;
+import com.bupt.ctrl.service.UserHasCourseService;
 import com.bupt.ctrl.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +22,9 @@ public class UserServiceImpl implements UserService{
     private Logger logger= LoggerFactory.getLogger(this.getClass());
     @Autowired
     private UserMapper userMapper;
-
+    private UserHasChapterService userHasChapterService;
+    private UserHasCourseService userHasCourseService;
+    private CommentService commentService;
     @Override
     public User getUserByID(Integer uid) {
         return userMapper.selectByPrimaryKey(uid);
@@ -65,7 +70,10 @@ public class UserServiceImpl implements UserService{
     }
 
     public void deleteUser(Integer uid){
-
+        userHasChapterService.deleteUserHasChap(uid);
+        userHasCourseService.deleteUserHasCourse(uid);
+        commentService.deleteCommentByUser(uid);
+        userMapper.deleteByPrimaryKey(uid);
     }
 
 }

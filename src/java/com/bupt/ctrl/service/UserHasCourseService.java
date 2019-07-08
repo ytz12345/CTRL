@@ -10,4 +10,7 @@ import java.util.List;
 public interface UserHasCourseService {
 
     public List<UserHasCourse> getCourseById(Integer user_id);
+
+    //根据userid删除UHC表的内容
+    void deleteUserHasCourse(Integer uid);
 }

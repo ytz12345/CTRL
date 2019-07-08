@@ -61,4 +61,6 @@ public interface UserHasCourseMapper {
      * @mbggenerated Mon Jul 08 08:22:52 CST 2019
      */
     int updateByExample(@Param("record") UserHasCourse record, @Param("example") UserHasCourseExample example);
+
+    int deleteUserHasCourse(Integer uid);
 }

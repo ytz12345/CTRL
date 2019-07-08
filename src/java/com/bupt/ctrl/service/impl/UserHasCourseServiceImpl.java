@@ -23,4 +23,8 @@ public class UserHasCourseServiceImpl implements UserHasCourseService{
         return userHasCourseMapper.selectByExample(userHasCourseExample);
     }
 
+    public void deleteUserHasCourse(Integer uid){
+        userHasCourseMapper.deleteUserHasCourse(uid);
+    }
+
 }
