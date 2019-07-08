@@ -111,7 +111,7 @@
                         <h1 class="entry-title">${course.courseName}</h1>
                         <div class="ratings flex justify-content-center align-items-center">
                             <c:choose>
-                                <c:when test="${sessionScope.user.userIdentity == 2}">
+                                <c:when test="${sessionScope.user.userIdentity == 2 and tos == 1}">
 
                                     <a href="#" data-toggle="modal" data-target="#modifyCourseName"><span style="color: white">更改课程名</span></a>
 
@@ -197,11 +197,14 @@
                     </div><!-- .course-students -->
                     <div class="buy-course mt-3">
                         <c:choose>
-                            <c:when test="${sessionScope.user.userIdentity == 2}">
+                            <c:when test="${sessionScope.user.userIdentity == 2 and tos == 1}">
                                 <a class="btn" href="#" data-toggle="modal" data-target="#modifyCourseImage">更改封面</a>
                             </c:when>
-                            <c:when test="${sessionScope.user.userIdentity == 1}">
+                            <c:when test="${sessionScope.user.userIdentity == 1 and tos == 100}">
                                 <a class="btn" href="addToCart?course_id=${course.courseId}&student_id=${sessionScope.user.userId}">ADD to cart</a>
+                            </c:when>
+                            <c:when test="${sessionScope.user.userIdentity == 1 and tos == 0}">
+                                <a class="btn" href="#">学习中</a>
                             </c:when>
                             <c:otherwise>
                                 <a class="btn" href="#" data-toggle="modal" data-target="#course_login">ADD to cart</a>
@@ -287,7 +290,7 @@
 
                 <div class="single-course-cont-section">
                     <c:choose>
-                        <c:when test="${sessionScope.user.userIdentity == 2}">
+                        <c:when test="${sessionScope.user.userIdentity == 2 and tos == 1}">
                             <a href="#" data-toggle="modal" data-target="#modifyCourseIntro"><h2>课程介绍</h2></a>
                         </c:when>
                         <c:otherwise>
@@ -303,7 +306,7 @@
                     <div class="single-course-accordion-cont mt-3">
                         <header class="entry-header flex flex-wrap justify-content-between align-items-center">
                             <c:choose>
-                                <c:when test="${sessionScope.user.userIdentity == 2}">
+                                <c:when test="${sessionScope.user.userIdentity == 2 and tos == 1}">
                                     <h2>章节管理</h2>
                                     <div>
                                         <a href="#" data-toggle="modal" data-target="#addChapter"><span>添加章节</span></a>
