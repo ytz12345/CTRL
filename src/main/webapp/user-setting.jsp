@@ -107,10 +107,10 @@
                             <img src="images/XJP.jpg" class="user-max">
                         </a>
 
-                            <h3 class="model-title substr" title="张瑞年"><s:property value="#session.user.User_Name"></s:property>
+                            <h3 class="model-title substr" title="张瑞年">${sessionScope.user.userName}
 
                         </h3>
-                        <div class="model-intro" title="北京邮电大学"><s:property value="#session.user.User_Intro"></s:property></div>
+                        <div class="model-intro" title="北京邮电大学">${sessionScope.user.userIntro}</div>
 
                     </div>
                 </div>
@@ -122,7 +122,7 @@
 
                             <!-- 我的课程 -->
                             <li class="nav-item" data-step="1" data-highlightclass="" data-intro="欢迎进入我的课程，这里汇集了您所有参加和收藏的课程。">
-                                <a class="nav-text" href=getcourselist?u2_id=<s:property value="#session.user.User_id"/>><i class="icon-nav icon-course"></i>我的课程</a>
+                                <a class="nav-text" href="getUserCourses?uid=${sessionScope.user.userId}"><i class="icon-nav icon-course"></i>我的课程</a>
                                 <ul class="sub-nav">
                                     <li class="nav-item">
                                         <a class="sub-nav-text" content="myCourse" href="#">学习的课程</a>
@@ -308,7 +308,7 @@
 
                         <div class="input-group">
                             <label class="input-label">ID</label>
-                            <span class="input-cr"><s:property value="#session.user.User_id"></s:property></span>
+                            <span class="input-cr">${sessionScope.user.userId}</span>
                         </div>
 
 
@@ -318,7 +318,7 @@
                             <label class="input-label">
                                 登录名
                             </label>
-                            <span class="input-cr"><s:property value="#session.user.User_Name"></s:property></span>
+                            <span class="input-cr">${sessionScope.user.userName}</span>
 
                             <input id="loginName" type="hidden" value="1145141919@qq.com">
                         </div>
@@ -331,9 +331,9 @@
                         </div>
                         <div class="input-group">
                             <label class="input-label">
-                                学号
+                                简介
                             </label>
-                            <span class="input-cr"><s:property value="#session.user.User_id"></s:property></span>
+                            <span class="input-cr">${sessionScope.user.userIntro}</span>
                             <input id="studentNo" type="hidden" value="1145141919">
                         </div>
                         <div class="input-group">

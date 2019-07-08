@@ -383,15 +383,17 @@
                                 </li>
 
                             </c:forEach>
+
                             <!-- 即将开始 -->
-                            <%--<li class="soon-item hidden-course" ucid="1277078">
+
+                            <c:forEach items="${userCoursesComing}" var="userCourseComing">
+                            <li class="soon-item hidden-course" ucid="1277078">
                                 <div class="view">
                                     <div class="view-show">
-
                                         <div class="view-img" href="javascript:void(0)">
-                                            <img src="images/ZYNCJZ.jpg">
+                                            <img src="${userCourseComing.courseImage}">
                                             <a class="view-shadow" href="https://www.cnmooc.org/portal/session/index/11846.mooc" style="top: 0px; left: -982px;">
-                                                <div class="view-tips view-controller">
+                                                <div class="view-tips view-action">
                                                     <i class="icon-play"></i>去学习
                                                 </div>
                                             </a>
@@ -400,17 +402,17 @@
                                     <div class="view-intro">
                                         <h3 class="view-title substr" style="width:400px;">
 
+                                                ${userCourseComing.courseName}
 
 
-
-                                            <span class="cview-time">2020春</span>
+                                            <span class="cview-time">2019春</span>
                                         </h3>
 
 
 
 
                                         <h4 class="view-subtitle">
-                                            <span class="show-tname substr" style="width:180px;"><a class="link-controller" href="/portal/teacher/11846/524530.mooc" title="江主席"><img src="images/JZM.jpg" class="user-min">江泽民</a></span>
+                                            <span class="show-tname substr" style="width:180px;"><a class="link-action" href="/portal/teacher/11846/524530.mooc" title="江主席"><img src="images/JZM.jpg" class="user-min">${userCourseComing.courseTeacher}</a></span>
                                             <span class="show-school substr"></span>
                                         </h4>
                                         <!-- 学期学习 -->
@@ -418,16 +420,14 @@
                                         <div class="view-handle clearfix">
                                             <!-- 学期学习 -->
 
-                                            <span class="view-tip"><i class="icon-clock01"></i>36周</span>
-                                            <span class="view-tip"><i class="icon-cycle01"></i>1小时/周</span>
+                                            <span class="view-tip">${userCourseComing.courseIntro}</span>
 
 
                                             <!-- 随到随学 -->
 
 
                                             <div class="link-group">
-                                                <a class="link-controller courseDetail" href="/portal/session/11846-study.mooc">课程详情</a>
-                                                <a class="link-controller totalReport" href="/portal/session/to/studystatistics-11846.mooc">学习统计</a>
+                                                <a class="link-action courseDetail" href="singleCourse?course_id=${userCourseComing.courseId}">课程详情</a>
 
                                             </div>
                                         </div>
@@ -442,8 +442,7 @@
                                         <div class="view-progressbar pc-progressbar">
                                             <div class="progressbar-ui">
                                                 <div class="progressbar-value">
-                                                    <span class="start-value">2020-01-11</span>
-                                                    <span class="end-value">2020-04-08</span>
+                                                    <span class="start-value">${userCourseComing.courseDate}</span>
                                                 </div>
                                                 <div class="progressbar-bg">
                                                     <div class="progressbar-in" style="width: 58%;"></div>
@@ -464,17 +463,19 @@
 
                                     </div>
                                 </div>
-                            </li>--%>
+                            </li>
+                            </c:forEach>
 
                             <!-- 已结束 -->
-                            <%--<li class="finished-item hidden-course" ucid="1277078">
+
+                            <c:forEach items="${userCoursesPass}" var="userCoursePass">
+                            <li class="finished-item hidden-course" ucid="1277078">
                                 <div class="view">
                                     <div class="view-show">
-
                                         <div class="view-img" href="javascript:void(0)">
-                                            <img src="images/ZYCSBL.jpg">
+                                            <img src="${userCoursePass.courseImage}">
                                             <a class="view-shadow" href="https://www.cnmooc.org/portal/session/index/11846.mooc" style="top: 0px; left: -982px;">
-                                                <div class="view-tips view-controller">
+                                                <div class="view-tips view-action">
                                                     <i class="icon-play"></i>去学习
                                                 </div>
                                             </a>
@@ -483,17 +484,17 @@
                                     <div class="view-intro">
                                         <h3 class="view-title substr" style="width:400px;">
 
-                                            怎样长生不老
+                                            ${userCoursePass.courseName}
 
 
-                                            <span class="cview-time">2018秋</span>
+                                            <span class="cview-time">2019春</span>
                                         </h3>
 
 
 
 
                                         <h4 class="view-subtitle">
-                                            <span class="show-tname substr" style="width:180px;"><a class="link-controller" href="/portal/teacher/11846/524530.mooc" title="江主席"><img src="images/JZM.jpg" class="user-min">江泽民</a></span>
+                                            <span class="show-tname substr" style="width:180px;"><a class="link-action" href="/portal/teacher/11846/524530.mooc" title="江主席"><img src="images/JZM.jpg" class="user-min">${userCoursePass.courseTeacher}</a></span>
                                             <span class="show-school substr"></span>
                                         </h4>
                                         <!-- 学期学习 -->
@@ -501,16 +502,14 @@
                                         <div class="view-handle clearfix">
                                             <!-- 学期学习 -->
 
-                                            <span class="view-tip"><i class="icon-clock01"></i>24周</span>
-                                            <span class="view-tip"><i class="icon-cycle01"></i>1.5小时/周</span>
+                                            <span class="view-tip">${userCoursePass.courseIntro}</span>
 
 
                                             <!-- 随到随学 -->
 
 
                                             <div class="link-group">
-                                                <a class="link-controller courseDetail" href="/portal/session/11846-study.mooc">课程详情</a>
-                                                <a class="link-controller totalReport" href="/portal/session/to/studystatistics-11846.mooc">学习统计</a>
+                                                <a class="link-action courseDetail" href="singleCourse?course_id=${userCoursePass.courseId}">课程详情</a>
 
                                             </div>
                                         </div>
@@ -525,8 +524,7 @@
                                         <div class="view-progressbar pc-progressbar">
                                             <div class="progressbar-ui">
                                                 <div class="progressbar-value">
-                                                    <span class="start-value">2018-09-11</span>
-                                                    <span class="end-value">2019-03-16</span>
+                                                    <span class="start-value">${userCoursePass.courseDate}</span>
                                                 </div>
                                                 <div class="progressbar-bg">
                                                     <div class="progressbar-in" style="width: 58%;"></div>
@@ -547,7 +545,8 @@
 
                                     </div>
                                 </div>
-                            </li>--%>
+                            </li>
+                            </c:forEach>
 
 
                             <!--
