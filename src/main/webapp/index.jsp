@@ -49,7 +49,7 @@
                                     <li><a href="about.jsp">About</a></li>
                                     <%--<li><a href="courses.jsp">Courses</a></li>--%>
                                     <li><a href="allCourses">Courses</a></li>
-                                    <li><a href="user-homepage.jsp">weibo</a></li>
+                                    <li><a href="video-test.jsp">weibo</a></li>
 
                                 </ul>
 
