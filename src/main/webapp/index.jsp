@@ -38,14 +38,14 @@
                     <div class="row">
                         <div class="col-9 col-lg-3">
                             <div class="site-branding">
-                                <h1 class="site-title"><a href="index.jsp" rel="home">CTR<span>L</span></a></h1>
+                                <h1 class="site-title"><a href="index.jsp" rel="home">Sdr<span>b</span></a></h1>
                             </div><!-- .site-branding -->
                         </div><!-- .col -->
 
                         <div class="col-3 col-lg-9 flex justify-content-end align-content-center">
                             <nav class="site-navigation flex justify-content-end align-items-center">
                                 <ul class="flex flex-column flex-lg-row justify-content-lg-end align-content-center">
-                                    <li class="current-menu-item"><a href="index.jsp">Home</a></li>
+                                      <li class="current-menu-item"><a href="index.jsp">Home</a></li>
                                     <li><a href="about.jsp">About</a></li>
                                     <%--<li><a href="courses.jsp">Courses</a></li>--%>
                                     <li><a href="allCourses">Courses</a></li>
