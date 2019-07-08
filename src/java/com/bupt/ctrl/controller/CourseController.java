@@ -126,8 +126,7 @@ public class CourseController {
         }else{
             tos = courseService.teachOrStudy(course_id, user.getUserId());
         }
-
-        System.out.println(tos);
+        
         model.addAttribute("tos",tos);
         return "single-courses";
     }
