@@ -98,8 +98,10 @@
     <div class="content person-center">
 
         <!-- sidebar start -->
-
-        <div class="user-sidebar">
+        <div class="container">
+            <div class="row">
+                <div class="col-4 col-lg-3">
+                    <div class="user-sidebar">
             <div class="panel">
                 <div class="panel-body">
                     <div class="model-box model-user">
@@ -154,117 +156,9 @@
                 </div>
             </div>
         </div>
-
-        <script type="text/javascript">
-            var coeusUserId;
-            var goauth;
-            $(function(){
-
-                coeusUserId = "973887";
-                //侧栏导航
-                $(".nav-text").click(function () {
-                    $li = $(this).parent();
-                    if ($li.hasClass("open-up")) {
-                        $li.removeClass("open-up");
-                        $li.children(".sub-nav").slideUp();
-                    } else {
-                        $li.siblings().removeClass("open-up");
-                        $li.siblings().find(".current").removeClass("current");
-                        $li.siblings().find(".sub-nav").slideUp();
-                        $(this).addClass("current");
-                        $li.addClass("open-up");
-                        $li.children(".sub-nav").slideDown();
-                    }
-                });
-
-
-                $(".go-auth").click(function(){
-                    goauth.close();
-                    location.href=CONTEXTPATH+"/portal/setting.mooc?type=1";
-                });
-                $(".go-notauth").click(function(){
-                    goauth.close();
-                });
-
-                $(".sub-nav-text").click(function () {
-                    $(this).parent().siblings().find(".current").removeClass("current");
-                    $(this).addClass("current");
-                });
-
-                selectMenu();
-
-                function selectMenu() {
-                    var currentMenu = $("#currentMenu").val();
-                    var $target = $(".nav-item").find("a[content='" + currentMenu + "']");
-                    $target.addClass("current");
-                    var $sub = $target.parents(".sub-nav");
-                    if ($sub.length != 0) {
-                        $sub.prev(".nav-text").addClass("current");
-                        $sub.parent(".nav-item").addClass("open-up navItem");
-                    }
-                    else {
-                        $target.parent(".nav-item").addClass("open-up navItem");
-                    }
-                }
-
-                hasNewMessage();
-                //判断是否有未读消息
-                function hasNewMessage(){
-                    $.ajax({
-                        type:"post",
-                        url:CONTEXTPATH+"/portal/user/hasmessage.mooc",
-                        dataType:"json",
-                        data:{
-
-                        },
-                        success:function(response){
-                            if (response.newMessage==1){
-                                $("#newMsg").show();
-                            }
-                        },
-                        error:function(){
-
-                        }
-                    });
-                }
-
-                //初始化管理的课程
-                $(".managerCourse").click(function(){
-                    $.ajax({
-                        type:'post',
-                        url:CONTEXTPATH+"/session/initManagerCourse.mooc",
-                        success:function(result){
-                            if (result.retCode=="success"){
-                                location.href=CONTEXTPATH+"/session/managerCourse.mooc";
-                            }
-                        }
-                    })
-                })
-
-
-                function alertTipMessage(){
-                    goauth = $.dialog({
-                        title:"学生身份认证提示",
-                        content:$(".dialog")[0],
-                        id:goauth,
-                        lock:true,
-                        width:"680px"
-                    });
-                    setCookie(coeusUserId.toString()+"isTip",1);
-                }
-            })
-        </script>
-        <!-- sidebar end -->
-
-
-        <input type="hidden" id="currentMenu" value="myCourse">
-        <input type="hidden" id="schoolcourseType" value="0">
-        <input type="hidden" id="domainType" value="sys">
-        <input type="hidden" id="tabIndex" value="1">
-        <input type="hidden" id="searchType" value="0">
-        <input type="hidden" id="showSecondMajor" value="false">
-        <!-- sidebar start -->
-        <div class="main personal-settings">
+                </div>
+                <div class="col-8 col-lg-9 align-content-end">
+                    <div class="main personal-settings">
             <div class="main-header">
                 <div class="btn-group btn-tabs">
                     <a id="basicInfo" class="btn-item current" href="javascript:void(0)" url="/portal/basicinfo.mooc">基本资料</a>
@@ -354,33 +248,33 @@
                             <!--<div class="dk-select select" id="dk0-education"><div class="dk-selected" tabindex="0" id="dk0-combobox" aria-live="assertive" aria-owns="dk0-listbox" role="combobox">---请选择---</div><ul class="dk-select-options" id="dk0-listbox" role="listbox" aria-expanded="false"><li class="dk-option  dk-option-selected" data-value="" role="option" aria-selected="true" id="dk0-">---请选择---</li><li class="dk-option " data-value="08" role="option" aria-selected="false" id="dk0-08">初中</li><li class="dk-option " data-value="10" role="option" aria-selected="false" id="dk0-10">高中</li><li class="dk-option " data-value="20" role="option" aria-selected="false" id="dk0-20">专科</li><li class="dk-option " data-value="30" role="option" aria-selected="false" id="dk0-30">本科</li><li class="dk-option " data-value="40" role="option" aria-selected="false" id="dk0-40">硕士</li><li class="dk-option " data-value="50" role="option" aria-selected="false" id="dk0-50">博士</li></ul></div>
                             -->
                             <select id="education" class="select" data-dkcacheid="0">
-                            <option value="">---请选择---</option>
+                                <option value="">---请选择---</option>
 
-                            <option value="08">
-                                初中
-                            </option>
+                                <option value="08">
+                                    初中
+                                </option>
 
-                            <option value="10">
-                                高中
-                            </option>
+                                <option value="10">
+                                    高中
+                                </option>
 
-                            <option value="20">
-                                专科
-                            </option>
+                                <option value="20">
+                                    专科
+                                </option>
 
-                            <option value="30">
-                                本科
-                            </option>
+                                <option value="30">
+                                    本科
+                                </option>
 
-                            <option value="40">
-                                硕士
-                            </option>
+                                <option value="40">
+                                    硕士
+                                </option>
 
-                            <option value="50">
-                                博士
-                            </option>
+                                <option value="50">
+                                    博士
+                                </option>
 
-                        </select>
+                            </select>
                         </div>
                         <div class="input-group">
                             <label class="input-label">
@@ -1690,6 +1584,121 @@
                     });
                 </script></div>
         </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            var coeusUserId;
+            var goauth;
+            $(function(){
+
+                coeusUserId = "973887";
+                //侧栏导航
+                $(".nav-text").click(function () {
+                    $li = $(this).parent();
+                    if ($li.hasClass("open-up")) {
+                        $li.removeClass("open-up");
+                        $li.children(".sub-nav").slideUp();
+                    } else {
+                        $li.siblings().removeClass("open-up");
+                        $li.siblings().find(".current").removeClass("current");
+                        $li.siblings().find(".sub-nav").slideUp();
+                        $(this).addClass("current");
+                        $li.addClass("open-up");
+                        $li.children(".sub-nav").slideDown();
+                    }
+                });
+
+
+                $(".go-auth").click(function(){
+                    goauth.close();
+                    location.href=CONTEXTPATH+"/portal/setting.mooc?type=1";
+                });
+                $(".go-notauth").click(function(){
+                    goauth.close();
+                });
+
+                $(".sub-nav-text").click(function () {
+                    $(this).parent().siblings().find(".current").removeClass("current");
+                    $(this).addClass("current");
+                });
+
+                selectMenu();
+
+                function selectMenu() {
+                    var currentMenu = $("#currentMenu").val();
+                    var $target = $(".nav-item").find("a[content='" + currentMenu + "']");
+                    $target.addClass("current");
+                    var $sub = $target.parents(".sub-nav");
+                    if ($sub.length != 0) {
+                        $sub.prev(".nav-text").addClass("current");
+                        $sub.parent(".nav-item").addClass("open-up navItem");
+                    }
+                    else {
+                        $target.parent(".nav-item").addClass("open-up navItem");
+                    }
+                }
+
+                hasNewMessage();
+                //判断是否有未读消息
+                function hasNewMessage(){
+                    $.ajax({
+                        type:"post",
+                        url:CONTEXTPATH+"/portal/user/hasmessage.mooc",
+                        dataType:"json",
+                        data:{
+
+                        },
+                        success:function(response){
+                            if (response.newMessage==1){
+                                $("#newMsg").show();
+                            }
+                        },
+                        error:function(){
+
+                        }
+                    });
+                }
+
+                //初始化管理的课程
+                $(".managerCourse").click(function(){
+                    $.ajax({
+                        type:'post',
+                        url:CONTEXTPATH+"/session/initManagerCourse.mooc",
+                        success:function(result){
+                            if (result.retCode=="success"){
+                                location.href=CONTEXTPATH+"/session/managerCourse.mooc";
+                            }
+                        }
+                    })
+                })
+
+
+                function alertTipMessage(){
+                    goauth = $.dialog({
+                        title:"学生身份认证提示",
+                        content:$(".dialog")[0],
+                        id:goauth,
+                        lock:true,
+                        width:"680px"
+                    });
+                    setCookie(coeusUserId.toString()+"isTip",1);
+                }
+            })
+        </script>
+        <!-- sidebar end -->
+
+
+        <input type="hidden" id="currentMenu" value="myCourse">
+        <input type="hidden" id="schoolcourseType" value="0">
+        <input type="hidden" id="domainType" value="sys">
+        <input type="hidden" id="tabIndex" value="1">
+        <input type="hidden" id="searchType" value="0">
+        <input type="hidden" id="showSecondMajor" value="false">
+        <!-- sidebar start -->
+
+
         <div id="viewUserGrade"></div>
         <script src="/js/plugins/jquery.history.js" type="text/javascript"></script>
         <script src="/js/app/portal/myCourseIndex.js?c10f4345bd" type="text/javascript"></script>
