@@ -47,7 +47,7 @@ public class UserController {
     @RequestMapping(value = "/checkLogin", method = RequestMethod.POST)
     @ResponseBody
     private ModelAndView checkLogin(User user, HttpSession session){
-        user = userService.checkLogin_admin(user.getUserName(), user.getUserPassword());
+        user = userService.checkLoginAdmin(user.getUserName(), user.getUserPassword());
 
         ModelAndView mav = new ModelAndView("redirect:/index.jsp");
         if(user != null){
@@ -62,7 +62,7 @@ public class UserController {
     @RequestMapping(value = "/checkLogin_admin", method = RequestMethod.POST)
     @ResponseBody
     private ModelAndView checkLoginAdmin(User user, HttpSession session){
-        user = userService.checkLogin_admin(user.getUserName(), user.getUserPassword());
+        user = userService.checkLoginAdmin(user.getUserName(), user.getUserPassword());
 
         ModelAndView mav = new ModelAndView("redirect:/allUsers");
         if(user != null){

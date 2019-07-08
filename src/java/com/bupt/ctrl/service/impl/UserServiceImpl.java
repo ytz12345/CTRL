@@ -47,9 +47,9 @@ public class UserServiceImpl implements com.bupt.ctrl.service.UserService {
 
     @Override
     public User checkLoginAdmin(String userName, String password){
-        User user = userMapper.findByName(userName);
+        User user = checkLogin(userName, password);
 
-        if(user != null && user.getUserPassword().equals(password) &&user.getUserIdentity().equals(0)){
+        if(user != null && user.getUserIdentity().equals(0)){
             return user;
         }
 
