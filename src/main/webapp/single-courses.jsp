@@ -201,7 +201,7 @@
                             <c:when test="${sessionScope.user.userIdentity == 2 and tos == 1}">
                                 <a class="btn" href="#" data-toggle="modal" data-target="#modifyCourseImage">更改封面</a>
                             </c:when>
-                            <c:when test="${sessionScope.user.userIdentity == 1 and tos == 100}">
+                            <c:when test="${tos == 100}">
                                 <a class="btn" href="addToCart?course_id=${course.courseId}&student_id=${sessionScope.user.userId}">ADD to cart</a>
                             </c:when>
                             <c:when test="${sessionScope.user.userIdentity == 1 and tos == 0}">

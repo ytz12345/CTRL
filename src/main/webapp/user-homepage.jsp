@@ -344,7 +344,7 @@
 
 
                                                 <div class="link-group">
-                                                    <a class="link-action courseDetail" href="single-courses.jsp?course_id=${userCourse.courseId}">课程详情</a>
+                                                    <a class="link-action courseDetail" href="singleCourse?course_id=${userCourse.courseId}">课程详情</a>
 
                                                 </div>
                                             </div>
