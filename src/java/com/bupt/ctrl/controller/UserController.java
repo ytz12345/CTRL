@@ -75,6 +75,12 @@ public class UserController {
 
     }
 
+    @RequestMapping("/teacher")
+    public String getTeacher(@RequestParam(value="teacher_id") Integer teacher_id, Model model){
+        User teacher = userService.getUserByID(teacher_id);
+        model.addAttribute("teacher", teacher);
+        return "teacher";
+    }
     /*@RequestMapping(value = "login", method = RequestMethod.POST)
     @ResponseBody
     private String login(User user) {

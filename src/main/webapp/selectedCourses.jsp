@@ -49,7 +49,7 @@
                                 <ul class="flex flex-column flex-lg-row justify-content-lg-end align-content-center">
                                     <li><a href="index.jsp">Home</a></li>
                                     <li><a href="about.jsp">About</a></li>
-                                    <li class="current-menu-item"><a href="courses.jsp">Courses</a></li>
+                                    <li class="current-menu-item"><a href="allCourses">Courses</a></li>
                                     <li><a href="https://weibo.com/u/5966988917?is_all=1">weibo</a></li>
                                 </ul>
 
@@ -103,12 +103,12 @@
                             <div class="col-12 col-md-4 px-25">
                                 <div class="course-content">
                                     <figure class="course-thumbnail">
-                                        <a href="single-courses.jsp?course_id=${course.courseId}"><img src="${course.courseImage}" alt=""></a>
+                                        <a href="singleCourse?course_id=${course.courseId}"><img src="${course.courseImage}" alt=""></a>
                                     </figure>
 
                                     <div class="course-content-wrap">
                                         <header class="entry-header">
-                                            <h2 class="entry-title"><a href="single-courses.jsp?course_id=${course.courseId}">${course.courseName}</a></h2>
+                                            <h2 class="entry-title"><a href="singleCourse?course_id=${course.courseId}">${course.courseName}</a></h2>
 
                                             <div class="entry-meta flex flex-wrap align-items-center">
                                                 <div class="course-author"><a href="#">${course.courseTeacher}</a></div>

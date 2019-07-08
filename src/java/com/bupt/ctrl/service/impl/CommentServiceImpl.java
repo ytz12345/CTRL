@@ -75,7 +75,15 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public int addComment(Comment comment) {
-        return commentMapper.insert(comment);
+        int result = 1;
+        try{
+            commentMapper.insert(comment);
+        }
+        catch (Exception e){
+            e.getStackTrace();
+            result = 0;
+        }
+        return result;
     }
 
     @Override

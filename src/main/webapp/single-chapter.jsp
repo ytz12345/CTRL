@@ -64,7 +64,7 @@
                                 <ul class="flex flex-column flex-lg-row justify-content-lg-end align-content-center">
                                     <li><a href="index.jsp">Home</a></li>
                                     <li><a href="about.jsp">About</a></li>
-                                    <li><a href="courses.jsp">Courses</a></li>
+                                    <li><a href="allCourses">Courses</a></li>
                                     <li><a href="https://weibo.com/u/5966988917?is_all=1">weibo</a></li>
                                 </ul>
 
@@ -235,7 +235,7 @@
 <%--                                                    if(comment.getUser_User_id() == login_id || adminJudge == 1){--%>
 <%--                                                %>--%>
                                                 <c:choose>
-                                                    <c:when test="${sessionScope.user.userId == parent.parentCommentAndUser.comment.userUserId}">
+                                                    <c:when test="${sessionScope.user.userId == parent.parentCommentAndUser.comment.userUserId or sessionScope.user.userIdentity == 0}">
                                                         <a href="deleteComment?comment_id=${parent.parentCommentAndUser.comment.commentId}" style="background:red;color:#fff">delete</a><%--这里的userId本来是login id--%>
                                                     </c:when>
                                                 </c:choose>
@@ -320,7 +320,7 @@
                                                                         <%--                                                                if(comment2.getUser_User_id() == login_id || adminJudge == 1){--%>
                                                                         <%--                                                            %>--%>
                                                                     <c:choose>
-                                                                        <c:when test="${sessionScope.user.userId == son.comment.userUserId}">
+                                                                        <c:when test="${sessionScope.user.userId == son.comment.userUserId  or sessionScope.user.userIdentity == 0}">
                                                                             <a href="deleteComment?comment_id=${son.comment.commentId}" style="background:red;color:#fff">delete</a><%--这里的userId本来是login id--%>
                                                                         </c:when>
 

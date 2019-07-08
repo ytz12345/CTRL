@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
-<%@ page import="dao.CourseDao" %>
-<%@ page import="dao.user_has_courseDao" %>
-<%@ page import="model.Course" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -63,7 +59,7 @@
                                 <ul class="flex flex-column flex-lg-row justify-content-lg-end align-content-center">
                                     <li><a href="index.jsp">Home</a></li>
                                     <li><a href="about.jsp">About</a></li>
-                                    <li><a href="courses.jsp">Courses</a></li>
+                                    <li><a href="allCourses">Courses</a></li>
                                     <li><a href="https://weibo.com/u/5966988917?is_all=1">weibo</a></li>
                                 </ul>
 

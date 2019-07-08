@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
+<jsp:forward page="/index"></jsp:forward>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -148,7 +149,7 @@
                     </div><!-- .entry-content -->
 
                     <footer class="entry-footer read-more">
-                        <a href="courses.jsp">read more<i class="fa fa-long-arrow-right"></i></a>
+                        <a href="allCourses">read more<i class="fa fa-long-arrow-right"></i></a>
                     </footer><!-- .entry-footer -->
                 </div><!-- .icon-box -->
 
@@ -180,7 +181,7 @@
                     <header class="heading flex justify-content-between align-items-center">
                         <h2 class="entry-title">Featured Courses</h2>
 
-                        <a class="btn mt-4 mt-sm-0" href="courses.jsp">view all</a>
+                        <a class="btn mt-4 mt-sm-0" href="allCourses">view all</a>
                     </header><!-- .heading -->
                 </div><!-- .col -->
 
@@ -543,7 +544,7 @@
                 </div><!-- .col -->
 
                 <div class="col-12 px-25 flex justify-content-center">
-                    <a class="btn" href="courses.jsp">view all courses</a>
+                    <a class="btn" href="allCourses">view all courses</a>
                 </div><!-- .col -->
             </div><!-- .row -->
         </div><!-- .container -->

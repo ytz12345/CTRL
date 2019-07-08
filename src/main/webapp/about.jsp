@@ -133,54 +133,6 @@
         </div><!-- .row -->
     </div><!-- .container -->
 
-    <section class="about-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-lg-6 align-content-lg-stretch">
-                    <header class="heading">
-                        <h2 class="entry-title">About Sdrb</h2>
-                        <p>leader YTZ</p>
-                        <p>每天都会不止一次的,走在路上,突然一句"恨信",然后环顾四周确认没人注意到,然后开始傻笑</p>
-                    </header><!-- .heading -->
-
-                    <div class="entry-content ezuca-stats">
-                        <div class="stats-wrap flex flex-wrap justify-content-lg-between">
-                            <div class="stats-count">
-                                5<span>+</span>
-                                <p>STUDENTS LEARNING</p>
-                            </div><!-- .stats-count -->
-
-                            <div class="stats-count">
-                                3<span>+</span>
-                                <p>ACTIVE COURSES</p>
-                            </div><!-- .stats-count -->
-
-                            <div class="stats-count">
-                                3<span>+</span>
-                                <p>INSTRUCTORS ONLINE</p>
-                            </div><!-- .stats-count -->
-
-                            <div class="stats-count">
-                                2<span>+</span>
-                                <p>Country Reached</p>
-                            </div><!-- .stats-count -->
-                        </div><!-- .stats-wrap -->
-                    </div><!-- .ezuca-stats -->
-                </div><!-- .col -->
-
-                <div class="col-12 col-lg-6 flex align-content-center mt-5 mt-lg-0">
-                    <div class="ezuca-video position-relative">
-                        <div class="video-play-btn position-absolute">
-                            <img src="images/video-icon.png" alt="Video Play">
-                        </div><!-- .video-play-btn -->
-
-                        <img src="images/video-screenshot.png" alt="">
-                    </div><!-- .ezuca-video -->
-                </div><!-- .col -->
-            </div><!-- .row -->
-        </div><!-- .container -->
-    </section><!-- .about-section -->
-
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -251,6 +203,55 @@
             </div><!-- .col -->
         </div><!-- .row -->
     </div><!-- .container -->
+
+    <section class="about-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6 align-content-lg-stretch">
+                    <header class="heading">
+                        <h2 class="entry-title">About Sdrb</h2>
+                        <p>leader YTZ</p>
+                        <p>每天都会不止一次的,走在路上,突然一句"恨信",然后环顾四周确认没人注意到,然后开始傻笑</p>
+                    </header><!-- .heading -->
+
+                    <div class="entry-content ezuca-stats">
+                        <div class="stats-wrap flex flex-wrap justify-content-lg-between">
+                            <div class="stats-count">
+                                5<span>+</span>
+                                <p>STUDENTS LEARNING</p>
+                            </div><!-- .stats-count -->
+
+                            <div class="stats-count">
+                                3<span>+</span>
+                                <p>ACTIVE COURSES</p>
+                            </div><!-- .stats-count -->
+
+                            <div class="stats-count">
+                                3<span>+</span>
+                                <p>INSTRUCTORS ONLINE</p>
+                            </div><!-- .stats-count -->
+
+                            <div class="stats-count">
+                                2<span>+</span>
+                                <p>Country Reached</p>
+                            </div><!-- .stats-count -->
+                        </div><!-- .stats-wrap -->
+                    </div><!-- .ezuca-stats -->
+                </div><!-- .col -->
+
+                <div class="col-12 col-lg-6 flex align-content-center mt-5 mt-lg-0">
+                    <div class="ezuca-video position-relative">
+                        <div class="video-play-btn position-absolute">
+                            <img src="images/video-icon.png" alt="Video Play">
+                        </div><!-- .video-play-btn -->
+
+                        <img src="images/video-screenshot.png" alt="">
+                    </div><!-- .ezuca-video -->
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </section><!-- .about-section -->
+
 
     <%@ include file="footer.jsp" %>
 

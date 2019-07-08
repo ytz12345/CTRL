@@ -58,5 +58,13 @@ public class UserServiceImpl implements com.bupt.ctrl.service.UserService {
         map.put("houseId",list.get(list.size()-1).getUserId());
         return map;
     }
+
+    @Override
+    public List<User> getTeachers(){
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andUserIdentityEqualTo(2);
+        return userMapper.selectByExample(userExample);
+    }
 }
 
