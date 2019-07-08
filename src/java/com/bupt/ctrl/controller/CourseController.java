@@ -142,6 +142,7 @@ public class CourseController {
 
         Course course = new Course();
         course.setCourseName(newCourseName);
+        course.setCourseId(course_id);
         flag = courseService.updateCourseName(course);
 
         if(flag == 1){
@@ -164,6 +165,7 @@ public class CourseController {
 
         Course course = new Course();
         course.setCourseIntro(newCourseIntro);
+        course.setCourseId(course_id);
         flag = courseService.updateCourseIntro(course);
 
         if(flag == 1){
