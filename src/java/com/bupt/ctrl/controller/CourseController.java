@@ -2,6 +2,7 @@ package com.bupt.ctrl.controller;
 
 import com.bupt.ctrl.model.Chapter;
 import com.bupt.ctrl.model.Course;
+import com.bupt.ctrl.model.User;
 import com.bupt.ctrl.model.UserHasCourse;
 import com.bupt.ctrl.service.ChapterService;
 import com.bupt.ctrl.service.CourseService;
@@ -111,11 +112,22 @@ public class CourseController {
     }
 
     @RequestMapping("/singleCourse")
-    public String getSingleCourse(@RequestParam(value= "course_id") int course_id, Model model){
+    public String getSingleCourse(@RequestParam(value= "course_id") int course_id, Model model, HttpServletRequest requset){
         Course course = courseService.getCourseByID(course_id);
         model.addAttribute("course", course);
         List<Chapter> chapterList = chapterService.getChapterOfCourse(course_id);
         model.addAttribute("chapterList", chapterList);
+
+        User user = (User)requset.getSession().getAttribute("user");
+        int tos = -1;
+
+        if(user == null){
+            System.out.println("user is null");
+        }else{
+            tos = courseService.teachOrStudy(course_id, user.getUserId());
+        }
+        
+        model.addAttribute("tos",tos);
         return "single-courses";
     }
 }

@@ -4,6 +4,7 @@ import com.bupt.ctrl.dao.CourseMapper;
 import com.bupt.ctrl.dao.UserHasCourseMapper;
 import com.bupt.ctrl.model.Course;
 import com.bupt.ctrl.model.CourseExample;
+import com.bupt.ctrl.model.UserHasCourseExample;
 import com.bupt.ctrl.service.CourseService;
 import com.bupt.ctrl.model.UserHasCourse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,31 @@ public class CourseServiceImpl implements CourseService {
         userHasCourseMapper.insert(userHasCourse);
         return 1;
     };
+
+    //判断用户是否拥有课程
+    public int teachOrStudy(Integer course_id, Integer user_id){
+        int tos = -1;
+        UserHasCourseExample userHasCourseExample = new UserHasCourseExample();
+        UserHasCourseExample.Criteria criteria = userHasCourseExample.createCriteria();
+        criteria.andCourseCourseIdEqualTo(course_id);
+        criteria.andUserUserIdEqualTo(user_id);
+        List<UserHasCourse> list = userHasCourseMapper.selectByExample(userHasCourseExample);
+
+        if(list == null) return tos;
+
+        UserHasCourse userHasCourse = list.get(0);
+
+        if(userHasCourse.getUserTeachorstudy() == 1){
+            tos = 1;//教师拥有课程修改权限
+        }else if(userHasCourse.getUserTeachorstudy() == 0){
+            tos = 0;//学生已订阅课程
+        }else{
+            tos = 100;//学生未订阅
+        }
+
+        return tos;
+
+    }
 
     public Course getCourseByID(Integer course_id){
         return courseMapper.selectByPrimaryKey(course_id);
