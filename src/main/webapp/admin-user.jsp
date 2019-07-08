@@ -353,7 +353,7 @@
                                                 </c:choose>
                                             </td>
                                             <td>${each_user.userIntro}</td>
-                                            <td><a href=del?u_id=${each_user.userId}>Delete</a></td>
+                                            <td><a href="deleteUser?uid=${each_user.userId}">Delete</a></td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>

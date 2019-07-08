@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService{
     private Logger logger= LoggerFactory.getLogger(this.getClass());
     @Autowired
     private UserMapper userMapper;
@@ -48,9 +48,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User checkLoginAdmin(String userName, String password){
-        User user = userMapper.findByName(userName);
+        User user = checkLogin(userName, password);
 
-        if(user != null && user.getUserPassword().equals(password) &&user.getUserIdentity().equals(0)){
+        if(user != null && user.getUserIdentity().equals(0)){
             return user;
         }
 
@@ -60,13 +60,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllUser() {
         UserExample userExample = new UserExample();
-
         return userMapper.selectByExample(userExample);
 
     }
 
     public void deleteUser(Integer uid){
 
-    };
+    }
+
 }
 

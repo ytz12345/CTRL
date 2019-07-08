@@ -21,10 +21,5 @@ public interface UserService {
     //根据id查找用户
     User getUserByID(Integer uid);
 
-    User checkLogin_admin(String userName, String password);
-
-
-    public Map<String, Object> saveUser(User record);
-
     public void deleteUser(Integer uid);
 }
