@@ -80,6 +80,7 @@ public class CourseController {
             return "course-create";//待修改
     }
 
+    //订阅
     @RequestMapping("/addToCart")
     public ModelAndView addToCart(@RequestParam(value = "course_id") int course_id, @RequestParam(value = "student_id") int student_id){
 
@@ -118,8 +119,8 @@ public class CourseController {
         List<Chapter> chapterList = chapterService.getChapterOfCourse(course_id);
         model.addAttribute("chapterList", chapterList);
 
-        User user = (User)requset.getSession().getAttribute("user");
         int tos = -1;
+        User user = (User)requset.getSession().getAttribute("user");
 
         if(user == null){
             System.out.println("user is null");
@@ -130,4 +131,51 @@ public class CourseController {
         model.addAttribute("tos",tos);
         return "single-courses";
     }
+
+    //修改课程名
+    @RequestMapping("/modifyCourseName")
+    public ModelAndView modifyCourseName(@RequestParam(value = "course_id") int course_id,@RequestParam(value = "newCourseName") String newCourseName){
+
+        ModelAndView mav = new ModelAndView("更改失败");
+
+        int flag = 0;
+
+        Course course = new Course();
+        course.setCourseName(newCourseName);
+        course.setCourseId(course_id);
+        flag = courseService.updateCourseName(course);
+
+        if(flag == 1){
+            String c_id = String.valueOf(course_id);//转化course_id类型
+            String success = "singleCourse?course_id=" + c_id;
+            mav.setViewName("redirect:/" + success);//调用singleCourse
+            return mav;
+        }
+
+        return mav;
+    }
+
+    //修改课程介绍
+    @RequestMapping("/modifyCourseIntro")
+    public ModelAndView modifyCourseIntro(@RequestParam(value = "course_id") int course_id,@RequestParam(value = "newCourseIntro") String newCourseIntro){
+
+        ModelAndView mav = new ModelAndView("更改失败");
+
+        int flag = 0;
+
+        Course course = new Course();
+        course.setCourseIntro(newCourseIntro);
+        course.setCourseId(course_id);
+        flag = courseService.updateCourseIntro(course);
+
+        if(flag == 1){
+            String c_id = String.valueOf(course_id);//转化course_id类型
+            String success = "singleCourse?course_id=" + c_id;
+            mav.setViewName("redirect:/" + success);//调用singleCourse
+            return mav;
+        }
+
+        return mav;
+    }
+
 }
