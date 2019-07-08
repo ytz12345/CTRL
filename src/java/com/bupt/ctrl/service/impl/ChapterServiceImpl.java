@@ -25,4 +25,9 @@ public class ChapterServiceImpl implements ChapterService {
     public Chapter getChapter(Integer chapter_id){
         return chapterMapper.selectByPrimaryKey(chapter_id);
     }
+
+    public int addChapter(Chapter chapter){
+        chapterMapper.insert(chapter);
+        return 1;
+    }
 }
