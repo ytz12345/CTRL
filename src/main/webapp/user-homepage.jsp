@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-         pageEncoding="utf-8"%>
+         pageEncoding="utf-8" autoFlush="false" buffer="300kb"%>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -280,9 +280,9 @@
                     <a class="btn-item current" href="javascript:void(0);" tabindex="1">正在进行</a>
                     <a class="btn-item" href="javascript:void(0);" tabindex="2">即将开始</a>
                     <a class="btn-item " href="javascript:void(0);" tabindex="3">已结束</a>
-                    <c:when test="${sessionScope.user.userIdentity == 2}">
+                    <c:if test="${sessionScope.user.userIdentity == 2}">
                         <a class="btn-item" href="course-create.jsp" style="color: white">创建课程</a>
-                    </c:when>
+                    </c:if>
                 </div>
                 <div class="search-box">
                     <div class="search">

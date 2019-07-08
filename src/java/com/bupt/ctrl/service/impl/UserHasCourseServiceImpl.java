@@ -15,6 +15,7 @@ public class UserHasCourseServiceImpl implements UserHasCourseService{
     @Autowired
     UserHasCourseMapper userHasCourseMapper;
 
+    //根据传入的用户ID查询他的UserHasCourse列表
     public List<UserHasCourse> getCourseById(Integer user_id){
         UserHasCourseExample userHasCourseExample = new UserHasCourseExample();
         UserHasCourseExample.Criteria criteria = userHasCourseExample.createCriteria();

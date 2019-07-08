@@ -26,6 +26,7 @@ public class UserCourseController {
     @Autowired
     UserService userService;
 
+    //点击顶栏用户名时传入session中的用户id，进行多表连接查询到用户拥有的课程
     @RequestMapping("/getUserCourses")
     public String getUserCourses(@RequestParam(value="uid")Integer user_id, Model model){
 
@@ -39,6 +40,10 @@ public class UserCourseController {
         model.addAttribute("userCourses",courseList);
         System.out.println("Show userHasCourses : " + userHasCourses);
         System.out.println("Show userCourses : " + courseList);
+        System.out.println("Show userHasCourses size : " + userHasCourses.size());
+        System.out.println("Show userCourses size : " + courseList.size());
+
+
         return "user-homepage";
     }
 
