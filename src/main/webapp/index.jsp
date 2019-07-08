@@ -38,7 +38,7 @@
                     <div class="row">
                         <div class="col-9 col-lg-3">
                             <div class="site-branding">
-                                <h1 class="site-title"><a href="index.jsp" rel="home">Sdr<span>b</span></a></h1>
+                                <h1 class="site-title"><a href="index.jsp" rel="home">CTR<span>L</span></a></h1>
                             </div><!-- .site-branding -->
                         </div><!-- .col -->
 
