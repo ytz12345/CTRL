@@ -356,13 +356,13 @@
                         <div class="comment-respond">
                             <h3 class="comment-reply-title">Leave a comment</h3>
 
-                            <form action="leavecomment" class="comment-form" method="post">
-                                <textarea rows="6" name="comment.Comment_Content" id="commentcontent" placeholder="Messages"></textarea>
-                                <input type="hidden" name="comment.Comment_Time" value="<%=new Timestamp(System.currentTimeMillis())%>">
-                                <input type="hidden" name="comment.Comment_To" value="<%=0%>">
-                                <input type="hidden" name="comment.Chapter_Chapter_id" value="${chapter.chapterId}">
-                                <input type="hidden" name="comment.User_User_id" value="${sessionScope.user.userId}">
-                                <input type="hidden" name="login_id" value="${sessionScope.user.userId}"><%--这里的userId本来是login id--%>
+                            <form action="leaveComment" class="comment-form" method="post">
+                                <textarea rows="6" name="commentContent" id="commentcontent" placeholder="Messages"></textarea>
+                                <input type="hidden" name="commentTime" value="<%=new Timestamp(System.currentTimeMillis())%>">
+                                <input type="hidden" name="commentTo" value="<%=0%>">
+                                <input type="hidden" name="chapterChapterId" value="${chapter.chapterId}">
+                                <input type="hidden" name="userUserId" value="${sessionScope.user.userId}">
+                                <%--<input type="hidden" name="login_id" value="${sessionScope.user.userId}">--%><%--这里的userId本来是login id--%>
                                 <input type="submit" value="send comment">
                             </form><!-- .comment-form -->
                         </div><!-- .comment-respond -->
