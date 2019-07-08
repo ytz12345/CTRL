@@ -75,11 +75,32 @@ public class CourseController {
 
         if(flag == 1){
             return "index";
-        }else{
-            return "course-create";//待修改
         }
+            return "course-create";//待修改
     }
 
+    @RequestMapping("/addToCart")
+    public ModelAndView addToCart(@RequestParam(value = "course_id") int course_id, @RequestParam(value = "student_id") int student_id){
+
+        UserHasCourse userHasCourse = new UserHasCourse();
+        userHasCourse.setUserTeachorstudy(0);//学生订阅-设置为0
+        userHasCourse.setCourseCourseId(course_id);//写入课程id
+        userHasCourse.setUserUserId(student_id);//写入学生id
+
+        ModelAndView mav = new ModelAndView("订阅失败");
+
+        int flag = 0;
+        flag = courseService.userHasCourse(userHasCourse);
+
+        if(flag == 1){
+            String c_id = String.valueOf(course_id);//转化course_id类型
+            String success = "singleCourse?course_id=" + c_id;
+            mav.setViewName("redirect:/" + success);//调用singleCourse
+            return mav;
+        }
+
+        return mav;
+    }
 
 
     @RequestMapping("/selectCoursesByName")
