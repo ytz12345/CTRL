@@ -30,7 +30,6 @@ public class CommentController {
     private UserService userService;
 
     @RequestMapping("/leaveComment")
-    @ResponseBody
     private String leaveComment(Comment comment, Model model){
         model.addAttribute("chapterId", comment.getChapterChapterId());
         System.out.println("Chapter Id : " + comment.getChapterChapterId());
@@ -59,8 +58,8 @@ public class CommentController {
     }
 
     @RequestMapping("/deleteCommentConfirm")
-    @ResponseBody
     private String deleteCommentConfirm(Comment comment, Model model){
+        model.addAttribute("chapterId", comment.getChapterChapterId());
         commentService.deleteComment(comment.getCommentId());
         return "delete_success";
     }
