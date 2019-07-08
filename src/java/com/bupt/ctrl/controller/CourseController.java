@@ -118,8 +118,8 @@ public class CourseController {
         List<Chapter> chapterList = chapterService.getChapterOfCourse(course_id);
         model.addAttribute("chapterList", chapterList);
 
-        User user = (User)requset.getSession().getAttribute("user");
         int tos = -1;
+        User user = (User)requset.getSession().getAttribute("user");
 
         if(user == null){
             System.out.println("user is null");
