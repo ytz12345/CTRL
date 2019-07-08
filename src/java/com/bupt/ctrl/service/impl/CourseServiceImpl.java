@@ -48,23 +48,22 @@ public class CourseServiceImpl implements CourseService {
 
     //判断用户是否拥有课程
     public int teachOrStudy(Integer course_id, Integer user_id){
-        int tos = -1;
+        int tos = 100;//学生未订阅
         UserHasCourseExample userHasCourseExample = new UserHasCourseExample();
         UserHasCourseExample.Criteria criteria = userHasCourseExample.createCriteria();
         criteria.andCourseCourseIdEqualTo(course_id);
         criteria.andUserUserIdEqualTo(user_id);
         List<UserHasCourse> list = userHasCourseMapper.selectByExample(userHasCourseExample);
 
-        if(list == null) return tos;
+        if(list.size() == 0) return tos;
+
 
         UserHasCourse userHasCourse = list.get(0);
 
         if(userHasCourse.getUserTeachorstudy() == 1){
             tos = 1;//教师拥有课程修改权限
-        }else if(userHasCourse.getUserTeachorstudy() == 0){
+        }else {
             tos = 0;//学生已订阅课程
-        }else{
-            tos = 100;//学生未订阅
         }
 
         return tos;
