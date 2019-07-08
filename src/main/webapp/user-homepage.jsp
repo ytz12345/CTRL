@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-         pageEncoding="utf-8"%>
-<%@ page import="dao.CourseDao" %>
-<%@ page import="dao.user_has_courseDao" %>
-<%@ page import="model.Course" %>
+         pageEncoding="utf-8" autoFlush="false" buffer="300kb"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -111,10 +107,10 @@
                             <img src="images/XJP.jpg" class="user-max">
                         </a>
 
-                        <h3 class="model-title substr" title="张瑞年"><s:property value="#session.user.User_Name"></s:property>
+                        <h3 class="model-title substr" title="张瑞年">${sessionScope.user.userName}
 
                         </h3>
-                        <div class="model-intro" title="北京邮电大学"><s:property value="#session.user.User_Intro"></s:property></div>
+                        <div class="model-intro" title="北京邮电大学">${sessionScope.user.userIntro}</div>
 
                     </div>
                 </div>
@@ -284,9 +280,9 @@
                     <a class="btn-item current" href="javascript:void(0);" tabindex="1">正在进行</a>
                     <a class="btn-item" href="javascript:void(0);" tabindex="2">即将开始</a>
                     <a class="btn-item " href="javascript:void(0);" tabindex="3">已结束</a>
-                    <s:if test="#session.user.User_Identity == 2">
+                    <c:if test="${sessionScope.user.userIdentity == 2}">
                         <a class="btn-item" href="course-create.jsp" style="color: white">创建课程</a>
-                    </s:if>
+                    </c:if>
                 </div>
                 <div class="search-box">
                     <div class="search">
@@ -306,13 +302,13 @@
 
                             <!-- 正在进行 -->
 
-                            <s:iterator value="courseList" status="status">
+                            <c:forEach items="${userCourses}" var="userCourse">
 
                                 <li class="view-item" ucid="1277078">
                                     <div class="view">
                                         <div class="view-show">
                                             <div class="view-img" href="javascript:void(0)">
-                                                <img src="<s:property value="Course_Image"/>">
+                                                <img src="${userCourse.courseImage}">
                                                 <a class="view-shadow" href="https://www.cnmooc.org/portal/session/index/11846.mooc" style="top: 0px; left: -982px;">
                                                     <div class="view-tips view-action">
                                                         <i class="icon-play"></i>去学习
@@ -323,7 +319,7 @@
                                         <div class="view-intro">
                                             <h3 class="view-title substr" style="width:400px;">
 
-                                                <s:property value="Course_Name"/>
+                                                ${userCourse.courseName}
 
 
                                                 <span class="cview-time">2019春</span>
@@ -333,7 +329,7 @@
 
 
                                             <h4 class="view-subtitle">
-                                                <span class="show-tname substr" style="width:180px;"><a class="link-action" href="/portal/teacher/11846/524530.mooc" title="江主席"><img src="images/JZM.jpg" class="user-min"><s:property value="Course_Teacher"/></a></span>
+                                                <span class="show-tname substr" style="width:180px;"><a class="link-action" href="/portal/teacher/11846/524530.mooc" title="江主席"><img src="images/JZM.jpg" class="user-min">${userCourse.courseTeacher}</a></span>
                                                 <span class="show-school substr"></span>
                                             </h4>
                                             <!-- 学期学习 -->
@@ -341,14 +337,14 @@
                                             <div class="view-handle clearfix">
                                                 <!-- 学期学习 -->
 
-                                                <span class="view-tip"><s:property value="Course_Intro"/></span>
+                                                <span class="view-tip">${userCourse.courseIntro}</span>
 
 
                                                 <!-- 随到随学 -->
 
 
                                                 <div class="link-group">
-                                                    <a class="link-action courseDetail" href="single-courses.jsp?course_id=<s:property value="Course_Id"/>">课程详情</a>
+                                                    <a class="link-action courseDetail" href="single-courses.jsp?course_id=${userCourse.courseId}">课程详情</a>
 
                                                 </div>
                                             </div>
@@ -363,7 +359,7 @@
                                             <div class="view-progressbar pc-progressbar">
                                                 <div class="progressbar-ui">
                                                     <div class="progressbar-value">
-                                                        <span class="start-value"><s:property value="Course_Date"/></span>
+                                                        <span class="start-value">${userCourse.courseDate}</span>
                                                     </div>
                                                     <div class="progressbar-bg">
                                                         <div class="progressbar-in" style="width: 58%;"></div>
@@ -386,7 +382,7 @@
                                     </div>
                                 </li>
 
-                            </s:iterator>
+                            </c:forEach>
                             <!-- 即将开始 -->
                             <%--<li class="soon-item hidden-course" ucid="1277078">
                                 <div class="view">
