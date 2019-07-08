@@ -25,4 +25,10 @@ public interface CourseService {
 
     //判断用户是否拥有课程
     public int teachOrStudy(Integer course_id, Integer user_id);
+
+    //修改课程名
+    public int updateCourseName(Course course);
+
+    //修改课程名
+    public int updateCourseIntro(Course course);
 }
