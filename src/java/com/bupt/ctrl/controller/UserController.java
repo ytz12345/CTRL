@@ -45,9 +45,25 @@ public class UserController {
     @RequestMapping(value = "/checkLogin", method = RequestMethod.POST)
     @ResponseBody
     private ModelAndView checkLogin(User user, HttpSession session){
-        user = userService.checkLogin(user.getUserName(), user.getUserPassword());
+        user = userService.checkLogin_admin(user.getUserName(), user.getUserPassword());
 
         ModelAndView mav = new ModelAndView("redirect:/index.jsp");
+        if(user != null){
+            //mav.addObject("user", user);
+            session.setAttribute("user",user);
+        }else{
+            mav.setViewName("redirect:/login_failure.jsp");//登录失败跳转到失败界面
+        }
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/checkLogin_admin", method = RequestMethod.POST)
+    @ResponseBody
+    private ModelAndView checkLogin_admin(User user, HttpSession session){
+        user = userService.checkLogin_admin(user.getUserName(), user.getUserPassword());
+
+        ModelAndView mav = new ModelAndView("redirect:/allUsers");
         if(user != null){
             //mav.addObject("user", user);
             session.setAttribute("user",user);
@@ -75,6 +91,19 @@ public class UserController {
 
     }
 
+    @RequestMapping("/allUsers")
+    public String getAllCourses(Model model) {
+        List<User> allUsers = userService.getAllUser();
+        model.addAttribute("users", allUsers);
+
+        System.out.println("Yes, come here!");
+         /*System.out.println(allCourses.size());
+        for (Course i : allCourses) {
+            System.out.println(i.toString());
+        }
+        */
+        return "admin-user";
+    }
     /*@RequestMapping(value = "login", method = RequestMethod.POST)
     @ResponseBody
     private String login(User user) {

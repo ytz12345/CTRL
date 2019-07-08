@@ -40,6 +40,16 @@ public class UserServiceImpl implements com.bupt.ctrl.service.UserService {
         return null;
     }
 
+    public User checkLogin_admin(String userName, String password){
+        User user = userMapper.findByName(userName);
+
+        if(user != null && user.getUserPassword().equals(password) &&user.getUserIdentity().equals(0)){
+            return user;
+        }
+
+        return null;
+    }
+
     @Override
     public Map<String, Object> saveUser(User record) {
         Map<String,Object> map=new HashMap<String,Object>();
@@ -57,6 +67,14 @@ public class UserServiceImpl implements com.bupt.ctrl.service.UserService {
         List<User> list = userMapper.selectByExample(suithouse);
         map.put("houseId",list.get(list.size()-1).getUserId());
         return map;
+    }
+
+    @Override
+    public List<User> getAllUser() {
+        UserExample userExample = new UserExample();
+
+        return userMapper.selectByExample(userExample);
+
     }
 }
 
