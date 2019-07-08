@@ -76,5 +76,9 @@ public class UserServiceImpl implements com.bupt.ctrl.service.UserService {
         return userMapper.selectByExample(userExample);
 
     }
+
+    public void deleteUser(Integer uid){
+
+    };
 }
 

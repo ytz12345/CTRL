@@ -18,4 +18,6 @@ public interface UserService {
     public List<User>  getAllUser();
 
     public Map<String, Object> saveUser(User record);
+
+    public void deleteUser(Integer uid);
 }
