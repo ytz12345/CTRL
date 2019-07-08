@@ -298,7 +298,7 @@
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-12 d-flex no-block align-items-center">
-                    <a href="allUsers" style="color: black"><h4 class="page-title">用户管理</h4></a><a href="allCourses">Courses</a>
+                    <a href="allUsers" style="color: black"><h4 class="page-title">用户管理</h4></a>
                     <div class="ml-auto text-right">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
@@ -344,17 +344,14 @@
                                             <td>${each_user.userId}</td>
                                             <td>${each_user.userName}</td>
                                             <td>${each_user.userPassword}</td>
-                                            <td>${each_user.userIdentity}</td>
-<%--                                            <s:if test="#ulist.User_Identity == 0">--%>
-<%--                                                <td>管理员</td>--%>
-<%--                                            </s:if>--%>
-<%--                                            <s:elseif test="#ulist.User_Identity == 1">--%>
-<%--                                                <td>学生</td>--%>
-<%--                                            </s:elseif>--%>
-<%--                                            <s:else>--%>
-<%--                                                <td>老师</td>--%>
-<%--                                            </s:else>--%>
-
+<%--                                            <td>${each_user.userIdentity}</td>--%>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${each_user.userIdentity==0}">管理员</c:when>
+                                                    <c:when test="${each_user.userIdentity==1}">学生</c:when>
+                                                    <c:when test="${each_user.userIdentity==2}">教师</c:when>
+                                                </c:choose>
+                                            </td>
                                             <td>${each_user.userIntro}</td>
                                             <td><a href=del?u_id=<s:property value="User_id"/>>Delete</a></td>
                                         </tr>
