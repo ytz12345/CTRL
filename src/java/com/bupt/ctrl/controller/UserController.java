@@ -47,9 +47,8 @@ public class UserController {
     private ModelAndView checkLogin(User user, HttpSession session){
         user = userService.checkLogin_admin(user.getUserName(), user.getUserPassword());
 
-        ModelAndView mav = new ModelAndView("redirehct:/index.jsp");
+        ModelAndView mav = new ModelAndView("redirect:/index.jsp");
         if(user != null){
-
             //mav.addObject("user", user);
             session.setAttribute("user",user);
         }else{
@@ -93,17 +92,18 @@ public class UserController {
     }
 
     @RequestMapping("/allUsers")
-    @ResponseBody
-    public String getAllUsers(Model model) {
+    public String getAllCourses(Model model) {
         List<User> allUsers = userService.getAllUser();
         model.addAttribute("users", allUsers);
         return "admin-user";
     }
 
-    @RequestMapping("/deleteUsers")
-    @ResponseBody
-    public String deleteUsers(Model model) {
+    @RequestMapping("/deleteUser")
+    public String deleteUser(@RequestParam("uid")Integer id,Model model){
 
+        userService.deleteUser(id);
+        ModelAndView mav = new ModelAndView("redirect:/allUsers");
+        System.out.println(id);
         List<User> allUsers = userService.getAllUser();
         model.addAttribute("users", allUsers);
         return "admin-user";

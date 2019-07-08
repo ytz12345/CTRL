@@ -4,6 +4,7 @@ import com.bupt.ctrl.common.CommonEnum;
 import com.bupt.ctrl.dao.UserMapper;
 import com.bupt.ctrl.model.User;
 import com.bupt.ctrl.model.UserExample;
+import com.bupt.ctrl.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class UserServiceImpl implements com.bupt.ctrl.service.UserService {
+public class UserServiceImpl implements UserService {
     private Logger logger= LoggerFactory.getLogger(this.getClass());
     @Autowired
     private UserMapper userMapper;
@@ -24,23 +25,29 @@ public class UserServiceImpl implements com.bupt.ctrl.service.UserService {
         return userMapper.selectByPrimaryKey(uid);
     }
 
+    //注册
     @Override
     public void register(User user){
         userMapper.insert(user);
     }
 
+    //登录
     @Override
     public User checkLogin(String userName, String password){
-        User user = userMapper.findByName(userName);
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andUserNameEqualTo(userName);
+        List<User> user = userMapper.selectByExample(userExample);
 
-        if(user != null && user.getUserPassword().equals(password)){
-            return user;
+        if(user.size() != 0 && user.get(0).getUserPassword().equals(password)){
+            return user.get(0);
         }
 
         return null;
     }
 
-    public User checkLogin_admin(String userName, String password){
+    @Override
+    public User checkLoginAdmin(String userName, String password){
         User user = userMapper.findByName(userName);
 
         if(user != null && user.getUserPassword().equals(password) &&user.getUserIdentity().equals(0)){
@@ -48,25 +55,6 @@ public class UserServiceImpl implements com.bupt.ctrl.service.UserService {
         }
 
         return null;
-    }
-
-    @Override
-    public Map<String, Object> saveUser(User record) {
-        Map<String,Object> map=new HashMap<String,Object>();
-        int num = userMapper.insertSelective(record);
-        //失败
-        if (num == 0) {
-            map.put("rescode", CommonEnum.REQUEST_FAILED.getCode());
-            map.put("resmsg", CommonEnum.REQUEST_FAILED.getMsg());
-            return map;
-        }
-        //成功
-        map.put("rescode", CommonEnum.REQUEST_SUCCESS.getCode());
-        map.put("resmsg",CommonEnum.REQUEST_SUCCESS.getMsg());
-        UserExample suithouse = new UserExample();
-        List<User> list = userMapper.selectByExample(suithouse);
-        map.put("houseId",list.get(list.size()-1).getUserId());
-        return map;
     }
 
     @Override

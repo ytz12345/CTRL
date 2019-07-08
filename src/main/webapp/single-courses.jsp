@@ -109,10 +109,9 @@
                 <div class="col-12">
                     <header class="entry-header">
                         <h1 class="entry-title">${course.courseName}</h1>
-
                         <div class="ratings flex justify-content-center align-items-center">
                             <c:choose>
-                                <c:when test="${sessionScope.user.userIdentity} == 2">
+                                <c:when test="${sessionScope.user.userIdentity == 2}">
 
                                     <a href="#" data-toggle="modal" data-target="#modifyCourseName"><span style="color: white">更改课程名</span></a>
 
@@ -196,19 +195,58 @@
                         <label class="m-0">Student</label>
                         <div class="author-name"><a href="#">26 (REGISTERED)</a></div>
                     </div><!-- .course-students -->
-
                     <div class="buy-course mt-3">
                         <c:choose>
-
-                            <c:when test="${sessionScope.user.userIdentity} == 2">
+                            <c:when test="${sessionScope.user.userIdentity == 2}">
                                 <a class="btn" href="#" data-toggle="modal" data-target="#modifyCourseImage">更改封面</a>
                             </c:when>
+                            <c:when test="${sessionScope.user.userIdentity == 1}">
+                                <a class="btn" href="addToCart?course_id=${course.courseId}&student_id=${sessionScope.user.userId}">ADD to cart</a>
+                            </c:when>
                             <c:otherwise>
-                                <a class="btn" href="#">ADD to cart</a>
+                                <a class="btn" href="#" data-toggle="modal" data-target="#course_login">ADD to cart</a>
                             </c:otherwise>
-
                         </c:choose>
                     </div><!-- .buy-course/admin -->
+                    <!--提示登录模态框-->
+                    <div class="modal fade" style="margin-top: 10%" id="course_login">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <!-- 模态框头部 -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">请先登录</h4>
+                                </div>
+
+                                <!-- 模态框主体 -->
+                                <div class="modal-body">
+                                    <form action="course_login?course_id=${course.courseId}" method="post">
+
+                                        <label class="login-lable">用户名：</label>
+                                        <div class="input-group input-group-sm">
+                                            <input type="text" class="form-control" name="userName" placeholder="Username">
+                                        </div>
+                                        <br />
+                                        <label class="login-lable">密码：</label>
+                                        <div class="input-group input-group-sm">
+                                            <input type="password" class="form-control" name="userPassword" placeholder="Password">
+                                        </div>
+                                        <br />
+                                        <div class="modal-footer">
+                                            <input class="btn btn-primary" id="login-btn" type="submit" value="登录">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <!-- 模态框底部 -->
+                                <div class="modal-footer">
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                     <!-- 封面更改-模态框 -->
                     <div class="modal fade" style="margin-top: 10%" id="modifyCourseImage">
                         <div class="modal-dialog">
@@ -249,7 +287,7 @@
 
                 <div class="single-course-cont-section">
                     <c:choose>
-                        <c:when test="${sessionScope.user.userIdentity} == 2">
+                        <c:when test="${sessionScope.user.userIdentity == 2}">
                             <a href="#" data-toggle="modal" data-target="#modifyCourseIntro"><h2>课程介绍</h2></a>
                         </c:when>
                         <c:otherwise>
@@ -265,7 +303,7 @@
                     <div class="single-course-accordion-cont mt-3">
                         <header class="entry-header flex flex-wrap justify-content-between align-items-center">
                             <c:choose>
-                                <c:when test="${sessionScope.user.userIdentity} == 2">
+                                <c:when test="${sessionScope.user.userIdentity == 2}">
                                     <h2>章节管理</h2>
                                     <div>
                                         <a href="#" data-toggle="modal" data-target="#addChapter"><span>添加章节</span></a>

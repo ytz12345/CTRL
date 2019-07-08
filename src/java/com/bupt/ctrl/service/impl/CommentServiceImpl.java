@@ -68,4 +68,15 @@ public class CommentServiceImpl implements CommentService {
     public Comment getComment(Integer comment_id){
         return commentMapper.selectByPrimaryKey(comment_id);
     }
+
+    public int insertComment(Comment comment) {
+        try {
+            commentMapper.insert(comment);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return 1;
+    }
 }
