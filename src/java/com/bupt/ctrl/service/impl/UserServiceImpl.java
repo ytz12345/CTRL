@@ -24,11 +24,13 @@ public class UserServiceImpl implements com.bupt.ctrl.service.UserService {
         return userMapper.selectByPrimaryKey(uid);
     }
 
+    //注册
     @Override
     public void register(User user){
         userMapper.insert(user);
     }
 
+    //登录
     @Override
     public User checkLogin(String userName, String password){
         UserExample userExample = new UserExample();

@@ -98,11 +98,11 @@
                         <div class="form-group">
                             <h1 class="col-sm-12 control">创建课程</h1>
                         </div>
-                        <form action="createCourse?teacher_id=<s:property value="#session.user.User_id"/>" method="post" enctype="multipart/form-data" style='background-color: white' class="form-horizontal col-sm-10" role="form">
+                        <form action="createCourse?teacher_id=${sessionScope.user.userId}" method="post" enctype="multipart/form-data" style='background-color: white' class="form-horizontal col-sm-10" role="form">
 						    <div class="form-group">
 							    <label class="col-sm-4 control-label" style="padding-top: 15px">课程封面</label>
 							    <div class="col-sm-4">
-								    <input type="file" name="courseImage" id="course-img"/>
+								    <input type="file" name="courseImageFile" id="course-img"/>
 							    </div>
 						    </div>
                             <div class="form-group">
@@ -111,19 +111,19 @@
 						    <div class="form-group">
 							    <label class="col-sm-4 control-label">课程名称</label>
 							    <div class="col-sm-8">
-								    <input type="text" name="course.Course_Name" class="form-control" placeholder="请输入课程名称">
+								    <input type="text" name="courseName" class="form-control" placeholder="请输入课程名称">
 							    </div>
 						    </div>
 						    <div class="form-group">
 							    <label class="col-sm-4 control-label">授课教师</label>
 							    <div class="col-sm-8">
-								    <input type="text" name="course.Course_Teacher" class="form-control" placeholder="请输入授课教师姓名">
+								    <input type="text" name="courseTeacher" class="form-control" placeholder="请输入授课教师姓名">
 							    </div>
 						    </div>
 						    <div class="form-group">
 							    <label class="col-sm-4 control-label">课程介绍</label>
 							    <div class="col-sm-8">
-								    <textarea row='5' name="course.Course_Intro" class="form-control" placeholder="请输入课程介绍"></textarea>
+								    <textarea row='5' name="courseIntro" class="form-control" placeholder="请输入课程介绍"></textarea>
 						    	</div>
 						    </div>
 						    <div class="form-group">

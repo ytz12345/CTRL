@@ -5,7 +5,6 @@ import com.bupt.ctrl.model.User;
 import java.util.Map;
 
 public interface UserService {
-
     //用户注册
     void register(User user);
 

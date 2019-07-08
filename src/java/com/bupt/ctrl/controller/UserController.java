@@ -30,6 +30,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    //注册
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
     private ModelAndView register(User user) {
@@ -42,6 +43,7 @@ public class UserController {
         return mav;
     }
 
+    //登录
     @RequestMapping(value = "/checkLogin", method = RequestMethod.POST)
     @ResponseBody
     private ModelAndView checkLogin(User user, HttpSession session){
@@ -49,7 +51,6 @@ public class UserController {
 
         ModelAndView mav = new ModelAndView("redirect:/index.jsp");
         if(user != null){
-            //mav.addObject("user", user);
             session.setAttribute("user",user);
         }else{
             mav.setViewName("redirect:/login_failure.jsp");//登录失败跳转到失败界面
@@ -58,6 +59,7 @@ public class UserController {
         return mav;
     }
 
+    //注销登录
     @RequestMapping(value = "/outLogin")
     @ResponseBody
     private ModelAndView outLogin(HttpSession session){
@@ -73,6 +75,25 @@ public class UserController {
 
         return mav;
 
+    }
+
+    //订阅-提示登录
+    @RequestMapping(value = "/course_login", method = RequestMethod.POST)
+    @ResponseBody
+    private ModelAndView courseLogin(@RequestParam(value = "course_id") int course_id, User user, HttpSession session){
+
+        user = userService.checkLogin(user.getUserName(), user.getUserPassword());
+
+        ModelAndView mav = new ModelAndView("login_failure");
+        if(user != null){
+            session.setAttribute("user",user);
+            String c_id = String.valueOf(course_id);//转化course_id类型
+            String success = "singleCourse?course_id=" + c_id;
+            mav.setViewName("redirect:/" + success);//调用singleCourse
+            return mav;
+        }else{
+            return mav;
+        }
     }
 
     /*@RequestMapping(value = "login", method = RequestMethod.POST)
