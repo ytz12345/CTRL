@@ -49,20 +49,20 @@
         <div class="auth-box bg-dark border-top border-secondary">
             <div id="loginform">
                 <!-- Form -->
-                <form class="form-horizontal m-t-20" id="loginform1" action="adlogin" method="post">
+                <form class="form-horizontal m-t-20" id="loginform1" action="checkLogin_admin" method="post">
                     <div class="row p-b-30">
                         <div class="col-12">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text bg-success text-white" id="basic-addon1"><i class="ti-user"></i></span>
                                 </div>
-                                <input type="text" class="form-control form-control-lg" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required="" name="user.User_Name">
+                                <input type="text" class="form-control form-control-lg" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required="" name="userName">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text bg-warning text-white" id="basic-addon2"><i class="ti-pencil"></i></span>
                                 </div>
-                                <input type="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required="" name="user.User_Password">
+                                <input type="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required="" name="userPassword">
                             </div>
                         </div>
                     </div>

@@ -80,7 +80,7 @@ public class CommentServiceImpl implements CommentService {
             commentMapper.insert(comment);
         }
         catch (Exception e){
-            e.getStackTrace();
+            e.printStackTrace();
             result = 0;
         }
         return result;

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -44,8 +45,8 @@
                             <div class="col-3 col-lg-9 flex justify-content-end align-content-center">
                                 <nav class="site-navigation flex justify-content-end align-items-center">
                                     <ul class="flex flex-column flex-lg-row justify-content-lg-end align-content-center">
-                                        <li><a href="index.jsp">Home</a></li>
-                                        <li class="current-menu-item"><a href="about.jsp">About</a></li>
+                                        <li><a href="index">Home</a></li>
+                                        <li class="current-menu-item"><a href="about">About</a></li>
                                         <li><a href="allCourses">Courses</a></li>
                                         <li><a href="https://weibo.com/u/5966988917?is_all=1">weibo</a></li>
                                     </ul>
@@ -141,66 +142,82 @@
                     <p>天线宝宝</p>
                 </div><!-- .team-heading -->
             </div><!-- .col -->
+            <c:forEach items="${teacherDisplayList}" var="teacher">
 
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="team-member">
-                    <img src="images/team-1.jpg" alt="">
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="team-member">
+                        <a href="teacher?teacher_id=${teacher.userId}"><img src="images/c-1.png" alt=""></a>
 
-                    <h3>丁丁</h3>
-                    <h4>说骚话</h4>
+                        <h3><a href="teacher?teacher_id=${teacher.userId}">${teacher.userName}</a></h3>
+                        <h4>${teacher.userIntro}</h4>
 
-                    <ul class="p-0 m-0 d-flex justify-content-center align-items-center">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    </ul>
-                </div><!-- .team-member -->
-            </div><!-- .col -->
+                        <ul class="p-0 m-0 d-flex justify-content-center align-items-center">
+                            <li><a href="href="teacher?teacher_id=${teacher.userId}""><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="href="teacher?teacher_id=${teacher.userId}""><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="href="teacher?teacher_id=${teacher.userId}""><i class="fa fa-twitter"></i></a></li>
+                        </ul>
+                    </div><!-- .team-member -->
+                </div>
+            </c:forEach>
+<%--            <div class="col-12 col-md-6 col-lg-3">--%>
+<%--                <div class="team-member">--%>
+<%--                    <img src="images/team-1.jpg" alt="">--%>
 
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="team-member">
-                    <img src="images/team-2.jpg" alt="">
+<%--                    <h3>丁丁</h3>--%>
+<%--                    <h4>说骚话</h4>--%>
 
-                    <h3>迪西</h3>
-                    <h4>喝冰可乐</h4>
+<%--                    <ul class="p-0 m-0 d-flex justify-content-center align-items-center">--%>
+<%--                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>--%>
+<%--                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>--%>
+<%--                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>--%>
+<%--                    </ul>--%>
+<%--                </div><!-- .team-member -->--%>
+<%--            </div><!-- .col -->--%>
 
-                    <ul class="p-0 m-0 d-flex justify-content-center align-items-center">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    </ul>
-                </div><!-- .team-member -->
-            </div><!-- .col -->
+<%--            <div class="col-12 col-md-6 col-lg-3">--%>
+<%--                <div class="team-member">--%>
+<%--                    <img src="images/team-2.jpg" alt="">--%>
 
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="team-member">
-                    <img src="images/team-3.jpg" alt="">
+<%--                    <h3>迪西</h3>--%>
+<%--                    <h4>喝冰可乐</h4>--%>
 
-                    <h3>拉拉</h3>
-                    <h4>吃汉堡</h4>
+<%--                    <ul class="p-0 m-0 d-flex justify-content-center align-items-center">--%>
+<%--                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>--%>
+<%--                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>--%>
+<%--                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>--%>
+<%--                    </ul>--%>
+<%--                </div><!-- .team-member -->--%>
+<%--            </div><!-- .col -->--%>
 
-                    <ul class="p-0 m-0 d-flex justify-content-center align-items-center">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    </ul>
-                </div><!-- .team-member -->
-            </div><!-- .col -->
+<%--            <div class="col-12 col-md-6 col-lg-3">--%>
+<%--                <div class="team-member">--%>
+<%--                    <img src="images/team-3.jpg" alt="">--%>
 
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="team-member">
-                    <img src="images/team-4.jpg" alt="">
+<%--                    <h3>拉拉</h3>--%>
+<%--                    <h4>吃汉堡</h4>--%>
 
-                    <h3>小波</h3>
-                    <h4>睡觉</h4>
+<%--                    <ul class="p-0 m-0 d-flex justify-content-center align-items-center">--%>
+<%--                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>--%>
+<%--                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>--%>
+<%--                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>--%>
+<%--                    </ul>--%>
+<%--                </div><!-- .team-member -->--%>
+<%--            </div><!-- .col -->--%>
 
-                    <ul class="p-0 m-0 d-flex justify-content-center align-items-center">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    </ul>
-                </div><!-- .team-member -->
-            </div><!-- .col -->
+<%--            <div class="col-12 col-md-6 col-lg-3">--%>
+<%--                <div class="team-member">--%>
+<%--                    <img src="images/team-4.jpg" alt="">--%>
+
+<%--                    <h3>小波</h3>--%>
+<%--                    <h4>睡觉</h4>--%>
+
+<%--                    <ul class="p-0 m-0 d-flex justify-content-center align-items-center">--%>
+<%--                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>--%>
+<%--                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>--%>
+<%--                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>--%>
+<%--                    </ul>--%>
+<%--                </div><!-- .team-member -->--%>
+<%--            </div><!-- .col -->--%>
         </div><!-- .row -->
     </div><!-- .container -->
 

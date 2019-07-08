@@ -44,8 +44,8 @@
                     <div class="col-3 col-lg-9 flex justify-content-end align-content-center">
                         <nav class="site-navigation flex justify-content-end align-items-center">
                             <ul class="flex flex-column flex-lg-row justify-content-lg-end align-content-center">
-                                <li><a href="index.jsp">Home</a></li>
-                                <li class="current-menu-item"><a href="about.jsp">About</a></li>
+                                <li><a href="index">Home</a></li>
+                                <li class="current-menu-item"><a href="about">About</a></li>
                                 <li><a href="allCourses">Courses</a></li>
                                 <li><a href="https://weibo.com/u/5966988917?is_all=1">weibo</a></li>
                             </ul>
@@ -85,8 +85,8 @@
         <div class="col-12">
             <div class="breadcrumbs">
                 <ul class="flex flex-wrap align-items-center p-0 m-0">
-                    <li><a href="index.jsp"><i class="fa fa-home"></i> Home</a></li>
-                    <li><a href="about.jsp">About</a></li>
+                    <li><a href="index"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="about">About</a></li>
                     <li>Teacher</li>
                 </ul>
             </div><!-- .breadcrumbs -->
@@ -104,7 +104,7 @@
                             <img src="images/instructor.jpg" alt="" style="width: 300px; height: 300px">
 
                             <ul class="author-social-profile p-0 m-0 mt-3 d-flex flex-wrap align-items-center">
-                                <li style="margin-left: 35%"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li style="margin-left: 37%"><a href="#"><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                                 <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                             </ul>
@@ -119,32 +119,32 @@
 
             <div class="col-12 col-lg-6 align-content-lg-stretch mt-5 mt-lg-0">
                 <header class="heading">
-                    <h2 class="entry-title" style="text-align: center">About Sdrb</h2>
+                    <h2 class="entry-title" style="text-align: center">${teacher.userName}</h2>
                     <p style="text-align: center">leader YTZ</p>
-                    <p>每天都会不止一次的,走在路上,突然一句"恨信",然后环顾四周确认没人注意到,然后开始傻笑</p>
+                    <p>${teacher.userIntro}</p>
                 </header><!-- .heading -->
 
                 <div class="entry-content ezuca-stats">
                     <div class="stats-wrap flex flex-wrap justify-content-lg-between">
                         <div class="stats-count">
-                            5<span>+</span>
+                            ${allStudentNum}<span>+</span>
                             <p>STUDENTS LEARNING</p>
                         </div><!-- .stats-count -->
 
                         <div class="stats-count">
-                            3<span>+</span>
+                            ${courseNum}<span>+</span>
                             <p>ACTIVE COURSES</p>
                         </div><!-- .stats-count -->
 
-                        <div class="stats-count">
-                            3<span>+</span>
-                            <p>INSTRUCTORS ONLINE</p>
-                        </div><!-- .stats-count -->
+<%--                        <div class="stats-count">--%>
+<%--                            3<span>+</span>--%>
+<%--                            <p>INSTRUCTORS ONLINE</p>--%>
+<%--                        </div>--%>
 
-                        <div class="stats-count">
-                            2<span>+</span>
-                            <p>Country Reached</p>
-                        </div><!-- .stats-count -->
+<%--                        <div class="stats-count">--%>
+<%--                            2<span>+</span>--%>
+<%--                            <p>Country Reached</p>--%>
+<%--                        </div>--%>
                     </div><!-- .stats-wrap -->
                 </div><!-- .ezuca-stats -->
             </div><!-- .col -->

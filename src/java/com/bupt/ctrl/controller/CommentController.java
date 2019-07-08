@@ -1,6 +1,13 @@
 package com.bupt.ctrl.controller;
 
 import com.bupt.ctrl.model.Comment;
+
+import com.bupt.ctrl.service.CommentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.bupt.ctrl.model.User;
 import com.bupt.ctrl.service.CommentService;
 import com.bupt.ctrl.service.UserService;
@@ -11,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 
 @Controller
 public class CommentController {

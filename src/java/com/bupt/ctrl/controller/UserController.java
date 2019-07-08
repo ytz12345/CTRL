@@ -2,7 +2,11 @@ package com.bupt.ctrl.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.bupt.ctrl.model.Course;
 import com.bupt.ctrl.model.User;
+import com.bupt.ctrl.model.UserHasCourse;
+import com.bupt.ctrl.service.CourseService;
+import com.bupt.ctrl.service.UserHasCourseService;
 import com.bupt.ctrl.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +34,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserHasCourseService userHasCourseService;
+
+    @Autowired
+    private CourseService courseService;
+
+    //注册
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
     private ModelAndView register(User user) {
@@ -42,12 +53,28 @@ public class UserController {
         return mav;
     }
 
+    //登录
     @RequestMapping(value = "/checkLogin", method = RequestMethod.POST)
     @ResponseBody
     private ModelAndView checkLogin(User user, HttpSession session){
         user = userService.checkLogin(user.getUserName(), user.getUserPassword());
 
         ModelAndView mav = new ModelAndView("redirect:/index.jsp");
+        if(user != null){
+            session.setAttribute("user",user);
+        }else{
+            mav.setViewName("redirect:/login_failure.jsp");//登录失败跳转到失败界面
+        }
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/checkLogin_admin", method = RequestMethod.POST)
+    @ResponseBody
+    private ModelAndView checkLoginAdmin(User user, HttpSession session){
+        user = userService.checkLoginAdmin(user.getUserName(), user.getUserPassword());
+
+        ModelAndView mav = new ModelAndView("redirect:/allUsers");
         if(user != null){
             //mav.addObject("user", user);
             session.setAttribute("user",user);
@@ -75,208 +102,53 @@ public class UserController {
 
     }
 
+    @RequestMapping("/allUsers")
+    public String getAllCourses(Model model) {
+        List<User> allUsers = userService.getAllUser();
+        model.addAttribute("users", allUsers);
+
+        System.out.println("Yes, come here!");
+         /*System.out.println(allCourses.size());
+        for (Course i : allCourses) {
+            System.out.println(i.toString());
+        }
+        */
+        return "admin-user";
+    }
+
+    //订阅-提示登录
+    @RequestMapping(value = "/course_login", method = RequestMethod.POST)
+    @ResponseBody
+    private ModelAndView courseLogin(@RequestParam(value = "course_id") int course_id, User user, HttpSession session){
+
+        user = userService.checkLogin(user.getUserName(), user.getUserPassword());
+
+        ModelAndView mav = new ModelAndView("login_failure");
+        if(user != null){
+            session.setAttribute("user",user);
+            String c_id = String.valueOf(course_id);//转化course_id类型
+            String success = "singleCourse?course_id=" + c_id;
+            mav.setViewName("redirect:/" + success);//调用singleCourse
+            return mav;
+        }else{
+            return mav;
+        }
+    }
+
     @RequestMapping("/teacher")
     public String getTeacher(@RequestParam(value="teacher_id") Integer teacher_id, Model model){
         User teacher = userService.getUserByID(teacher_id);
         model.addAttribute("teacher", teacher);
+        List<UserHasCourse> userHasCourseList = userHasCourseService.getCourseByTeacher(teacher_id);
+        System.out.println("teacher id: " + teacher_id);
+        Integer allStudentNum = 0;
+        for(int i = 0; i < userHasCourseList.size(); i ++){
+            UserHasCourse userHasCourse = userHasCourseList.get(i);
+            allStudentNum += userHasCourseService.getStudentNumByCourse(userHasCourse.getCourseCourseId());
+        }
+        model.addAttribute("allStudentNum", allStudentNum);
+        System.out.println("allStudentNum: " + allStudentNum);
+        model.addAttribute("courseNum", userHasCourseService.getCourseNumByTeacher(teacher_id));
         return "teacher";
     }
-    /*@RequestMapping(value = "login", method = RequestMethod.POST)
-    @ResponseBody
-    private String login(User user) {
-        Map<String,Object> map=userService.checkUserLogin(user);
-        return JSON.toJSONString(map);
-    }
-    @RequestMapping(value = "/personedit/{userid}", method = RequestMethod.POST)
-    @ResponseBody
-    public String personedit(@PathVariable("userid") int userid,
-                             @RequestParam("phonenumber") String phonenumber) {
-        logger.info("=======================================================");
-        logger.info("Person Edit phonenumber\n");
-        Map<String,Object> map=new HashMap<String,Object>();
-        map=userService.updateUserPhonenumber(userid,phonenumber);
-        String json=JSON.toJSONString(map, SerializerFeature.WriteMapNullValue);
-        return json;
-    }
-    @RequestMapping(value = "/personinfo/{userid}", method = RequestMethod.GET)
-    @ResponseBody
-    public String personview(@PathVariable("userid") int userid) {
-        logger.info("!!!!are you ok?\n");
-        logger.info("userid="+userid);
-        User nowUser=userService.selectUserById(userid);
-        System.out.println("!!!"+nowUser.toString());
-        String json=JSON.toJSONString(nowUser, SerializerFeature.WriteMapNullValue);
-        return json;
-    }
-    @RequestMapping(value = "/changepassword/{userid}", method = RequestMethod.POST)
-    @ResponseBody
-    public String changepassword(@PathVariable("userid") int userid,
-                                 HttpServletRequest request) {
-        logger.info("=======================================================");
-        logger.info("change Password");
-        String oldpassword=request.getParameter("oldpassword");
-        String newpassword=request.getParameter("newpassword");
-        logger.info(oldpassword);
-        logger.info(newpassword);
-        Map<String,Object> map=new HashMap<String,Object>();
-        map=userService.updateUserPassword(userid,oldpassword,newpassword);
-        //User nowuser=userService.selectUserById(userid);
-        //logger.info(nowuser.toString());
-        String json=JSON.toJSONString(map);
-        return json;
-        //return userService.selectUserById(userid);
-    }
-    @RequestMapping("/test")
-    @ResponseBody
-    public void test1(@RequestParam("idList[]") List<Integer> idList){
-        for(Integer i: idList){
-            System.out.println(i);
-        }
-    }
-    @RequestMapping("/test3")
-    @ResponseBody
-    public void test3(@RequestParam("prideList[]") List<Integer> idList){
-        for(Integer i: idList){
-            System.out.println(i);
-        }
-    }
-    @RequestMapping(value ="/test2",method = RequestMethod.POST)
-    @ResponseBody
-    public String test1(){
-        System.out.println("!!!!!Response");
-        return "redirect:/index.html";
-    }
-    @RequestMapping(value ="/test4",method = RequestMethod.GET)
-    @ResponseBody
-    public String test4(){
-        System.out.println("!!!!!Response");
-        return "redirect:/index.html";
-    }
-    *//* test photo *//*
-    @RequestMapping(value="/testpersonimg", method = RequestMethod.GET)
-    public @ResponseBody Map list(){
-        System.out.printf("!!!\n");
-        //	List<String> list;
-        Map<String,Object> files=new HashMap<>();
-        //files.put("files",list);
-        return files;
-    }
-    @RequestMapping(value="/testpersonimg", method = RequestMethod.POST)
-    @ResponseBody
-    public void addphoto(MultipartHttpServletRequest request) {
-        Iterator<String> itr = request.getFileNames();
-        MultipartFile mpf;
-        mpf=request.getFile(itr.next());
-        String fileName = mpf.getOriginalFilename();
-        File file = new File(request.getServletContext()
-                .getRealPath("/img/file"), fileName);
-        if (!file.getParentFile().exists()) {
-            file.getParentFile().mkdirs();
-        }
-        System.out.println(request.getServletContext()
-                .getRealPath("/img/file"));
-        System.out.println("tttwwwoooo\n");
-        try {
-            mpf.transferTo(file);
-        }
-        catch (IOException e) {
-        }
-        System.out.println("tttwwwoooo\n");
-    }
-    @RequestMapping(value="/ownerhouselist/{userid}",method=RequestMethod.GET)
-    @ResponseBody
-    public String getOwnerHouseList(@PathVariable("userid") int userid,
-                                    HttpServletRequest request) {
-        List<House> houselist;
-        Map<String,List> map=new HashMap<>();
-        List<Integer> publishuserlist=new ArrayList<>();
-        publishuserlist.add(userid);
-        map.put("publishUserId",publishuserlist);
-        houselist=houseService.queryHouse(map,0,1);
-        for(House nowhouse : houselist) {//其内部实质上还是调用了迭代器遍历方式，这种循环方式还有其他限制，不建议使用。
-            System.out.println(nowhouse.toString());
-        }
-        String json= JSON.toJSONString(houselist, SerializerFeature.WriteMapNullValue);
-        return json;
-    }
-    @RequestMapping(value = "regist",method = RequestMethod.POST)
-    @ResponseBody
-    public String userregist(HttpServletRequest request) throws UnsupportedEncodingException {
-        request.setCharacterEncoding("UTF-8");
-        User newuser = new User();
-        String userNickName = request.getParameter("usernickname");
-        Map<String,Object> map =new HashMap<String, Object>();
-        UserExample example = new UserExample();
-        example.or().andUsernicknameIn(Collections.singletonList(userNickName));
-        User testuser = userService.getExistUser(example);
-        if (testuser!=null)
-        {
-            System.out.println("User already exists !!");
-            map.put("rescode", CommonEnum.REQUEST_FAILED.getCode());
-            map.put("resmsg",CommonEnum.REQUEST_FAILED.getMsg());
-            return JSON.toJSONString(map);
-        }
-        String password = request.getParameter("password");
-        int userType=0,cardType=0;
-        String userName = request.getParameter("username");
-        String idNumber = request.getParameter("idnumber");
-        String phoneNumber = request.getParameter("phonenumber");
-        String registCity = request.getParameter("registcity");
-        try{
-            userType = Integer.parseInt(request.getParameter("useryype"));
-        }catch(NumberFormatException e) { }
-        try{
-            cardType = Integer.parseInt(request.getParameter("cardtype"));
-        }catch(NumberFormatException e) { }
-        newuser.setUsernickname(userNickName);
-        newuser.setPassword(password);
-        newuser.setUsername(userName);
-        newuser.setUsertype(userType);
-        newuser.setIdnumber(idNumber);
-        newuser.setCardtype(cardType);
-        newuser.setRegistcity(registCity);
-        newuser.setPhonenumber(phoneNumber);
-        map = userService.insertUser(newuser);
-        String json = JSON.toJSONString(map);
-        System.out.println("Signed up successfully!!");
-        System.out.println(json);
-        return json;
-    }
-    @RequestMapping(value = "landlordstatistics/{userid}",method = RequestMethod.GET)
-    @ResponseBody
-    public String landlordstatistics(@PathVariable("userid") int userid,
-                                     HttpServletRequest request)
-    {
-        logger.info("====================================================");
-        logger.info("landlordstatistics");
-        String startMonth = request.getParameter("startmonth");
-        String endMonth = request.getParameter("endmonth");
-        if (startMonth==null) startMonth="0000-00-00 00:00:00";
-        if (endMonth==null) endMonth="9999-99-99 99:99:99";
-        logger.info(startMonth+"->"+endMonth);
-        int op = 0;
-        Map<String,Object> map = rentTransactionService.countTransaction(userid,op,startMonth,endMonth);
-        String json= JSON.toJSONString(map, SerializerFeature.WriteMapNullValue);
-        System.out.println(json);
-        return json;
-    }
-    @RequestMapping(value = "statisticsroomer/{userid}",method = RequestMethod.GET)
-    @ResponseBody
-    public String statisticsroomer(@PathVariable("userid") int userid,
-                                   HttpServletRequest request)
-    {
-        logger.info("====================================================");
-        logger.info("landlordstatistics");
-        String startMonth = request.getParameter("startmonth");
-        String endMonth = request.getParameter("endmonth");
-        if (startMonth==null) startMonth="0000-00-00 00:00:00";
-        if (endMonth==null) endMonth="9999-99-99 99:99:99";
-        logger.info(startMonth+"->"+endMonth);
-        int op = 1;
-        Map<String,Object> map = rentTransactionService.countTransaction(userid,op,startMonth,endMonth);
-        String json= JSON.toJSONString(map, SerializerFeature.WriteMapNullValue);
-        System.out.println(json);
-        return json;
-    }
-    */
 }

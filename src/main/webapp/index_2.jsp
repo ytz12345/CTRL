@@ -46,8 +46,8 @@
                     <div class="col-3 col-lg-9 flex justify-content-end align-content-center">
                         <nav class="site-navigation flex justify-content-end align-items-center">
                             <ul class="flex flex-column flex-lg-row justify-content-lg-end align-content-center">
-                                <li class="current-menu-item"><a href="index.jsp">Home</a></li>
-                                <li><a href="about.jsp">About</a></li>
+                                <li class="current-menu-item"><a href="index">Home</a></li>
+                                <li><a href="about">About</a></li>
                                 <%--<li><a href="courses.jsp">Courses</a></li>--%>
                                 <li><a href="allCourses">Courses</a></li>
                                 <li><a href="user-homepage.jsp">weibo</a></li>
@@ -113,7 +113,7 @@
                 </div><!-- .entry-content -->
 
                 <footer class="entry-footer read-more">
-                    <a href="#">read more<i class="fa fa-long-arrow-right"></i></a>
+                    <a href="about">read more<i class="fa fa-long-arrow-right"></i></a>
                 </footer><!-- .entry-footer -->
             </div><!-- .icon-box -->
 
@@ -184,11 +184,11 @@
                     <a class="btn mt-4 mt-sm-0" href="allCourses">view all</a>
                 </header><!-- .heading -->
             </div><!-- .col -->
-            <c:forEach items="${courseList}" var="course">
+            <c:forEach items="${firstTwoCoursesAndTeacher}" var="courseAndTeacher">
                 <div class="col-12 col-lg-6">
                     <div class="course-content flex flex-wrap justify-content-between align-content-lg-stretch">
                         <figure class="course-thumbnail">
-                            <a href="singleCourse?course_id=${course.courseId}"><img src="${course.courseImage}" alt=""></a>
+                            <a href="singleCourse?course_id=${courseAndTeacher.course.courseId}"><img src="${courseAndTeacher.course.courseImage}" alt=""></a>
                         </figure><!-- .course-thumbnail -->
 
                         <div class="course-content-wrap">
@@ -203,12 +203,12 @@
                                     <span class="course-ratings-count">(4 votes)</span>
                                 </div><!-- .course-ratings -->
 
-                                <h2 class="entry-title"><a href="singleCourse?course_id=${course.courseId}">${course.courseName}</a></h2>
+                                <h2 class="entry-title"><a href="singleCourse?course_id=${courseAndTeacher.course.courseId}">${courseAndTeacher.course.courseName}</a></h2>
 
                                 <div class="entry-meta flex flex-wrap align-items-center">
-                                    <div class="course-author"><a href="#">${course.courseTeacher}</a></div>
+                                    <div class="course-author"><a href="teacher?teacher_id=${courseAndTeacher.teacher.userId}">${courseAndTeacher.course.courseTeacher}</a></div>
 
-                                    <div class="course-date">${course.courseDate}</div>
+                                    <div class="course-date">${courseAndTeacher.course.courseDate}</div>
                                 </div><!-- .course-date -->
                             </header><!-- .entry-header -->
 
@@ -291,22 +291,22 @@
 <%--                    </nav>--%>
                 </header><!-- .heading -->
             </div><!-- .col -->
-            <c:forEach items="${sixCourses}" var="course">
+            <c:forEach items="${sixCoursesAndTeacher}" var="courseAndTeacher">
 
                 <div class="col-12 col-md-6 col-lg-4 px-25">
                     <div class="course-content">
                         <figure class="course-thumbnail">
-                            <a href="singleCourse?course_id=${course.courseId}"><img src="${course.courseImage}" alt=""></a>
+                            <a href="singleCourse?course_id=${courseAndTeacher.course.courseId}"><img src="${courseAndTeacher.course.courseImage}" alt=""></a>
                         </figure><!-- .course-thumbnail -->
 
                         <div class="course-content-wrap">
                             <header class="entry-header">
-                                <h2 class="entry-title"><a href="singleCourse?course_id=${course.courseId}">${course.courseName}</a></h2>
+                                <h2 class="entry-title"><a href="singleCourse?course_id=${courseAndTeacher.course.courseId}">${courseAndTeacher.course.courseName}</a></h2>
 
                                 <div class="entry-meta flex align-items-center">
-                                    <div class="course-author"><a href="#">${course.courseTeacher}</a></div>
+                                    <div class="course-author"><a href="teacher?teacher_id=${courseAndTeacher.teacher.userId}">${courseAndTeacher.course.courseTeacher}</a></div>
 
-                                    <div class="course-date">${course.courseDate}</div>
+                                    <div class="course-date">${courseAndTeacher.course.courseDate}</div>
                                 </div><!-- .course-date -->
                             </header><!-- .entry-header -->
 

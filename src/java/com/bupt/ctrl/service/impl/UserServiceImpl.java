@@ -24,16 +24,32 @@ public class UserServiceImpl implements com.bupt.ctrl.service.UserService {
         return userMapper.selectByPrimaryKey(uid);
     }
 
+    //注册
     @Override
     public void register(User user){
         userMapper.insert(user);
     }
 
+    //登录
     @Override
     public User checkLogin(String userName, String password){
-        User user = userMapper.findByName(userName);
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andUserNameEqualTo(userName);
+        List<User> user = userMapper.selectByExample(userExample);
 
-        if(user != null && user.getUserPassword().equals(password)){
+        if(user.size() != 0 && user.get(0).getUserPassword().equals(password)){
+            return user.get(0);
+        }
+
+        return null;
+    }
+
+    @Override
+    public User checkLoginAdmin(String userName, String password){
+        User user = checkLogin(userName, password);
+
+        if(user != null && user.getUserIdentity().equals(0)){
             return user;
         }
 
@@ -41,22 +57,11 @@ public class UserServiceImpl implements com.bupt.ctrl.service.UserService {
     }
 
     @Override
-    public Map<String, Object> saveUser(User record) {
-        Map<String,Object> map=new HashMap<String,Object>();
-        int num = userMapper.insertSelective(record);
-        //失败
-        if (num == 0) {
-            map.put("rescode", CommonEnum.REQUEST_FAILED.getCode());
-            map.put("resmsg", CommonEnum.REQUEST_FAILED.getMsg());
-            return map;
-        }
-        //成功
-        map.put("rescode", CommonEnum.REQUEST_SUCCESS.getCode());
-        map.put("resmsg",CommonEnum.REQUEST_SUCCESS.getMsg());
-        UserExample suithouse = new UserExample();
-        List<User> list = userMapper.selectByExample(suithouse);
-        map.put("houseId",list.get(list.size()-1).getUserId());
-        return map;
+    public List<User> getAllUser() {
+        UserExample userExample = new UserExample();
+
+        return userMapper.selectByExample(userExample);
+
     }
 
     @Override
@@ -65,6 +70,23 @@ public class UserServiceImpl implements com.bupt.ctrl.service.UserService {
         UserExample.Criteria criteria = userExample.createCriteria();
         criteria.andUserIdentityEqualTo(2);
         return userMapper.selectByExample(userExample);
+    }
+
+    @Override
+    public User getTeacherByName(String userName){
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andUserNameEqualTo(userName);
+        List<User> userList = userMapper.selectByExample(userExample);
+        User user = new User();
+        if(userList.size() != 0){
+            for(int i = 0; i <= userList.size(); i ++)
+                if(userList.get(i).getUserIdentity() == 2){
+                    user = userList.get(i);
+                    return user;
+                }
+        }
+        return null;
     }
 }
 
