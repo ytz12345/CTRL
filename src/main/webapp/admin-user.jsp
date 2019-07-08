@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -6,7 +7,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">h
 
@@ -298,7 +298,7 @@
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-12 d-flex no-block align-items-center">
-                    <a href=disp style="color: black"><h4 class="page-title">用户管理</h4></a>
+                    <a href="allUsers" style="color: black"><h4 class="page-title">用户管理</h4></a>
                     <div class="ml-auto text-right">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
@@ -339,27 +339,23 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <s:iterator value="list" var="ulist" status="status">
+                                    <c:forEach items="${users}" var="each_user">
                                         <tr>
-                                            <td><s:property value="User_id"/></td>
-                                            <td><s:property value="User_Name"/></td>
-                                            <td><s:property value="User_Passward"/></td>
-
-                                            <s:if test="#ulist.User_Identity == 0">
-                                                <td>管理员</td>
-                                            </s:if>
-                                            <s:elseif test="#ulist.User_Identity == 1">
-                                                <td>学生</td>
-                                            </s:elseif>
-                                            <s:else>
-                                                <td>老师</td>
-                                            </s:else>
-
-                                            <td><s:property value="User_Intro"/></td>
+                                            <td>${each_user.userId}</td>
+                                            <td>${each_user.userName}</td>
+                                            <td>${each_user.userPassword}</td>
+<%--                                            <td>${each_user.userIdentity}</td>--%>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${each_user.userIdentity==0}">管理员</c:when>
+                                                    <c:when test="${each_user.userIdentity==1}">学生</c:when>
+                                                    <c:when test="${each_user.userIdentity==2}">教师</c:when>
+                                                </c:choose>
+                                            </td>
+                                            <td>${each_user.userIntro}</td>
                                             <td><a href=del?u_id=<s:property value="User_id"/>>Delete</a></td>
                                         </tr>
-                                    </s:iterator>
-
+                                    </c:forEach>
                                     </tbody>
                                     <tfoot>
                                     <tr>
