@@ -47,7 +47,7 @@ public class UserController {
     @RequestMapping(value = "/checkLogin", method = RequestMethod.POST)
     @ResponseBody
     private ModelAndView checkLogin(User user, HttpSession session){
-        user = userService.checkLoginAdmin(user.getUserName(), user.getUserPassword());
+        user = userService.checkLogin(user.getUserName(), user.getUserPassword());
 
         ModelAndView mav = new ModelAndView("redirect:/index.jsp");
         if(user != null){

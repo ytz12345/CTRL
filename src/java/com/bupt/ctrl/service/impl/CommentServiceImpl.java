@@ -23,6 +23,7 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     CommentMapper commentMapper;
 
+    @Override
     public List<Comment> getParentComment(Integer chapter_id){
         CommentExample commentExample = new CommentExample();
         CommentExample.Criteria criteria = commentExample.createCriteria();
@@ -31,6 +32,7 @@ public class CommentServiceImpl implements CommentService {
         return commentMapper.selectByExample(commentExample);
     }
 
+    @Override
     public List<Comment> getSonComment(Integer comment_id){
         PriorityQueue<Comment> commentPriorityQueue = new PriorityQueue<Comment>(50, new CmpComent());
         List<Comment> commentList = new ArrayList<>();
@@ -58,6 +60,7 @@ public class CommentServiceImpl implements CommentService {
         return commentList;
     }
 
+    @Override
     public Integer getCommentNum(Integer chapter_id){
         CommentExample commentExample = new CommentExample();
         CommentExample.Criteria criteria = commentExample.createCriteria();
@@ -65,18 +68,18 @@ public class CommentServiceImpl implements CommentService {
         return commentMapper.countByExample(commentExample);
     }
 
+    @Override
     public Comment getComment(Integer comment_id){
         return commentMapper.selectByPrimaryKey(comment_id);
     }
 
-    public int insertComment(Comment comment) {
-        try {
-            commentMapper.insert(comment);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return 0;
-        }
-        return 1;
+    @Override
+    public int addComment(Comment comment) {
+        return commentMapper.insert(comment);
+    }
+
+    @Override
+    public int deleteComment(Integer comment_id){
+        return commentMapper.deleteByPrimaryKey(comment_id);
     }
 }
