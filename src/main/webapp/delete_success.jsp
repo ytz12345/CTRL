@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>评论成功页面</title>
+    <title>删除成功页面</title>
 </head>
 <body>
 <%

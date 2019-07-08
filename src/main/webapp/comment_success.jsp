@@ -7,12 +7,12 @@
     <title>评论成功页面</title>
 </head>
 <body>
-<%
-    int chapter_id = Integer.parseInt(request.getParameter("chapter_id"));
-    int user_id = Integer.parseInt(request.getParameter("user_id"));
-%>
+<%--<%--%>
+<%--    int chapter_id = Integer.parseInt(request.getParameter("chapter_id"));--%>
+<%--    int user_id = Integer.parseInt(request.getParameter("user_id"));--%>
+<%--%>--%>
 <script language=JavaScript>
-    window.location="single-chapter.jsp?chapter_id=<%=chapter_id%>&user_id=<%=user_id%>"
+    window.location="singleChapter?chapter_id=${chapterId}&user_id=${userId}"
 </script>
 </body>
 </html>

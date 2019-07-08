@@ -13,4 +13,10 @@ public interface CommentService {
     public Integer getCommentNum(Integer chapter_id);
 
     public Comment getComment(Integer comment_id);
+
+    //添加新评论
+    public int addComment(Comment comment);
+
+    //删除评论
+    public int deleteComment(Integer comment_id);
 }
