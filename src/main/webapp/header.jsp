@@ -54,8 +54,8 @@
                         <c:choose>
                             <c:when test="${ sessionScope.user != null }">
                                 <ul class="flex justify-content-center align-items-center py-2 pt-md-0" style="list-style: none">
-                                    <li><a href="#">${sessionScope.user.userName}</a></li>
-                                    <li><a href="outLogin" style="font-size: 6px">logout</a></li>
+                                    <li><a href="getUserCourses?uid=${sessionScope.user.userId}">${sessionScope.user.userName}</a></li>
+                                    <li><a href="outLogin">logout</a></li>
                                 </ul>
                             </c:when>
                             <c:otherwise>

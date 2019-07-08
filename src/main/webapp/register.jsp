@@ -70,7 +70,7 @@
                             <ul class="flex flex-column flex-lg-row justify-content-lg-end align-content-center">
                                 <li class="current-menu-item"><a href="index.jsp">Home</a></li>
                                 <li><a href="about.jsp">About</a></li>
-                                <li><a href="courses.jsp">Courses</a></li>
+                                <li><a href="allCourses">Courses</a></li>
                                 <li><a href="https://weibo.com/u/5966988917?is_all=1">weibo</a></li>
                             </ul>
 

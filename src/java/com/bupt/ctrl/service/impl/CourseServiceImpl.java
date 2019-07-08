@@ -17,6 +17,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Autowired
     CourseMapper courseMapper;
+
     @Autowired
     UserHasCourseMapper userHasCourseMapper;
     //获得所有课程
@@ -27,6 +28,7 @@ public class CourseServiceImpl implements CourseService {
         return courseMapper.selectByExample(courseExample);
     }
 
+    @Override
     //将课程信息插入course表
     public void createCourse(Course course){
         courseMapper.insert(course);
@@ -40,6 +42,7 @@ public class CourseServiceImpl implements CourseService {
         return courseMapper.selectByExample(courseExample);
     }
 
+    @Override
     //设置用户拥有课程
     public int userHasCourse(UserHasCourse userHasCourse){
         userHasCourseMapper.insert(userHasCourse);

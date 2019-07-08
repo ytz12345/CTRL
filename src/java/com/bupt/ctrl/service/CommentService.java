@@ -18,6 +18,9 @@ public interface CommentService {
     //根据评论id获取评论
     public Comment getComment(Integer comment_id);
 
-    //插入评论, 成功/失败 返回 1/0
-    public int insertComment(Comment comment);
+    //添加新评论
+    public int addComment(Comment comment);
+
+    //删除评论
+    public int deleteComment(Integer comment_id);
 }

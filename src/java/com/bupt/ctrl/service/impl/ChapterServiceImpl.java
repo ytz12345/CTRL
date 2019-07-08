@@ -15,6 +15,7 @@ public class ChapterServiceImpl implements ChapterService {
     @Autowired
     ChapterMapper chapterMapper;
 
+    @Override
     public List<Chapter> getChapterOfCourse(Integer course_id){
         ChapterExample courseExample = new ChapterExample();
         ChapterExample.Criteria criteria = courseExample.createCriteria();
@@ -22,6 +23,7 @@ public class ChapterServiceImpl implements ChapterService {
         return chapterMapper.selectByExample(courseExample);
     }
 
+    @Override
     public Chapter getChapter(Integer chapter_id){
         return chapterMapper.selectByPrimaryKey(chapter_id);
     }

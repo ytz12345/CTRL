@@ -44,5 +44,24 @@ public class UserServiceImpl implements com.bupt.ctrl.service.UserService {
 
         return null;
     }
+
+    @Override
+    public User checkLoginAdmin(String userName, String password){
+        User user = checkLogin(userName, password);
+
+        if(user != null && user.getUserIdentity().equals(0)){
+            return user;
+        }
+
+        return null;
+    }
+
+    @Override
+    public List<User> getAllUser() {
+        UserExample userExample = new UserExample();
+
+        return userMapper.selectByExample(userExample);
+
+    }
 }
 

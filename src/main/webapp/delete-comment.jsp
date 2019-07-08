@@ -1,7 +1,3 @@
-<%@ page import="dao.CommentDao" %>
-<%@ page import="model.Comment" %>
-<%@ page import="dao.UserDao" %>
-<%@ page import="model.User" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" autoFlush="false" buffer="256kb"
          pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -56,16 +52,16 @@
 </head>
 <body>
 
-    <%
-        int comment_id = Integer.parseInt(request.getParameter("comment_id"));
-        int login_id = Integer.parseInt(request.getParameter("user_id"));
-        CommentDao commentDao = new CommentDao();
-        Comment comment = commentDao.find(comment_id);
-        UserDao userDao = new UserDao();
-        User user = userDao.findUser(login_id);
+<%--    <%--%>
+<%--        int comment_id = Integer.parseInt(request.getParameter("comment_id"));--%>
+<%--        int login_id = Integer.parseInt(request.getParameter("user_id"));--%>
+<%--        CommentDao commentDao = new CommentDao();--%>
+<%--        Comment comment = commentDao.find(comment_id);--%>
+<%--        UserDao userDao = new UserDao();--%>
+<%--        User user = userDao.findUser(login_id);--%>
 
-    %>
-    <form action="deletecomment" class="comment-form" method="post">
+<%--    %>--%>
+    <form action="deleteCommentConfirm" class="comment-form" method="post">
 
 
         <h2 align="center"style="margin-top: 10%" >
@@ -91,15 +87,15 @@
                                         <div class="comment-wrap">
                                             <div class="comment-author">
                                             <span class="comment-meta d-block">
-                                                <a href="#"><%=comment.getComment_Time()%></a>
+                                                <a href="#">${comment.commentTime}</a>
                                             </span>
 
                                                 <span class="fn">
-                                                <a href="#"><%=user.getUser_Name()%></a>
+                                                <a href="#">${user.userName}</a>
                                             </span>
                                             </div>
 
-                                            <p><%=comment.getComment_Content()%></p>
+                                            <p>${comment.commentContent}</p>
                                         </div>
 
                                         <div class="clearfix"></div>
@@ -113,11 +109,14 @@
             </div><!-- .row -->
         </div>
         <br />
-        <input type="hidden" name="comment_id" value="<%=comment.getComment_id()%>">
-        <input type="hidden" name="comment_chapter_id" value="<%=comment.getChapter_Chapter_id()%>">
-        <input type="hidden" name="login_id" value="<%=login_id%>">
+        <input type="hidden" name="commentId" value="${comment.commentId}">
+        <input type="hidden" name="chapterChapterId" value="${comment.chapterChapterId}">
+        <input type="hidden" name="userUserId" value="${comment.userUserId}">
+        <input type="hidden" name="commentContent" value="${comment.commentContent}">
+        <input type="hidden" name="commentTime" value="${comment.commentTime}">
+        <input type="hidden" name="commentTo" value="${comment.commentTo}">
         <button type="submit" class="btn btn-danger btn-lg" style="margin-left: 43%" >确认</button>
-        <button type="button" class="btn btn-default btn-lg" style="margin-left: 5%" onclick="window.location.href='single-chapter.jsp?chapter_id=<%=comment.getChapter_Chapter_id()%>&user_id=<%=login_id%>'">返回</button>
+        <button type="button" class="btn btn-default btn-lg" style="margin-left: 5%" onclick="window.location.href='singleChapter?chapter_id=${comment.chapterChapterId}&user_id=${user.userId}'">返回</button>
     </form>
 
     <script type='text/javascript' src='js/jquery.js'></script>
