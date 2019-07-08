@@ -201,10 +201,10 @@
                             <c:when test="${sessionScope.user.userIdentity == 2 and tos == 1}">
                                 <a class="btn" href="#" data-toggle="modal" data-target="#modifyCourseImage">更改封面</a>
                             </c:when>
-                            <c:when test="${sessionScope.user.userIdentity == 1 and tos == 100}">
+                            <c:when test="${tos == 100}">
                                 <a class="btn" href="addToCart?course_id=${course.courseId}&student_id=${sessionScope.user.userId}">ADD to cart</a>
                             </c:when>
-                            <c:when test="${sessionScope.user.userIdentity == 1 and tos == 0}">
+                            <c:when test="${tos == 0}">
                                 <a class="btn" href="#">学习中</a>
                             </c:when>
                             <c:otherwise>
@@ -264,7 +264,7 @@
 
                                 <!-- 模态框主体 -->
                                 <div class="modal-body">
-                                    <form action="modifyCourseImage?modify_id=${course.courseId}" method="post" role="form" enctype="multipart/form-data" >
+                                    <form action="modifyCourseImage?course_id=${course.courseId}" method="post" role="form" enctype="multipart/form-data" >
                                         <div class="form-group">
                                             <input type="file" name="newCourseImage" id="course-img-modify"/>
                                         </div>

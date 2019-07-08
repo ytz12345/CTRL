@@ -93,4 +93,14 @@ public class CourseServiceImpl implements CourseService {
         courseMapper.updateByExampleSelective(course,courseExample);
         return 1;
     }
+
+    //修改课程封面
+    public int updateCourseImage(Course course){
+        CourseExample courseExample = new CourseExample();
+        CourseExample.Criteria criteria = courseExample.createCriteria();
+
+        criteria.andCourseIdEqualTo(course.getCourseId());
+        courseMapper.updateByExampleSelective(course,courseExample);
+        return 1;
+    }
 }
