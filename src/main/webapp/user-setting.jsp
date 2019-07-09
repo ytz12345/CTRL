@@ -240,27 +240,12 @@
                                     </div>
                                     <div class="input-group">
                                         <label class="input-label">
-                                            真实姓名
-                                        </label>
-                                        <span class="input-cr">张瑞年</span>
-                                        <input id="userName" type="hidden" value="张瑞年">
-                                    </div>
-                                    <div class="input-group">
-                                        <label class="input-label">
                                             简介
                                         </label>
                                         <span class="input-cr">${sessionScope.user.userIntro}</span>
                                         <input id="studentNo" type="hidden" value="1145141919">
                                     </div>
-                                    <div class="input-group">
-                                        <label class="input-label">
-                                            所在学校
-                                        </label>
-                                        <span class="input-cr">北京锤雷大学</span>
-                                        <input id="schoolName" type="hidden" value="北京锤雷大学"
-                                               class="ui-autocomplete-input" autocomplete="off">
-                                        <input id="schoolId" type="hidden" value="102">
-                                    </div>
+
 
 
                                     <%--<div class="input-group">
