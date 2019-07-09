@@ -32,4 +32,6 @@ public interface UserService {
     //依据名字寻找用户
     User getTeacherByName(String userName);
 
+    //更新数据库中的用户信息
+    int updateUser(User user);
 }
