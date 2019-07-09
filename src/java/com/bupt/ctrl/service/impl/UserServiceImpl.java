@@ -66,10 +66,5 @@ public class UserServiceImpl implements UserService{
         return userMapper.selectByExample(userExample);
 
     }
-    public void deleteUser(Integer uid){
-        System.out.println("try delete");
-        userMapper.deleteByPrimaryKey(uid);
-        System.out.println("sus");
-    }
 }
 
