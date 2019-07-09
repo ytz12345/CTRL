@@ -31,18 +31,25 @@ public class UserCourseController {
     public String getUserCourses(@RequestParam(value="uid")Integer user_id, Model model){
 
         List<UserHasCourse> userHasCourses = userHasCourseService.getCourseById(user_id);
-        model.addAttribute("userHasCourses", userHasCourses);
+        //model.addAttribute("userHasCourses", userHasCourses);
         List<Course> courseList= new ArrayList();
+        List<Course> courseListComing= new ArrayList();
+        List<Course> courseListPass= new ArrayList();
         for(int i=0;i<userHasCourses.size();i++) {
             Course temp_courseList = courseService.getCourseByID(userHasCourses.get(i).getCourseCourseId());
-            courseList.add(temp_courseList);
+            //已申请未通过课程
+            if(temp_courseList.getCoursePass()==0)
+                courseListComing.add(temp_courseList);
+            //通过课程
+            if(temp_courseList.getCoursePass()==1)
+                courseList.add(temp_courseList);
+            //已申请被拒绝课程
+            if(temp_courseList.getCoursePass()==2)
+                courseListPass.add(temp_courseList);
         }
         model.addAttribute("userCourses",courseList);
-        System.out.println("Show userHasCourses : " + userHasCourses);
-        System.out.println("Show userCourses : " + courseList);
-        System.out.println("Show userHasCourses size : " + userHasCourses.size());
-        System.out.println("Show userCourses size : " + courseList.size());
-
+        model.addAttribute("userCoursesComing",courseListComing);
+        model.addAttribute("userCoursesPass",courseListPass);
 
         return "user-homepage";
     }

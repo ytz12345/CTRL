@@ -88,5 +88,15 @@ public class UserServiceImpl implements com.bupt.ctrl.service.UserService {
         }
         return null;
     }
+
+    @Override
+    public int updateUserPassword(User user){
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+
+        criteria.andUserIdEqualTo(user.getUserId());
+        userMapper.updateByExampleSelective(user,userExample);
+        return 1;
+    }
 }
 

@@ -124,7 +124,7 @@
             <div class="col-12 offset-lg-1 col-lg-10">
                 <div class="featured-image">
                     <video width="940" height="530" controls="controls">
-                        <source src="${chapter.chapterVideo}" type="video/mp4" />
+                        <source src="${chapter.chapterVideo}" type="video/mp4" >
                     </video>
                     <!-- 修改为视频 -->
                 </div><!-- .featured-image -->

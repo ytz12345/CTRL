@@ -64,10 +64,20 @@ public class CourseController {
 
         UserHasCourse userHasCourse = new UserHasCourse();
         String courseImagePath = request.getServletContext().getRealPath("/upload/images/");//路径修改为服务器地址！！！
-        String filename = courseImageFile.getOriginalFilename();//获取文件名
-        String imagePath = courseImagePath + filename;//图像上传完整路径
 
-        File imageFile = new File(courseImagePath,filename);
+        String filename = courseImageFile.getOriginalFilename();//获取文件名
+        String suffix = filename.substring(filename.lastIndexOf(".") + 1);//获取原文件后缀名
+
+        course.setCourseImage(courseImagePath + filename);
+        course.setCoursePass(0);
+        int flag = 0;
+        flag = courseService.createCourse(course);//创建课程-添加数据进course表
+
+        String preffix = String.valueOf(course.getCourseId());
+        String realImageName = preffix + "." + suffix;
+        String imagePath = courseImagePath + realImageName;//图像上传完整路径
+
+        File imageFile = new File(imagePath);
         //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
 
         if(!imageFile.getParentFile().exists()){
@@ -76,22 +86,19 @@ public class CourseController {
 
         courseImageFile.transferTo(imageFile);
 
-        course.setCourseImage(imagePath);
-        course.setCoursePass(0);
+        if(flag == 1 && imageFile.exists()){
+            userHasCourse.setUserUserId(teacher_id);//传入课程创建人id
+            userHasCourse.setCourseCourseId(course.getCourseId());//传入课程id
+            userHasCourse.setUserTeachorstudy(1);//设置拥有类型为：teach
 
-        courseService.createCourse(course);//创建课程-添加数据进course表
+            course.setCourseImage(imagePath);
+            courseService.updateCourseImage(course);
+            courseService.userHasCourse(userHasCourse);//创建课程-添加数据进user_has_course表
 
-        userHasCourse.setUserUserId(teacher_id);//传入课程创建人id
-        userHasCourse.setCourseCourseId(course.getCourseId());//传入课程id
-        userHasCourse.setUserTeachorstudy(1);//设置拥有类型为：teach
-
-        int flag = 0;
-        flag = courseService.userHasCourse(userHasCourse);//创建课程-添加数据进user_has_course表
-
-        if(flag == 1){
             return "index";
         }
             return "course-create";//待修改
+
     }
 
     //订阅
@@ -204,11 +211,11 @@ public class CourseController {
 
         ModelAndView mav = new ModelAndView("更改失败");
 
-        String courseImagePath = request.getServletContext().getRealPath("/upload/images/");//路径修改为服务器地址！！！
-        String filename = newCourseImageFile.getOriginalFilename();//获取文件名
-        String imagePath = courseImagePath + filename;//图像上传完整路径
+        Course course = courseService.getCourseByID(course_id);
+        String imagePath = course.getCourseImage();
 
-        File imageFile = new File(courseImagePath,filename);
+        File imageFile = new File(imagePath);
+
         //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
 
         if(!imageFile.getParentFile().exists()){
@@ -217,15 +224,8 @@ public class CourseController {
 
         newCourseImageFile.transferTo(imageFile);
 
-        Course course = new Course();
-        course.setCourseId(course_id);
-        course.setCourseImage(imagePath);
+        if(imageFile.exists()){
 
-        int flag = 0;
-        flag = courseService.updateCourseImage(course);
-
-
-        if(flag == 1){
             String c_id = String.valueOf(course_id);//转化course_id类型
             String success = "singleCourse?course_id=" + c_id;
             mav.setViewName("redirect:/" + success);//调用singleCourse

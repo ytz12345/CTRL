@@ -75,27 +75,35 @@ public class ChapterController {
     public ModelAndView addChapter(@RequestParam(value = "course_id")int course_id, @RequestParam("chapterVideoFile") CommonsMultipartFile chapterVideoFile, Chapter chapter, HttpServletRequest request) throws IOException {
 
         ModelAndView mav = new ModelAndView("添加章节失败");
-
-        String courseImagePath = request.getServletContext().getRealPath("/upload/videos/");//路径修改为服务器地址！！！
+      
+        String chapterVideoPath = request.getServletContext().getRealPath("/upload/videos/");//路径修改为服务器地址！！！
         String filename = chapterVideoFile.getOriginalFilename();//获取文件名
-        String videoPath = courseImagePath + filename;//图像上传完整路径
 
-        File videoFile = new File(courseImagePath,filename);
+        String suffix = filename.substring(filename.lastIndexOf(".") + 1);//获取原文件后缀名
+
+        int flag = 0;
+        chapter.setCourseCourseId(course_id);
+        flag =  chapterService.addChapter(chapter);
+
+        String prefix = String.valueOf(chapter.getChapterId());//用文件id做文件名，唯一标识
+        String realChapterVideo = prefix + "." + suffix;//最终文件上传名
+        String videoPath = chapterVideoPath + realChapterVideo;
+
+        File videoFile = new File(videoPath);
         //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
+
+        //判断目标文件夹是否存在，不存在则创建
 
         if(!videoFile.getParentFile().exists()){
             videoFile.getParentFile().mkdirs();
         }
 
-        chapterVideoFile.transferTo(videoFile);
+        chapterVideoFile.transferTo(videoFile);//复制文件
 
-        chapter.setCourseCourseId(course_id);
-        chapter.setChapterVideo(videoPath);
+        if(flag == 1 && videoFile.exists()){
+            chapter.setChapterVideo(videoPath);
+            chapterService.modifyChapterVideo(chapter);
 
-        int flag = 0;
-        flag =  chapterService.addChapter(chapter);
-
-        if(flag == 1){
             String c_id = String.valueOf(course_id);//转化course_id类型
             String success = "singleCourse?course_id=" + c_id;
             mav.setViewName("redirect:/" + success);//调用singleCourse
