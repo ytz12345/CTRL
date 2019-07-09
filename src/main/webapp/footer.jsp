@@ -29,7 +29,7 @@
                         <h2 class="w-100">Quick Links</h2>
 
                         <ul class="w-50">
-                            <li><a href="about.jsp">About </a></li>
+                            <li><a href="about">About </a></li>
                             <li><a href="#">Terms of Use </a></li>
                             <li><a href="#">Privacy Policy </a></li>
                             <li><a href="#">Contact Us</a></li>

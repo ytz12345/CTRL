@@ -13,4 +13,13 @@ public interface UserHasCourseService {
 
     //根据userid删除UHC表的内容
     void deleteUserHasCourse(Integer uid);
+
+    //获取当前课程学生数量
+    Integer getStudentNumByCourse(Integer courseId);
+
+    //获取Teacher教的课程数量
+    Integer getCourseNumByTeacher(Integer teacherId);
+
+    //获取Teacher教的所有课程
+    List<UserHasCourse> getCourseByTeacher(Integer teacherId);
 }

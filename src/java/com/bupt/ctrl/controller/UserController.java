@@ -3,9 +3,12 @@ package com.bupt.ctrl.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.bupt.ctrl.model.Comment;
-import com.bupt.ctrl.model.User;
 import com.bupt.ctrl.service.CommentService;
 import com.bupt.ctrl.service.UserHasChapterService;
+import com.bupt.ctrl.model.Course;
+import com.bupt.ctrl.model.User;
+import com.bupt.ctrl.model.UserHasCourse;
+import com.bupt.ctrl.service.CourseService;
 import com.bupt.ctrl.service.UserHasCourseService;
 import com.bupt.ctrl.service.UserService;
 import org.slf4j.Logger;
@@ -39,6 +42,9 @@ public class UserController {
     private UserHasChapterService userHasChapterService;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private CourseService courseService;
+  
     //注册
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
@@ -79,6 +85,31 @@ public class UserController {
             session.setAttribute("user",user);
         }else{
             mav.setViewName("redirect:/login_failure.jsp");//登录失败跳转到失败界面
+        }
+
+        return mav;
+    }
+
+    //用户更改密码
+    @RequestMapping(value = "/passwordReset", method = RequestMethod.POST)
+    @ResponseBody
+    private ModelAndView passwordReset(@RequestParam(value = "oldPassword") String oldPassword,
+                                       @RequestParam(value = "newPassword") String newPassword,
+                                       @RequestParam(value = "uid") Integer uid,
+                                       User user, HttpSession session){
+        user = userService.getUserByID(uid);
+
+        System.out.println("Show user_name : "+ user.getUserName()+" , user_password :"+user.getUserPassword());
+
+        ModelAndView mav = new ModelAndView("redirect:/user-setting.jsp");
+        if(!oldPassword.equals(user.getUserPassword())){
+            System.out.println("Wrong old password : " + oldPassword +" user_password : "+user.getUserPassword());
+            mav.setViewName("redirect:/passwordReset_failure.jsp");//登录失败跳转到失败界面
+        }else{
+            System.out.println("new password :"+newPassword);
+            user.setUserPassword(newPassword);
+            userService.updateUserPassword(user);
+            System.out.println("password has been set to:"+ user.getUserPassword());
         }
 
         return mav;
@@ -139,5 +170,30 @@ public class UserController {
         }else{
             return mav;
         }
+    }
+
+    @RequestMapping("/teacher")
+    public String getTeacher(@RequestParam(value="teacher_id") Integer teacher_id, Model model){
+        User teacher = userService.getUserByID(teacher_id);
+        model.addAttribute("teacher", teacher);
+        List<UserHasCourse> userHasCourseList = userHasCourseService.getCourseByTeacher(teacher_id);
+        List<Course> teacherCourse = new ArrayList<>();
+        System.out.println("teacher id: " + teacher_id);
+        Integer allStudentNum = 0;
+        Integer courseNum = 0;
+        for(int i = 0; i < userHasCourseList.size(); i ++){
+            UserHasCourse userHasCourse = userHasCourseList.get(i);
+            Course course = courseService.getCourseByID(userHasCourse.getCourseCourseId());
+            if(course.getCoursePass() == 1){
+                allStudentNum += userHasCourseService.getStudentNumByCourse(course.getCourseId());
+                courseNum ++;
+                teacherCourse.add(course);
+            }
+        }
+        model.addAttribute("teacherCourse", teacherCourse);
+        model.addAttribute("allStudentNum", allStudentNum);
+        System.out.println("allStudentNum: " + allStudentNum);
+        model.addAttribute("courseNum", courseNum);
+        return "teacher";
     }
 }

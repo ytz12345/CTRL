@@ -72,6 +72,39 @@ public class UserServiceImpl implements UserService{
         System.out.println("try delete");
         userMapper.deleteByPrimaryKey(uid);
         System.out.println("sus");
+
+    public List<User> getTeachers(){
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andUserIdentityEqualTo(2);
+        return userMapper.selectByExample(userExample);
+    }
+
+    @Override
+    public User getTeacherByName(String userName){
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andUserNameEqualTo(userName);
+        List<User> userList = userMapper.selectByExample(userExample);
+        User user = new User();
+        if(userList.size() != 0){
+            for(int i = 0; i <= userList.size(); i ++)
+                if(userList.get(i).getUserIdentity() == 2){
+                    user = userList.get(i);
+                    return user;
+                }
+        }
+        return null;
+    }
+
+    @Override
+    public int updateUserPassword(User user){
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+
+        criteria.andUserIdEqualTo(user.getUserId());
+        userMapper.updateByExampleSelective(user,userExample);
+        return 1;
     }
 }
 

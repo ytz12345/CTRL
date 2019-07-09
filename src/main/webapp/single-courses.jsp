@@ -80,8 +80,8 @@
                     <div class="col-3 col-lg-9 flex justify-content-end align-content-center">
                         <nav class="site-navigation flex justify-content-end align-items-center">
                             <ul class="flex flex-column flex-lg-row justify-content-lg-end align-content-center">
-                                <li><a href="index.jsp">Home</a></li>
-                                <li><a href="about.jsp">About</a></li>
+                                <li><a href="index">Home</a></li>
+                                <li><a href="about">About</a></li>
                                 <li><a href="allCourses">Courses</a></li>
                                 <li><a href="https://weibo.com/u/5966988917?is_all=1">weibo</a></li>
                             </ul>
@@ -187,13 +187,13 @@
 
                         <div class="author-wrap">
                             <label class="m-0">Teacher</label>
-                            <div class="author-name"><a href="#">${course.courseTeacher}</a></div>
+                            <div class="author-name"><a href="teacher?teacher_id=${teacher.userId}">${course.courseTeacher}</a></div>
                         </div><!-- .author-wrap -->
                     </div><!-- .course-author -->
 
                     <div class="course-students mt-3">
                         <label class="m-0">Student</label>
-                        <div class="author-name"><a href="#">26 (REGISTERED)</a></div>
+                        <div class="author-name"><a href="#">${studentNum} (REGISTERED)</a></div>
 
                     </div><!-- .course-students -->
                     <div class="buy-course mt-3">
@@ -204,7 +204,7 @@
                             <c:when test="${tos == 100}">
                                 <a class="btn" href="addToCart?course_id=${course.courseId}&student_id=${sessionScope.user.userId}">ADD to cart</a>
                             </c:when>
-                            <c:when test="${sessionScope.user.userIdentity == 1 and tos == 0}">
+                            <c:when test="${tos == 0}">
                                 <a class="btn" href="#">学习中</a>
                             </c:when>
                             <c:otherwise>
@@ -264,7 +264,7 @@
 
                                 <!-- 模态框主体 -->
                                 <div class="modal-body">
-                                    <form action="modifyCourseImage?modify_id=${course.courseId}" method="post" role="form" enctype="multipart/form-data" >
+                                    <form action="modifyCourseImage?course_id=${course.courseId}" method="post" role="form" enctype="multipart/form-data" >
                                         <div class="form-group">
                                             <input type="file" name="newCourseImage" id="course-img-modify"/>
                                         </div>
@@ -335,23 +335,23 @@
 
                                     <!-- 模态框主体 -->
                                     <div class="modal-body">
-                                        <form action="addChapter?add_id=${course.courseId}" method="post" enctype="multipart/form-data" role="form">
+                                        <form action="addChapter?course_id=${course.courseId}" method="post" enctype="multipart/form-data" role="form">
                                             <div class="form-group">
                                                 <label class="col-sm-4 control-label">章节名称</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" name="chapter.Chapter_Name" class="form-control" placeholder="请输入课程名称">
+                                                    <input type="text" name="chapterName" class="form-control" placeholder="请输入课程名称">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-4 control-label">章节数</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" name="chapter.Chapter_Num" class="form-control" placeholder="请输入课程名称">
+                                                    <input type="text" name="chapterNum" class="form-control" placeholder="请输入课程名称">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-4 control-label" style="padding-top: 15px">视频</label>
                                                 <div class="col-sm-6">
-                                                    <input type="file" name="chapterVideo"/>
+                                                    <input type="file" name="chapterVideoFile"/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -392,7 +392,8 @@
                                     <div class="entry-content">
                                         <ul class="p-0 m-0">
                                             <li class="flex flex-column flex-lg-row align-items-lg-center">
-                                                <span class="lecture-title"><a href="singleChapter?chapter_id=${chapter.chapterId}&user_id=${sessionScope.user.userId}">${chapter.chapterName}</a></span><span class="lectures-preview"></span><span class="lectures-time text-left text-lg-right"></span></li>
+                                                <span class="lecture-title"><a href="singleChapter?chapter_id=${chapter.chapterId}&user_id=${sessionScope.user.userId}">${chapter.chapterName}</a></span><span class="lectures-preview"></span><span class="lectures-time text-left text-lg-right"></span>
+                                            </li>
                                         </ul>
                                     </div>
                                 </c:forEach>

@@ -23,4 +23,13 @@ public interface UserService {
 
     //根据ID删用户
     void deleteUser(Integer uid);
+
+    //根据新密码更新数据库中的用户密码
+    int updateUserPassword(User user);
+
+    List<User> getTeachers();
+
+    //依据名字寻找用户
+    User getTeacherByName(String userName);
+
 }

@@ -37,8 +37,10 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     //将课程信息插入course表
-    public void createCourse(Course course){
+    public int createCourse(Course course){
+
         courseMapper.insert(course);
+        return 1;
     }
 
     public List<Course> getCourseByName(String str) {
@@ -107,6 +109,12 @@ public class CourseServiceImpl implements CourseService {
     public int updataCoursePass(Course course){
         CourseExample courseExample = new CourseExample();
         CourseExample.Criteria criteria = courseExample.createCriteria();
+      
+    //修改课程封面
+    public int updateCourseImage(Course course){
+        CourseExample courseExample = new CourseExample();
+        CourseExample.Criteria criteria = courseExample.createCriteria();
+
         criteria.andCourseIdEqualTo(course.getCourseId());
         courseMapper.updateByExampleSelective(course,courseExample);
         return 1;
