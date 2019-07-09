@@ -1,6 +1,7 @@
 package com.bupt.ctrl.controller;
 
 import com.bupt.ctrl.model.*;
+import com.bupt.ctrl.common.commonPath;
 import com.bupt.ctrl.service.ChapterService;
 import com.bupt.ctrl.service.CommentService;
 import com.bupt.ctrl.service.CourseService;
@@ -76,7 +77,7 @@ public class ChapterController {
 
         ModelAndView mav = new ModelAndView("添加章节失败");
 
-        String courseImagePath = request.getServletContext().getRealPath("/upload/videos/");//路径修改为服务器地址！！！
+        String courseImagePath = commonPath.videoPath;//路径修改为服务器地址！！！
         String filename = chapterVideoFile.getOriginalFilename();//获取文件名
         String videoPath = courseImagePath + filename;//图像上传完整路径
 

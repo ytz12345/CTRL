@@ -1,5 +1,6 @@
 package com.bupt.ctrl.controller;
 
+import com.bupt.ctrl.common.commonPath;
 import com.bupt.ctrl.model.Chapter;
 import com.bupt.ctrl.model.Course;
 import com.bupt.ctrl.model.User;
@@ -63,11 +64,13 @@ public class CourseController {
     public String createCourse(@RequestParam(value = "teacher_id")int teacher_id, @RequestParam("courseImageFile")CommonsMultipartFile courseImageFile, Course course, HttpServletRequest request) throws IOException {
 
         UserHasCourse userHasCourse = new UserHasCourse();
-        String courseImagePath = request.getServletContext().getRealPath("/upload/images/");//路径修改为服务器地址！！！
+        String courseImagePath = commonPath.imagePath;//路径修改为服务器地址！！！
         String filename = courseImageFile.getOriginalFilename();//获取文件名
         String imagePath = courseImagePath + filename;//图像上传完整路径
 
-        File imageFile = new File(courseImagePath,filename);
+        System.out.println("Path!  " + imagePath);
+
+        File imageFile = new File(imagePath);
         //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
 
         if(!imageFile.getParentFile().exists()){
@@ -75,7 +78,13 @@ public class CourseController {
         }
 
         courseImageFile.transferTo(imageFile);
+        /*try {
+            courseImageFile.transferTo(imageFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
 
+        //course.setCourseImage(imagePath.substring(1));
         course.setCourseImage(imagePath);
         course.setCoursePass(0);
 
