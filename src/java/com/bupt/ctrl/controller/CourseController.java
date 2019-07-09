@@ -164,6 +164,7 @@ public class CourseController {
         int flag = 0;
 
         Course course = new Course();
+
         course.setCourseIntro(newCourseIntro);
         course.setCourseId(course_id);
         flag = courseService.updateCourseIntro(course);
@@ -177,5 +178,42 @@ public class CourseController {
 
         return mav;
     }
+
+    //更改课程封面
+    @RequestMapping(value = "/modifyCourseImage", method = RequestMethod.POST)
+    public ModelAndView modifyCourseImage(@RequestParam(value = "course_id")int course_id, @RequestParam("newCourseImage")CommonsMultipartFile newCourseImageFile, HttpServletRequest request) throws IOException {
+
+        ModelAndView mav = new ModelAndView("更改失败");
+
+        String courseImagePath = request.getServletContext().getRealPath("/upload/images/");//路径修改为服务器地址！！！
+        String filename = newCourseImageFile.getOriginalFilename();//获取文件名
+        String imagePath = courseImagePath + filename;//图像上传完整路径
+
+        File imageFile = new File(courseImagePath,filename);
+        //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
+
+        if(!imageFile.getParentFile().exists()){
+            imageFile.getParentFile().mkdirs();
+        }
+
+        newCourseImageFile.transferTo(imageFile);
+
+        Course course = new Course();
+        course.setCourseId(course_id);
+        course.setCourseImage(imagePath);
+
+        int flag = 0;
+        flag = courseService.updateCourseImage(course);
+
+
+        if(flag == 1){
+            String c_id = String.valueOf(course_id);//转化course_id类型
+            String success = "singleCourse?course_id=" + c_id;
+            mav.setViewName("redirect:/" + success);//调用singleCourse
+            return mav;
+        }
+        return mav;
+    }
+
 
 }
