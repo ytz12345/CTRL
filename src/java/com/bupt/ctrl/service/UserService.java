@@ -20,4 +20,7 @@ public interface UserService {
 
     //根据id查找用户
     User getUserByID(Integer uid);
+
+    //根据ID删用户
+    void deleteUser(Integer uid);
 }
