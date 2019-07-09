@@ -1,6 +1,7 @@
 package com.bupt.ctrl.service.impl;
 
 import com.bupt.ctrl.common.CommonEnum;
+import com.bupt.ctrl.dao.UserHasChapterMapper;
 import com.bupt.ctrl.dao.UserMapper;
 import com.bupt.ctrl.model.User;
 import com.bupt.ctrl.model.UserExample;
@@ -22,9 +23,6 @@ public class UserServiceImpl implements UserService{
     private Logger logger= LoggerFactory.getLogger(this.getClass());
     @Autowired
     private UserMapper userMapper;
-    private UserHasChapterService userHasChapterService;
-    private UserHasCourseService userHasCourseService;
-    private CommentService commentService;
     @Override
     public User getUserByID(Integer uid) {
         return userMapper.selectByPrimaryKey(uid);
@@ -68,13 +66,10 @@ public class UserServiceImpl implements UserService{
         return userMapper.selectByExample(userExample);
 
     }
-
     public void deleteUser(Integer uid){
-        userHasChapterService.deleteUserHasChap(uid);
-        userHasCourseService.deleteUserHasCourse(uid);
-        commentService.deleteCommentByUser(uid);
+        System.out.println("try delete");
         userMapper.deleteByPrimaryKey(uid);
+        System.out.println("sus");
     }
-
 }
 

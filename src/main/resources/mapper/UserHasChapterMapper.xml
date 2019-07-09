@@ -140,11 +140,6 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-
-  <delete id="deleteUserHasChap" parameterType="java.lang.Integer">
-    delete from user_has_chapter
-    where User_User_id = #{uid,jdbcType=INTEGER}
-  </delete>
   <insert id="insert" parameterType="com.bupt.ctrl.model.UserHasChapter">
     <!--
       WARNING - @mbggenerated

@@ -130,12 +130,6 @@
     delete from comment
     where Comment_id = #{commentId,jdbcType=INTEGER}
   </delete>
-
-  <delete id="deleteCommentByUser" parameterType="java.lang.Integer">
-    delete from comment
-    where User_User_id = #{uid,jdbcType=INTEGER}
-  </delete>
-  
   <delete id="deleteByExample" parameterType="com.bupt.ctrl.model.CommentExample">
     <!--
       WARNING - @mbggenerated

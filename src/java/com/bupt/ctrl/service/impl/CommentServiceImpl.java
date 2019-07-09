@@ -91,7 +91,13 @@ public class CommentServiceImpl implements CommentService {
         return commentMapper.deleteByPrimaryKey(comment_id);
     }
 
+    @Override
     public void deleteCommentByUser(Integer uid){
-        commentMapper.deleteCommentByUser(uid);
+        System.out.println("try delete");
+        CommentExample commentExample = new CommentExample();
+        CommentExample.Criteria criteria = commentExample.createCriteria();
+        criteria.andUserUserIdEqualTo(uid);
+        commentMapper.deleteByExample(commentExample);
+        System.out.println("sd");
     }
 }

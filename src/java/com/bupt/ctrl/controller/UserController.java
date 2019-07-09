@@ -2,7 +2,11 @@ package com.bupt.ctrl.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.bupt.ctrl.model.Comment;
 import com.bupt.ctrl.model.User;
+import com.bupt.ctrl.service.CommentService;
+import com.bupt.ctrl.service.UserHasChapterService;
+import com.bupt.ctrl.service.UserHasCourseService;
 import com.bupt.ctrl.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +33,12 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private UserHasCourseService userHasCourseService;
+    @Autowired
+    private UserHasChapterService userHasChapterService;
+    @Autowired
+    private CommentService commentService;
     //注册
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
@@ -102,6 +111,9 @@ public class UserController {
     @RequestMapping("/deleteUser")
     public String deleteUser(@RequestParam("uid")Integer id,Model model){
         System.out.println(id);
+        commentService.deleteCommentByUser(id);
+        userHasChapterService.deleteUserHasChap(id);
+        userHasCourseService.deleteUserHasCourse(id);
         userService.deleteUser(id);
         ModelAndView mav = new ModelAndView("redirect:/allUsers");
         System.out.println(id);

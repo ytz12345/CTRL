@@ -21,5 +21,5 @@ public interface UserService {
     //根据id查找用户
     User getUserByID(Integer uid);
 
-    public void deleteUser(Integer uid);
+     void deleteUser(Integer uid);
 }
