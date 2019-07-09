@@ -126,7 +126,7 @@
                                         <!-- 我的课程 -->
                                         <li class="nav-item open-up navItem" data-step="1" data-highlightclass="" data-intro="欢迎进入我的课程，这里汇集了您所有参加和收藏的课程。">
                                             <a class="nav-text current" href="user-homepage.jsp"><i class="icon-nav icon-course"></i>我的课程</a>
-                                            <ul class="sub-nav">
+                   <%--                         <ul class="sub-nav">
                                                 <li class="nav-item">
                                                     <a class="sub-nav-text current" content="myCourse" href="#">学习的课程</a>
                                                 </li>
@@ -136,18 +136,18 @@
                                                     <a class="sub-nav-text" href="#" content="favoriteCourse">收藏的课程</a>
                                                 </li>
 
-                                            </ul>
+                                            </ul>--%>
                                         </li>
 
 
 
                                         <!-- 我的笔记 -->
-                                        <li class="nav-item" data-step="4" data-highlightclass="" data-intro="在课程学习的过程中您可以随时记录学习心得或疑惑,点击这里可以管理自己的课程笔记。">
+                                        <%--<li class="nav-item" data-step="4" data-highlightclass="" data-intro="在课程学习的过程中您可以随时记录学习心得或疑惑,点击这里可以管理自己的课程笔记。">
                                             <a class="nav-text" href="#" content="myNote"><i class="icon-nav icon-notes"></i>我的笔记</a>
                                         </li>
                                         <li class="nav-item" data-step="5" data-highlightclass="" data-intro="系统和授课教师会通过站内消息向您发送重要通知，您要及时关注这里的消息哦！">
                                             <a class="nav-text" href="#" content="myMessage"><i class="icon-nav icon-msg"></i>消息<sup id="newMsg" style="display:none;">●</sup></a>
-                                        </li>
+                                        </li>--%>
                                         <li class="nav-item" data-step="6" data-highlightclass="" data-intro="在这里您可以进行密码管理,邮箱绑定,以及对基本资料信息进行维护。">
                                             <a class="nav-text" href="user-setting.jsp" content="mySetting"><i class="icon-nav icon-set"></i>个人设置</a>
                                         </li>
