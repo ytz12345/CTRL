@@ -20,4 +20,7 @@ public interface UserService {
    
     //根据id查找用户
     User getUserByID(Integer uid);
+
+    //根据新密码更新数据库中的用户密码
+    int updateUserPassword(User user);
 }

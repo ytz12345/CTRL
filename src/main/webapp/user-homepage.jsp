@@ -168,12 +168,12 @@
                                     <a class="btn-item" href="course-create.jsp" style="color: white">创建课程</a>
                                 </c:if>
                             </div>
-                            <div class="search-box">
+<%--                            <div class="search-box">
                                 <div class="search">
                                     <input class="input-search searchCourse" id="keyWord" placeholder="根据课程名称、学校、教师搜索" type="text" value="">
                                     <a class="icon-search" id="searchCourse" href="javascript:void(0)"><i class="i-search"></i></a>
                                 </div>
-                            </div>
+                            </div>--%>
                         </div>
 
 

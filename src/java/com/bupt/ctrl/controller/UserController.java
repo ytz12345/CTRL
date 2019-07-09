@@ -75,6 +75,31 @@ public class UserController {
         return mav;
     }
 
+    //用户更改密码
+    @RequestMapping(value = "/passwordReset", method = RequestMethod.POST)
+    @ResponseBody
+    private ModelAndView passwordReset(@RequestParam(value = "oldPassword") String oldPassword,
+                                       @RequestParam(value = "newPassword") String newPassword,
+                                       @RequestParam(value = "uid") Integer uid,
+                                       User user, HttpSession session){
+        user = userService.getUserByID(uid);
+
+        System.out.println("Show user_name : "+ user.getUserName()+" , user_password :"+user.getUserPassword());
+
+        ModelAndView mav = new ModelAndView("redirect:/user-setting.jsp");
+        if(!oldPassword.equals(user.getUserPassword())){
+            System.out.println("Wrong old password : " + oldPassword +" user_password : "+user.getUserPassword());
+            mav.setViewName("redirect:/passwordReset_failure.jsp");//登录失败跳转到失败界面
+        }else{
+            System.out.println("new password :"+newPassword);
+            user.setUserPassword(newPassword);
+            userService.updateUserPassword(user);
+            System.out.println("password has been set to:"+ user.getUserPassword());
+        }
+
+        return mav;
+    }
+
     @RequestMapping(value = "/outLogin")
     @ResponseBody
     private ModelAndView outLogin(HttpSession session){
