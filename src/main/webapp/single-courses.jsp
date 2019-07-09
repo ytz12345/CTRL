@@ -392,7 +392,8 @@
                                     <div class="entry-content">
                                         <ul class="p-0 m-0">
                                             <li class="flex flex-column flex-lg-row align-items-lg-center">
-                                                <span class="lecture-title"><a href="singleChapter?chapter_id=${chapter.chapterId}&user_id=${sessionScope.user.userId}">${chapter.chapterName}</a></span><span class="lectures-preview"></span><span class="lectures-time text-left text-lg-right"></span></li>
+                                                <span class="lecture-title"><a href="singleChapter?chapter_id=${chapter.chapterId}&user_id=${sessionScope.user.userId}">${chapter.chapterName}</a></span><span class="lectures-preview"></span><span class="lectures-time text-left text-lg-right"></span>
+                                            </li>
                                         </ul>
                                     </div>
                                 </c:forEach>
