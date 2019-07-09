@@ -16,13 +16,20 @@ public interface UserService {
     User checkLoginAdmin(String userName, String password);
 
     //获得所有用户
-    List<User>  getAllUser();
+    public List<User>  getAllUser();
 
     //根据id查找用户
     User getUserByID(Integer uid);
+
+    //根据ID删用户
+    void deleteUser(Integer uid);
+
+    //根据新密码更新数据库中的用户密码
+    int updateUserPassword(User user);
 
     List<User> getTeachers();
 
     //依据名字寻找用户
     User getTeacherByName(String userName);
+
 }

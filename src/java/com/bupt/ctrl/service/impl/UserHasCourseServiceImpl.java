@@ -24,6 +24,16 @@ public class UserHasCourseServiceImpl implements UserHasCourseService{
         return userHasCourseMapper.selectByExample(userHasCourseExample);
     }
 
+    public void deleteUserHasCourse(Integer uid){
+        System.out.println("try delete");
+        UserHasCourseExample userHasCourseExample = new UserHasCourseExample();
+        UserHasCourseExample.Criteria criteria = userHasCourseExample.createCriteria();
+        criteria.andUserUserIdEqualTo(uid);
+        userHasCourseMapper.deleteByExample(userHasCourseExample);
+
+        System.out.println("sd");
+    }
+
     public Integer getStudentNumByCourse(Integer courseId){
         UserHasCourseExample userHasCourseExample = new UserHasCourseExample();
         UserHasCourseExample.Criteria criteria = userHasCourseExample.createCriteria();
