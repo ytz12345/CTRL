@@ -32,4 +32,13 @@ public class ChapterServiceImpl implements ChapterService {
         chapterMapper.insert(chapter);
         return 1;
     }
+
+    public int modifyChapterVideo(Chapter chapter){
+        ChapterExample chapterExample = new ChapterExample();
+        ChapterExample.Criteria criteria = chapterExample.createCriteria();
+
+        criteria.andChapterIdEqualTo(chapter.getChapterId());
+        chapterMapper.updateByExampleSelective(chapter,chapterExample);
+        return 1;
+    }
 }
