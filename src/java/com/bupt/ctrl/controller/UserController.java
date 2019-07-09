@@ -141,14 +141,26 @@ public class UserController {
 
     @RequestMapping("/deleteUser")
     public String deleteUser(@RequestParam("uid")Integer id,Model model){
-        System.out.println(id);
+        //System.out.println(id);
 
+        //修改被删号教师的课程为已下架
+        List<UserHasCourse> userHasCourses=userHasCourseService.getCourseByTeacher(id);
+        for(UserHasCourse attribute:userHasCourses){
+            //System.out.println(attribute.getCourseCourseId());
+            if(attribute.getUserTeachorstudy()==1){
+                Course course = new Course();
+                course.setCourseId(attribute.getCourseCourseId());
+                course.setCoursePass(2);
+                courseService.updataCoursePass(course);
+            }
+
+        }
         commentService.deleteCommentByUser(id);
         userHasChapterService.deleteUserHasChap(id);
         userHasCourseService.deleteUserHasCourse(id);
         userService.deleteUser(id);
         ModelAndView mav = new ModelAndView("redirect:/allUsers");
-        System.out.println(id);
+        //System.out.println(id);
         List<User> allUsers = userService.getAllUser();
         model.addAttribute("users", allUsers);
         return "admin-user";
