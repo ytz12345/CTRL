@@ -29,10 +29,10 @@ public interface CourseService {
     //修改课程名
     public int updateCourseName(Course course);
 
-    //修改课程名
+    //修改课程介绍
     public int updateCourseIntro(Course course);
 
-    //修改课程名
+    //修改课程封面
     public int updateCourseImage(Course course);
 
 }

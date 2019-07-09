@@ -192,11 +192,10 @@ public class CourseController {
 
         ModelAndView mav = new ModelAndView("更改失败");
 
-        String courseImagePath = request.getServletContext().getRealPath("/upload/images/");//路径修改为服务器地址！！！
-        String filename = newCourseImageFile.getOriginalFilename();//获取文件名
-        String imagePath = courseImagePath + filename;//图像上传完整路径
+        Course course = courseService.getCourseByID(course_id);
+        String imagePath = course.getCourseImage();
 
-        File imageFile = new File(courseImagePath,filename);
+        File imageFile = new File(imagePath);
         //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
 
         if(!imageFile.getParentFile().exists()){
@@ -205,15 +204,7 @@ public class CourseController {
 
         newCourseImageFile.transferTo(imageFile);
 
-        Course course = new Course();
-        course.setCourseId(course_id);
-        course.setCourseImage(imagePath);
-
-        int flag = 0;
-        flag = courseService.updateCourseImage(course);
-
-
-        if(flag == 1){
+        if(imageFile.exists()){
             String c_id = String.valueOf(course_id);//转化course_id类型
             String success = "singleCourse?course_id=" + c_id;
             mav.setViewName("redirect:/" + success);//调用singleCourse
