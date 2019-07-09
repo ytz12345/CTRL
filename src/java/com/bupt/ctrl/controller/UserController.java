@@ -140,12 +140,15 @@ public class UserController {
         User teacher = userService.getUserByID(teacher_id);
         model.addAttribute("teacher", teacher);
         List<UserHasCourse> userHasCourseList = userHasCourseService.getCourseByTeacher(teacher_id);
+        List<Course> teacherCourse = new ArrayList<>();
         System.out.println("teacher id: " + teacher_id);
         Integer allStudentNum = 0;
         for(int i = 0; i < userHasCourseList.size(); i ++){
             UserHasCourse userHasCourse = userHasCourseList.get(i);
             allStudentNum += userHasCourseService.getStudentNumByCourse(userHasCourse.getCourseCourseId());
+            teacherCourse.add(courseService.getCourseByID(userHasCourse.getCourseCourseId()));
         }
+        model.addAttribute("teacherCourse", teacherCourse);
         model.addAttribute("allStudentNum", allStudentNum);
         System.out.println("allStudentNum: " + allStudentNum);
         model.addAttribute("courseNum", userHasCourseService.getCourseNumByTeacher(teacher_id));
