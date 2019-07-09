@@ -58,6 +58,39 @@ public class CourseController {
         return "courses";
     }
 
+    @RequestMapping("/adminCourses")
+    public String adminAllCourses(Model model){
+        List<Course> allCourses = courseService.getAllCourse();
+        model.addAttribute("courses", allCourses);
+        return "admin-course";
+    }
+
+    //通过课程，重新上架
+    @RequestMapping("/coursePass")
+    public String CoursePass(@RequestParam("course_id")Integer id,Model model){
+        Course course = new Course();
+        course.setCourseId(id);
+        course.setCoursePass(1);
+        courseService.updataCoursePass(course);
+        List<Course> allCourses = courseService.getAllCourse();
+        model.addAttribute("courses", allCourses);
+        return "admin-course";
+    }
+
+    //不通过，下架课程
+    @RequestMapping("/courseDontPass")
+    public String CourseDontPass(@RequestParam("course_id")Integer id,Model model){
+        Course course = new Course();
+        course.setCourseId(id);
+        course.setCoursePass(2);
+        courseService.updataCoursePass(course);
+        List<Course> allCourses = courseService.getAllCourse();
+        model.addAttribute("courses", allCourses);
+        return "admin-course";
+    }
+
+    //删除课程
+
     //创建课程
     @RequestMapping(value = "/createCourse", method = RequestMethod.POST)
     public String createCourse(@RequestParam(value = "teacher_id")int teacher_id, @RequestParam("courseImageFile")CommonsMultipartFile courseImageFile, Course course, HttpServletRequest request) throws IOException {
