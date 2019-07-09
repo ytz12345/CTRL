@@ -237,8 +237,8 @@
             <!-- Sidebar navigation-->
             <nav class="sidebar-nav">
                 <ul id="sidebarnav" class="p-t-30">
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="admin-course.jsp" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Course</span></a></li>
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="admin-user.jsp" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">User</span></a></li>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="adminCourses" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Course</span></a></li>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="allUsers" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">User</span></a></li>
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="widgets.html" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Widgets</span></a></li>
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="tables.html" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Tables</span></a></li>
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="grid.html" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Full Width</span></a></li>
@@ -353,7 +353,7 @@
                                                 </c:choose>
                                             </td>
                                             <td>${each_user.userIntro}</td>
-                                            <td><a href=del?u_id=<s:property value="User_id"/>>Delete</a></td>
+                                            <td><a href="deleteUser?uid=${each_user.userId}">Delete</a></td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>

@@ -2,6 +2,9 @@ package com.bupt.ctrl.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.bupt.ctrl.model.Comment;
+import com.bupt.ctrl.service.CommentService;
+import com.bupt.ctrl.service.UserHasChapterService;
 import com.bupt.ctrl.model.Course;
 import com.bupt.ctrl.model.User;
 import com.bupt.ctrl.model.UserHasCourse;
@@ -33,13 +36,15 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
     @Autowired
     private UserHasCourseService userHasCourseService;
-
+    @Autowired
+    private UserHasChapterService userHasChapterService;
+    @Autowired
+    private CommentService commentService;
     @Autowired
     private CourseService courseService;
-
+  
     //注册
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
@@ -144,13 +149,20 @@ public class UserController {
     public String getAllCourses(Model model) {
         List<User> allUsers = userService.getAllUser();
         model.addAttribute("users", allUsers);
+        return "admin-user";
+    }
 
-        System.out.println("Yes, come here!");
-         /*System.out.println(allCourses.size());
-        for (Course i : allCourses) {
-            System.out.println(i.toString());
-        }
-        */
+    @RequestMapping("/deleteUser")
+    public String deleteUser(@RequestParam("uid")Integer id,Model model){
+        System.out.println(id);
+        commentService.deleteCommentByUser(id);
+        userHasChapterService.deleteUserHasChap(id);
+        userHasCourseService.deleteUserHasCourse(id);
+        userService.deleteUser(id);
+        ModelAndView mav = new ModelAndView("redirect:/allUsers");
+        System.out.println(id);
+        List<User> allUsers = userService.getAllUser();
+        model.addAttribute("users", allUsers);
         return "admin-user";
     }
 
@@ -178,15 +190,23 @@ public class UserController {
         User teacher = userService.getUserByID(teacher_id);
         model.addAttribute("teacher", teacher);
         List<UserHasCourse> userHasCourseList = userHasCourseService.getCourseByTeacher(teacher_id);
+        List<Course> teacherCourse = new ArrayList<>();
         System.out.println("teacher id: " + teacher_id);
         Integer allStudentNum = 0;
+        Integer courseNum = 0;
         for(int i = 0; i < userHasCourseList.size(); i ++){
             UserHasCourse userHasCourse = userHasCourseList.get(i);
-            allStudentNum += userHasCourseService.getStudentNumByCourse(userHasCourse.getCourseCourseId());
+            Course course = courseService.getCourseByID(userHasCourse.getCourseCourseId());
+            if(course.getCoursePass() == 1){
+                allStudentNum += userHasCourseService.getStudentNumByCourse(course.getCourseId());
+                courseNum ++;
+                teacherCourse.add(course);
+            }
         }
+        model.addAttribute("teacherCourse", teacherCourse);
         model.addAttribute("allStudentNum", allStudentNum);
         System.out.println("allStudentNum: " + allStudentNum);
-        model.addAttribute("courseNum", userHasCourseService.getCourseNumByTeacher(teacher_id));
+        model.addAttribute("courseNum", courseNum);
         return "teacher";
     }
 }
