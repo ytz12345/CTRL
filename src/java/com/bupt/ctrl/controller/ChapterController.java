@@ -1,9 +1,6 @@
 package com.bupt.ctrl.controller;
 
-import com.bupt.ctrl.model.Chapter;
-import com.bupt.ctrl.model.Comment;
-import com.bupt.ctrl.model.Course;
-import com.bupt.ctrl.model.User;
+import com.bupt.ctrl.model.*;
 import com.bupt.ctrl.service.ChapterService;
 import com.bupt.ctrl.service.CommentService;
 import com.bupt.ctrl.service.CourseService;
@@ -12,8 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 @Controller
@@ -67,5 +70,38 @@ public class ChapterController {
         return "single-chapter";
     }
 
+    //创建课程
+    @RequestMapping(value = "/addChapter", method = RequestMethod.POST)
+    public ModelAndView addChapter(@RequestParam(value = "course_id")int course_id, @RequestParam("chapterVideoFile") CommonsMultipartFile chapterVideoFile, Chapter chapter, HttpServletRequest request) throws IOException {
+
+        ModelAndView mav = new ModelAndView("添加章节失败");
+
+        String courseImagePath = request.getServletContext().getRealPath("/upload/videos/");//路径修改为服务器地址！！！
+        String filename = chapterVideoFile.getOriginalFilename();//获取文件名
+        String videoPath = courseImagePath + filename;//图像上传完整路径
+
+        File videoFile = new File(courseImagePath,filename);
+        //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
+
+        if(!videoFile.getParentFile().exists()){
+            videoFile.getParentFile().mkdirs();
+        }
+
+        chapterVideoFile.transferTo(videoFile);
+
+        chapter.setCourseCourseId(course_id);
+        chapter.setChapterVideo(videoPath);
+
+        int flag = 0;
+        flag =  chapterService.addChapter(chapter);
+
+        if(flag == 1){
+            String c_id = String.valueOf(course_id);//转化course_id类型
+            String success = "singleCourse?course_id=" + c_id;
+            mav.setViewName("redirect:/" + success);//调用singleCourse
+            return mav;
+        }
+        return mav;
+    }
 
 }

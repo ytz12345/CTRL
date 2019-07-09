@@ -6,6 +6,8 @@ import com.bupt.ctrl.model.User;
 import com.bupt.ctrl.model.UserHasCourse;
 import com.bupt.ctrl.service.ChapterService;
 import com.bupt.ctrl.service.CourseService;
+import com.bupt.ctrl.service.UserHasCourseService;
+import com.bupt.ctrl.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
 
@@ -29,11 +32,22 @@ public class CourseController {
     CourseService courseService;
     @Autowired
     ChapterService chapterService;
+    @Autowired
+    UserService userService;
+    @Autowired
+    UserHasCourseService userHasCourseService;
 
     @RequestMapping("/allCourses")
     public String getAllCourses(Model model) {
         List<Course> allCourses = courseService.getAllPass();
-        model.addAttribute("courses", allCourses);
+        List<CourseAndTeacher> courseAndTeacherList = new ArrayList<>();
+        for(int i = 0; i < allCourses.size(); i ++){
+            Course course = allCourses.get(i);
+            User teacher  = userService.getTeacherByName(course.getCourseTeacher());
+            CourseAndTeacher courseAndTeacher = new CourseAndTeacher(course, teacher);
+            courseAndTeacherList.add(courseAndTeacher);
+        }
+        model.addAttribute("courseAndTeacher", courseAndTeacherList);
         /*
         System.out.println("Yes, come here!");
         System.out.println(allCourses.size());
@@ -127,7 +141,12 @@ public class CourseController {
         }else{
             tos = courseService.teachOrStudy(course_id, user.getUserId());
         }
-        
+        User teacher  = userService.getTeacherByName(course.getCourseTeacher());
+        model.addAttribute("teacher", teacher);
+
+        Integer studentNum = userHasCourseService.getStudentNumByCourse(course_id);
+        model.addAttribute("studentNum", studentNum);
+
         model.addAttribute("tos",tos);
         return "single-courses";
     }
@@ -164,6 +183,7 @@ public class CourseController {
         int flag = 0;
 
         Course course = new Course();
+
         course.setCourseIntro(newCourseIntro);
         course.setCourseId(course_id);
         flag = courseService.updateCourseIntro(course);
@@ -177,5 +197,42 @@ public class CourseController {
 
         return mav;
     }
+
+    //更改课程封面
+    @RequestMapping(value = "/modifyCourseImage", method = RequestMethod.POST)
+    public ModelAndView modifyCourseImage(@RequestParam(value = "course_id")int course_id, @RequestParam("newCourseImage")CommonsMultipartFile newCourseImageFile, HttpServletRequest request) throws IOException {
+
+        ModelAndView mav = new ModelAndView("更改失败");
+
+        String courseImagePath = request.getServletContext().getRealPath("/upload/images/");//路径修改为服务器地址！！！
+        String filename = newCourseImageFile.getOriginalFilename();//获取文件名
+        String imagePath = courseImagePath + filename;//图像上传完整路径
+
+        File imageFile = new File(courseImagePath,filename);
+        //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
+
+        if(!imageFile.getParentFile().exists()){
+            imageFile.getParentFile().mkdirs();
+        }
+
+        newCourseImageFile.transferTo(imageFile);
+
+        Course course = new Course();
+        course.setCourseId(course_id);
+        course.setCourseImage(imagePath);
+
+        int flag = 0;
+        flag = courseService.updateCourseImage(course);
+
+
+        if(flag == 1){
+            String c_id = String.valueOf(course_id);//转化course_id类型
+            String success = "singleCourse?course_id=" + c_id;
+            mav.setViewName("redirect:/" + success);//调用singleCourse
+            return mav;
+        }
+        return mav;
+    }
+
 
 }

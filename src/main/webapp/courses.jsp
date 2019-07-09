@@ -47,8 +47,8 @@
                     <div class="col-3 col-lg-9 flex justify-content-end align-content-center">
                         <nav class="site-navigation flex justify-content-end align-items-center">
                             <ul class="flex flex-column flex-lg-row justify-content-lg-end align-content-center">
-                                <li><a href="index.jsp">Home</a></li>
-                                <li><a href="about.jsp">About</a></li>
+                                <li><a href="index">Home</a></li>
+                                <li><a href="about">About</a></li>
                                 <li class="current-menu-item"><a href="allCourses">Courses</a></li>
                                 <li><a href="https://weibo.com/u/5966988917?is_all=1">weibo</a></li>
                             </ul>
@@ -99,21 +99,21 @@
         <div class="col-12 col-lg-12">
             <div class="featured-courses courses-wrap">
                 <div class="row mx-m-25">
-                    <c:forEach items="${courses}" var="course">
+                    <c:forEach items="${courseAndTeacher}" var="courseAndTeacher">
                         <div class="col-12 col-md-4 px-25">
                             <div class="course-content">
                                 <figure class="course-thumbnail">
-                                    <a href="singleCourse?course_id=${course.courseId}"><img src="${course.courseImage}" alt=""></a>
+                                    <a href="singleCourse?course_id=${courseAndTeacher.course.courseId}"><img src="${courseAndTeacher.course.courseImage}" alt=""></a>
                                 </figure>
 
                                 <div class="course-content-wrap">
                                     <header class="entry-header">
-                                        <h2 class="entry-title"><a href="singleCourse?course_id=${course.courseId}">${course.courseName}</a></h2>
+                                        <h2 class="entry-title"><a href="singleCourse?course_id=${courseAndTeacher.course.courseId}">${courseAndTeacher.course.courseName}</a></h2>
 
                                         <div class="entry-meta flex flex-wrap align-items-center">
-                                            <div class="course-author"><a href="#">${course.courseTeacher}</a></div>
+                                            <div class="course-author"><a href="teacher?teacher_id=${courseAndTeacher.teacher.userId}">${courseAndTeacher.course.courseTeacher}</a></div>
 
-                                            <div class="course-date">${course.courseDate}</div>
+                                            <div class="course-date">${courseAndTeacher.course.courseDate}</div>
                                         </div>
                                     </header>
 
