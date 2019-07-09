@@ -35,5 +35,9 @@ public interface CourseService {
     //修改课程名
     public int updateCourseIntro(Course course);
 
-    int updataCoursePass(Course course,Integer Course_Pass);
+    //更新审核状态
+    int updataCoursePass(Course course);
+
+    //删除课程
+    void deleteCourse(Integer course_id);
 }

@@ -104,12 +104,18 @@ public class CourseServiceImpl implements CourseService {
         return 1;
     }
 
-    public int updataCoursePass(Course course,Integer Course_Pass){
+    public int updataCoursePass(Course course){
         CourseExample courseExample = new CourseExample();
         CourseExample.Criteria criteria = courseExample.createCriteria();
-
         criteria.andCourseIdEqualTo(course.getCourseId());
         courseMapper.updateByExampleSelective(course,courseExample);
         return 1;
+    }
+
+    public void deleteCourse(Integer course_id){
+        CourseExample courseExample = new CourseExample();
+        CourseExample.Criteria criteria = courseExample.createCriteria();
+        criteria.andCourseIdEqualTo(course_id);
+        courseMapper.deleteByExample(courseExample);
     }
 }

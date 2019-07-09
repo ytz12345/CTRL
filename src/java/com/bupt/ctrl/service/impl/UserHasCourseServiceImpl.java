@@ -29,6 +29,7 @@ public class UserHasCourseServiceImpl implements UserHasCourseService{
         UserHasCourseExample.Criteria criteria = userHasCourseExample.createCriteria();
         criteria.andUserUserIdEqualTo(uid);
         userHasCourseMapper.deleteByExample(userHasCourseExample);
+
         System.out.println("sd");
     }
 

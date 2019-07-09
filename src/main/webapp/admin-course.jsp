@@ -362,7 +362,7 @@
                                                         <a href="courseDontPass?course_id=${each_course.courseId}">下架</a>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <a href="courseDelete?course_id=${each_course.courseId}">删除</a>
+                                                        <a href="coursePass?course_id=${each_course.courseId}">重新上架</a>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </td>
