@@ -1492,7 +1492,7 @@
                                         <span class="public-tip"><i class=""></i></span>
                                     </div>
                                     <div class="modal-footer">
-                                        <input class="btn btn-primary" id="register-btn" type="submit" value="重置">
+                                        <input class="btn btn-primary" id="register-btn" type="submit" value="提交">
                                     </div>
                                 </form>
 
