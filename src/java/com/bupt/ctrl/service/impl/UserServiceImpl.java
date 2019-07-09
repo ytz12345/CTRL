@@ -107,5 +107,6 @@ public class UserServiceImpl implements UserService{
         userMapper.updateByExampleSelective(user,userExample);
         return 1;
     }
+
 }
 

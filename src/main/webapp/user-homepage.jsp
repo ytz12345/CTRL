@@ -125,7 +125,7 @@
 
                                         <!-- 我的课程 -->
                                         <li class="nav-item open-up navItem" data-step="1" data-highlightclass="" data-intro="欢迎进入我的课程，这里汇集了您所有参加和收藏的课程。">
-                                            <a class="nav-text current" href="user-homepage.jsp"><i class="icon-nav icon-course"></i>我的课程</a>
+                                            <a class="nav-text current" href="getUserCourses?uid=${sessionScope.user.userId}"><i class="icon-nav icon-course"></i>我的课程</a>
                    <%--                         <ul class="sub-nav">
                                                 <li class="nav-item">
                                                     <a class="sub-nav-text current" content="myCourse" href="#">学习的课程</a>
@@ -392,10 +392,10 @@
                                                             <!-- 随到随学 -->
 
 
-                                                            <div class="link-group">
+                                                            <%--<div class="link-group">
                                                                 <a class="link-action courseDetail" href="singleCourse?course_id=${userCoursePass.courseId}">课程详情</a>
 
-                                                            </div>
+                                                            </div>--%>
                                                         </div>
 
                                                         <!-- 学期学习 -->
