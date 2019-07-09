@@ -6,6 +6,8 @@ import com.bupt.ctrl.model.User;
 import com.bupt.ctrl.model.UserHasCourse;
 import com.bupt.ctrl.service.ChapterService;
 import com.bupt.ctrl.service.CourseService;
+import com.bupt.ctrl.service.UserHasCourseService;
+import com.bupt.ctrl.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
 
@@ -29,11 +32,22 @@ public class CourseController {
     CourseService courseService;
     @Autowired
     ChapterService chapterService;
+    @Autowired
+    UserService userService;
+    @Autowired
+    UserHasCourseService userHasCourseService;
 
     @RequestMapping("/allCourses")
     public String getAllCourses(Model model) {
         List<Course> allCourses = courseService.getAllPass();
-        model.addAttribute("courses", allCourses);
+        List<CourseAndTeacher> courseAndTeacherList = new ArrayList<>();
+        for(int i = 0; i < allCourses.size(); i ++){
+            Course course = allCourses.get(i);
+            User teacher  = userService.getTeacherByName(course.getCourseTeacher());
+            CourseAndTeacher courseAndTeacher = new CourseAndTeacher(course, teacher);
+            courseAndTeacherList.add(courseAndTeacher);
+        }
+        model.addAttribute("courseAndTeacher", courseAndTeacherList);
         /*
         System.out.println("Yes, come here!");
         System.out.println(allCourses.size());
@@ -127,7 +141,12 @@ public class CourseController {
         }else{
             tos = courseService.teachOrStudy(course_id, user.getUserId());
         }
-        
+        User teacher  = userService.getTeacherByName(course.getCourseTeacher());
+        model.addAttribute("teacher", teacher);
+
+        Integer studentNum = userHasCourseService.getStudentNumByCourse(course_id);
+        model.addAttribute("studentNum", studentNum);
+
         model.addAttribute("tos",tos);
         return "single-courses";
     }

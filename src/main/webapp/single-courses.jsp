@@ -80,8 +80,8 @@
                     <div class="col-3 col-lg-9 flex justify-content-end align-content-center">
                         <nav class="site-navigation flex justify-content-end align-items-center">
                             <ul class="flex flex-column flex-lg-row justify-content-lg-end align-content-center">
-                                <li><a href="index.jsp">Home</a></li>
-                                <li><a href="about.jsp">About</a></li>
+                                <li><a href="index">Home</a></li>
+                                <li><a href="about">About</a></li>
                                 <li><a href="allCourses">Courses</a></li>
                                 <li><a href="https://weibo.com/u/5966988917?is_all=1">weibo</a></li>
                             </ul>
@@ -187,13 +187,13 @@
 
                         <div class="author-wrap">
                             <label class="m-0">Teacher</label>
-                            <div class="author-name"><a href="#">${course.courseTeacher}</a></div>
+                            <div class="author-name"><a href="teacher?teacher_id=${teacher.userId}">${course.courseTeacher}</a></div>
                         </div><!-- .author-wrap -->
                     </div><!-- .course-author -->
 
                     <div class="course-students mt-3">
                         <label class="m-0">Student</label>
-                        <div class="author-name"><a href="#">26 (REGISTERED)</a></div>
+                        <div class="author-name"><a href="#">${studentNum} (REGISTERED)</a></div>
 
                     </div><!-- .course-students -->
                     <div class="buy-course mt-3">

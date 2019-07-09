@@ -2,7 +2,11 @@ package com.bupt.ctrl.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.bupt.ctrl.model.Course;
 import com.bupt.ctrl.model.User;
+import com.bupt.ctrl.model.UserHasCourse;
+import com.bupt.ctrl.service.CourseService;
+import com.bupt.ctrl.service.UserHasCourseService;
 import com.bupt.ctrl.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +33,12 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserHasCourseService userHasCourseService;
+
+    @Autowired
+    private CourseService courseService;
 
     //注册
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -123,5 +133,22 @@ public class UserController {
         }else{
             return mav;
         }
+    }
+
+    @RequestMapping("/teacher")
+    public String getTeacher(@RequestParam(value="teacher_id") Integer teacher_id, Model model){
+        User teacher = userService.getUserByID(teacher_id);
+        model.addAttribute("teacher", teacher);
+        List<UserHasCourse> userHasCourseList = userHasCourseService.getCourseByTeacher(teacher_id);
+        System.out.println("teacher id: " + teacher_id);
+        Integer allStudentNum = 0;
+        for(int i = 0; i < userHasCourseList.size(); i ++){
+            UserHasCourse userHasCourse = userHasCourseList.get(i);
+            allStudentNum += userHasCourseService.getStudentNumByCourse(userHasCourse.getCourseCourseId());
+        }
+        model.addAttribute("allStudentNum", allStudentNum);
+        System.out.println("allStudentNum: " + allStudentNum);
+        model.addAttribute("courseNum", userHasCourseService.getCourseNumByTeacher(teacher_id));
+        return "teacher";
     }
 }

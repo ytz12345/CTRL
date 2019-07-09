@@ -1,4 +1,3 @@
-<%@ page import="dao.UserDao" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -68,8 +67,8 @@
                     <div class="col-3 col-lg-9 flex justify-content-end align-content-center">
                         <nav class="site-navigation flex justify-content-end align-items-center">
                             <ul class="flex flex-column flex-lg-row justify-content-lg-end align-content-center">
-                                <li class="current-menu-item"><a href="index.jsp">Home</a></li>
-                                <li><a href="about.jsp">About</a></li>
+                                <li class="current-menu-item"><a href="index">Home</a></li>
+                                <li><a href="about">About</a></li>
                                 <li><a href="allCourses">Courses</a></li>
                                 <li><a href="https://weibo.com/u/5966988917?is_all=1">weibo</a></li>
                             </ul>
