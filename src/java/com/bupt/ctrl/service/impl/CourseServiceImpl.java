@@ -30,8 +30,10 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     //将课程信息插入course表
-    public void createCourse(Course course){
+    public int createCourse(Course course){
+
         courseMapper.insert(course);
+        return 1;
     }
 
     public List<Course> getCourseByName(String str) {
@@ -106,4 +108,5 @@ public class CourseServiceImpl implements CourseService {
         courseMapper.updateByExampleSelective(course,courseExample);
         return 1;
     }
+
 }

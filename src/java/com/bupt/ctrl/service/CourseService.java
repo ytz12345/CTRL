@@ -12,7 +12,7 @@ public interface CourseService {
     public List<Course>  getAllPass();
 
     //创建课程
-    public void createCourse(Course course);
+    public int createCourse(Course course);
 
     //根据名字匹配来获得课程，用于搜索
     public List<Course> getCourseByName(String str);
@@ -29,9 +29,10 @@ public interface CourseService {
     //修改课程名
     public int updateCourseName(Course course);
 
-    //修改课程名
+    //修改课程介绍
     public int updateCourseIntro(Course course);
 
-    //修改课程名
+    //修改课程封面
     public int updateCourseImage(Course course);
+
 }

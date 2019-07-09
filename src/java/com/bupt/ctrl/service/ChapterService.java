@@ -14,4 +14,8 @@ public interface ChapterService {
 
     //增加章节
     public int addChapter(Chapter chapter);
+
+    //修改章节视频
+    int modifyChapterVideo(Chapter chapter);
+
 }
