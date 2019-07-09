@@ -44,6 +44,20 @@ public class CourseController {
         return "courses";
     }
 
+    @RequestMapping("/adminCourses")
+    public String adminAllCourses(Model model){
+        List<Course> allCourses = courseService.getAllCourse();
+        model.addAttribute("courses", allCourses);
+        return "admin-course";
+    }
+
+    @RequestMapping("/coursePass")
+    public String CoursePass(@RequestParam("course_id")Integer id,Model model){
+
+        List<Course> allCourses = courseService.getAllCourse();
+        model.addAttribute("courses", allCourses);
+        return "admin-course";
+    }
     //创建课程
     @RequestMapping(value = "/createCourse", method = RequestMethod.POST)
     public String createCourse(@RequestParam(value = "teacher_id")int teacher_id, @RequestParam("courseImageFile")CommonsMultipartFile courseImageFile, Course course, HttpServletRequest request) throws IOException {

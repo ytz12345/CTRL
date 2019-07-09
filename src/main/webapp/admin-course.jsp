@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -6,7 +7,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">h
 
@@ -237,8 +237,8 @@
             <!-- Sidebar navigation-->
             <nav class="sidebar-nav">
                 <ul id="sidebarnav" class="p-t-30">
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="admin-course.jsp" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Course</span></a></li>
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="admin-user.jsp" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">User</span></a></li>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="adminCourses" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Course</span></a></li>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="allUsers" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">User</span></a></li>
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="widgets.html" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Widgets</span></a></li>
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="tables.html" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Tables</span></a></li>
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="grid.html" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Full Width</span></a></li>
@@ -339,40 +339,35 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <s:iterator value="coursesList" var="clist" status="status">
+                                    <c:forEach items="${courses}" var="each_course">
                                         <tr>
-                                            <td><s:property value="Course_Id"/></td>
-                                            <td><s:property value="Course_Name"/></td>
-
-                                            <s:if test="#clist.Course_pass == 0">
-                                                <td>待审核</td>
-                                            </s:if>
-                                            <s:elseif test="#clist.Course_pass == 1">
-                                                <td>已通过</td>
-                                            </s:elseif>
-                                            <s:else>
-                                                <td>未通过</td>
-                                            </s:else>
-
-                                            <td><s:property value="Course_Teacher"/></td>
-                                            <td><s:property value="Course_Intro"/></td>
-
-                                            <s:if test="#clist.Course_pass == 0">
-                                                <td>
-                                                    <a href="coursePass?c_id=<s:property value="Course_Id"/>">通过</a>
-                                                    <a href="courseDontPass?c_id=<s:property value="Course_Id"/>" style="margin-left: 5px">拒绝</a>
-                                                </td>
-                                            </s:if>
-                                            <s:elseif test="#clist.Course_pass == 1">
-                                                <td><a href="courseDelete?c_id=<s:property value="Course_Id"/>">下架</a></td>
-                                            </s:elseif>
-                                            <s:else>
-                                                <td><a href="courseDelete?c_id=<s:property value="Course_Id"/>">删除</a></td>
-                                            </s:else>
-
+                                            <td>${each_course.courseId}</td>
+                                            <td>${each_course.courseName}</td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${each_course.coursePass==0}">待审核</c:when>
+                                                    <c:when test="${each_course.coursePass==1}">通过</c:when>
+                                                    <c:otherwise>未通过</c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td>${each_course.courseTeacher}</td>
+                                            <td>${each_course.courseIntro}</td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${each_course.coursePass==0}">
+                                                        <a href="coursePass?course_id=${each_course.courseId}">通过</a>
+                                                        <a href="courseDontPass?course_id=${each_course.courseId}" style="margin-left: 5px">拒绝</a>
+                                                    </c:when>
+                                                    <c:when test="${each_course.coursePass==1}">
+                                                        <a href="courseDontPass?course_id=${each_course.courseId}">下架</a>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href="courseDelete?course_id=${each_course.courseId}">删除</a>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
                                         </tr>
-                                    </s:iterator>
-
+                                    </c:forEach>
                                     </tbody>
                                     <tfoot>
                                     <tr>

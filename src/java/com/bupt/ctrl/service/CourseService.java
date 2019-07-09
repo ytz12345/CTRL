@@ -11,6 +11,9 @@ public interface CourseService {
     //获得所有被审核通过的课程
     public List<Course>  getAllPass();
 
+    //获得所有课程
+    List<Course>  getAllCourse();
+
     //创建课程
     public void createCourse(Course course);
 
@@ -31,4 +34,6 @@ public interface CourseService {
 
     //修改课程名
     public int updateCourseIntro(Course course);
+
+    int updataCoursePass(Course course,Integer Course_Pass);
 }
