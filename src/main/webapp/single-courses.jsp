@@ -204,7 +204,7 @@
                             <c:when test="${tos == 100}">
                                 <a class="btn" href="addToCart?course_id=${course.courseId}&student_id=${sessionScope.user.userId}">ADD to cart</a>
                             </c:when>
-                            <c:when test="${sessionScope.user.userIdentity == 1 and tos == 0}">
+                            <c:when test="${tos == 0}">
                                 <a class="btn" href="#">学习中</a>
                             </c:when>
                             <c:otherwise>
@@ -264,7 +264,7 @@
 
                                 <!-- 模态框主体 -->
                                 <div class="modal-body">
-                                    <form action="modifyCourseImage?modify_id=${course.courseId}" method="post" role="form" enctype="multipart/form-data" >
+                                    <form action="modifyCourseImage?course_id=${course.courseId}" method="post" role="form" enctype="multipart/form-data" >
                                         <div class="form-group">
                                             <input type="file" name="newCourseImage" id="course-img-modify"/>
                                         </div>
@@ -335,23 +335,23 @@
 
                                     <!-- 模态框主体 -->
                                     <div class="modal-body">
-                                        <form action="addChapter?add_id=${course.courseId}" method="post" enctype="multipart/form-data" role="form">
+                                        <form action="addChapter?course_id=${course.courseId}" method="post" enctype="multipart/form-data" role="form">
                                             <div class="form-group">
                                                 <label class="col-sm-4 control-label">章节名称</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" name="chapter.Chapter_Name" class="form-control" placeholder="请输入课程名称">
+                                                    <input type="text" name="chapterName" class="form-control" placeholder="请输入课程名称">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-4 control-label">章节数</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" name="chapter.Chapter_Num" class="form-control" placeholder="请输入课程名称">
+                                                    <input type="text" name="chapterNum" class="form-control" placeholder="请输入课程名称">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-4 control-label" style="padding-top: 15px">视频</label>
                                                 <div class="col-sm-6">
-                                                    <input type="file" name="chapterVideo"/>
+                                                    <input type="file" name="chapterVideoFile"/>
                                                 </div>
                                             </div>
                                             <div class="form-group">

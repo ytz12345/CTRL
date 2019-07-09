@@ -11,4 +11,7 @@ public interface ChapterService {
 
     //根据章节id获得相应章节
     public Chapter getChapter(Integer chapter_id);
+
+    //增加章节
+    public int addChapter(Chapter chapter);
 }
