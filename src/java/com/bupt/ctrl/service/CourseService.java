@@ -32,4 +32,6 @@ public interface CourseService {
     //修改课程名
     public int updateCourseIntro(Course course);
 
+    //修改课程名
+    public int updateCourseImage(Course course);
 }
