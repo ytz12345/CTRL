@@ -7,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en">h
 
@@ -298,12 +299,12 @@
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-12 d-flex no-block align-items-center">
-                    <a href="displayCourses" style="color: black"><h4 class="page-title">课程管理</h4></a>
+                    <a href="#" style="color: black"><h4 class="page-title">课程管理</h4></a>
                     <div class="ml-auto text-right">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">User</li>
+                                <li class="breadcrumb-item active" aria-current="page">Courses</li>
                             </ol>
                         </nav>
                     </div>
@@ -428,7 +429,10 @@
     /****************************************
      *       Basic Table                   *
      ****************************************/
-    $('#courses_config').DataTable();
+    $('#courses_config').DataTable({
+        bPaginate: false,
+        "bStateSave": true,
+    });
 </script>
 
 </body>

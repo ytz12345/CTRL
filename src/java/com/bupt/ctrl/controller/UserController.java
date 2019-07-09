@@ -142,6 +142,7 @@ public class UserController {
     @RequestMapping("/deleteUser")
     public String deleteUser(@RequestParam("uid")Integer id,Model model){
         System.out.println(id);
+
         commentService.deleteCommentByUser(id);
         userHasChapterService.deleteUserHasChap(id);
         userHasCourseService.deleteUserHasCourse(id);

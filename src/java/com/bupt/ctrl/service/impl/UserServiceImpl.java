@@ -68,10 +68,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void deleteUser(Integer uid){
+    public void deleteUser(Integer uid) {
         System.out.println("try delete");
         userMapper.deleteByPrimaryKey(uid);
         System.out.println("sus");
+    }
 
     public List<User> getTeachers(){
         UserExample userExample = new UserExample();
