@@ -14,12 +14,15 @@ public interface UserService {
 
     //检验admin登录
     User checkLoginAdmin(String userName, String password);
-
+    
     //获得所有用户
-    List<User>  getAllUser();
-
+    public List<User>  getAllUser(); 
+   
     //根据id查找用户
     User getUserByID(Integer uid);
+
+    //根据新密码更新数据库中的用户密码
+    int updateUserPassword(User user);
 
     List<User> getTeachers();
 
