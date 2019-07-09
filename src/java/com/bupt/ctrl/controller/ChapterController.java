@@ -75,7 +75,7 @@ public class ChapterController {
     public ModelAndView addChapter(@RequestParam(value = "course_id")int course_id, @RequestParam("chapterVideoFile") CommonsMultipartFile chapterVideoFile, Chapter chapter, HttpServletRequest request) throws IOException {
 
         ModelAndView mav = new ModelAndView("添加章节失败");
-
+      
         String chapterVideoPath = request.getServletContext().getRealPath("/upload/videos/");//路径修改为服务器地址！！！
         String filename = chapterVideoFile.getOriginalFilename();//获取文件名
 
@@ -93,6 +93,7 @@ public class ChapterController {
         //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
 
         //判断目标文件夹是否存在，不存在则创建
+
         if(!videoFile.getParentFile().exists()){
             videoFile.getParentFile().mkdirs();
         }
@@ -102,6 +103,7 @@ public class ChapterController {
         if(flag == 1 && videoFile.exists()){
             chapter.setChapterVideo(videoPath);
             chapterService.modifyChapterVideo(chapter);
+
             String c_id = String.valueOf(course_id);//转化course_id类型
             String success = "singleCourse?course_id=" + c_id;
             mav.setViewName("redirect:/" + success);//调用singleCourse

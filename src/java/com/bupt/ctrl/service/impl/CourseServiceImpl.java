@@ -108,5 +108,4 @@ public class CourseServiceImpl implements CourseService {
         courseMapper.updateByExampleSelective(course,courseExample);
         return 1;
     }
-
 }

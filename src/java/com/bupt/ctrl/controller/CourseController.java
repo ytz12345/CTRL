@@ -215,6 +215,7 @@ public class CourseController {
         String imagePath = course.getCourseImage();
 
         File imageFile = new File(imagePath);
+
         //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
 
         if(!imageFile.getParentFile().exists()){
@@ -224,6 +225,7 @@ public class CourseController {
         newCourseImageFile.transferTo(imageFile);
 
         if(imageFile.exists()){
+
             String c_id = String.valueOf(course_id);//转化course_id类型
             String success = "singleCourse?course_id=" + c_id;
             mav.setViewName("redirect:/" + success);//调用singleCourse
