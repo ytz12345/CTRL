@@ -123,9 +123,15 @@
         <div class="row">
             <div class="col-12 offset-lg-1 col-lg-10">
                 <div class="featured-image">
-                    <video width="940" height="530" controls="controls">
-                        <source src="${chapter.chapterVideo}" type="video/mp4" >
+                    <video width="940" height="530" controls="controls" id="video" autoplay="autoplay">
+                        <source src="${chapter.chapterVideo}#t=4" type="video/mp4" >
+                        <%
+
+                        %>
                     </video>
+                    <button onclick="${userHasChapter.userHasLearned}" type="button">设置播放位置为 ${userHasChapter.userHasLearned} 秒</button>
+<%--                    setCurTime()--%>
+
                     <!-- 修改为视频 -->
                 </div><!-- .featured-image -->
             </div><!-- .col -->
@@ -379,6 +385,16 @@
     <script type='text/javascript' src='js/masonry.pkgd.min.js'></script>
     <script type='text/javascript' src='js/jquery.collapsible.min.js'></script>
     <script type='text/javascript' src='js/custom.js'></script>
-
+    <script>
+        var vid = document.getElementById("video");
+        vid.ontimeupdate = function() {timeUpdate()}
+        function timeUpdate() {
+            document.getElementById('time').innerHTML = vid.currentTime;
+        }
+        function setCurTime()
+        {
+            vid.currentTime = 5;
+        }
+    </script>
 </body>
 </html>
