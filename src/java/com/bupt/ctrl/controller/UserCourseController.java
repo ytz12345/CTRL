@@ -1,6 +1,7 @@
 package com.bupt.ctrl.controller;
 
 import com.bupt.ctrl.model.Course;
+import com.bupt.ctrl.model.User;
 import com.bupt.ctrl.model.UserHasCourse;
 import com.bupt.ctrl.service.CourseService;
 import com.bupt.ctrl.service.UserHasCourseService;
@@ -32,24 +33,29 @@ public class UserCourseController {
 
         List<UserHasCourse> userHasCourses = userHasCourseService.getCourseById(user_id);
         //model.addAttribute("userHasCourses", userHasCourses);
-        List<Course> courseList= new ArrayList();
-        List<Course> courseListComing= new ArrayList();
-        List<Course> courseListPass= new ArrayList();
+        List<CourseAndTeacher> courseList= new ArrayList();
+        List<CourseAndTeacher> courseListComing= new ArrayList();
+        List<CourseAndTeacher> courseListPass= new ArrayList();
         for(int i=0;i<userHasCourses.size();i++) {
-            Course temp_courseList = courseService.getCourseByID(userHasCourses.get(i).getCourseCourseId());
+            Course course = courseService.getCourseByID(userHasCourses.get(i).getCourseCourseId());
+            User teacher = userHasCourseService.getTeacherByCourse(course);
+            if (teacher == null) continue;
+            CourseAndTeacher courseAndTeacher = new CourseAndTeacher(course, teacher);
             //已申请未通过课程
-            if(temp_courseList.getCoursePass()==0)
-                courseListComing.add(temp_courseList);
+            if(course.getCoursePass()==0)
+                courseListComing.add(courseAndTeacher);
             //通过课程
-            if(temp_courseList.getCoursePass()==1)
-                courseList.add(temp_courseList);
+            if(course.getCoursePass()==1)
+                courseList.add(courseAndTeacher);
             //已申请被拒绝课程
-            if(temp_courseList.getCoursePass()==2)
-                courseListPass.add(temp_courseList);
+            if(course.getCoursePass()==2)
+                courseListPass.add(courseAndTeacher);
         }
         model.addAttribute("userCourses",courseList);
         model.addAttribute("userCoursesComing",courseListComing);
         model.addAttribute("userCoursesPass",courseListPass);
+        System.out.println("userHasCourses:"+userHasCourses);
+        System.out.println("courseListPass:"+courseListPass);
 
         return "user-homepage";
     }
