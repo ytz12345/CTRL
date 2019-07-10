@@ -421,7 +421,11 @@
     /****************************************
      *       Basic Table                   *
      ****************************************/
-    $('#zero_config').DataTable();
+    $('#zero_config').DataTable({
+        //pageLength:15
+        bPaginate: false,
+        "bStateSave": true,
+    });
 </script>
 
 </body>
