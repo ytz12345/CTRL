@@ -185,6 +185,8 @@
                                    url="/portal/basicinfo.mooc">基本资料</a>
                                 <a id="passwordSet" class="btn-item" href="javascript:void(0)"
                                    url="/portal/password.mooc">密码设置</a>
+                                <a id="avatarSet" class="btn-item" href="javascript:void(0)"
+                                   url="/portal/password.mooc">更换头像</a>
 
                             </div>
                         </div>
@@ -1471,7 +1473,7 @@
                                     <p class="public-pwd-tip"><i class="icon-tip"></i>请输入3~18个字符</p>
                                     <div class="input-group">
                                         <label class="input-label"><b>*</b>确认密码</label>
-                                        <input id="newPassword2" maxlength="18" minlength="3" type="password"
+                                        <input id="newPassword2" minlength="3" maxlength="18" type="password"
                                                class="input-text">
                                         <span class="public-tip"><i class=""></i></span>
                                     </div>
@@ -1606,6 +1608,157 @@
                                 });
                             </script>
                         </div>
+
+                        <div id="settingAvatar" class="hidden-course">
+
+
+                            <div class="main-body p-pwd-set">
+
+                                <form action="passwordReset" name="passwordReset" method="post">
+
+                                    <%--   <input type="text" class="form-control hidden-course" name="userName" placeholder="${sessionScope.user.userName}">
+                                       <input type="text" class="form-control hidden-course" name="userPassword" placeholder="${sessionScope.user.userPassword}">
+   --%>
+                                    <input type="hidden" class="form-control hidden-course" id="uid" name="uid"
+                                           value="${sessionScope.user.userId}">
+                                    <div class="input-group">
+                                        <label class="input-label"><b>*</b>当前密码</label>
+                                        <input id="newAvatar" type="password" class="input-text"
+                                               name="newAvatar">
+                                        <span class="public-tip"><i class=""></i></span>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input class="btn btn-primary" id="updateAvatar" type="submit" value="更换">
+                                    </div>
+                                </form>
+
+
+                            </div>
+
+                            <script src="/js/extJs/BigInt.js" type="text/javascript"></script>
+                            <script src="/js/extJs/RSA.js" type="text/javascript"></script>
+                            <script src="/js/extJs/Barrett.js" type="text/javascript"></script>
+
+                            <script type="text/javascript">
+                                $(function () {
+                                    $("#oldPassword").blur(function () {
+                                        var op = $("#oldPassword").val();
+                                        //var oph = $("#oldPasswordHide").val();
+                                        $.ajax({
+                                            type: "post",
+                                            url: CONTEXTPATH + "/portal/comparePasswd.mooc",
+                                            data: {
+                                                srpwd: op
+                                            },
+                                            success: function (response) {
+                                                if (response.returnCode == 'success') {
+                                                    $("#oldPassword").parent().children("span.public-tip").children("i").removeClass().addClass("icon-mark right-mark");
+                                                } else {
+                                                    $("#oldPassword").parent().children("span.public-tip").children("i").removeClass().addClass("icon-mark error-mark");
+                                                }
+                                            },
+                                            error: function () {
+
+                                            }
+                                        });
+
+                                    });
+
+                                    $("#newPassword").keyup(function () {
+                                        var opn = $.trim($("#newPassword").val());
+                                        if (opn.length > 0) {
+                                            var modes = checkStrong(opn);
+                                            if (modes == 0) { //位数小于8
+                                                $('.psw-tip').addClass("publicTip");
+                                                $('.public-pwd1-tip').find("span").html(Msg.get("user.checkPassword"));
+                                                $('.public-pwd1-tip').removeClass("publicTip");
+                                            } else if (modes == -1) {
+                                                $('.psw-tip').addClass("publicTip");
+                                                $('.public-pwd1-tip').find("span").html(Msg.get("user.incorrectPasswordFormat"));
+                                                $('.public-pwd1-tip').removeClass("publicTip");
+                                            } else {
+                                                $('.public-pwd1-tip').addClass("publicTip");
+                                                if (modes == 1) {
+                                                    $('.psw-tip').removeClass("middle strong publicTip");
+                                                } else if (modes == 2) {
+                                                    $('.psw-tip').removeClass("middle strong publicTip").addClass("middle");
+                                                } else if (modes >= 3) {
+                                                    $('.psw-tip').removeClass("middle strong publicTip").addClass("strong");
+                                                }
+                                            }
+                                        } else {
+                                            $('.psw-tip').addClass("publicTip");
+                                            $('.public-pwd1-tip').find("span").html(Msg.get("password.null"));
+                                            $('.public-pwd1-tip').removeClass("publicTip");
+                                        }
+                                    });
+
+                                    $("#newPassword2").blur(function () {
+                                        var opn2 = $("#newPassword2").val();
+                                        var opn = $("#newPassword").val();
+                                        if (opn.length < 8 || opn2.length < 8) {
+                                            $.dialog.error(Msg.get("userSet.password.length.less"));
+                                        } else if (opn != opn2) {
+                                            $.dialog.error(Msg.get("userSet.password.not.same"));
+                                            $("#newPassword2").parent().children("span.public-tip").children("i").removeClass().addClass("icon-mark error-mark");
+                                        } else {
+                                            $("#newPassword2").parent().children("span.public-tip").children("i").removeClass().addClass("icon-mark right-mark");
+                                        }
+                                    });
+
+                                    $("#savePassword").click(function () {
+                                        var op = $("#oldPassword").val();
+                                        var opn2 = $("#newPassword2").val();
+                                        var opn = $("#newPassword").val();
+                                        if (op == null || op == "") {
+                                            $.dialog.error(Msg.get("userSet.password.current.error"));
+                                            return;
+                                        }
+                                        if (opn == null || opn2 == "") {
+                                            $.dialog.error(Msg.get("userSet.password.new.empty"));
+                                            return;
+                                        }
+                                        if (opn != opn2) {
+                                            $.dialog.error(Msg.get("userSet.password.not.same"));
+                                            return;
+                                        }
+                                        if (opn.length < 8 || opn2.length < 8) {
+                                            $.dialog.error(Msg.get("userSet.password.length.less"));
+                                            return;
+                                        }
+                                        var modulus = $("#modulus").val();
+                                        var exponent = $("#exponent").val();
+                                        setMaxDigits(130);
+                                        var key = new RSAKeyPair(exponent, "", modulus);
+                                        var strOldPass = encryptedString(key, op);
+                                        var strNewPass = encryptedString(key, opn);
+
+                                        $.ajax({
+                                            type: "post",
+                                            url: CONTEXTPATH + "/portal/save/password.mooc",
+                                            dataType: "json",
+                                            data: {
+                                                strOldPass: strOldPass,
+                                                strNewPass: strNewPass
+                                            },
+                                            success: function (response) {
+                                                if (response.errorMsg) {
+                                                    $.dialog.error(response.errorMsg);
+                                                } else {
+                                                    $.dialog.success(Msg.get("userSet.password.success"));
+                                                }
+                                            },
+                                            error: function () {
+
+                                            }
+                                        });
+                                    });
+
+
+                                });
+                            </script>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -1750,10 +1903,17 @@
         if (this.id == 'basicInfo') {
             $('#settingContent').removeClass('hidden-course');
             $('#settingPassword').addClass('hidden-course');
+            $('#passwordReset').addClass('hidden-course');
         }
         if (this.id == 'passwordSet') {
             $('#settingContent').addClass('hidden-course');
             $('#settingPassword').removeClass('hidden-course');
+            $('#passwordReset').addClass('hidden-course');
+        }
+        if (this.id == 'avatarSet') {
+            $('#settingContent').addClass('hidden-course');
+            $('#settingPassword').addClass('hidden-course');
+            $('#passwordReset').removeClass('hidden-course');
         }
     });
 </script>
