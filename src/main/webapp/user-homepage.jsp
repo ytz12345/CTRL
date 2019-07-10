@@ -116,7 +116,7 @@
                                     </h3>
                                     <c:choose>
                                         <c:when test="${sessionScope.user.userIntro == null}">
-                                            <div class="model-intro">这个人很蔡，还没有写个人简介喔</div>
+                                            <div class="model-intro">这个人很蔡，还没有写个人简介</div>
                                         </c:when>
                                         <c:otherwise>
                                             <div class="model-intro">${sessionScope.user.userIntro}</div>

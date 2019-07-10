@@ -135,7 +135,7 @@
                                     </h3>
                                     <c:choose>
                                         <c:when test="${sessionScope.user.userIntro == null}">
-                                            <div class="model-intro">这个人很蔡，还没有写个人简介喔</div>
+                                            <div class="model-intro">这个人很蔡，还没有写个人简介</div>
                                         </c:when>
                                         <c:otherwise>
                                             <div class="model-intro">${sessionScope.user.userIntro}</div>
@@ -244,7 +244,7 @@
                                             <c:choose>
                                                 <c:when test="${sessionScope.user.userIntro == null}">
                                                     <input id="userIntro" class="input-area"
-                                                           name="userIntro" placeholder="更新简介，让大家了解你">
+                                                           name="userIntro" placeholder="你是日本天皇，个人练习生，还是加拿大电鳗？">
                                                 </c:when>
                                                 <c:otherwise>
                                                     <input id="userIntro" class="input-area"
