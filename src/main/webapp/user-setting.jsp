@@ -153,28 +153,9 @@
                                         <!-- 我的课程 -->
                                         <li class="nav-item open-up navItem" data-step="1" data-highlightclass="" data-intro="欢迎进入我的课程，这里汇集了您所有参加和收藏的课程。">
                                             <a class="nav-text current" href="getUserCourses?uid=${sessionScope.user.userId}"><i class="icon-nav icon-course"></i>我的课程</a>
-                                            <%--                         <ul class="sub-nav">
-                                                                         <li class="nav-item">
-                                                                             <a class="sub-nav-text current" content="myCourse" href="#">学习的课程</a>
-                                                                         </li>
-                                                                         <!-- 管理的课程 -->
 
-                                                                         <li class="nav-item">
-                                                                             <a class="sub-nav-text" href="#" content="favoriteCourse">收藏的课程</a>
-                                                                         </li>
-
-                                                                     </ul>--%>
                                         </li>
 
-
-
-                                        <!-- 我的笔记 -->
-                                        <%--<li class="nav-item" data-step="4" data-highlightclass="" data-intro="在课程学习的过程中您可以随时记录学习心得或疑惑,点击这里可以管理自己的课程笔记。">
-                                            <a class="nav-text" href="#" content="myNote"><i class="icon-nav icon-notes"></i>我的笔记</a>
-                                        </li>
-                                        <li class="nav-item" data-step="5" data-highlightclass="" data-intro="系统和授课教师会通过站内消息向您发送重要通知，您要及时关注这里的消息哦！">
-                                            <a class="nav-text" href="#" content="myMessage"><i class="icon-nav icon-msg"></i>消息<sup id="newMsg" style="display:none;">●</sup></a>
-                                        </li>--%>
                                         <li class="nav-item" data-step="6" data-highlightclass="" data-intro="在这里您可以进行密码管理,邮箱绑定,以及对基本资料信息进行维护。">
                                             <a class="nav-text" href="user-setting.jsp" content="mySetting"><i class="icon-nav icon-set"></i>个人设置</a>
                                         </li>
@@ -244,7 +225,7 @@
                                             <c:choose>
                                                 <c:when test="${sessionScope.user.userIntro == null}">
                                                     <input id="userIntro" class="input-area"
-                                                           name="userIntro" placeholder="你是日本天皇，个人练习生，还是加拿大电鳗？">
+                                                           name="userIntro" placeholder="你是日本天皇还是个人练习生？">
                                                 </c:when>
                                                 <c:otherwise>
                                                     <input id="userIntro" class="input-area"
@@ -266,77 +247,7 @@
                                     </form>
                             </div>
 
-                            <!--
-                            <div class="dialog ui-dialog-public ui-dialog-form">
-                                <div class="dialog-form-courseList">
-                                    <div class="input-group">
-                                        <span class="print-text print-tip"><i class="icon-right"></i>提交成功，您的在校认证已通过！</span>
-                                    </div>
-                                    <p class="public-tip">登录时您可以采用方式：</p>
 
-                                    <div class="input-group">
-                                        <label class="input-label">登录名：</label>
-                                        <span class="print-text" id="loginType"></span>
-                                    </div>
-
-                                    <div class="input-group">
-                                        <label class="input-label">邮　箱：</label>
-                                        <span class="print-text" id="loginEmail"></span>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="dialog ui-dialog-public ui-dialog-form">
-                                <div class="dialog-form-courseList">
-                                    <div class="input-group">
-                                        <span class="print-text print-tip"><i class="icon-e-point"></i>您填写的学生身份已被其他账号使用！</span>
-                                    </div>
-                                    <p class="public-tip">请确认您的学号、姓名、学校是否填写正确；</p>
-                                    <p class="public-tip">如果正确无误，请用填写的学生身份登录；</p>
-                                </div>
-                            </div>
-                            <div class="dialog ui-dialog-public ui-dialog-form">
-                                <div class="dialog-form-courseList">
-                                    <div class="input-group">
-                                        <span class="print-text print-tip"><i class="icon-right"></i>提交成功，您的在校认证在审核中！</span>
-                                    </div>
-                                    <p class="public-tip" style="padding-left:20px;"><i class="icon-tip"></i>审核通过后我们会发消息通知您。</p>
-
-                                </div>
-                            </div>
-                            <div class="dialog ui-dialog-public ui-dialog-form">
-                                <div class="dialog-form-courseList">
-                                    <div class="input-group">
-                                        <span class="print-text print-tip"><i class="icon-right"></i>在校认证失败！</span>
-                                    </div>
-                                    <p class="public-tip" style="padding-left:20px;"><i class="icon-tip"></i>您填写的姓名与教务处系统中的姓名不一致，有疑问请联系学校教务处。</p>
-
-                                </div>
-                            </div>
-
-                            <div class="dialog ui-dialog-public ui-dialog-form">
-                                <div class="dialog-form-courseList">
-                                    <div class="input-group">
-                                        <span class="print-text print-tip"><i class="icon-e-point"></i>您填写的学生信息未被学校录入进去！</span>
-                                    </div>
-                                    <p class="public-tip">请确认您的学号、姓名、学校是否填写正确；</p>
-                                    <p class="public-tip">如果正确无误，请联系学校录入您的学生信息。</p>
-
-                                </div>
-                            </div>
-
-                            <div class="dialog ui-dialog-public ui-dialog-form">
-                                <div class="dialog-form-courseList">
-                                    <div class="input-group">
-                                        <span class="print-text print-tip"><i class="icon-e-point"></i>您填写的学生信息已被学校录入，现已被激活！</span>
-                                    </div>
-
-                                    <p class="public-tip">请您重新登录，您的学生信息将自动被录入</p>
-
-                                </div>
-                            </div>
-                            -->
                             <!--提示语句-->
 
                             <script type="text/javascript">
