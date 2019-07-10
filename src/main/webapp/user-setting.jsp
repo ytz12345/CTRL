@@ -1611,24 +1611,17 @@
 
                         <div id="settingAvatar" class="hidden-course">
 
-
                             <div class="main-body p-pwd-set">
 
                                 <form action="passwordReset" name="passwordReset" method="post">
-
-                                    <%--   <input type="text" class="form-control hidden-course" name="userName" placeholder="${sessionScope.user.userName}">
-                                       <input type="text" class="form-control hidden-course" name="userPassword" placeholder="${sessionScope.user.userPassword}">
-   --%>
-                                    <input type="hidden" class="form-control hidden-course" id="uid" name="uid"
-                                           value="${sessionScope.user.userId}">
-                                    <div class="input-group">
-                                        <label class="input-label"><b>*</b>当前密码</label>
-                                        <input id="newAvatar" type="password" class="input-text"
-                                               name="newAvatar">
-                                        <span class="public-tip"><i class=""></i></span>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" style="padding-top: 15px">选择头像</label>
+                                        <div class="col-sm-4">
+                                            <input type="file" name="courseImageFile" id="course-img"/>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <input class="btn btn-primary" id="updateAvatar" type="submit" value="更换">
+                                        <input class="btn btn-primary" type="submit" value="提交">
                                     </div>
                                 </form>
 
@@ -1903,17 +1896,17 @@
         if (this.id == 'basicInfo') {
             $('#settingContent').removeClass('hidden-course');
             $('#settingPassword').addClass('hidden-course');
-            $('#passwordReset').addClass('hidden-course');
+            $('#settingAvatar').addClass('hidden-course');
         }
         if (this.id == 'passwordSet') {
             $('#settingContent').addClass('hidden-course');
             $('#settingPassword').removeClass('hidden-course');
-            $('#passwordReset').addClass('hidden-course');
+            $('#settingAvatar').addClass('hidden-course');
         }
         if (this.id == 'avatarSet') {
             $('#settingContent').addClass('hidden-course');
             $('#settingPassword').addClass('hidden-course');
-            $('#passwordReset').removeClass('hidden-course');
+            $('#settingAvatar').removeClass('hidden-course');
         }
     });
 </script>
