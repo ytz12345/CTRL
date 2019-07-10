@@ -88,6 +88,21 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public int deleteComment(Integer comment_id){
+        PriorityQueue<Comment> commentPriorityQueue = new PriorityQueue<Comment>(50, new CmpComent());
+        CommentExample commentExample = new CommentExample();
+        CommentExample.Criteria criteria = commentExample.createCriteria();
+        criteria.andCommentToEqualTo(comment_id);
+        List<Comment> commentList = commentMapper.selectByExample(commentExample);
+        for(int i = 0; i < commentList.size(); i ++) commentPriorityQueue.offer(commentList.get(i));
+        while(!commentPriorityQueue.isEmpty()){
+            Comment Comment = commentPriorityQueue.poll();
+            CommentExample Example = new CommentExample();
+            CommentExample.Criteria Criteria = Example.createCriteria();
+            Criteria.andCommentToEqualTo(Comment.getCommentId());
+            List<Comment> sonComments = commentMapper.selectByExample(Example);
+            for(int i = 0; i < sonComments.size(); i ++) commentPriorityQueue.offer(sonComments.get(i));
+            commentMapper.deleteByPrimaryKey(Comment.getCommentId());
+        }
         return commentMapper.deleteByPrimaryKey(comment_id);
     }
 
