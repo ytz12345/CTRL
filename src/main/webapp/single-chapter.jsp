@@ -177,7 +177,7 @@
                 <div class="author-box">
                     <div class="author-info flex flex-wrap">
                         <div class="author-avatar">
-                            <img class="lazy" datasrc="images/instructor.jpg" alt="">
+                            <img class="lazy" data-src="images/instructor.jpg" alt="">
 
                             <ul class="author-social-profile p-0 m-0 mt-3 d-flex flex-wrap align-items-center">
                                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
