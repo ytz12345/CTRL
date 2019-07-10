@@ -26,6 +26,17 @@ public class UserHasChapterServiceImpl implements UserHasChapterService {
         UserHasChapterExample.Criteria criteria = userHasChapterExample.createCriteria();
         criteria.andUserUserIdEqualTo(uid);
         criteria.andChapterChapterIdEqualTo(chapterId);
-        return userHasChapterMapper.selectByExample(userHasChapterExample).get(0);
+        if(userHasChapterMapper.selectByExample(userHasChapterExample).size() != 0){
+            return userHasChapterMapper.selectByExample(userHasChapterExample).get(0);
+        }
+        return null;
+    }
+
+    public void setHasLearned(UserHasChapter userHasChapter){
+        UserHasChapterExample userHasChapterExample = new UserHasChapterExample();
+        UserHasChapterExample.Criteria criteria = userHasChapterExample.createCriteria();
+        criteria.andUserUserIdEqualTo(userHasChapter.getUserUserId());
+        criteria.andChapterChapterIdEqualTo(userHasChapter.getChapterChapterId());
+        userHasChapterMapper.updateByExampleSelective(userHasChapter,userHasChapterExample);
     }
 }

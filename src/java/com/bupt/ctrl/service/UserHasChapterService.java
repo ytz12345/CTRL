@@ -11,5 +11,8 @@ public interface UserHasChapterService {
 
     //获取用户学习进度
     UserHasChapter getHasLearned(Integer uid, Integer chapterId);
+
+    //更新进度
+    void setHasLearned(UserHasChapter userHasChapter);
 }
 

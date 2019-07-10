@@ -123,17 +123,22 @@
         <div class="row">
             <div class="col-12 offset-lg-1 col-lg-10">
                 <div class="featured-image">
-                    <video width="940" height="530" controls="controls" id="video" autoplay="autoplay">
-                        <source src="${chapter.chapterVideo}#t=4" type="video/mp4" >
+                    <video width="940" height="530" controls="controls" id="video" autoplay="autoplay" >
+                        <source src="${chapter.chapterVideo}" type="video/mp4" >
                         <%
 
+                            //int min=userHasChapter.userHasLearned;
                         %>
                     </video>
-                    <button onclick="${userHasChapter.userHasLearned}" type="button">设置播放位置为 ${userHasChapter.userHasLearned} 秒</button>
-<%--                    setCurTime()--%>
+
+<%--                    --%>
 
                     <!-- 修改为视频 -->
                 </div><!-- .featured-image -->
+                <p id="pgetp">
+                    上次看到 <span id="demo"></span>:<span id="demo2"></span>
+                    <a onclick="setCurTime()" href="#" id="getPro">跳转播放</a>
+                </p>
             </div><!-- .col -->
         </div><!-- .row -->
 
@@ -387,14 +392,44 @@
     <script type='text/javascript' src='js/custom.js'></script>
     <script>
         var vid = document.getElementById("video");
-        vid.ontimeupdate = function() {timeUpdate()}
-        function timeUpdate() {
-            document.getElementById('time').innerHTML = vid.currentTime;
+        // vid.ontimeupdate = function() {timeUpdate()}
+        // function timeUpdate() {
+        //     document.getElementById('time').innerHTML = vid.currentTime;
+        // }
+        function setCurTime() {
+            vid.currentTime = ${userHasChapter.userHasLearned};
         }
-        function setCurTime()
+        function updatePro()
         {
-            vid.currentTime = 5;
+            $.ajax({
+                url:'updateProgress',
+                type:'post',
+                dataType:'json',
+                data:{
+                    chapter_id:${userHasChapter.chapterChapterId},
+                    user_id:${userHasChapter.userUserId},
+                    has_leared:parseInt(vid.currentTime)
+                },   //后台 Request["data"] 得到rows.ModelID值
+                success:function(result){
+                    //成功回调
+                }
+            });
         }
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#pgetp").hide();
+            }, 4000);
+            document.getElementById("demo").innerHTML =getMin();
+            document.getElementById("demo2").innerHTML =${userHasChapter.userHasLearned}-60*getMin();
+            setInterval("updatePro()",5000);
+        });
+        $("#getPro").click(function(){
+            $("#pgetp").hide();
+        });
+        function getMin() {
+            return parseInt(${userHasChapter.userHasLearned/60});
+        }
+
     </script>
 </body>
 </html>
