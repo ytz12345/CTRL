@@ -94,19 +94,19 @@
                                                 <div class="modal-body">
                                                     <div id="form-register">
                                                         <form action="register" name="register" method="post" onsubmit="return isValidate()" >
-                                                            <label class="register-lable">用户名：</label>
+                                                            <label class="register-lable">用户名(12个字符以内)：</label>
                                                             <div class="input-group input-group-sm">
-                                                                <input type="text" class="form-control" name="userName" id="username" placeholder="Username">
+                                                                <input type="text" class="form-control" minlength="1" maxlength="12" name="userName" id="username" placeholder="Username">
                                                             </div>
                                                             <br />
-                                                            <label class="register-lable">设置密码：</label>
+                                                            <label class="register-lable">设置密码(16个字符以内)：</label>
                                                             <div class="input-group input-group-sm">
-                                                                <input type="password" class="form-control" name="userPassword" id="userpassword" placeholder="Password">
+                                                                <input type="password" class="form-control" minlength="1" maxlength="16" name="userPassword" id="userpassword" placeholder="Password">
                                                             </div>
                                                             <br />
                                                             <label class="register-lable">确认密码：</label>
                                                             <div class="input-group input-group-sm">
-                                                                <input type="password" class="form-control" name="userpass1" id="userpass1" placeholder="Password">
+                                                                <input type="password" class="form-control" minlength="1" maxlength="16"name="userpass1" id="userpass1" placeholder="Password">
                                                             </div>
                                                             <br />
 

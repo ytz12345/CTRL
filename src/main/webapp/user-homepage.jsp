@@ -296,7 +296,7 @@
 
 
                                                         <h4 class="view-subtitle">
-                                                            <span class="show-tname substr" style="width:180px;"><a class="link-action" href="teacher?teacher_id=${userCourse.teacher.userId}" title="江主席"><img src="images/JZM.jpg" class="user-min">${userCourseComing.teacher.userName}</a></span>
+                                                            <span class="show-tname substr" style="width:180px;"><a class="link-action" href="teacher?teacher_id=${userCourseComing.teacher.userId}" title="江主席"><img src="images/JZM.jpg" class="user-min">${userCourseComing.teacher.userName}</a></span>
                                                             <span class="show-school substr"></span>
                                                         </h4>
                                                         <!-- 学期学习 -->
@@ -378,7 +378,7 @@
 
 
                                                         <h4 class="view-subtitle">
-                                                            <span class="show-tname substr" style="width:180px;"><a class="link-action" href="teacher?teacher_id=${userCourse.teacher.userId}" title="江主席"><img src="images/JZM.jpg" class="user-min">${userCoursePass.teacher.userName}</a></span>
+                                                            <span class="show-tname substr" style="width:180px;"><a class="link-action" href="teacher?teacher_id=${userCoursePass.teacher.userId}" title="江主席"><img src="images/JZM.jpg" class="user-min">${userCoursePass.teacher.userName}</a></span>
                                                             <span class="show-school substr"></span>
                                                         </h4>
                                                         <!-- 学期学习 -->
