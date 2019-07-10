@@ -23,4 +23,8 @@ public interface CommentService {
 
     //删除评论
     public int deleteComment(Integer comment_id);
+
+    //根据userid删除Commen表的内容
+    //在管理员删除用户表前需要先删除外键表
+    void deleteCommentByUser(Integer uid);
 }

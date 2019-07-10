@@ -1,9 +1,14 @@
 package com.bupt.ctrl.service.impl;
 
 import com.bupt.ctrl.common.CommonEnum;
+import com.bupt.ctrl.dao.UserHasChapterMapper;
 import com.bupt.ctrl.dao.UserMapper;
 import com.bupt.ctrl.model.User;
 import com.bupt.ctrl.model.UserExample;
+import com.bupt.ctrl.service.CommentService;
+import com.bupt.ctrl.service.UserHasChapterService;
+import com.bupt.ctrl.service.UserHasCourseService;
+import com.bupt.ctrl.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +19,10 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class UserServiceImpl implements com.bupt.ctrl.service.UserService {
+public class UserServiceImpl implements UserService{
     private Logger logger= LoggerFactory.getLogger(this.getClass());
     @Autowired
     private UserMapper userMapper;
-
     @Override
     public User getUserByID(Integer uid) {
         return userMapper.selectByPrimaryKey(uid);
@@ -59,12 +63,17 @@ public class UserServiceImpl implements com.bupt.ctrl.service.UserService {
     @Override
     public List<User> getAllUser() {
         UserExample userExample = new UserExample();
-
         return userMapper.selectByExample(userExample);
 
     }
 
     @Override
+    public void deleteUser(Integer uid) {
+        System.out.println("try delete");
+        userMapper.deleteByPrimaryKey(uid);
+        System.out.println("sus");
+    }
+
     public List<User> getTeachers(){
         UserExample userExample = new UserExample();
         UserExample.Criteria criteria = userExample.createCriteria();
@@ -88,5 +97,16 @@ public class UserServiceImpl implements com.bupt.ctrl.service.UserService {
         }
         return null;
     }
+
+    @Override
+    public int updateUser(User user){
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+
+        criteria.andUserIdEqualTo(user.getUserId());
+        userMapper.updateByExampleSelective(user,userExample);
+        return 1;
+    }
+
 }
 

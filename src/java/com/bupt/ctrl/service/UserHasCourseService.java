@@ -1,5 +1,7 @@
 package com.bupt.ctrl.service;
 
+import com.bupt.ctrl.model.Course;
+import com.bupt.ctrl.model.User;
 import com.bupt.ctrl.model.UserHasCourse;
 
 import java.util.Map;
@@ -11,6 +13,9 @@ public interface UserHasCourseService {
 
     public List<UserHasCourse> getCourseById(Integer user_id);
 
+    //根据userid删除UHC表的内容
+    void deleteUserHasCourse(Integer uid);
+
     //获取当前课程学生数量
     Integer getStudentNumByCourse(Integer courseId);
 
@@ -19,4 +24,7 @@ public interface UserHasCourseService {
 
     //获取Teacher教的所有课程
     List<UserHasCourse> getCourseByTeacher(Integer teacherId);
+
+    //获取脚course的teacher
+    User getTeacherByCourse(Course course);
 }

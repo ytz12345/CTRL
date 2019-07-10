@@ -29,9 +29,18 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public List<Course> getAllCourse(){
+        CourseExample courseExample = new CourseExample();
+        return courseMapper.selectByExample(courseExample);
+    }
+
+
+    @Override
     //将课程信息插入course表
-    public void createCourse(Course course){
+    public int createCourse(Course course){
+
         courseMapper.insert(course);
+        return 1;
     }
 
     public List<Course> getCourseByName(String str) {
@@ -97,6 +106,14 @@ public class CourseServiceImpl implements CourseService {
         return 1;
     }
 
+    public int updataCoursePass(Course course){
+        CourseExample courseExample = new CourseExample();
+        CourseExample.Criteria criteria = courseExample.createCriteria();
+        criteria.andCourseIdEqualTo(course.getCourseId());
+        courseMapper.updateByExampleSelective(course,courseExample);
+        return 1;
+    }
+
     //修改课程封面
     public int updateCourseImage(Course course){
         CourseExample courseExample = new CourseExample();
@@ -105,5 +122,12 @@ public class CourseServiceImpl implements CourseService {
         criteria.andCourseIdEqualTo(course.getCourseId());
         courseMapper.updateByExampleSelective(course,courseExample);
         return 1;
+    }
+
+    public void deleteCourse(Integer course_id){
+        CourseExample courseExample = new CourseExample();
+        CourseExample.Criteria criteria = courseExample.createCriteria();
+        criteria.andCourseIdEqualTo(course_id);
+        courseMapper.deleteByExample(courseExample);
     }
 }

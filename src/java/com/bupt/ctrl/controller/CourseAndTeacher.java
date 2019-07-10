@@ -4,8 +4,12 @@ import com.bupt.ctrl.model.Course;
 import com.bupt.ctrl.model.User;
 
 public class CourseAndTeacher {
-    Course course;
-    User teacher;
+    public Course course;
+    public User teacher;
+
+    public CourseAndTeacher() {
+
+    }
 
     public CourseAndTeacher(Course course, User teacher) {
         this.course = course;
