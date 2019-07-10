@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface UserService {
     //用户注册
-    void register(User user);
+    int register(User user);
 
     //登录验证
     User checkLogin(String userName, String password);
@@ -31,4 +31,6 @@ public interface UserService {
 
     //更新数据库中的用户信息
     int updateUser(User user);
+
+    User getUserByName(String userName);
 }

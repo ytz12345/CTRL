@@ -30,8 +30,10 @@ public class UserServiceImpl implements UserService{
 
     //注册
     @Override
-    public void register(User user){
-        userMapper.insertSelective(user);
+    public int register(User user){
+        int flag = userMapper.insert(user);
+        if(flag == 0) return 0;//插入失败
+        return 1;//插入成功
     }
 
     //登录
@@ -106,6 +108,20 @@ public class UserServiceImpl implements UserService{
         criteria.andUserIdEqualTo(user.getUserId());
         userMapper.updateByExampleSelective(user,userExample);
         return 1;
+    }
+
+    @Override
+    public User getUserByName(String userName){
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andUserNameEqualTo(userName);
+        List<User> userList = userMapper.selectByExample(userExample);
+        User user = new User();
+        if(userList.size() != 0){
+            user = userList.get(0);
+            return user;
+        }
+        return null;
     }
 
 }
