@@ -130,10 +130,10 @@
                                         <img src="images/XJP.jpg" class="user-max">
                                     </a>
 
-                                    <h3 class="model-title substr" title="张瑞年">${sessionScope.user.userName}
+                                    <h3 class="model-title substr">${sessionScope.user.userName}
 
                                     </h3>
-                                    <div class="model-intro" title="北京邮电大学">${sessionScope.user.userIntro}</div>
+                                    <div class="model-intro">${sessionScope.user.userIntro}</div>
 
                                 </div>
                             </div>
@@ -240,27 +240,12 @@
                                     </div>
                                     <div class="input-group">
                                         <label class="input-label">
-                                            真实姓名
-                                        </label>
-                                        <span class="input-cr">张瑞年</span>
-                                        <input id="userName" type="hidden" value="张瑞年">
-                                    </div>
-                                    <div class="input-group">
-                                        <label class="input-label">
                                             简介
                                         </label>
                                         <span class="input-cr">${sessionScope.user.userIntro}</span>
                                         <input id="studentNo" type="hidden" value="1145141919">
                                     </div>
-                                    <div class="input-group">
-                                        <label class="input-label">
-                                            所在学校
-                                        </label>
-                                        <span class="input-cr">北京锤雷大学</span>
-                                        <input id="schoolName" type="hidden" value="北京锤雷大学"
-                                               class="ui-autocomplete-input" autocomplete="off">
-                                        <input id="schoolId" type="hidden" value="102">
-                                    </div>
+
 
 
                                     <%--<div class="input-group">
@@ -494,8 +479,7 @@
                                         <span class="to-text">月</span>
                                     </div>--%>
                                 </div>
-                                <div id="schoolNo" style="display: none;">
-
+                               <%-- <div id="schoolNo" style="display: none;">
                                     <div class="input-group">
                                         <label class="input-label">好大学ID</label>
                                         <span class="input-cr">6232884097</span>
@@ -505,9 +489,9 @@
                                         <label class="input-label">
                                             <b id="userNameLabel">*</b>真实姓名
                                         </label>
-                                        <input id="userName10" type="text" class="input-text" value="曾礼" maxlength="50">
+                                        <input id="userName10" type="text" class="input-text" value="张瑞年" maxlength="50">
                                     </div>
-                                   <%-- <div class="input-group">
+                                    <div class="input-group">
                                         <label class="input-label">
                                             毕业学校
                                         </label>
@@ -554,9 +538,9 @@
                                         </label>
                                         <input id="lastProfessional" type="text" class="input-text" value=""
                                                maxlength="50">
-                                    </div>--%>
+                                    </div>
                                 </div>
-                                <%--<div class="input-group">
+                                <div class="input-group">
                                     <label class="input-label">
                                         通讯地址
                                     </label>
@@ -1492,7 +1476,7 @@
                                         <span class="public-tip"><i class=""></i></span>
                                     </div>
                                     <div class="modal-footer">
-                                        <input class="btn btn-primary" id="register-btn" type="submit" value="重置">
+                                        <input class="btn btn-primary" id="register-btn" type="submit" value="提交">
                                     </div>
                                 </form>
 
