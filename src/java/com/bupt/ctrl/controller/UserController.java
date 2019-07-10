@@ -51,9 +51,15 @@ public class UserController {
     private ModelAndView register(User user) {
         logger.info("into");
 
-        userService.register(user);
+        ModelAndView mav = new ModelAndView("redirect:/register-failure_user.jsp");//指定用户已存在跳转页面
 
-        ModelAndView mav = new ModelAndView("redirect:/register-success.jsp");//指定跳转页面
+        User checkUser = userService.getUserByName(user.getUserName());
+        if(checkUser != null){
+            return mav;
+        }else{
+            if(userService.register(user) == 1) mav.setViewName("redirect:/register-success.jsp");//注册成功
+            else mav.setViewName("redirect:/register-failure.jsp");//用户插入数据库失败，注册失败
+        }
 
         return mav;
     }
