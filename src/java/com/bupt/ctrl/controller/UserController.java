@@ -99,18 +99,31 @@ public class UserController {
                                        User user, HttpSession session){
         user = userService.getUserByID(uid);
 
-        System.out.println("Show user_name : "+ user.getUserName()+" , user_password :"+user.getUserPassword());
-
         ModelAndView mav = new ModelAndView("redirect:/user-setting.jsp");
         if(!oldPassword.equals(user.getUserPassword())){
-            System.out.println("Wrong old password : " + oldPassword +" user_password : "+user.getUserPassword());
             mav.setViewName("redirect:/passwordReset_failure.jsp");//登录失败跳转到失败界面
         }else{
-            System.out.println("new password :"+newPassword);
             user.setUserPassword(newPassword);
-            userService.updateUserPassword(user);
-            System.out.println("password has been set to:"+ user.getUserPassword());
+            userService.updateUser(user);
+            session.setAttribute("user.userPassword",newPassword);
         }
+        return mav;
+    }
+
+    @RequestMapping(value = "/introSubmit", method = RequestMethod.POST)
+    @ResponseBody
+    private ModelAndView passwordReset(@RequestParam(value = "userIntro") String userIntro,
+                                       @RequestParam(value = "uid") Integer uid,
+                                       User user, HttpSession session){
+        user = userService.getUserByID(uid);
+
+        ModelAndView mav = new ModelAndView("redirect:/user-setting.jsp");
+        user.setUserIntro(userIntro);
+        userService.updateUser(user);
+
+        User tempUser = (User)session.getAttribute("user");
+        tempUser.setUserIntro(userIntro);
+        session.setAttribute("user",tempUser);
 
         return mav;
     }

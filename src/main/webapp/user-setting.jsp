@@ -8,20 +8,19 @@
 
     <script type="text/javascript">
         function isDuplicate(form) {
-            var oldPassword=document.getElementById("oldPassword").value;
-            var newPassword=document.getElementById("newPassword").value;
-            var newPassword2=document.getElementById("newPassword2").value;
-            if(newPassword != newPassword2){
+            var oldPassword = document.getElementById("oldPassword").value;
+            var newPassword = document.getElementById("newPassword").value;
+            var newPassword2 = document.getElementById("newPassword2").value;
+            if (newPassword != newPassword2) {
                 alert("两次输入的密码不一致，请重新输入！");
                 return false;
-            }else if(newPassword.length<=2 || newPassword.length>=19) {
+            } else if (newPassword.length <= 2 || newPassword.length >= 19) {
                 alert("密码长度不合规范，请重新输入！");
                 return false;
-            }else if(oldPassword != ${sessionScope.user.userName}){
+            } else if (oldPassword != ${sessionScope.user.userName}) {
                 alert("${sessionScope.user.userName}");
                 return false;
-            }
-            else{
+            } else {
                 return true;
             }
         }</script>
@@ -131,10 +130,10 @@
                                         <img src="images/XJP.jpg" class="user-max">
                                     </a>
 
-                                    <h3 class="model-title substr" title="张瑞年">${sessionScope.user.userName}
+                                    <h3 class="model-title substr">${sessionScope.user.userName}
 
                                     </h3>
-                                    <div class="model-intro" title="北京邮电大学">${sessionScope.user.userIntro}</div>
+                                    <div class="model-intro">${sessionScope.user.userIntro}</div>
 
                                 </div>
                             </div>
@@ -145,42 +144,32 @@
                                     <ul class="nav-courseList">
 
                                         <!-- 我的课程 -->
-                                        <li class="nav-item" data-step="1" data-highlightclass=""
-                                            data-intro="欢迎进入我的课程，这里汇集了您所有参加和收藏的课程。">
-                                            <a class="nav-text" href="getUserCourses?uid=${sessionScope.user.userId}"><i
-                                                    class="icon-nav icon-course"></i>我的课程</a>
-                                            <ul class="sub-nav">
-                                                <li class="nav-item">
-                                                    <a class="sub-nav-text" content="myCourse" href="#">学习的课程</a>
-                                                </li>
-                                                <!-- 管理的课程 -->
+                                        <li class="nav-item open-up navItem" data-step="1" data-highlightclass="" data-intro="欢迎进入我的课程，这里汇集了您所有参加和收藏的课程。">
+                                            <a class="nav-text current" href="getUserCourses?uid=${sessionScope.user.userId}"><i class="icon-nav icon-course"></i>我的课程</a>
+                                            <%--                         <ul class="sub-nav">
+                                                                         <li class="nav-item">
+                                                                             <a class="sub-nav-text current" content="myCourse" href="#">学习的课程</a>
+                                                                         </li>
+                                                                         <!-- 管理的课程 -->
 
-                                                <li class="nav-item">
-                                                    <a class="sub-nav-text" href="#" content="favoriteCourse">收藏的课程</a>
-                                                </li>
+                                                                         <li class="nav-item">
+                                                                             <a class="sub-nav-text" href="#" content="favoriteCourse">收藏的课程</a>
+                                                                         </li>
 
-                                            </ul>
+                                                                     </ul>--%>
                                         </li>
 
 
-                                        <!-- 我的错题本 与考试相关 mooc_cloud使用-->
 
                                         <!-- 我的笔记 -->
-                                        <li class="nav-item" data-step="4" data-highlightclass=""
-                                            data-intro="在课程学习的过程中您可以随时记录学习心得或疑惑,点击这里可以管理自己的课程笔记。">
-                                            <a class="nav-text" href="#" content="myNote"><i
-                                                    class="icon-nav icon-notes"></i>我的笔记</a>
+                                        <%--<li class="nav-item" data-step="4" data-highlightclass="" data-intro="在课程学习的过程中您可以随时记录学习心得或疑惑,点击这里可以管理自己的课程笔记。">
+                                            <a class="nav-text" href="#" content="myNote"><i class="icon-nav icon-notes"></i>我的笔记</a>
                                         </li>
-                                        <li class="nav-item" data-step="5" data-highlightclass=""
-                                            data-intro="系统和授课教师会通过站内消息向您发送重要通知，您要及时关注这里的消息哦！">
-                                            <a class="nav-text" href="#" content="myMessage"><i
-                                                    class="icon-nav icon-msg"></i>消息<sup id="newMsg"
-                                                                                         style="display:none;">●</sup></a>
-                                        </li>
-                                        <li class="nav-item open-up navItem" data-step="6" data-highlightclass=""
-                                            data-intro="在这里您可以进行密码管理,邮箱绑定,以及对基本资料信息进行维护。">
-                                            <a class="nav-text current" href="user-setting.jsp" content="mySetting"><i
-                                                    class="icon-nav icon-set"></i>个人设置</a>
+                                        <li class="nav-item" data-step="5" data-highlightclass="" data-intro="系统和授课教师会通过站内消息向您发送重要通知，您要及时关注这里的消息哦！">
+                                            <a class="nav-text" href="#" content="myMessage"><i class="icon-nav icon-msg"></i>消息<sup id="newMsg" style="display:none;">●</sup></a>
+                                        </li>--%>
+                                        <li class="nav-item" data-step="6" data-highlightclass="" data-intro="在这里您可以进行密码管理,邮箱绑定,以及对基本资料信息进行维护。">
+                                            <a class="nav-text" href="user-setting.jsp" content="mySetting"><i class="icon-nav icon-set"></i>个人设置</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -206,7 +195,7 @@
                             <div class="main-body p-basic-data">
 
 
-                                <div id="isPrivate" class="input-group">
+                                <%--<div id="isPrivate" class="input-group">
                                     <label class="input-label">
                                         隐私
                                     </label>
@@ -231,7 +220,7 @@
 				</span>
 
 
-                                </div>
+                                </div>--%>
                                 <div id="schoolYes">
 
                                     <div class="input-group">
@@ -251,30 +240,15 @@
                                     </div>
                                     <div class="input-group">
                                         <label class="input-label">
-                                            真实姓名
-                                        </label>
-                                        <span class="input-cr">张瑞年</span>
-                                        <input id="userName" type="hidden" value="张瑞年">
-                                    </div>
-                                    <div class="input-group">
-                                        <label class="input-label">
                                             简介
                                         </label>
                                         <span class="input-cr">${sessionScope.user.userIntro}</span>
                                         <input id="studentNo" type="hidden" value="1145141919">
                                     </div>
-                                    <div class="input-group">
-                                        <label class="input-label">
-                                            所在学校
-                                        </label>
-                                        <span class="input-cr">北京锤雷大学</span>
-                                        <input id="schoolName" type="hidden" value="北京锤雷大学"
-                                               class="ui-autocomplete-input" autocomplete="off">
-                                        <input id="schoolId" type="hidden" value="102">
-                                    </div>
 
 
-                                    <div class="input-group">
+
+                                    <%--<div class="input-group">
                                         <label class="input-label">
                                             在读学历
                                         </label>
@@ -503,10 +477,9 @@
 
                                         </select>
                                         <span class="to-text">月</span>
-                                    </div>
+                                    </div>--%>
                                 </div>
-                                <div id="schoolNo" style="display: none;">
-
+                               <%-- <div id="schoolNo" style="display: none;">
                                     <div class="input-group">
                                         <label class="input-label">好大学ID</label>
                                         <span class="input-cr">6232884097</span>
@@ -516,7 +489,7 @@
                                         <label class="input-label">
                                             <b id="userNameLabel">*</b>真实姓名
                                         </label>
-                                        <input id="userName10" type="text" class="input-text" value="曾礼" maxlength="50">
+                                        <input id="userName10" type="text" class="input-text" value="张瑞年" maxlength="50">
                                     </div>
                                     <div class="input-group">
                                         <label class="input-label">
@@ -1051,19 +1024,28 @@
 
                                     </select>
                                     <span class="to-text">日</span>
-                                </div>
-                                <div class="input-group">
-                                    <label class="input-label">
-                                        个人简介
-                                    </label>
-                                    <textarea id="selfIntro" class="input-area"
-                                              placeholder="告诉我们您的情况，例如您的工作，感兴趣的事情以及您希望通过学习课程达到什么目标。"></textarea>
-                                </div>
+                                </div>--%>
+                                    <form action="introSubmit" name="introSubmit" method="post">
+                                        <input type="hidden" class="form-control hidden-course" id="uid" name="uid"
+                                               value="${sessionScope.user.userId}">
 
-                                <div class="btn-area">
-                                    <a id="saveBtn" href="javascript:void(0)" class="btn-icon"><i class="icon-btn"><i
-                                            class="i-save"></i> </i>提交</a>
-                                </div>
+                                        <div class="input-group">
+                                            <label class="input-label">
+                                                更新简介
+                                            </label>
+                                            <input id="userIntro" class="input-area"
+                                                   name="userIntro" placeholder="告诉我们您的情况，例如您的工作，感兴趣的事情以及您希望通过学习课程达到什么目标。">
+                                        </div>
+
+                                        <%--<div class="btn-area">
+                                            <a id="saveBtn" href="javascript:void(0)" class="btn-icon"><i
+                                                    class="icon-btn"><i
+                                                    class="i-save"></i> </i>提交</a>
+                                        </div>--%>
+                                        <div class="modal-footer">
+                                            <input class="btn btn-primary" id="submit-btn" type="submit" value="提交">
+                                        </div>
+                                    </form>
                             </div>
 
                             <!--
@@ -1457,13 +1439,15 @@
                             <input type="hidden" id="exponent" value="010001">
                             <div class="main-body p-pwd-set">
 
-                                <form action="passwordReset" name="passwordReset" method="post" onsubmit="return isDuplicate()">
+                                <form action="passwordReset" name="passwordReset" method="post"
+                                      onsubmit="return isDuplicate()">
 
-                                 <%--   <input type="text" class="form-control hidden-course" name="userName" placeholder="${sessionScope.user.userName}">
-                                    <input type="text" class="form-control hidden-course" name="userPassword" placeholder="${sessionScope.user.userPassword}">
---%>
-                                     <input type="hidden" class="form-control hidden-course" id="uid" name="uid" value="${sessionScope.user.userId}">
-                                     <div class="input-group">
+                                    <%--   <input type="text" class="form-control hidden-course" name="userName" placeholder="${sessionScope.user.userName}">
+                                       <input type="text" class="form-control hidden-course" name="userPassword" placeholder="${sessionScope.user.userPassword}">
+   --%>
+                                    <input type="hidden" class="form-control hidden-course" id="uid" name="uid"
+                                           value="${sessionScope.user.userId}">
+                                    <div class="input-group">
                                         <label class="input-label"><b>*</b>当前密码</label>
                                         <input id="oldPassword" type="password" class="input-text"
                                                name="oldPassword">
@@ -1492,7 +1476,7 @@
                                         <span class="public-tip"><i class=""></i></span>
                                     </div>
                                     <div class="modal-footer">
-                                        <input class="btn btn-primary" id="register-btn" type="submit" value="重置">
+                                        <input class="btn btn-primary" id="register-btn" type="submit" value="提交">
                                     </div>
                                 </form>
 

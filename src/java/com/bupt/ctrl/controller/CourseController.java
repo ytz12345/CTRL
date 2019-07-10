@@ -1,5 +1,6 @@
 package com.bupt.ctrl.controller;
 
+import com.bupt.ctrl.common.commonPath;
 import com.bupt.ctrl.model.Chapter;
 import com.bupt.ctrl.model.Course;
 import com.bupt.ctrl.model.User;
@@ -96,7 +97,7 @@ public class CourseController {
     public String createCourse(@RequestParam(value = "teacher_id")int teacher_id, @RequestParam("courseImageFile")CommonsMultipartFile courseImageFile, Course course, HttpServletRequest request) throws IOException {
 
         UserHasCourse userHasCourse = new UserHasCourse();
-        String courseImagePath = request.getServletContext().getRealPath("/upload/images/");//路径修改为服务器地址！！！
+        String courseImagePath = commonPath.imagePath;//路径修改为服务器地址！！！
 
         String filename = courseImageFile.getOriginalFilename();//获取文件名
         String suffix = filename.substring(filename.lastIndexOf(".") + 1);//获取原文件后缀名
@@ -118,6 +119,11 @@ public class CourseController {
         }
 
         courseImageFile.transferTo(imageFile);
+        /*try {
+            courseImageFile.transferTo(imageFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
 
         if(flag == 1 && imageFile.exists()){
             userHasCourse.setUserUserId(teacher_id);//传入课程创建人id

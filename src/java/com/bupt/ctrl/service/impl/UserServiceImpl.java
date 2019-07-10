@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public int updateUserPassword(User user){
+    public int updateUser(User user){
         UserExample userExample = new UserExample();
         UserExample.Criteria criteria = userExample.createCriteria();
 
@@ -107,5 +107,6 @@ public class UserServiceImpl implements UserService{
         userMapper.updateByExampleSelective(user,userExample);
         return 1;
     }
+
 }
 

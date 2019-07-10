@@ -1,5 +1,7 @@
 package com.bupt.ctrl.service;
 
+import com.bupt.ctrl.model.Course;
+import com.bupt.ctrl.model.User;
 import com.bupt.ctrl.model.UserHasCourse;
 
 import java.util.Map;
@@ -22,4 +24,7 @@ public interface UserHasCourseService {
 
     //获取Teacher教的所有课程
     List<UserHasCourse> getCourseByTeacher(Integer teacherId);
+
+    //获取脚course的teacher
+    User getTeacherByCourse(Course course);
 }
