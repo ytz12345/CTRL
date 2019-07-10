@@ -345,7 +345,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-4 control-label">章节数</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" name="chapterNum" class="form-control" placeholder="请输入课程名称">
+                                                    <input type="text" name="chapterNum" oninput="value=value.replace(/[^\d]/g,'')" class="form-control" placeholder="请输入阿拉伯数字">
                                                 </div>
                                             </div>
                                             <div class="form-group">
