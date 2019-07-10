@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService{
     //注册
     @Override
     public void register(User user){
-        userMapper.insert(user);
+        userMapper.insertSelective(user);
     }
 
     //登录
