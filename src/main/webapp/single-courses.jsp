@@ -221,7 +221,7 @@
             <div class="single-course-wrap">
                 <div class="course-info flex flex-wrap align-items-center">
                     <div class="course-author flex flex-wrap align-items-center mt-3">
-                        <img class="lazy" src="${teacher.userAvatar}" alt="">
+                        <img src="${teacher.userAvatar}" alt="">
 
                         <div class="author-wrap">
                             <label class="m-0">Teacher</label>

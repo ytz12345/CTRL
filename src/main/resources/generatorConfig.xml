@@ -38,7 +38,7 @@
       <property name="useActualColumnNames" value="false"/>
       <property name="ignoreQualifiersAtRuntime" value="true"/>
     </table>
-    <!--自动生成House-->
+    <!--&lt;!&ndash;自动生成House&ndash;&gt;
     <table catalog="sdrb" tableName="course" domainObjectName="Course"
            enableCountByExample="true"
            enableUpdateByExample="true"
@@ -48,7 +48,7 @@
       <property name="useActualColumnNames" value="false"/>
       <property name="ignoreQualifiersAtRuntime" value="true"/>
     </table>
-    <!--自动生成House-->
+    &lt;!&ndash;自动生成House&ndash;&gt;
     <table catalog="sdrb" tableName="chapter" domainObjectName="Chapter"
            enableCountByExample="true"
            enableUpdateByExample="true"
@@ -58,7 +58,7 @@
       <property name="useActualColumnNames" value="false"/>
       <property name="ignoreQualifiersAtRuntime" value="true"/>
     </table>
-    <!--自动生成rentinformation-->
+    &lt;!&ndash;自动生成rentinformation&ndash;&gt;
     <table catalog="sdrb" tableName="comment" domainObjectName="Comment"
            enableCountByExample="true"
            enableUpdateByExample="true"
@@ -68,7 +68,7 @@
       <property name="useActualColumnNames" value="false"/>
       <property name="ignoreQualifiersAtRuntime" value="true"/>
     </table>
-    <!--自动生成renttransaction-->
+    &lt;!&ndash;自动生成renttransaction&ndash;&gt;
     <table catalog="sdrb" tableName="user_has_course" domainObjectName="UserHasCourse"
            enableCountByExample="true"
            enableUpdateByExample="true"
@@ -78,7 +78,7 @@
       <property name="useActualColumnNames" value="false"/>
       <property name="ignoreQualifiersAtRuntime" value="true"/>
     </table>
-    <!--自动生成Photo-->
+    &lt;!&ndash;自动生成Photo&ndash;&gt;
     <table catalog="sdrb" tableName="user_has_chapter" domainObjectName="UserHasChapter"
            enableCountByExample="true"
            enableUpdateByExample="true"
@@ -87,7 +87,7 @@
            selectByExampleQueryId="true" >
       <property name="useActualColumnNames" value="false"/>
       <property name="ignoreQualifiersAtRuntime" value="true"/>
-    </table>
+    </table>-->
 
   </context>
 
