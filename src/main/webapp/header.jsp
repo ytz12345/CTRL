@@ -136,6 +136,9 @@
         </div><!-- .container-fluid -->
     </div><!-- .top-header-bar -->
 <script type="text/javascript">
+    if ('${message}' != ""){
+        alert('${message}');
+    }
     function isValidate() {
         var username = document.getElementById("username").value;
         var userpass = document.getElementById("userpass").value;
