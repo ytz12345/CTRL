@@ -112,10 +112,9 @@
 							    <label class="col-sm-4 control-label">课程名称(20个字符以内)</label>
 							    <div class="col-sm-8">
 								    <input type="text" name="courseName" minlength="1" maxlength="20" class="form-control" placeholder="请输入课程名称">
-							    </div>
-						    </div>
-								    <input type="hidden" name="courseTeacher" value=${sessionScope.user.userName}>
-						    </div>
+                                    <input type="hidden" name="courseTeacher" value=${sessionScope.user.userName}>
+                                </div>
+                            </div>
 						    <div class="form-group">
 							    <label class="col-sm-4 control-label">课程介绍(200个字符以内)</label>
 							    <div class="col-sm-8">
