@@ -111,24 +111,6 @@ public class UserController {
         return mav;
     }
 
-    @RequestMapping(value = "/introSubmit", method = RequestMethod.POST)
-    @ResponseBody
-    private ModelAndView passwordReset(@RequestParam(value = "userIntro") String userIntro,
-                                       @RequestParam(value = "uid") Integer uid,
-                                       User user, HttpSession session){
-        user = userService.getUserByID(uid);
-
-        ModelAndView mav = new ModelAndView("redirect:/user-setting.jsp");
-        user.setUserIntro(userIntro);
-        userService.updateUser(user);
-
-        User tempUser = (User)session.getAttribute("user");
-        tempUser.setUserIntro(userIntro);
-        session.setAttribute("user",tempUser);
-
-        return mav;
-    }
-
     @RequestMapping(value = "/outLogin")
     @ResponseBody
     private ModelAndView outLogin(HttpSession session){
@@ -226,14 +208,35 @@ public class UserController {
         return "teacher";
     }
 
+
+    @RequestMapping(value = "/introSubmit", method = RequestMethod.POST)
+    @ResponseBody
+    private ModelAndView passwordReset(@RequestParam(value = "userIntro") String userIntro,
+                                       @RequestParam(value = "uid") Integer uid,
+                                       User user, HttpSession session){
+        user = userService.getUserByID(uid);
+
+        ModelAndView mav = new ModelAndView("redirect:/user-setting.jsp");
+        user.setUserIntro(userIntro);
+        userService.updateUser(user);
+
+        User tempUser = (User)session.getAttribute("user");
+        tempUser.setUserIntro(userIntro);
+        session.setAttribute("user",tempUser);
+
+        return mav;
+    }
+
     //更新用户头像
     @RequestMapping(value = "/avatarReset", method = RequestMethod.POST)
     public String updateAvatar(@RequestParam(value = "uid2")int uid,
                                @RequestParam("avatarImageFile") CommonsMultipartFile avatarImageFile,
+                               HttpSession session,
                                HttpServletRequest request) throws IOException {
 
         User user = userService.getUserByID(uid);
         String avatarImagePath = commonPath.avatarPath;
+
 
         String filename = avatarImageFile.getOriginalFilename().toString();//获取文件名
         String suffix = filename.substring(filename.lastIndexOf(".") + 1);//获取原文件后缀名
@@ -255,6 +258,11 @@ public class UserController {
 
         user.setUserAvatar(imagePath);
         userService.updateUser(user);
+
+        User tempUser = (User)session.getAttribute("user");
+        tempUser.setUserAvatar(imagePath);
+        session.setAttribute("user",tempUser);
+
         return "user-setting";
     }
 }
