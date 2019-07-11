@@ -36,6 +36,26 @@
     <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
+    <!--获取url参数-->
+    <script type="text/javascript">
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = document.location.search.substr(1).match(reg);
+            if (r != null) return decodeURIComponent(r[2]);
+            return null;
+        }
+        if(getQueryString("message") != null){
+            alert(getQueryString("message"));
+        }
+    </script>
+
+    <script type="text/javascript">
+        function course_register(){
+            document.getElementById("loginclose").click();
+        }
+    </script>
+
+
     <script type="text/javascript">
         $(document).ready(function () {
             $("#course-img-modify").change(function () {
@@ -62,7 +82,7 @@
         }
     </script>
 
-    <script>
+    <script type="text/javascript">
         document.addEventListener("DOMContentLoaded", function() {
             let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
             let active = false;
@@ -105,7 +125,6 @@
     <header class="site-header">
 
         <%@ include file="header.jsp" %>
-
         <div class="nav-bar">
             <div class="container">
                 <div class="row">
@@ -273,10 +292,11 @@
                                         <div class="input-group input-group-sm">
                                             <input type="password" class="form-control" name="userPassword" placeholder="Password">
                                         </div>
-                                        <br />
+                                        <br/>
+                                        <p>没有账号？<a href="#" data-toggle="modal" onclick="course_register()" data-target="#myModal2">立即注册</a></p>
                                         <div class="modal-footer">
                                             <input class="btn btn-primary" id="login-btn" type="submit" value="登录">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                            <button type="button" id="loginclose" class="btn btn-secondary" data-dismiss="modal">关闭</button>
                                         </div>
                                     </form>
                                 </div>
