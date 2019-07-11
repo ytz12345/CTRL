@@ -63,9 +63,6 @@ script {
     overflow: hidden;
 }
 
-.model-user .model-img {
-    background-color: #17a369;
-}
 .model-img {
     display: table-cell;
     width: 208px;
@@ -514,4 +511,10 @@ input, button, textarea, select, optgroup, option {
 }
 .hidden-course{
     display: none;
+}
+
+.user-max{
+    width: 160px;
+    height: 160px;
+    border-radius: 50%
 }

@@ -139,7 +139,7 @@
                 <div class="author-box" style="margin-top: -30px;margin-left:100px">
                     <div class="author-info flex flex-wrap">
                         <div class="author-avatar" style="width: 300px">
-                            <img class="lazy" data-src="images/instructor.jpg" alt="" style="width: 300px; height: 300px">
+                            <img class="lazy" src="${teacher.userAvatar}" alt="" style="width: 300px; height: 300px">
 
                             <ul class="author-social-profile p-0 m-0 mt-3 d-flex flex-wrap align-items-center">
                                 <li style="margin-left: 37%"><a href="#"><i class="fa fa-facebook"></i></a></li>

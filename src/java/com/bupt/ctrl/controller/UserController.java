@@ -1,8 +1,6 @@
 package com.bupt.ctrl.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.bupt.ctrl.model.Comment;
+import com.bupt.ctrl.common.commonPath;
 import com.bupt.ctrl.service.CommentService;
 import com.bupt.ctrl.service.UserHasChapterService;
 import com.bupt.ctrl.model.Course;
@@ -17,16 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 @Controller
@@ -230,4 +225,34 @@ public class UserController {
         model.addAttribute("courseNum", courseNum);
         return "teacher";
     }
+
+    //更新用户头像
+/*    @RequestMapping(value = "/settingAvatar", method = RequestMethod.POST)
+    public String updateAvatar(@RequestParam(value = "uid2")int uid, @RequestParam("avatarImageFile") CommonsMultipartFile avatarImageFile, Course course, HttpServletRequest request) throws IOException {
+
+        User user = userService.getUserByID(uid);
+        String avatarImagePath = commonPath.imagePath;
+
+        String filename = avatarImageFile.getOriginalFilename();//获取文件名
+        String suffix = filename.substring(filename.lastIndexOf(".") + 1);//获取原文件后缀名
+
+        user.setUserImage(avatarImagePath + filename);
+
+        String preffix = String.valueOf(course.getCourseId());
+        String realImageName = preffix + "." + suffix;
+        String imagePath = avatarImagePath + realImageName;//图像上传完整路径
+
+        File imageFile = new File(imagePath);
+        //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
+
+        if (!imageFile.getParentFile().exists()) {
+            imageFile.getParentFile().mkdirs();
+        }
+
+        avatarImageFile.transferTo(imageFile);
+
+        user.setUserImage(imagePath);
+        userService.updateUser(user);
+        return "user-setting";
+    }*/
 }

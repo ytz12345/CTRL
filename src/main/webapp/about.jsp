@@ -146,7 +146,7 @@
 
                 <div class="col-12 col-md-6 col-lg-3">
                     <div class="team-member">
-                        <a href="teacher?teacher_id=${teacher.userId}"><img src="images/c-1.png" alt=""></a>
+                        <a href="teacher?teacher_id=${teacher.userId}"><img src="${teacher.userAvatar}" alt="" style="width: 180px; height: 180px"></a>
 
                         <h3><a href="teacher?teacher_id=${teacher.userId}">${teacher.userName}</a></h3>
                         <h4>${teacher.userIntro}</h4>

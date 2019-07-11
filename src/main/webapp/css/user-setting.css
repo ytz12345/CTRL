@@ -350,3 +350,9 @@ strong, b {
     margin-bottom: 5px;
     font-size: 12px;
 }
+
+.user-max{
+    width: 160px;
+    height: 160px;
+    border-radius: 50%
+}

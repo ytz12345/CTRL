@@ -181,7 +181,7 @@
                 <div class="author-box">
                     <div class="author-info flex flex-wrap">
                         <div class="author-avatar">
-                            <img class="lazy" data-src="images/instructor.jpg" alt="">
+                            <img class = "lazy" src="${teacher.userAvatar}" alt="">
 
                             <ul class="author-social-profile p-0 m-0 mt-3 d-flex flex-wrap align-items-center">
                                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -222,7 +222,7 @@
                                 <li class="comment">
                                     <article class="comment-body">
                                         <figure class="comment-author-avatar">
-                                            <img class="lazy" data-src="images/c-1.png" alt="">
+                                            <img class="lazy" src="${parent.parentCommentAndUser.user.userAvatar}" alt=""  style="width: 70px; height: 70px">
                                         </figure>
 
                                         <div class="comment-wrap">
@@ -312,7 +312,7 @@
                                                     <li class="comment">
                                                         <article class="comment-body">
                                                             <figure class="comment-author-avatar">
-                                                                <img class="lazy" data-src="images/c-1.png" alt="">
+                                                                <img class="lazy" data-src="${son.user.userAvatar}" alt="">
                                                             </figure>
 
                                                             <div class="comment-wrap">

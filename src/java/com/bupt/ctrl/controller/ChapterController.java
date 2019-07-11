@@ -35,13 +35,18 @@ public class ChapterController {
     @Autowired
     UserHasChapterService userHasChapterService;
     @RequestMapping("/singleChapter")
-    public String getSingleChapter(@RequestParam(value="chapter_id") Integer chapter_id,@RequestParam(value = "user_id") Integer user_id, Model model){
+    public String getSingleChapter(@RequestParam(value="chapter_id") Integer chapter_id,
+                                   @RequestParam(value="user_id",required = false) Integer user_id,
+                                   @RequestParam(value="teacher_id") Integer teacher_id,
+                                   Model model){
         Chapter chapter = chapterService.getChapter(chapter_id);
         model.addAttribute("chapter", chapter);
         Course course = courseService.getCourseByID(chapter.getCourseCourseId());
         model.addAttribute("course", course);
         Integer commentNum = commentService.getCommentNum(chapter_id);
         model.addAttribute("commentNum", commentNum);
+        User teacher = userService.getUserByID(teacher_id);
+        model.addAttribute("teacher", teacher);
         List<Comment> parentCommentList = commentService.getParentComment(chapter_id);
         System.out.println("parentCommentList Size: " + parentCommentList.size());
         List<GroupComment> groupCommentList = new ArrayList<>();

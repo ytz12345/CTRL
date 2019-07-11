@@ -160,4 +160,10 @@ public class User {
     public void setUserIntro(String userIntro) {
         this.userIntro = userIntro == null ? null : userIntro.trim();
     }
+
+    public String userAvatar;
+
+    public String getUserAvatar() {
+        return "images/1.jpg";
+    }
 }
