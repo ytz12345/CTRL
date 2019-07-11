@@ -44,4 +44,6 @@ public interface CourseService {
     //修改课程封面
     public int updateCourseImage(Course course);
 
+    public int getChapterNum(Integer course_id);
+
 }
