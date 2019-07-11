@@ -46,14 +46,21 @@ public class UserController {
     private ModelAndView register(User user) {
         logger.info("into");
 
-        ModelAndView mav = new ModelAndView("redirect:/register-failure_user.jsp");//指定用户已存在跳转页面
+        ModelAndView mav = new ModelAndView("index");//指定用户已存在跳转页面
+        String message = "注册失败！用户已存在！请重新注册!";
 
         User checkUser = userService.getUserByName(user.getUserName());
         if(checkUser != null){
-            return mav;
+            mav.addObject("message",message);//用户已存在
         }else{
-            if(userService.register(user) == 1) mav.setViewName("redirect:/register-success.jsp");//注册成功
-            else mav.setViewName("redirect:/register-failure.jsp");//用户插入数据库失败，注册失败
+            if(userService.register(user) == 1) {
+                message = "注册成功！";
+                mav.addObject("message",message);//注册成功
+            } else
+            {
+                message = "注册失败!";
+                mav.addObject("message",message);//注册失败
+            }
         }
         return mav;
     }
@@ -85,7 +92,10 @@ public class UserController {
             //mav.addObject("user", user);
             session.setAttribute("user",user);
         }else{
-            mav.setViewName("redirect:/login_failure.jsp");//登录失败跳转到失败界面
+            mav.setViewName("admin-login");
+            String message = "登录失败！用户名或密码错误！";
+            mav.addObject("message",message);
+            //mav.setViewName("redirect:/login_failure.jsp");//登录失败跳转到失败界面
         }
 
         return mav;
@@ -169,16 +179,18 @@ public class UserController {
 
         user = userService.checkLogin(user.getUserName(), user.getUserPassword());
 
-        ModelAndView mav = new ModelAndView("login_failure");
+        String c_id = String.valueOf(course_id);//转化course_id类型
+        String pri = "singleCourse?course_id=" + c_id;//原始页面
+        ModelAndView mav = new ModelAndView("redirect:" + pri);
         if(user != null){
             session.setAttribute("user",user);
-            String c_id = String.valueOf(course_id);//转化course_id类型
-            String success = "singleCourse?course_id=" + c_id;
-            mav.setViewName("redirect:/" + success);//调用singleCourse
             return mav;
         }else{
-            return mav;
+            String message = "登录失败！用户名或密码错误！";
+            mav.addObject("message", message);
         }
+
+        return mav;
     }
 
     @RequestMapping("/teacher")

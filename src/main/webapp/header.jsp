@@ -69,10 +69,11 @@
                                                             <div class="input-group input-group-sm">
                                                                 <input type="password" class="form-control" name="userPassword" placeholder="Password">
                                                             </div>
-                                                            <br />
+                                                            <br/>
+                                                            <p>没有账号？<a href="#" data-toggle="modal" onclick="loginmodelclose()" data-target="#myModal2">立即注册</a></p>
                                                             <div class="modal-footer">
                                                                 <input class="btn btn-primary" id="login-btn" type="submit" value="登录">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                                                <button type="button" id="loginmodalclose" class="btn btn-secondary" data-dismiss="modal">关闭</button>
                                                             </div>
                                                         </form>
                                                     </div><!-- #form-login -->
@@ -153,5 +154,8 @@
         } else {
             return true;
         }
+    }
+    function loginmodelclose(){
+        document.getElementById("loginmodalclose").click();
     }
 </script>

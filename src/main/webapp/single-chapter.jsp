@@ -124,7 +124,7 @@
         </header><!-- .site-header -->
         <input type="hidden" id="login_User_id" value="${sessionScope.user.userId}">
 <%--        <%--%>
-<%--            ActionContext actionContext = ActionContext.getContext();--%>
+<%--            ActionContext actionContext = ActionContext.getContext();--%>f
 <%--            Map session2 = actionContext.getSession();--%>
 <%--            int chapter_id = Integer.parseInt(request.getParameter("chapter_id"));--%>
 <%--            String login = request.getParameter("user_id");--%>
@@ -358,7 +358,7 @@
                                                                                             <input type="hidden" name="userUserId" value="${sessionScope.user.userId}">
                                                                                             <input type="hidden" name="teacherId" value="${teacher.userId}">
                                                                                                 <%--<input type="hidden" name="login_id" value="${sessionScope.user.userId}">这里的userId本来是login id--%>
-                                                                                            <input type="submit" value="send comment">
+                                                                                            <input type="submit" value="send comment" onclick="return hasLogin()">
                                                                                         </form><!-- .comment-form -->
                                                                                     </div><!-- .comment-respond -->
                                                                                 </div><!-- .comments-form -->
@@ -413,7 +413,7 @@
                                 <input type="hidden" name="userUserId" value="${sessionScope.user.userId}">
                                 <input type="hidden" name="teacherId" value="${teacher.userId}">
                                 <%--<input type="hidden" name="login_id" value="${sessionScope.user.userId}">这里的userId本来是login id--%>
-                                <input type="submit" value="send comment">
+                                <input type="submit" value="send comment" onclick="return hasLogin()">
                             </form><!-- .comment-form -->
                         </div><!-- .comment-respond -->
                     </div><!-- .comments-form -->
@@ -467,6 +467,14 @@
                         //成功回调
                     }
                 });
+        }
+
+        function hasLogin(){
+            var checkUsr = '${sessionScope.user}';
+            if (checkUsr == null){
+                alert("请先登录");
+                return false;
+            }
         }
     </script>
 </body>

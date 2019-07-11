@@ -131,6 +131,9 @@
 <!-- This page plugin js -->
 <!-- ============================================================== -->
 <script>
+    if ('${message}' != ""){
+        alert('${message}');
+    }
 
     $('[data-toggle="tooltip"]').tooltip();
     $(".preloader").fadeOut();
