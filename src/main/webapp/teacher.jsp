@@ -25,6 +25,44 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+            let active = false;
+
+            const lazyLoad = function() {
+                if (active === false) {
+                    active = true;
+
+                    setTimeout(function() {
+                        lazyImages.forEach(function(lazyImage) {
+                            if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+                                lazyImage.src = lazyImage.dataset.src;
+                                lazyImage.classList.remove("lazy");
+
+                                lazyImages = lazyImages.filter(function(image) {
+                                    return image !== lazyImage;
+                                });
+
+                                if (lazyImages.length === 0) {
+                                    document.removeEventListener("scroll", lazyLoad);
+                                    window.removeEventListener("resize", lazyLoad);
+                                    window.removeEventListener("orientationchange", lazyLoad);
+                                }
+                            }
+                        });
+
+                        active = false;
+                    }, 200);
+                }
+            };
+
+            document.addEventListener("scroll", lazyLoad);
+            window.addEventListener("resize", lazyLoad);
+            window.addEventListener("orientationchange", lazyLoad);
+        });
+    </script>
 </head>
 <body class="about-page">
 <div class="page-header">
@@ -101,7 +139,7 @@
                 <div class="author-box" style="margin-top: -30px;margin-left:100px">
                     <div class="author-info flex flex-wrap">
                         <div class="author-avatar" style="width: 300px">
-                            <img src="images/instructor.jpg" alt="" style="width: 300px; height: 300px">
+                            <img class="lazy" data-src="images/instructor.jpg" alt="" style="width: 300px; height: 300px">
 
                             <ul class="author-social-profile p-0 m-0 mt-3 d-flex flex-wrap align-items-center">
                                 <li style="margin-left: 37%"><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -111,10 +149,6 @@
                         </div>
                     </div>
                 </div>
-<%--                <div class="ezuca-video position-relative">--%>
-
-<%--                    <img src="images/video-screenshot.png" alt="" class="img-rounded">--%>
-<%--                </div><!-- .ezuca-video -->--%>
             </div><!-- .col -->
 
             <div class="col-12 col-lg-6 align-content-lg-stretch mt-5 mt-lg-0">
@@ -166,7 +200,7 @@
                 <div class="col-12 col-lg-6">
                     <div class="course-content flex flex-wrap justify-content-between align-content-lg-stretch">
                         <figure class="course-thumbnail">
-                            <a href="singleCourse?course_id=${course.courseId}"><img src="${course.courseImage}" alt=""></a>
+                            <a href="singleCourse?course_id=${course.courseId}"><img class="lazy" data-src="${course.courseImage}" alt=""></a>
                         </figure><!-- .course-thumbnail -->
 
                         <div class="course-content-wrap">

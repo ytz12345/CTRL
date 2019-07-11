@@ -27,6 +27,44 @@
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+            let active = false;
+
+            const lazyLoad = function() {
+                if (active === false) {
+                    active = true;
+
+                    setTimeout(function() {
+                        lazyImages.forEach(function(lazyImage) {
+                            if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+                                lazyImage.src = lazyImage.dataset.src;
+                                lazyImage.classList.remove("lazy");
+
+                                lazyImages = lazyImages.filter(function(image) {
+                                    return image !== lazyImage;
+                                });
+
+                                if (lazyImages.length === 0) {
+                                    document.removeEventListener("scroll", lazyLoad);
+                                    window.removeEventListener("resize", lazyLoad);
+                                    window.removeEventListener("orientationchange", lazyLoad);
+                                }
+                            }
+                        });
+
+                        active = false;
+                    }, 200);
+                }
+            };
+
+            document.addEventListener("scroll", lazyLoad);
+            window.addEventListener("resize", lazyLoad);
+            window.addEventListener("orientationchange", lazyLoad);
+        });
+    </script>
+
 </head>
 <body>
 <div class="hero-content">
@@ -188,7 +226,7 @@
                 <div class="col-12 col-lg-6">
                     <div class="course-content flex flex-wrap justify-content-between align-content-lg-stretch">
                         <figure class="course-thumbnail">
-                            <a href="singleCourse?course_id=${courseAndTeacher.course.courseId}"><img src="${courseAndTeacher.course.courseImage}" alt=""></a>
+                            <a href="singleCourse?course_id=${courseAndTeacher.course.courseId}"><img class="lazy" data-src="${courseAndTeacher.course.courseImage}" alt=""></a>
                         </figure><!-- .course-thumbnail -->
 
                         <div class="course-content-wrap">
@@ -296,7 +334,7 @@
                 <div class="col-12 col-md-6 col-lg-4 px-25">
                     <div class="course-content">
                         <figure class="course-thumbnail">
-                            <a href="singleCourse?course_id=${courseAndTeacher.course.courseId}"><img src="${courseAndTeacher.course.courseImage}" alt=""></a>
+                            <a href="singleCourse?course_id=${courseAndTeacher.course.courseId}"><img class="lazy" data-src="${courseAndTeacher.course.courseImage}" alt=""></a>
                         </figure><!-- .course-thumbnail -->
 
                         <div class="course-content-wrap">
@@ -341,59 +379,59 @@
 <section class="home-gallery">
     <div class="gallery-wrap flex flex-wrap">
         <div class="gallery-grid gallery-grid1x1">
-            <a href="#"><img src="images/a.jpg" alt=""></a>
+            <a href="#"><img src="images/a.jpg"></a>
         </div><!-- .gallery-grid -->
 
         <div class="gallery-grid gallery-grid1x1">
-            <a href="#"><img src="images/b.jpg" alt=""></a>
+            <a href="#"><img src="images/b.jpg"></a>
         </div><!-- .gallery-grid -->
 
         <div class="gallery-grid gallery-grid2x2">
-            <a href="#"><img src="images/c.jpg" alt=""></a>
+            <a href="#"><img src="images/c.jpg"></a>
         </div><!-- .gallery-grid -->
 
         <div class="gallery-grid gallery-grid1x1">
-            <a href="#"><img src="images/d.jpg" alt=""></a>
+            <a href="#"><img src="images/d.jpg"></a>
         </div><!-- .gallery-grid -->
 
         <div class="gallery-grid gallery-grid1x1">
-            <a href="#"><img src="images/e.jpg" alt=""></a>
+            <a href="#"><img src="images/e.jpg"></a>
         </div><!-- .gallery-grid -->
 
         <div class="gallery-grid gallery-grid2x1">
-            <a href="#"><img src="images/g.jpg" alt=""></a>
+            <a href="#"><img src="images/g.jpg"></a>
         </div><!-- .gallery-grid -->
 
         <div class="gallery-grid gallery-grid2x1">
-            <a href="#"><img src="images/h.jpg" alt=""></a>
+            <a href="#"><img src="images/h.jpg"></a>
         </div><!-- .gallery-grid -->
 
         <div class="gallery-grid gallery-grid1x1">
-            <a href="#"><img src="images/i.jpg" alt=""></a>
+            <a href="#"><img src="images/i.jpg"></a>
         </div><!-- .gallery-grid -->
 
         <div class="gallery-grid gallery-grid2x2 ">
-            <a href="#"><img src="images/j.jpg" alt=""></a>
+            <a href="#"><img src="images/j.jpg"></a>
         </div><!-- .gallery-grid -->
 
         <div class="gallery-grid gallery-grid1x1">
-            <a href="#"><img src="images/k.jpg" alt=""></a>
+            <a href="#"><img src="images/k.jpg"></a>
         </div><!-- .gallery-grid -->
 
         <div class="gallery-grid gallery-grid1x1">
-            <a href="#"><img src="images/l.jpg" alt=""></a>
+            <a href="#"><img src="images/l.jpg"></a>
         </div><!-- .gallery-grid -->
 
         <div class="gallery-grid gallery-grid2x1">
-            <a href="#"><img src="images/m.jpg" alt=""></a>
+            <a href="#"><img src="images/m.jpg"></a>
         </div><!-- .gallery-grid -->
 
         <div class="gallery-grid gallery-grid3x1">
-            <a href="#"><img src="images/n.jpg" alt=""></a>
+            <a href="#"><img src="images/n.jpg"></a>
         </div><!-- .gallery-grid -->
 
         <div class="gallery-grid gallery-grid1x1">
-            <a href="#"><img src="images/o.jpg" alt=""></a>
+            <a href="#"><img src="images/o.jpg"></a>
         </div><!-- .gallery-grid -->
     </div><!-- .gallery-wrap -->
 </section><!-- .home-gallery -->
