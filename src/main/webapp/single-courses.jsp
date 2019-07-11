@@ -183,7 +183,7 @@
             <div class="single-course-wrap">
                 <div class="course-info flex flex-wrap align-items-center">
                     <div class="course-author flex flex-wrap align-items-center mt-3">
-                        <img src="images/course-author.jpg" alt="">
+                        <img src="${teacher.userAvatar}" alt="">
 
                         <div class="author-wrap">
                             <label class="m-0">Teacher</label>
@@ -392,7 +392,7 @@
                                     <div class="entry-content">
                                         <ul class="p-0 m-0">
                                             <li class="flex flex-column flex-lg-row align-items-lg-center">
-                                                <span class="lecture-title"><a href="singleChapter?chapter_id=${chapter.chapterId}&user_id=${sessionScope.user.userId}">${chapter.chapterName}</a></span><span class="lectures-preview"></span><span class="lectures-time text-left text-lg-right"></span>
+                                                <span class="lecture-title"><a href="singleChapter?chapter_id=${chapter.chapterId}&user_id=${sessionScope.user.userId}&teacher_id=${teacher.userId}">${chapter.chapterName}</a></span><span class="lectures-preview"></span><span class="lectures-time text-left text-lg-right"></span>
                                             </li>
                                         </ul>
                                     </div>

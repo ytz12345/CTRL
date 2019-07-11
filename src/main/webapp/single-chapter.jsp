@@ -139,7 +139,7 @@
                 <div class="author-box">
                     <div class="author-info flex flex-wrap">
                         <div class="author-avatar">
-                            <img src="images/instructor.jpg" alt="">
+                            <img src="${teacher.userAvatar}" alt="">
 
                             <ul class="author-social-profile p-0 m-0 mt-3 d-flex flex-wrap align-items-center">
                                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -180,7 +180,7 @@
                                 <li class="comment">
                                     <article class="comment-body">
                                         <figure class="comment-author-avatar">
-                                            <img src="images/c-1.png" alt="">
+                                            <img src="${parent.parentCommentAndUser.user.userAvatar}" alt=""  style="width: 70px; height: 70px">
                                         </figure>
 
                                         <div class="comment-wrap">

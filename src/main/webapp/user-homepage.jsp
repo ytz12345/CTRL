@@ -107,7 +107,7 @@
                             <div class="panel-body">
                                 <div class="model-box model-user">
                                     <a class="model-img" href="/portal/setting.mooc">
-                                        <img src="images/XJP.jpg" class="user-max">
+                                        <img src="${sessionScope.user.userAvatar}" class="user-max">
                                     </a>
 
                                     <h3 class="model-title substr">${sessionScope.user.userName}
