@@ -64,11 +64,12 @@ public class UserController {
     private ModelAndView checkLogin(User user, HttpSession session){
         user = userService.checkLogin(user.getUserName(), user.getUserPassword());
 
-        ModelAndView mav = new ModelAndView("redirect:/index.jsp");
+        ModelAndView mav = new ModelAndView("index");
         if(user != null){
             session.setAttribute("user",user);
         }else{
-            mav.setViewName("redirect:/login_failure.jsp");//登录失败跳转到失败界面
+            String message = "用户名或密码错误！";
+            mav.addObject("message",message);
         }
 
         return mav;
