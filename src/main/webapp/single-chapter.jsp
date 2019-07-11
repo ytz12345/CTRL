@@ -35,7 +35,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="single-blog-post">
+<body class="single-blog-post" onbeforeunload="tip()">
 <%--    <%--%>
 <%--        class CmpComent implements Comparator<Comment>--%>
 <%--        {--%>
@@ -385,15 +385,23 @@
     <script type='text/javascript' src='js/custom.js'></script>
     <script>
         var vid = document.getElementById("video");
-        // vid.ontimeupdate = function() {timeUpdate()}
-        // function timeUpdate() {
-        //     document.getElementById('time').innerHTML = vid.currentTime;
-        // }
         function setCurTime() {
             vid.currentTime = ${userHasChapter.userHasLearned};
         }
-        function updatePro()
-        {
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#pgetp").hide();
+            }, 4000);
+            document.getElementById("demo").innerHTML =getMin();
+            document.getElementById("demo2").innerHTML =${userHasChapter.userHasLearned}-60*getMin();
+        });
+        $("#getPro").click(function(){
+            $("#pgetp").hide();
+        });
+        function getMin() {
+            return parseInt(${userHasChapter.userHasLearned/60});
+        }
+        function tip(){
             if(parseInt(vid.currentTime)!=0)
                 $.ajax({
                     url:'updateProgress',
@@ -403,27 +411,12 @@
                         chapter_id:${userHasChapter.chapterChapterId},
                         user_id:${userHasChapter.userUserId},
                         has_leared:parseInt(vid.currentTime)
-                    },   //后台 Request["data"] 得到rows.ModelID值
+                    },
                     success:function(result){
                         //成功回调
                     }
                 });
         }
-        $(document).ready(function () {
-            setTimeout(function () {
-                $("#pgetp").hide();
-            }, 4000);
-            document.getElementById("demo").innerHTML =getMin();
-            document.getElementById("demo2").innerHTML =${userHasChapter.userHasLearned}-60*getMin();
-            setInterval("updatePro()",5000);
-        });
-        $("#getPro").click(function(){
-            $("#pgetp").hide();
-        });
-        function getMin() {
-            return parseInt(${userHasChapter.userHasLearned/60});
-        }
-
     </script>
 </body>
 </html>
