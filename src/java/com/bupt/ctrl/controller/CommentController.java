@@ -51,18 +51,23 @@ public class CommentController {
     }
 
     @RequestMapping("/deleteComment")
-    private String deleteComment(@RequestParam(value="comment_id") int comment_id, Model model){
+    private String deleteComment(@RequestParam(value="comment_id") int comment_id,
+                                 @RequestParam("teacher_id") Integer teacherId,
+                                 Model model){
         Comment comment = commentService.getComment(comment_id);
         model.addAttribute("comment", comment);
         User user = userService.getUserByID(comment.getUserUserId());
         model.addAttribute("user", user);
+        model.addAttribute("teacherId", teacherId);
         return "delete-comment";
     }
 
     @RequestMapping("/deleteCommentConfirm")
-    private String deleteCommentConfirm(Comment comment, Model model){
+    private String deleteCommentConfirm(@RequestParam("teacherId") Integer teacherId,
+            Comment comment, Model model){
         model.addAttribute("chapterId", comment.getChapterChapterId());
         commentService.deleteComment(comment.getCommentId());
+        model.addAttribute("teacherId", teacherId);
         return "delete_success";
     }
 }

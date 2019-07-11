@@ -115,8 +115,9 @@
         <input type="hidden" name="commentContent" value="${comment.commentContent}">
         <input type="hidden" name="commentTime" value="${comment.commentTime}">
         <input type="hidden" name="commentTo" value="${comment.commentTo}">
+        <input type="hidden" name="teacherId" value="${teacherId}">
         <button type="submit" class="btn btn-danger btn-lg" style="margin-left: 43%" >确认</button>
-        <button type="button" class="btn btn-default btn-lg" style="margin-left: 5%" onclick="window.location.href='singleChapter?chapter_id=${comment.chapterChapterId}&user_id=${user.userId}'">返回</button>
+        <button type="button" class="btn btn-default btn-lg" style="margin-left: 5%" onclick="window.location.href='singleChapter?chapter_id=${comment.chapterChapterId}&user_id=${user.userId}&teacher_id=${teacherId}'">返回</button>
     </form>
 
     <script type='text/javascript' src='js/jquery.js'></script>

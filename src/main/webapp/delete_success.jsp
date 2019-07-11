@@ -12,7 +12,7 @@
 <%--    int user_id = Integer.parseInt(request.getParameter("user_id"));--%>
 <%--%>--%>
 <script language=JavaScript>
-    window.location="singleChapter?chapter_id=${chapterId}&user_id=${sessionScope.user.userId}"
+    window.location="singleChapter?chapter_id=${chapterId}&user_id=${sessionScope.user.userId}&teacher_id=${teacherId}"
 </script>
 </body>
 </html>

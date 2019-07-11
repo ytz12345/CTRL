@@ -279,7 +279,7 @@
 <%--                                                %>--%>
                                                 <c:choose>
                                                     <c:when test="${sessionScope.user.userId == parent.parentCommentAndUser.comment.userUserId or sessionScope.user.userIdentity == 0}">
-                                                        <a href="deleteComment?comment_id=${parent.parentCommentAndUser.comment.commentId}&teacher_id=${sessionScope.teacher_id}" style="background:red;color:#fff">delete</a><%--这里的userId本来是login id--%>
+                                                        <a href="deleteComment?comment_id=${parent.parentCommentAndUser.comment.commentId}&teacher_id=${teacher.userId}" style="background:red;color:#fff">delete</a><%--这里的userId本来是login id--%>
                                                     </c:when>
                                                 </c:choose>
 <%--                                                <%--%>
@@ -365,7 +365,7 @@
                                                                         <%--                                                            %>--%>
                                                                     <c:choose>
                                                                         <c:when test="${sessionScope.user.userId == son.comment.userUserId  or sessionScope.user.userIdentity == 0}">
-                                                                            <a href="deleteComment?comment_id=${son.comment.commentId}&teacher_id=${sessionScope.teacher_id}" style="background:red;color:#fff">delete</a><%--这里的userId本来是login id--%>
+                                                                            <a href="deleteComment?comment_id=${son.comment.commentId}&teacher_id=${teacher.userId}" style="background:red;color:#fff">delete</a><%--这里的userId本来是login id--%>
                                                                         </c:when>
 
                                                                     </c:choose>
