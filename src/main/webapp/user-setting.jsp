@@ -171,6 +171,8 @@
                             <div class="btn-group btn-tabs">
                                 <a id="basicInfo" class="btn-item current" href="javascript:void(0)"
                                    url="/portal/basicinfo.mooc">基本资料</a>
+                                <a id="introSet" class="btn-item" href="javascript:void(0)"
+                                   url="/portal/password.mooc">个人简介</a>
                                 <a id="passwordSet" class="btn-item" href="javascript:void(0)"
                                    url="/portal/password.mooc">密码设置</a>
                                 <a id="avatarSet" class="btn-item" href="javascript:void(0)"
@@ -222,17 +224,7 @@
                                             <label class="input-label">
                                                 简介
                                             </label>
-                                            <c:choose>
-                                                <c:when test="${sessionScope.user.userIntro == null}">
-                                                    <input id="userIntro" class="input-area"
-                                                           name="userIntro" placeholder="你是日本天皇还是个人练习生？">
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <input id="userIntro" class="input-area"
-                                                           name="userIntro"
-                                                           placeholder="${sessionScope.user.userIntro}">
-                                                </c:otherwise>
-                                            </c:choose>
+                                            <span class="input-cr">${sessionScope.user.userIntro}</span>
 
                                         </div>
 
@@ -241,9 +233,6 @@
                                                     class="icon-btn"><i
                                                     class="i-save"></i> </i>提交</a>
                                         </div>--%>
-                                        <div class="modal-footer">
-                                            <input class="btn btn-primary" id="submit-btn" type="submit" value="更新简介">
-                                        </div>
                                     </form>
                             </div>
 
@@ -882,6 +871,357 @@
                             </script>
                         </div>
 
+                        <div id="settingIntro" class="hidden-course">
+
+
+                            <div class="main-body p-basic-data">
+
+                                <form action="introSubmit" name="introSubmit" method="post">
+                                    <input type="hidden" class="form-control hidden-course" id="uid" name="uid"
+                                           value="${sessionScope.user.userId}">
+
+                                    <div class="input-group">
+                                        <label class="input-label">
+                                            简介
+                                        </label>
+                                        <c:choose>
+                                            <c:when test="${sessionScope.user.userIntro == null}">
+                                                <input id="userIntro" class="input-area"
+                                                       name="userIntro" placeholder="你是日本天皇还是个人练习生？">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <input id="userIntro" class="input-area"
+                                                       name="userIntro"
+                                                       placeholder="${sessionScope.user.userIntro}">
+                                            </c:otherwise>
+                                        </c:choose>
+
+                                    </div>
+
+                                    <%--<div class="btn-area">
+                                        <a id="saveBtn" href="javascript:void(0)" class="btn-icon"><i
+                                                class="icon-btn"><i
+                                                class="i-save"></i> </i>提交</a>
+                                    </div>--%>
+                                    <div class="modal-footer">
+                                        <input class="btn btn-primary" id="submit-btn" type="submit" value="更新简介">
+                                    </div>
+                                </form>
+                            </div>
+
+
+                            <!--提示语句-->
+
+                            <script type="text/javascript">
+                                $(function () {
+                                    //禁止学号复制粘贴剪切
+                                    $("#studentNo").bind("copy cut paste", function (e) {
+                                        //alert(111);
+                                        return false;
+                                    })
+                                    $("#studentNoTwo").bind("copy cut paste", function (e) {
+                                        //alert(111);
+                                        return false;
+                                    })
+                                    var inSchoolHide = $("#inSchoolHide").val();
+                                    showInSchool(inSchoolHide);
+
+                                    var inSchoolPre = $("#inSchoolPre").val();
+                                    if (inSchoolPre == 20) {
+                                        $(".in-school").removeClass("selected");
+                                        $(".in-school").addClass("disabled");
+                                        $(".in-school").each(function () {
+                                            if ($(this).attr("value") == 20) {
+                                                $(this).addClass("selected");
+                                                showInSchool(20);
+                                            }
+                                        });
+                                    }
+                                    var inSchoolVerify = $("#inSchoolVerify").val();
+                                    /*if (inSchoolVerify == 20){
+                                     $("#schoolYes").find("input").attr("disabled", "disabled");
+                                     $("#education").attr("disabled", "disabled");
+                                     }*/
+
+                                    var $education;
+                                    //if (inSchoolVerify != 20 || inSchoolHide == 10){
+                                    $education = $("#education").select();
+                                    //}
+                                    var $lastEducation = $("#lastEducation").select();
+                                    var $yearSelect, $monthSelect, $daySelect;
+                                    if (isMobile) {
+                                        $yearSelect = $("#year").change(function () {
+                                            var year = this.value;
+                                            var month = $monthSelect.val();
+                                            addDayOptions(year, month);
+                                        })
+                                        $monthSelect = $("#month").change(function () {
+                                            var year = this.value;
+                                            var month = $monthSelect.val();
+                                            addDayOptions(year, month);
+                                        })
+                                        $daySelect = $("#day");
+                                    } else {
+                                        $yearSelect = $("#year").select({
+                                            change: function () {
+                                                var year = this.value;
+                                                var month = $monthSelect.val();
+                                                addDayOptions(year, month);
+                                            }
+                                        });
+                                        $monthSelect = $("#month").select({
+                                            change: function () {
+                                                var month = this.value;
+                                                var year = $yearSelect.val();
+                                                addDayOptions(year, month);
+                                            }
+                                        });
+                                        $daySelect = new Dropkick("#day");
+                                    }
+
+                                    var $eduYear = $("#eduYear").select();
+                                    var $eduMonth = $("#eduMonth").select();
+
+
+                                    $(".input-r").click(
+                                        function () {
+                                            if ($(this).hasClass("disabled")) {
+                                                return;
+                                            }
+                                            var $radio = $(this).parent().parent().find("a.input-r")
+                                                .removeClass("selected");
+                                            $(this).addClass("selected");
+                                            if ($(this).hasClass("in-school")) {
+                                                showInSchool($(this).attr("value"));
+                                            }
+                                        });
+
+                                    function showInSchool(inschool) {
+                                        if (inschool == 10) {
+                                            $("#schoolYes").hide();
+                                            $(".pbd-tip").hide();
+                                            $("#schoolNo").show();
+                                            $("#userNameLabel").text("");
+                                        }
+                                        if (inschool == 20) {
+                                            $("#schoolNo").hide();
+                                            $("#schoolYes").show();
+                                            $(".pbd-tip").show();
+                                            $("#userNameLabel").text("*");
+                                        }
+                                    }
+
+                                    function addDayOptions(year, month) {
+                                        var days = getDaysInOneMonth(year, month);
+                                        if (isMobile) {
+                                            var html = "";
+                                            for (var i = 0; i < days; i++) {
+                                                html += "<option value='" + (i + 1) + "'>" + (i + 1) + "</option>";
+                                            }
+                                            $daySelect.html(html);
+                                        } else {
+                                            for (var x = $daySelect.options.length - 1; x >= 0; x--) {
+                                                $daySelect.remove(x);
+                                            }
+                                            for (var i = 0; i < days; i++) {
+                                                $daySelect.add(i + 1 + "", i);
+                                            }
+                                            $daySelect.refresh();
+                                        }
+                                    }
+
+                                    function getDaysInOneMonth(year, month) {
+                                        return parseInt(new Date(new Date(year, month, 1).getTime()
+                                            - (1000 * 3600 * 24)).getDate());
+                                    }
+
+                                    $("#saveBtn").click(function () {
+                                        var isPrivacy = $("#isPrivate").find("a.selected").attr("value");
+                                        var inSchool = $("#inSchool").find("a.selected").attr("value");
+                                        var education = $education.val();
+                                        var eduStartDate = $eduYear.val() + "" + $eduMonth.val();
+                                        var company = "";
+
+                                        var professional = $("#professional").val();
+                                        var schoolName = $("#schoolName").val();
+                                        var schoolId = $("#schoolId").val();
+                                        var studentNo = $("#studentNo").val();
+                                        var studentNoTwo = $("#studentNoTwo").val();
+                                        //alert(studentNoTwo)
+
+
+                                        var grade = $("#grade").val();
+                                        var department = $("#department").val();
+                                        var userName = $("#userName").val();
+                                        if (inSchool == 10) {
+                                            userName = $("#userName10").val();
+                                            education = $lastEducation.val();
+                                            professional = $("#lastProfessional").val();
+                                            company = $("#lastSchoolName").val();
+                                            //schoolId = $("#lastSchoolId").val();
+                                            studentNo = null;
+                                            grade = null;
+                                            department = null;
+                                            eduStartDate = null;
+                                        }
+                                        if (inSchool == 20 && inSchoolVerify != 20) {
+                                            if (schoolName == null || $.trim(schoolName) == "") {
+                                                $.dialog.error(Msg.get('userSet.schoolname.empty'));
+                                                return;
+                                            }
+                                            if (studentNo == null || $.trim(studentNo) == "") {
+                                                $.dialog.error(Msg.get('userSet.studentno.empty'));
+                                                return;
+                                            }
+                                            if (userName == null || $.trim(userName) == "") {
+                                                $.dialog.error(Msg.get('userSet.identity.name.empty'));
+                                                return;
+                                            }
+                                            if (typeof (studentNoTwo) != "undefined") {
+                                                if (studentNo != studentNoTwo) {
+                                                    $.dialog.error("两次输入的学号必须相同！");
+                                                    return;
+                                                }
+                                                if (studentNo.match(/[\uff00-\uffff]/g) || studentNoTwo.match(/[\uff00-\uffff]/g)) {
+                                                    $.dialog.error("请使用半角输入学号！");
+                                                    return;
+                                                }
+
+
+                                            }
+                                        }
+                                        var address = $("#address").val();
+                                        var nickName = $("#nickName").val();
+                                        if (nickName == null || $.trim(nickName) == "") {
+                                            $.dialog.error(Msg.get('userSet.nickName.empty'));
+                                            return;
+                                        }
+                                        if (userName.indexOf("<") > -1 || userName.indexOf(">") > -1) {
+                                            $.dialog.error(Msg.get('userSet.userName.check'));
+                                            return;
+                                        }
+                                        if (nickName.indexOf("<") > -1 || nickName.indexOf(">") > -1) {
+                                            $.dialog.error(Msg.get('userSet.nickName.check'));
+                                            return;
+                                        }
+                                        var mobile = $("#mobile").val();
+                                        var gender = $("#gender").find("a.selected").attr("value");
+                                        var year = $yearSelect.val();
+                                        var month = $monthSelect.val();
+                                        var day = $daySelect.value;
+                                        var selfIntro = $("#selfIntro").val();
+                                        var birthday = year + "-" + month + "-" + day;
+                                        $.ajax({
+                                            type: "post",
+                                            url: CONTEXTPATH + "/portal/savebaseinfo.mooc",
+                                            dataType: "json",
+                                            data: {
+                                                isPrivacy: isPrivacy,
+                                                inSchool: inSchool,
+                                                education: education,
+                                                professional: professional,
+                                                company: company,
+                                                schoolName: schoolName,
+                                                schoolId: schoolId,
+                                                address: address,
+                                                nickName: nickName,
+                                                userName: userName,
+                                                mobile: mobile,
+                                                gender: gender,
+                                                birthday: birthday,
+                                                selfIntro: selfIntro,
+                                                studentNo: studentNo,
+                                                department: department,
+                                                grade: grade,
+                                                eduStartDate: eduStartDate
+                                            },
+                                            success: function (response) {
+                                                if (response.userInfo && response.userInfo.inSchoolVerify == 20) {
+                                                    $("#loginType").text(response.coeusUser.loginName);
+                                                    $("#loginEmail").text(response.coeusUser.email);
+                                                    var dialog = $.dialog({
+                                                        title: Msg.get("userSet.save.tip"),
+                                                        content: $(".dialog")[0],
+                                                        width: "650px",
+                                                        lock: true,
+                                                        ok: function () {
+                                                        }
+                                                    });
+                                                } else if (response.userInfo && response.userInfo.inSchoolVerify == 40) {
+                                                    var dialog = $.dialog({
+                                                        title: Msg.get("userSet.save.tip"),
+                                                        content: $(".dialog")[2],
+                                                        width: "650px",
+                                                        lock: true,
+                                                        ok: function () {
+                                                        }
+                                                    });
+                                                } else if (response.isExist == 1) {
+                                                    var dialog = $.dialog({
+                                                        title: Msg.get("userSet.exist.tip"),
+                                                        content: $(".dialog")[1],
+                                                        width: "650px",
+                                                        lock: true
+                                                    });
+                                                } else if (response.isExist == 2) {
+                                                    var dialog = $.dialog({
+                                                        title: Msg.get("userSet.inschool.tip"),
+                                                        content: $(".dialog")[3],
+                                                        width: "650px",
+                                                        lock: true
+                                                    });
+                                                } else if (response.isExist == 3) {
+                                                    var dialog = $.dialog({
+                                                        title: Msg.get("userSet.exist.tip"),
+                                                        content: $(".dialog")[4],
+                                                        width: "650px",
+                                                        lock: true
+                                                    });
+                                                } else if (response.isExist == 4) {
+                                                    var dialog = $.dialog({
+                                                        title: Msg.get("userSet.exist.tip"),
+                                                        content: $(".dialog")[5],
+                                                        width: "650px",
+                                                        lock: true
+                                                    });
+                                                } else if (response.errMsg) {
+                                                    $.dialog.error(response.errMsg);
+                                                } else {
+                                                    $.dialog.success(Msg.get('userSet.basicInfo.success'));
+                                                }
+                                            },
+                                            error: function () {
+                                                $.dialog.error(Msg.get('userSet.basicInfo.error'));
+                                            }
+                                        });
+                                    });
+
+
+                                    //输入框搜索
+                                    $.ajax({
+                                        type: 'post',
+                                        url: CONTEXTPATH + '/school/initSchool.mooc',
+                                        dataType: "json",
+                                        success: function (response) {
+                                            $('#schoolName').autocomplete({
+                                                appendTo: null,
+                                                autoFocus: false,
+                                                source: response,
+                                                minLength: 0,
+                                                // callbacks
+                                                select: function (a, b, v) {
+                                                    $("#schoolId").val(b.item.schoolId);
+                                                }
+                                            }).focus(function () {
+                                                $(this).autocomplete("search");
+                                            });
+
+                                        }
+                                    })
+                                });
+                            </script>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -1027,17 +1367,27 @@
             $('#settingContent').removeClass('hidden-course');
             $('#settingPassword').addClass('hidden-course');
             $('#settingAvatar').addClass('hidden-course');
+            $('#settingIntro').addClass('hidden-course');
         }
         if (this.id == 'passwordSet') {
             $('#settingContent').addClass('hidden-course');
             $('#settingPassword').removeClass('hidden-course');
             $('#settingAvatar').addClass('hidden-course');
+            $('#settingIntro').addClass('hidden-course');
         }
         if (this.id == 'avatarSet') {
             $('#settingContent').addClass('hidden-course');
             $('#settingPassword').addClass('hidden-course');
             $('#settingAvatar').removeClass('hidden-course');
+            $('#settingIntro').addClass('hidden-course');
         }
+        if (this.id == 'introSet') {
+            $('#settingContent').addClass('hidden-course');
+            $('#settingPassword').addClass('hidden-course');
+            $('#settingAvatar').addClass('hidden-course');
+            $('#settingIntro').removeClass('hidden-course');
+        }
+
     });
 </script>
 <script>
