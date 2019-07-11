@@ -61,6 +61,44 @@
             $('#c-img').attr('src','#');
         }
     </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+            let active = false;
+
+            const lazyLoad = function() {
+                if (active === false) {
+                    active = true;
+
+                    setTimeout(function() {
+                        lazyImages.forEach(function(lazyImage) {
+                            if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+                                lazyImage.src = lazyImage.dataset.src;
+                                lazyImage.classList.remove("lazy");
+
+                                lazyImages = lazyImages.filter(function(image) {
+                                    return image !== lazyImage;
+                                });
+
+                                if (lazyImages.length === 0) {
+                                    document.removeEventListener("scroll", lazyLoad);
+                                    window.removeEventListener("resize", lazyLoad);
+                                    window.removeEventListener("orientationchange", lazyLoad);
+                                }
+                            }
+                        });
+
+                        active = false;
+                    }, 200);
+                }
+            };
+
+            document.addEventListener("scroll", lazyLoad);
+            window.addEventListener("resize", lazyLoad);
+            window.addEventListener("orientationchange", lazyLoad);
+        });
+    </script>
 </head>
 <body class="single-courses-page">
 <div class="page-header">
@@ -170,7 +208,7 @@
     <div class="row">
         <div class="col-12 offset-lg-1 col-lg-10">
             <div class="featured-image">
-                <img src="${course.courseImage}" alt="">
+                <img class="lazy" data-src="${course.courseImage}" alt="">
 
                 <div class="course-cost">Free</div>
             </div>
@@ -183,7 +221,7 @@
             <div class="single-course-wrap">
                 <div class="course-info flex flex-wrap align-items-center">
                     <div class="course-author flex flex-wrap align-items-center mt-3">
-                        <img src="images/course-author.jpg" alt="">
+                        <img class="lazy" data-src="images/course-author.jpg" alt="">
 
                         <div class="author-wrap">
                             <label class="m-0">Teacher</label>
@@ -269,7 +307,7 @@
                                             <input type="file" name="newCourseImage" id="course-img-modify"/>
                                         </div>
                                         <div class="form-group">
-                                            <img class="col-sm-6" id="c-img" src="#">
+                                            <img class="lazy" data-class="col-sm-6" id="c-img" src="#">
                                         </div>
                                         <div class="form-group">
                                             <button class='col-sm-2' type="submit" class="btn btn-default" style="background-color: #19c880; color: white;">更改</button>
@@ -345,7 +383,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-4 control-label">章节数</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" name="chapterNum" class="form-control" placeholder="请输入课程名称">
+                                                    <input type="text" name="chapterNum" oninput="value=value.replace(/[^\d]/g,'')" class="form-control" placeholder="请输入阿拉伯数字">
                                                 </div>
                                             </div>
                                             <div class="form-group">
