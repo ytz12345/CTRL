@@ -196,10 +196,10 @@
                         </div>
 
                         <div class="author-details">
-                            <h3 class="author-name">Ms. Lara Croft <span>Admin</span></h3>
+                            <h3 class="author-name">${teacher.userName}</h3>
 
                             <div class="entry-content mt-3">
-                                <p>Hi! I'm Colt. I'm a developer with a serious love for teaching. I've spent the last few years teaching people to program at 2 different immersive bootcamps where I've helped hundreds of people become web developers and change their lives. My graduates work at companies like Google, Salesforce, and Square.</p>
+                                <p>${teacher.userIntro}</p>
                             </div>
                         </div>
                     </div>
