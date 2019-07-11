@@ -111,13 +111,10 @@ public class UserController {
         user = userService.getUserByID(uid);
 
         ModelAndView mav = new ModelAndView("redirect:/user-setting.jsp");
-        if(!oldPassword.equals(user.getUserPassword())){
-            mav.setViewName("redirect:/passwordReset_failure.jsp");//登录失败跳转到失败界面
-        }else{
-            user.setUserPassword(newPassword);
-            userService.updateUser(user);
-            session.setAttribute("user.userPassword",newPassword);
-        }
+        user.setUserPassword(newPassword);
+        userService.updateUser(user);
+        session.setAttribute("user.userPassword",newPassword);
+
         return mav;
     }
 
