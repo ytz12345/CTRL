@@ -146,9 +146,9 @@
                             <h1 class="entry-title">${chapter.chapterName}</h1>
 
                             <div class="entry-meta flex justify-content-center align-items-center">
-                                <div class="post-author"><a href="#">${course.courseTeacher}</a></div>
+                                <div class="post-author"><a>${course.courseTeacher}</a></div>
 
-                                <div class="post-comments"><a href="#">评论数：${commentNum}</a></div>
+                                <div class="post-comments"><a>评论数：${commentNum}</a></div>
                             </div><!-- .entry-meta -->
                         </header><!-- .entry-header -->
                     </div><!-- .col -->

@@ -231,7 +231,7 @@
 
                     <div class="course-students mt-3">
                         <label class="m-0">Student</label>
-                        <div class="author-name"><a href="#">${studentNum} (REGISTERED)</a></div>
+                        <div class="author-name"><a>${studentNum} (REGISTERED)</a></div>
 
                     </div><!-- .course-students -->
                     <div class="buy-course mt-3">
