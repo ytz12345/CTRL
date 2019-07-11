@@ -133,7 +133,14 @@
                                     <h3 class="model-title substr">${sessionScope.user.userName}
 
                                     </h3>
-                                    <div class="model-intro">${sessionScope.user.userIntro}</div>
+                                    <c:choose>
+                                        <c:when test="${sessionScope.user.userIntro == null}">
+                                            <div class="model-intro">这个人很蔡，还没有写个人简介</div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="model-intro">${sessionScope.user.userIntro}</div>
+                                        </c:otherwise>
+                                    </c:choose>
 
                                 </div>
                             </div>
@@ -146,28 +153,9 @@
                                         <!-- 我的课程 -->
                                         <li class="nav-item open-up navItem" data-step="1" data-highlightclass="" data-intro="欢迎进入我的课程，这里汇集了您所有参加和收藏的课程。">
                                             <a class="nav-text current" href="getUserCourses?uid=${sessionScope.user.userId}"><i class="icon-nav icon-course"></i>我的课程</a>
-                                            <%--                         <ul class="sub-nav">
-                                                                         <li class="nav-item">
-                                                                             <a class="sub-nav-text current" content="myCourse" href="#">学习的课程</a>
-                                                                         </li>
-                                                                         <!-- 管理的课程 -->
 
-                                                                         <li class="nav-item">
-                                                                             <a class="sub-nav-text" href="#" content="favoriteCourse">收藏的课程</a>
-                                                                         </li>
-
-                                                                     </ul>--%>
                                         </li>
 
-
-
-                                        <!-- 我的笔记 -->
-                                        <%--<li class="nav-item" data-step="4" data-highlightclass="" data-intro="在课程学习的过程中您可以随时记录学习心得或疑惑,点击这里可以管理自己的课程笔记。">
-                                            <a class="nav-text" href="#" content="myNote"><i class="icon-nav icon-notes"></i>我的笔记</a>
-                                        </li>
-                                        <li class="nav-item" data-step="5" data-highlightclass="" data-intro="系统和授课教师会通过站内消息向您发送重要通知，您要及时关注这里的消息哦！">
-                                            <a class="nav-text" href="#" content="myMessage"><i class="icon-nav icon-msg"></i>消息<sup id="newMsg" style="display:none;">●</sup></a>
-                                        </li>--%>
                                         <li class="nav-item" data-step="6" data-highlightclass="" data-intro="在这里您可以进行密码管理,邮箱绑定,以及对基本资料信息进行维护。">
                                             <a class="nav-text" href="user-setting.jsp" content="mySetting"><i class="icon-nav icon-set"></i>个人设置</a>
                                         </li>
@@ -196,33 +184,6 @@
                             <input type="hidden" id="inSchoolVerify" value="20">
                             <div class="main-body p-basic-data">
 
-
-                                <%--<div id="isPrivate" class="input-group">
-                                    <label class="input-label">
-                                        隐私
-                                    </label>
-                                    <span class="input-cr"><a class="input-r " href="javascript:void(0)" value="2"></a>仅限自己</span>
-                                    <span class="input-cr"><a class="input-r selected" href="javascript:void(0)"
-                                                              value="1"></a>公开</span>
-                                </div>
-                                <div id="inSchool" class="input-group">
-                                    <label class="input-label">
-                                        是否在校生
-                                    </label>
-                                    <input type="hidden" id="inSchoolHide" value="20">
-
-
-                                    <span class="input-cr">
-					<a class="input-r in-school selected disabled" href="javascript:void(0)" value="20"></a>
-					在校生
-				</span>
-                                    <span class="input-cr">
-					<a class="input-r in-school disabled" href="javascript:void(0)" value="10"></a>
-					非在校生
-				</span>
-
-
-                                </div>--%>
                                 <div id="schoolYes">
 
                                     <div class="input-group">
@@ -232,7 +193,6 @@
 
 
                                     <div class="input-group">
-
                                         <label class="input-label">
                                             登录名
                                         </label>
@@ -242,801 +202,38 @@
                                     </div>
                                     <div class="input-group">
                                         <label class="input-label">
-                                            简介
+                                            用户身份
                                         </label>
-                                        <span class="input-cr">${sessionScope.user.userIntro}</span>
+                                        <c:if test="${sessionScope.user.userIdentity == 1}">
+                                            <span class="input-cr">学生</span>
+                                        </c:if>
+                                        <c:if test="${sessionScope.user.userIdentity == 2}">
+                                            <span class="input-cr">教师</span>
+                                        </c:if>
                                         <input id="studentNo" type="hidden" value="1145141919">
                                     </div>
 
-
-
-                                    <%--<div class="input-group">
-                                        <label class="input-label">
-                                            在读学历
-                                        </label>
-                                        <!--<div class="dk-select select" id="dk0-education"><div class="dk-selected" tabindex="0" id="dk0-combobox" aria-live="assertive" aria-owns="dk0-listbox" role="combobox">---请选择---</div><ul class="dk-select-options" id="dk0-listbox" role="listbox" aria-expanded="false"><li class="dk-option  dk-option-selected" data-value="" role="option" aria-selected="true" id="dk0-">---请选择---</li><li class="dk-option " data-value="08" role="option" aria-selected="false" id="dk0-08">初中</li><li class="dk-option " data-value="10" role="option" aria-selected="false" id="dk0-10">高中</li><li class="dk-option " data-value="20" role="option" aria-selected="false" id="dk0-20">专科</li><li class="dk-option " data-value="30" role="option" aria-selected="false" id="dk0-30">本科</li><li class="dk-option " data-value="40" role="option" aria-selected="false" id="dk0-40">硕士</li><li class="dk-option " data-value="50" role="option" aria-selected="false" id="dk0-50">博士</li></ul></div>
-                                        -->
-                                        <select id="education" class="select" data-dkcacheid="0">
-                                            <option value="">---请选择---</option>
-
-                                            <option value="08">
-                                                初中
-                                            </option>
-
-                                            <option value="10">
-                                                高中
-                                            </option>
-
-                                            <option value="20">
-                                                专科
-                                            </option>
-
-                                            <option value="30">
-                                                本科
-                                            </option>
-
-                                            <option value="40">
-                                                硕士
-                                            </option>
-
-                                            <option value="50">
-                                                博士
-                                            </option>
-
-                                        </select>
-                                    </div>
-                                    <div class="input-group">
-                                        <label class="input-label">
-                                            所在院系
-                                        </label>
-                                        <input id="department" type="text" class="input-text" value="" maxlength="50">
-                                    </div>
-                                    <div class="input-group">
-                                        <label class="input-label">
-                                            所学专业
-                                        </label>
-                                        <input id="professional" type="text" class="input-text" value="" maxlength="50">
-                                    </div>
-                                    <div class="input-group">
-                                        <label class="input-label">
-                                            所在年级
-                                        </label>
-                                        <input id="grade" type="text" class="input-text" value="" maxlength="10">
-                                    </div>
-                                    <div class="input-group">
-                                        <label class="input-label">
-                                            入学时间
-                                        </label>
-                                        <select id="eduYear" class="select date-select">
-
-                                            <option value="2000">
-                                                2000
-                                            </option>
-
-                                            <option value="2001">
-                                                2001
-                                            </option>
-
-                                            <option value="2002">
-                                                2002
-                                            </option>
-
-                                            <option value="2003">
-                                                2003
-                                            </option>
-
-                                            <option value="2004">
-                                                2004
-                                            </option>
-
-                                            <option value="2005">
-                                                2005
-                                            </option>
-
-                                            <option value="2006">
-                                                2006
-                                            </option>
-
-                                            <option value="2007">
-                                                2007
-                                            </option>
-
-                                            <option value="2008">
-                                                2008
-                                            </option>
-
-                                            <option value="2009">
-                                                2009
-                                            </option>
-
-                                            <option value="2010">
-                                                2010
-                                            </option>
-
-                                            <option value="2011">
-                                                2011
-                                            </option>
-
-                                            <option value="2012">
-                                                2012
-                                            </option>
-
-                                            <option value="2013">
-                                                2013
-                                            </option>
-
-                                            <option value="2014">
-                                                2014
-                                            </option>
-
-                                            <option value="2015">
-                                                2015
-                                            </option>
-
-                                            <option value="2016">
-                                                2016
-                                            </option>
-
-                                            <option value="2017">
-                                                2017
-                                            </option>
-
-                                            <option value="2018">
-                                                2018
-                                            </option>
-
-                                            <option selected="selected" value="2019">
-                                                2019
-                                            </option>
-
-                                            <option value="2020">
-                                                2020
-                                            </option>
-
-                                            <option value="2021">
-                                                2021
-                                            </option>
-
-                                            <option value="2022">
-                                                2022
-                                            </option>
-
-                                            <option value="2023">
-                                                2023
-                                            </option>
-
-                                            <option value="2024">
-                                                2024
-                                            </option>
-
-                                            <option value="2025">
-                                                2025
-                                            </option>
-
-                                            <option value="2026">
-                                                2026
-                                            </option>
-
-                                            <option value="2027">
-                                                2027
-                                            </option>
-
-                                            <option value="2028">
-                                                2028
-                                            </option>
-
-                                        </select>
-                                        <span class="to-text">年</span>
-                                        <select id="eduMonth" class="select date-select">
-
-                                            <option value="01">
-                                                01
-                                            </option>
-
-                                            <option value="02">
-                                                02
-                                            </option>
-
-                                            <option value="03">
-                                                03
-                                            </option>
-
-                                            <option value="04">
-                                                04
-                                            </option>
-
-                                            <option value="05">
-                                                05
-                                            </option>
-
-                                            <option selected="selected" value="06">
-                                                06
-                                            </option>
-
-                                            <option value="07">
-                                                07
-                                            </option>
-
-                                            <option value="08">
-                                                08
-                                            </option>
-
-                                            <option value="09">
-                                                09
-                                            </option>
-
-                                            <option value="10">
-                                                10
-                                            </option>
-
-                                            <option value="11">
-                                                11
-                                            </option>
-
-                                            <option value="12">
-                                                12
-                                            </option>
-
-                                        </select>
-                                        <span class="to-text">月</span>
-                                    </div>--%>
                                 </div>
-                               <%-- <div id="schoolNo" style="display: none;">
-                                    <div class="input-group">
-                                        <label class="input-label">好大学ID</label>
-                                        <span class="input-cr">6232884097</span>
-                                    </div>
-
-                                    <div class="input-group">
-                                        <label class="input-label">
-                                            <b id="userNameLabel">*</b>真实姓名
-                                        </label>
-                                        <input id="userName10" type="text" class="input-text" value="张瑞年" maxlength="50">
-                                    </div>
-                                    <div class="input-group">
-                                        <label class="input-label">
-                                            毕业学校
-                                        </label>
-                                        <input id="lastSchoolName" type="text" class="input-text" value=""
-                                               maxlength="50">
-                                        <input id="lastSchoolId" type="hidden" class="input-text" value="102">
-                                    </div>
-                                    <div class="input-group">
-                                        <label class="input-label">
-                                            最后学历
-                                        </label>
-                                        <select id="lastEducation" class="select">
-                                            <option value="">---请选择---</option>
-
-                                            <option value="08">
-                                                初中
-                                            </option>
-
-                                            <option value="10">
-                                                高中
-                                            </option>
-
-                                            <option value="20">
-                                                专科
-                                            </option>
-
-                                            <option value="30">
-                                                本科
-                                            </option>
-
-                                            <option value="40">
-                                                硕士
-                                            </option>
-
-                                            <option value="50">
-                                                博士
-                                            </option>
-
-                                        </select>
-                                    </div>
-                                    <div class="input-group">
-                                        <label class="input-label">
-                                            毕业专业
-                                        </label>
-                                        <input id="lastProfessional" type="text" class="input-text" value=""
-                                               maxlength="50">
-                                    </div>
-                                </div>
-                                <div class="input-group">
-                                    <label class="input-label">
-                                        通讯地址
-                                    </label>
-                                    <input id="address" type="text" class="input-text input-address" value=""
-                                           placeholder="请填写完整的通讯地址，确保您能收到我们邮寄的证书" maxlength="100">
-                                </div>
-                                <div class="input-group">
-                                    <label class="input-label">
-                                        昵称
-                                    </label>
-                                    <input id="nickName" type="text" class="input-text" value="张瑞年" maxlength="50">
-                                </div>
-                                <div class="input-group">
-                                    <label class="input-label">
-                                        手机
-                                    </label>
-                                    <input id="mobile" type="text" class="input-text" value="" maxlength="20">
-                                </div>
-                                <div id="gender" class="input-group">
-                                    <label class="input-label">
-                                        性别
-                                    </label>
-                                    <span class="input-cr"><a class="input-r " href="javascript:void(0)" value="1"></a>男</span>
-                                    <span class="input-cr"><a class="input-r " href="javascript:void(0)" value="2"></a>女</span>
-                                    <span class="input-cr"><a class="input-r selected" href="javascript:void(0)"
-                                                              value="0"></a>保密</span>
-                                </div>
-                                <div class="input-group">
-                                    <label class="input-label">
-                                        生日
-                                    </label>
-                                    <select id="year" class="select date-select">
-
-                                        <option value="1950">
-                                            1950
-                                        </option>
-
-                                        <option value="1951">
-                                            1951
-                                        </option>
-
-                                        <option value="1952">
-                                            1952
-                                        </option>
-
-                                        <option value="1953">
-                                            1953
-                                        </option>
-
-                                        <option value="1954">
-                                            1954
-                                        </option>
-
-                                        <option value="1955">
-                                            1955
-                                        </option>
-
-                                        <option value="1956">
-                                            1956
-                                        </option>
-
-                                        <option value="1957">
-                                            1957
-                                        </option>
-
-                                        <option value="1958">
-                                            1958
-                                        </option>
-
-                                        <option value="1959">
-                                            1959
-                                        </option>
-
-                                        <option value="1960">
-                                            1960
-                                        </option>
-
-                                        <option value="1961">
-                                            1961
-                                        </option>
-
-                                        <option value="1962">
-                                            1962
-                                        </option>
-
-                                        <option value="1963">
-                                            1963
-                                        </option>
-
-                                        <option value="1964">
-                                            1964
-                                        </option>
-
-                                        <option value="1965">
-                                            1965
-                                        </option>
-
-                                        <option value="1966">
-                                            1966
-                                        </option>
-
-                                        <option value="1967">
-                                            1967
-                                        </option>
-
-                                        <option value="1968">
-                                            1968
-                                        </option>
-
-                                        <option value="1969">
-                                            1969
-                                        </option>
-
-                                        <option value="1970">
-                                            1970
-                                        </option>
-
-                                        <option value="1971">
-                                            1971
-                                        </option>
-
-                                        <option value="1972">
-                                            1972
-                                        </option>
-
-                                        <option value="1973">
-                                            1973
-                                        </option>
-
-                                        <option value="1974">
-                                            1974
-                                        </option>
-
-                                        <option value="1975">
-                                            1975
-                                        </option>
-
-                                        <option value="1976">
-                                            1976
-                                        </option>
-
-                                        <option value="1977">
-                                            1977
-                                        </option>
-
-                                        <option value="1978">
-                                            1978
-                                        </option>
-
-                                        <option value="1979">
-                                            1979
-                                        </option>
-
-                                        <option value="1980">
-                                            1980
-                                        </option>
-
-                                        <option value="1981">
-                                            1981
-                                        </option>
-
-                                        <option value="1982">
-                                            1982
-                                        </option>
-
-                                        <option value="1983">
-                                            1983
-                                        </option>
-
-                                        <option value="1984">
-                                            1984
-                                        </option>
-
-                                        <option value="1985">
-                                            1985
-                                        </option>
-
-                                        <option value="1986">
-                                            1986
-                                        </option>
-
-                                        <option value="1987">
-                                            1987
-                                        </option>
-
-                                        <option value="1988">
-                                            1988
-                                        </option>
-
-                                        <option value="1989">
-                                            1989
-                                        </option>
-
-                                        <option selected="selected" value="1990">
-                                            1990
-                                        </option>
-
-                                        <option value="1991">
-                                            1991
-                                        </option>
-
-                                        <option value="1992">
-                                            1992
-                                        </option>
-
-                                        <option value="1993">
-                                            1993
-                                        </option>
-
-                                        <option value="1994">
-                                            1994
-                                        </option>
-
-                                        <option value="1995">
-                                            1995
-                                        </option>
-
-                                        <option value="1996">
-                                            1996
-                                        </option>
-
-                                        <option value="1997">
-                                            1997
-                                        </option>
-
-                                        <option value="1998">
-                                            1998
-                                        </option>
-
-                                        <option value="1999">
-                                            1999
-                                        </option>
-
-                                        <option value="2000">
-                                            2000
-                                        </option>
-
-                                        <option value="2001">
-                                            2001
-                                        </option>
-
-                                        <option value="2002">
-                                            2002
-                                        </option>
-
-                                        <option value="2003">
-                                            2003
-                                        </option>
-
-                                        <option value="2004">
-                                            2004
-                                        </option>
-
-                                        <option value="2005">
-                                            2005
-                                        </option>
-
-                                        <option value="2006">
-                                            2006
-                                        </option>
-
-                                        <option value="2007">
-                                            2007
-                                        </option>
-
-                                        <option value="2008">
-                                            2008
-                                        </option>
-
-                                        <option value="2009">
-                                            2009
-                                        </option>
-
-                                        <option value="2010">
-                                            2010
-                                        </option>
-
-                                        <option value="2011">
-                                            2011
-                                        </option>
-
-                                        <option value="2012">
-                                            2012
-                                        </option>
-
-                                        <option value="2013">
-                                            2013
-                                        </option>
-
-                                        <option value="2014">
-                                            2014
-                                        </option>
-
-                                        <option value="2015">
-                                            2015
-                                        </option>
-
-                                        <option value="2016">
-                                            2016
-                                        </option>
-
-                                        <option value="2017">
-                                            2017
-                                        </option>
-
-                                        <option value="2018">
-                                            2018
-                                        </option>
-
-                                        <option value="2019">
-                                            2019
-                                        </option>
-
-                                    </select>
-                                    <span class="to-text">年</span>
-                                    <select id="month" class="select date-select">
-
-                                        <option value="01">
-                                            01
-                                        </option>
-
-                                        <option value="02">
-                                            02
-                                        </option>
-
-                                        <option value="03">
-                                            03
-                                        </option>
-
-                                        <option value="04">
-                                            04
-                                        </option>
-
-                                        <option value="05">
-                                            05
-                                        </option>
-
-                                        <option value="06">
-                                            06
-                                        </option>
-
-                                        <option value="07">
-                                            07
-                                        </option>
-
-                                        <option value="08">
-                                            08
-                                        </option>
-
-                                        <option value="09">
-                                            09
-                                        </option>
-
-                                        <option value="10">
-                                            10
-                                        </option>
-
-                                        <option value="11">
-                                            11
-                                        </option>
-
-                                        <option value="12">
-                                            12
-                                        </option>
-
-                                    </select>
-                                    <span class="to-text">月</span>
-                                    <select id="day" class="select date-select">
-
-                                        <option value="1">
-                                            1
-                                        </option>
-
-                                        <option value="2">
-                                            2
-                                        </option>
-
-                                        <option value="3">
-                                            3
-                                        </option>
-
-                                        <option value="4">
-                                            4
-                                        </option>
-
-                                        <option value="5">
-                                            5
-                                        </option>
-
-                                        <option value="6">
-                                            6
-                                        </option>
-
-                                        <option value="7">
-                                            7
-                                        </option>
-
-                                        <option value="8">
-                                            8
-                                        </option>
-
-                                        <option value="9">
-                                            9
-                                        </option>
-
-                                        <option value="10">
-                                            10
-                                        </option>
-
-                                        <option value="11">
-                                            11
-                                        </option>
-
-                                        <option value="12">
-                                            12
-                                        </option>
-
-                                        <option value="13">
-                                            13
-                                        </option>
-
-                                        <option value="14">
-                                            14
-                                        </option>
-
-                                        <option value="15">
-                                            15
-                                        </option>
-
-                                        <option value="16">
-                                            16
-                                        </option>
-
-                                        <option value="17">
-                                            17
-                                        </option>
-
-                                        <option value="18">
-                                            18
-                                        </option>
-
-                                        <option value="19">
-                                            19
-                                        </option>
-
-                                        <option value="20">
-                                            20
-                                        </option>
-
-                                        <option value="21">
-                                            21
-                                        </option>
-
-                                        <option value="22">
-                                            22
-                                        </option>
-
-                                        <option value="23">
-                                            23
-                                        </option>
-
-                                        <option value="24">
-                                            24
-                                        </option>
-
-                                        <option value="25">
-                                            25
-                                        </option>
-
-                                        <option value="26">
-                                            26
-                                        </option>
-
-                                        <option value="27">
-                                            27
-                                        </option>
-
-                                        <option value="28">
-                                            28
-                                        </option>
-
-                                    </select>
-                                    <span class="to-text">日</span>
-                                </div>--%>
                                     <form action="introSubmit" name="introSubmit" method="post">
                                         <input type="hidden" class="form-control hidden-course" id="uid" name="uid"
                                                value="${sessionScope.user.userId}">
 
                                         <div class="input-group">
                                             <label class="input-label">
-                                                更新简介
+                                                简介
                                             </label>
-                                            <input id="userIntro" class="input-area"
-                                                   name="userIntro" placeholder="告诉我们您的情况，例如您的工作，感兴趣的事情以及您希望通过学习课程达到什么目标。">
+                                            <c:choose>
+                                                <c:when test="${sessionScope.user.userIntro == null}">
+                                                    <input id="userIntro" class="input-area"
+                                                           name="userIntro" placeholder="你是日本天皇还是个人练习生？">
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <input id="userIntro" class="input-area"
+                                                           name="userIntro"
+                                                           placeholder="${sessionScope.user.userIntro}">
+                                                </c:otherwise>
+                                            </c:choose>
+
                                         </div>
 
                                         <%--<div class="btn-area">
@@ -1045,82 +242,12 @@
                                                     class="i-save"></i> </i>提交</a>
                                         </div>--%>
                                         <div class="modal-footer">
-                                            <input class="btn btn-primary" id="submit-btn" type="submit" value="提交">
+                                            <input class="btn btn-primary" id="submit-btn" type="submit" value="更新简介">
                                         </div>
                                     </form>
                             </div>
 
-                            <!--
-                            <div class="dialog ui-dialog-public ui-dialog-form">
-                                <div class="dialog-form-courseList">
-                                    <div class="input-group">
-                                        <span class="print-text print-tip"><i class="icon-right"></i>提交成功，您的在校认证已通过！</span>
-                                    </div>
-                                    <p class="public-tip">登录时您可以采用方式：</p>
 
-                                    <div class="input-group">
-                                        <label class="input-label">登录名：</label>
-                                        <span class="print-text" id="loginType"></span>
-                                    </div>
-
-                                    <div class="input-group">
-                                        <label class="input-label">邮　箱：</label>
-                                        <span class="print-text" id="loginEmail"></span>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="dialog ui-dialog-public ui-dialog-form">
-                                <div class="dialog-form-courseList">
-                                    <div class="input-group">
-                                        <span class="print-text print-tip"><i class="icon-e-point"></i>您填写的学生身份已被其他账号使用！</span>
-                                    </div>
-                                    <p class="public-tip">请确认您的学号、姓名、学校是否填写正确；</p>
-                                    <p class="public-tip">如果正确无误，请用填写的学生身份登录；</p>
-                                </div>
-                            </div>
-                            <div class="dialog ui-dialog-public ui-dialog-form">
-                                <div class="dialog-form-courseList">
-                                    <div class="input-group">
-                                        <span class="print-text print-tip"><i class="icon-right"></i>提交成功，您的在校认证在审核中！</span>
-                                    </div>
-                                    <p class="public-tip" style="padding-left:20px;"><i class="icon-tip"></i>审核通过后我们会发消息通知您。</p>
-
-                                </div>
-                            </div>
-                            <div class="dialog ui-dialog-public ui-dialog-form">
-                                <div class="dialog-form-courseList">
-                                    <div class="input-group">
-                                        <span class="print-text print-tip"><i class="icon-right"></i>在校认证失败！</span>
-                                    </div>
-                                    <p class="public-tip" style="padding-left:20px;"><i class="icon-tip"></i>您填写的姓名与教务处系统中的姓名不一致，有疑问请联系学校教务处。</p>
-
-                                </div>
-                            </div>
-
-                            <div class="dialog ui-dialog-public ui-dialog-form">
-                                <div class="dialog-form-courseList">
-                                    <div class="input-group">
-                                        <span class="print-text print-tip"><i class="icon-e-point"></i>您填写的学生信息未被学校录入进去！</span>
-                                    </div>
-                                    <p class="public-tip">请确认您的学号、姓名、学校是否填写正确；</p>
-                                    <p class="public-tip">如果正确无误，请联系学校录入您的学生信息。</p>
-
-                                </div>
-                            </div>
-
-                            <div class="dialog ui-dialog-public ui-dialog-form">
-                                <div class="dialog-form-courseList">
-                                    <div class="input-group">
-                                        <span class="print-text print-tip"><i class="icon-e-point"></i>您填写的学生信息已被学校录入，现已被激活！</span>
-                                    </div>
-
-                                    <p class="public-tip">请您重新登录，您的学生信息将自动被录入</p>
-
-                                </div>
-                            </div>
-                            -->
                             <!--提示语句-->
 
                             <script type="text/javascript">
@@ -1611,24 +738,17 @@
 
                         <div id="settingAvatar" class="hidden-course">
 
-
                             <div class="main-body p-pwd-set">
 
                                 <form action="passwordReset" name="passwordReset" method="post">
-
-                                    <%--   <input type="text" class="form-control hidden-course" name="userName" placeholder="${sessionScope.user.userName}">
-                                       <input type="text" class="form-control hidden-course" name="userPassword" placeholder="${sessionScope.user.userPassword}">
-   --%>
-                                    <input type="hidden" class="form-control hidden-course" id="uid" name="uid"
-                                           value="${sessionScope.user.userId}">
-                                    <div class="input-group">
-                                        <label class="input-label"><b>*</b>当前密码</label>
-                                        <input id="newAvatar" type="password" class="input-text"
-                                               name="newAvatar">
-                                        <span class="public-tip"><i class=""></i></span>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" style="padding-top: 15px">选择头像</label>
+                                        <div class="col-sm-4">
+                                            <input type="file" name="courseImageFile" id="course-img"/>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <input class="btn btn-primary" id="updateAvatar" type="submit" value="更换">
+                                        <input class="btn btn-primary" type="submit" value="提交">
                                     </div>
                                 </form>
 
@@ -1903,17 +1023,17 @@
         if (this.id == 'basicInfo') {
             $('#settingContent').removeClass('hidden-course');
             $('#settingPassword').addClass('hidden-course');
-            $('#passwordReset').addClass('hidden-course');
+            $('#settingAvatar').addClass('hidden-course');
         }
         if (this.id == 'passwordSet') {
             $('#settingContent').addClass('hidden-course');
             $('#settingPassword').removeClass('hidden-course');
-            $('#passwordReset').addClass('hidden-course');
+            $('#settingAvatar').addClass('hidden-course');
         }
         if (this.id == 'avatarSet') {
             $('#settingContent').addClass('hidden-course');
             $('#settingPassword').addClass('hidden-course');
-            $('#passwordReset').removeClass('hidden-course');
+            $('#settingAvatar').removeClass('hidden-course');
         }
     });
 </script>

@@ -110,10 +110,18 @@
                                         <img src="images/XJP.jpg" class="user-max">
                                     </a>
 
-                                    <h3 class="model-title substr" title="张瑞年">${sessionScope.user.userName}
+                                    <h3 class="model-title substr">${sessionScope.user.userName}
 
                                     </h3>
-                                    <div class="model-intro" title="北京邮电大学">${sessionScope.user.userIntro}</div>
+                                    </h3>
+                                    <c:choose>
+                                        <c:when test="${sessionScope.user.userIntro == null}">
+                                            <div class="model-intro">这个人很蔡，还没有写个人简介</div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="model-intro">${sessionScope.user.userIntro}</div>
+                                        </c:otherwise>
+                                    </c:choose>
 
                                 </div>
                             </div>
