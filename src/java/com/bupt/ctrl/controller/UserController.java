@@ -55,7 +55,6 @@ public class UserController {
             if(userService.register(user) == 1) mav.setViewName("redirect:/register-success.jsp");//注册成功
             else mav.setViewName("redirect:/register-failure.jsp");//用户插入数据库失败，注册失败
         }
-
         return mav;
     }
 
