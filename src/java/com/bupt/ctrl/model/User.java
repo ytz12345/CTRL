@@ -178,7 +178,7 @@ public class User {
      * @mbggenerated Thu Jul 11 11:15:57 CST 2019
      */
     public String getUserAvatar() {
-        return userAvatar;
+        return userAvatar == null ? "images/defaultAvatar.jpg" : userAvatar;
     }
 
     /**
