@@ -39,4 +39,8 @@ public class UserHasChapterServiceImpl implements UserHasChapterService {
         criteria.andChapterChapterIdEqualTo(userHasChapter.getChapterChapterId());
         userHasChapterMapper.updateByExampleSelective(userHasChapter,userHasChapterExample);
     }
+
+    public void insertHasLearned(UserHasChapter userHasChapter){
+        userHasChapterMapper.insert(userHasChapter);
+    }
 }

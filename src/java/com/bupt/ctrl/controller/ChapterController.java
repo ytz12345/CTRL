@@ -67,12 +67,12 @@ public class ChapterController {
         }
 
         //添加学习进度
-        UserHasChapter userHasChapter=userHasChapterService.getHasLearned(user_id,chapter_id);
-        if(userHasChapter != null){
-            model.addAttribute("userHasChapter",userHasChapter);
+        if(user_id!=null){
+            UserHasChapter userHasChapter=userHasChapterService.getHasLearned(user_id,chapter_id);
+            if(userHasChapter != null){
+                model.addAttribute("userHasChapter",userHasChapter);
+            }
         }
-
-
         model.addAttribute("groupCommentList", groupCommentList);
         System.out.println("groupCommentList Size:    " + groupCommentList.size());
         return "single-chapter";
@@ -121,14 +121,18 @@ public class ChapterController {
 
     //更新进度
     @RequestMapping(value = "/updateProgress", method = RequestMethod.POST)
-    public void updeteProgress(@RequestParam(value = "chapter_id") Integer chapter_id,@RequestParam(value = "user_id") Integer user_id,@RequestParam(value = "has_leared") Integer has_learned){
+    public void updateProgress(@RequestParam(value = "chapter_id") Integer chapter_id,@RequestParam(value = "user_id") Integer user_id,@RequestParam(value = "has_learned") Integer has_learned){
         System.out.print("has_learnt  ");
         System.out.println(has_learned);
         UserHasChapter userHasChapter=new UserHasChapter();
         userHasChapter.setUserHasLearned(has_learned);
         userHasChapter.setChapterChapterId(chapter_id);
         userHasChapter.setUserUserId(user_id);
-        userHasChapterService.setHasLearned(userHasChapter);
+        UserHasChapter userHasChapter2=userHasChapterService.getHasLearned(user_id,chapter_id);
+        if(userHasChapter2!=null)
+            userHasChapterService.setHasLearned(userHasChapter);
+        else
+            userHasChapterService.insertHasLearned(userHasChapter);
         System.out.println(has_learned);
     }
 }

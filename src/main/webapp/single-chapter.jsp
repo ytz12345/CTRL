@@ -128,10 +128,15 @@
                     </video>
                     <!-- 修改为视频 -->
                 </div><!-- .featured-image -->
-                <p id="pgetp">
-                    上次看到 <span id="demo"></span>:<span id="demo2"></span>
-                    <a onclick="setCurTime()" href="#" id="getPro">跳转播放</a>
-                </p>
+                <c:choose>
+                    <c:when test="${userHasChapter!=null}">
+                        <p id="pgetp">
+                            上次看到 <span id="demo"></span>:<span id="demo2"></span>
+                            <a onclick="setCurTime()" href="#" id="getPro">跳转播放</a>
+                        </p>
+                    </c:when>
+                </c:choose>
+
             </div><!-- .col -->
         </div><!-- .row -->
 
@@ -401,16 +406,21 @@
         function getMin() {
             return parseInt(${userHasChapter.userHasLearned/60});
         }
+    </script>
+    <script>
+
+        var vid2 = document.getElementById("video");
         function tip(){
-            if(parseInt(vid.currentTime)!=0)
+            //event.returnValue="确定离开当前页面吗？";
+            if(parseInt(vid2.currentTime)!=0)
                 $.ajax({
                     url:'updateProgress',
                     type:'post',
                     dataType:'json',
                     data:{
-                        chapter_id:${userHasChapter.chapterChapterId},
-                        user_id:${userHasChapter.userUserId},
-                        has_leared:parseInt(vid.currentTime)
+                        chapter_id:${chapter.chapterId},
+                        user_id:${sessionScope.user.userId},
+                        has_learned:parseInt(vid2.currentTime)
                     },
                     success:function(result){
                         //成功回调

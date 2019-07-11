@@ -14,5 +14,8 @@ public interface UserHasChapterService {
 
     //更新进度
     void setHasLearned(UserHasChapter userHasChapter);
+
+    //插入进度
+    void insertHasLearned(UserHasChapter userHasChapter);
 }
 
