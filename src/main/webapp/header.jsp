@@ -12,6 +12,7 @@
     <script src="https://?ile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  
 </head>
 <div class="top-header-bar">
         <div class="container-fluid">
@@ -79,8 +80,6 @@
                                             </div>
                                         </div>
                                     </div>
-    <%--                                <li><a href="register.jsp">Register</a></li>--%>
-    <%--                                <li><a href="register.jsp">Register</a></li>--%>
                                     <li><a href="#" data-toggle="modal" data-target="#myModal2">Register</a></li>
                                     <!-- 模态框 -->
                                     <div class="modal fade" id="myModal2">
@@ -95,19 +94,19 @@
                                                 <div class="modal-body">
                                                     <div id="form-register">
                                                         <form action="register" name="register" method="post" onsubmit="return isValidate()" >
-                                                            <label class="register-lable">用户名：</label>
+                                                            <label class="register-lable">用户名(12个字符以内)：</label>
                                                             <div class="input-group input-group-sm">
-                                                                <input type="text" class="form-control" name="userName" id="username" placeholder="Username">
+                                                                <input type="text" class="form-control" minlength="1" maxlength="12" name="userName" id="username" placeholder="Username">
                                                             </div>
                                                             <br />
-                                                            <label class="register-lable">设置密码：</label>
+                                                            <label class="register-lable">设置密码(16个字符以内)：</label>
                                                             <div class="input-group input-group-sm">
-                                                                <input type="password" class="form-control" name="userPassword" id="userpassword" placeholder="Password">
+                                                                <input type="password" class="form-control" minlength="1" maxlength="16" name="userPassword" id="userpassword" placeholder="Password">
                                                             </div>
                                                             <br />
                                                             <label class="register-lable">确认密码：</label>
                                                             <div class="input-group input-group-sm">
-                                                                <input type="password" class="form-control" name="userpass1" id="userpass1" placeholder="Password">
+                                                                <input type="password" class="form-control" minlength="1" maxlength="16"name="userpass1" id="userpass1" placeholder="Password">
                                                             </div>
                                                             <br />
 
@@ -152,3 +151,19 @@
         }
     }</script>
 
+<script type="text/javascript">
+    function isValidate(form) {
+        var username=document.getElementById("username").value;
+        var userpass=document.getElementById("userpassword").value;
+        var userpass1=document.getElementById("userpass1").value;
+        user.Identity=$('input:radio[name="Identity"]:checked').val();
+        if(userpass != userpass1){
+            alert("两次输入的密码不一致，请重新输入！");
+            return false;
+        }else if(userpass.length<=0 || username.length<=0) {
+            alert("用户名以及密码不能为空，请重新输入！");
+            return false;
+        }else{
+            return true;
+        }
+    }</script>

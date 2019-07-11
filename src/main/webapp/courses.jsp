@@ -28,6 +28,44 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+            let active = false;
+
+            const lazyLoad = function() {
+                if (active === false) {
+                    active = true;
+
+                    setTimeout(function() {
+                        lazyImages.forEach(function(lazyImage) {
+                            if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+                                lazyImage.src = lazyImage.dataset.src;
+                                lazyImage.classList.remove("lazy");
+
+                                lazyImages = lazyImages.filter(function(image) {
+                                    return image !== lazyImage;
+                                });
+
+                                if (lazyImages.length === 0) {
+                                    document.removeEventListener("scroll", lazyLoad);
+                                    window.removeEventListener("resize", lazyLoad);
+                                    window.removeEventListener("orientationchange", lazyLoad);
+                                }
+                            }
+                        });
+
+                        active = false;
+                    }, 200);
+                }
+            };
+
+            document.addEventListener("scroll", lazyLoad);
+            window.addEventListener("resize", lazyLoad);
+            window.addEventListener("orientationchange", lazyLoad);
+        });
+    </script>
 </head>
 <body class="courses-page">
 <div class="page-header">
@@ -103,7 +141,7 @@
                         <div class="col-12 col-md-4 px-25">
                             <div class="course-content">
                                 <figure class="course-thumbnail">
-                                    <a href="singleCourse?course_id=${courseAndTeacher.course.courseId}"><img src="${courseAndTeacher.course.courseImage}" alt=""></a>
+                                    <a href="singleCourse?course_id=${courseAndTeacher.course.courseId}"><img class="lazy" data-src="${courseAndTeacher.course.courseImage}" alt=""></a>
                                 </figure>
 
                                 <div class="course-content-wrap">

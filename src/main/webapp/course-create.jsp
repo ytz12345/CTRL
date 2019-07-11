@@ -109,21 +109,21 @@
                                <img id="cou-img" src="#" class="col-sm-2">
                             </div>
 						    <div class="form-group">
-							    <label class="col-sm-4 control-label">课程名称</label>
+							    <label class="col-sm-4 control-label">课程名称(20个字符以内)</label>
 							    <div class="col-sm-8">
-								    <input type="text" name="courseName" class="form-control" placeholder="请输入课程名称">
+								    <input type="text" name="courseName" minlength="1" maxlength="20" class="form-control" placeholder="请输入课程名称">
 							    </div>
 						    </div>
 						    <div class="form-group">
-							    <label class="col-sm-4 control-label">授课教师</label>
+							    <label class="col-sm-4 control-label">授课教师(20个字符以内)</label>
 							    <div class="col-sm-8">
-								    <input type="text" name="courseTeacher" class="form-control" placeholder="请输入授课教师姓名">
+								    <input type="text" name="courseTeacher" minlength="1" maxlength="20" class="form-control" placeholder="请输入授课教师姓名">
 							    </div>
 						    </div>
 						    <div class="form-group">
-							    <label class="col-sm-4 control-label">课程介绍</label>
+							    <label class="col-sm-4 control-label">课程介绍(200个字符以内)</label>
 							    <div class="col-sm-8">
-								    <textarea row='5' name="courseIntro" class="form-control" placeholder="请输入课程介绍"></textarea>
+								    <textarea row='5' name="courseIntro" minlength="1" maxlength="200" class="form-control" placeholder="请输入课程介绍"></textarea>
 						    	</div>
 						    </div>
 						    <div class="form-group">

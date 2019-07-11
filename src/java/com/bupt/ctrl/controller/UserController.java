@@ -205,6 +205,8 @@ public class UserController {
 
     @RequestMapping("/teacher")
     public String getTeacher(@RequestParam(value="teacher_id") Integer teacher_id, Model model){
+
+        System.out.println(teacher_id);
         User teacher = userService.getUserByID(teacher_id);
         model.addAttribute("teacher", teacher);
         List<UserHasCourse> userHasCourseList = userHasCourseService.getCourseByTeacher(teacher_id);

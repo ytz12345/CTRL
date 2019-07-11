@@ -34,6 +34,44 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+            let active = false;
+
+            const lazyLoad = function() {
+                if (active === false) {
+                    active = true;
+
+                    setTimeout(function() {
+                        lazyImages.forEach(function(lazyImage) {
+                            if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+                                lazyImage.src = lazyImage.dataset.src;
+                                lazyImage.classList.remove("lazy");
+
+                                lazyImages = lazyImages.filter(function(image) {
+                                    return image !== lazyImage;
+                                });
+
+                                if (lazyImages.length === 0) {
+                                    document.removeEventListener("scroll", lazyLoad);
+                                    window.removeEventListener("resize", lazyLoad);
+                                    window.removeEventListener("orientationchange", lazyLoad);
+                                }
+                            }
+                        });
+
+                        active = false;
+                    }, 200);
+                }
+            };
+
+            document.addEventListener("scroll", lazyLoad);
+            window.addEventListener("resize", lazyLoad);
+            window.addEventListener("orientationchange", lazyLoad);
+        });
+    </script>
 </head>
 <body class="single-blog-post" onbeforeunload="tip()">
 <%--    <%--%>
@@ -148,7 +186,7 @@
                 <div class="author-box">
                     <div class="author-info flex flex-wrap">
                         <div class="author-avatar">
-                            <img src="images/instructor.jpg" alt="">
+                            <img class="lazy" data-src="images/instructor.jpg" alt="">
 
                             <ul class="author-social-profile p-0 m-0 mt-3 d-flex flex-wrap align-items-center">
                                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -189,7 +227,7 @@
                                 <li class="comment">
                                     <article class="comment-body">
                                         <figure class="comment-author-avatar">
-                                            <img src="images/c-1.png" alt="">
+                                            <img class="lazy" data-src="images/c-1.png" alt="">
                                         </figure>
 
                                         <div class="comment-wrap">
@@ -279,7 +317,7 @@
                                                     <li class="comment">
                                                         <article class="comment-body">
                                                             <figure class="comment-author-avatar">
-                                                                <img src="images/c-1.png" alt="">
+                                                                <img class="lazy" data-src="images/c-1.png" alt="">
                                                             </figure>
 
                                                             <div class="comment-wrap">
