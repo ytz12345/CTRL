@@ -110,10 +110,11 @@ public class UserController {
                                        User user, HttpSession session){
         user = userService.getUserByID(uid);
 
-        ModelAndView mav = new ModelAndView("redirect:/user-setting.jsp");
+        ModelAndView mav = new ModelAndView("redirect:/index.jsp");
         user.setUserPassword(newPassword);
         userService.updateUser(user);
-        session.setAttribute("user.userPassword",newPassword);
+        session.setAttribute("user",user);
+        outLogin(session);
 
         return mav;
     }
