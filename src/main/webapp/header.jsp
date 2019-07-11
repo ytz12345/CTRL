@@ -10,8 +10,6 @@
 
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
-    <script src="https://?ile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
 </head>
@@ -46,7 +44,7 @@
                             </c:when>
                             <c:otherwise>
                                 <ul class="flex justify-content-center align-items-center py-2 pt-md-0">
-                                    <li><a href="#" data-toggle="modal" data-target="#myModal">Login</a></li>
+                                    <li><a href="#" data-toggle="modal" data-target="#myModal" id="loginhere">Login</a></li>
                                     <div class="modal fade" id="myModal">
                                         <div class="modal-dialog modal-sm">
                                             <div class="modal-content">
