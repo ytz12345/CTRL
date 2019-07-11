@@ -123,16 +123,9 @@
         <div class="row">
             <div class="col-12 offset-lg-1 col-lg-10">
                 <div class="featured-image">
-                    <video width="940" height="530" controls="controls" id="video" autoplay="autoplay" >
+                    <video width="940" height="530" controls="controls" id="video">
                         <source src="${chapter.chapterVideo}" type="video/mp4" >
-                        <%
-
-                            //int min=userHasChapter.userHasLearned;
-                        %>
                     </video>
-
-<%--                    --%>
-
                     <!-- 修改为视频 -->
                 </div><!-- .featured-image -->
                 <p id="pgetp">
@@ -401,19 +394,20 @@
         }
         function updatePro()
         {
-            $.ajax({
-                url:'updateProgress',
-                type:'post',
-                dataType:'json',
-                data:{
-                    chapter_id:${userHasChapter.chapterChapterId},
-                    user_id:${userHasChapter.userUserId},
-                    has_leared:parseInt(vid.currentTime)
-                },   //后台 Request["data"] 得到rows.ModelID值
-                success:function(result){
-                    //成功回调
-                }
-            });
+            if(parseInt(vid.currentTime)!=0)
+                $.ajax({
+                    url:'updateProgress',
+                    type:'post',
+                    dataType:'json',
+                    data:{
+                        chapter_id:${userHasChapter.chapterChapterId},
+                        user_id:${userHasChapter.userUserId},
+                        has_leared:parseInt(vid.currentTime)
+                    },   //后台 Request["data"] 得到rows.ModelID值
+                    success:function(result){
+                        //成功回调
+                    }
+                });
         }
         $(document).ready(function () {
             setTimeout(function () {
