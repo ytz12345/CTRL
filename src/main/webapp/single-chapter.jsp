@@ -73,7 +73,7 @@
         });
     </script>
 </head>
-<body class="single-blog-post">
+<body class="single-blog-post" onbeforeunload="tip()">
 <%--    <%--%>
 <%--        class CmpComent implements Comparator<Comment>--%>
 <%--        {--%>
@@ -161,11 +161,15 @@
         <div class="row">
             <div class="col-12 offset-lg-1 col-lg-10">
                 <div class="featured-image">
-                    <video width="940" height="530" controls="controls">
+                    <video width="940" height="530" controls="controls" id="video">
                         <source src="${chapter.chapterVideo}" type="video/mp4" >
                     </video>
                     <!-- 修改为视频 -->
                 </div><!-- .featured-image -->
+                <p id="pgetp">
+                    上次看到 <span id="demo"></span>:<span id="demo2"></span>
+                    <a onclick="setCurTime()" href="#" id="getPro">跳转播放</a>
+                </p>
             </div><!-- .col -->
         </div><!-- .row -->
 
@@ -417,6 +421,40 @@
     <script type='text/javascript' src='js/masonry.pkgd.min.js'></script>
     <script type='text/javascript' src='js/jquery.collapsible.min.js'></script>
     <script type='text/javascript' src='js/custom.js'></script>
-
+    <script>
+        var vid = document.getElementById("video");
+        function setCurTime() {
+            vid.currentTime = ${userHasChapter.userHasLearned};
+        }
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#pgetp").hide();
+            }, 4000);
+            document.getElementById("demo").innerHTML =getMin();
+            document.getElementById("demo2").innerHTML =${userHasChapter.userHasLearned}-60*getMin();
+        });
+        $("#getPro").click(function(){
+            $("#pgetp").hide();
+        });
+        function getMin() {
+            return parseInt(${userHasChapter.userHasLearned/60});
+        }
+        function tip(){
+            if(parseInt(vid.currentTime)!=0)
+                $.ajax({
+                    url:'updateProgress',
+                    type:'post',
+                    dataType:'json',
+                    data:{
+                        chapter_id:${userHasChapter.chapterChapterId},
+                        user_id:${userHasChapter.userUserId},
+                        has_leared:parseInt(vid.currentTime)
+                    },
+                    success:function(result){
+                        //成功回调
+                    }
+                });
+        }
+    </script>
 </body>
 </html>

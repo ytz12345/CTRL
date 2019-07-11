@@ -12,7 +12,7 @@
     <script src="https://?ile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
-
+  
 </head>
 <div class="top-header-bar">
         <div class="container-fluid">
@@ -134,6 +134,22 @@
             </div><!-- .row -->
         </div><!-- .container-fluid -->
     </div><!-- .top-header-bar -->
+<script type="text/javascript">
+    function isValidate(form) {
+        var username=document.getElementById("username").value;
+        var userpass=document.getElementById("userpassword").value;
+        var userpass1=document.getElementById("userpass1").value;
+        user.Identity=$('input:radio[name="Identity"]:checked').val();
+        if(userpass != userpass1){
+            alert("两次输入的密码不一致，请重新输入！");
+            return false;
+        }else if(userpass.length<=0 || username.length<=0) {
+            alert("用户名以及密码不能为空，请重新输入！");
+            return false;
+        }else{
+            return true;
+        }
+    }</script>
 
 <script type="text/javascript">
     function isValidate(form) {

@@ -2,10 +2,7 @@ package com.bupt.ctrl.controller;
 
 import com.bupt.ctrl.model.*;
 import com.bupt.ctrl.common.commonPath;
-import com.bupt.ctrl.service.ChapterService;
-import com.bupt.ctrl.service.CommentService;
-import com.bupt.ctrl.service.CourseService;
-import com.bupt.ctrl.service.UserService;
+import com.bupt.ctrl.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,8 +32,10 @@ public class ChapterController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    UserHasChapterService userHasChapterService;
     @RequestMapping("/singleChapter")
-    public String getSingleChapter(@RequestParam(value="chapter_id") Integer chapter_id, Model model){
+    public String getSingleChapter(@RequestParam(value="chapter_id") Integer chapter_id,@RequestParam(value = "user_id") Integer user_id, Model model){
         Chapter chapter = chapterService.getChapter(chapter_id);
         model.addAttribute("chapter", chapter);
         Course course = courseService.getCourseByID(chapter.getCourseCourseId());
@@ -66,6 +65,14 @@ public class ChapterController {
             GroupComment groupComment = new GroupComment(parentCommentAndUser, sonCommentAndUserList);
             groupCommentList.add(groupComment);
         }
+
+        //添加学习进度
+        UserHasChapter userHasChapter=userHasChapterService.getHasLearned(user_id,chapter_id);
+        if(userHasChapter != null){
+            model.addAttribute("userHasChapter",userHasChapter);
+        }
+
+
         model.addAttribute("groupCommentList", groupCommentList);
         System.out.println("groupCommentList Size:    " + groupCommentList.size());
         return "single-chapter";
@@ -111,4 +118,23 @@ public class ChapterController {
         return mav;
     }
 
+    @RequestMapping("/getProgress")
+    public String getProgress(@RequestParam(value = "chapter_id") Integer chapter_id,@RequestParam(value = "user_id") Integer user_id,Model model){
+        UserHasChapter userHasChapter=userHasChapterService.getHasLearned(user_id,chapter_id);
+        model.addAttribute("userHasChapter",userHasChapter);
+        return "single-chapter";
+    }
+
+    //更新进度
+    @RequestMapping(value = "/updateProgress", method = RequestMethod.POST)
+    public void updeteProgress(@RequestParam(value = "chapter_id") Integer chapter_id,@RequestParam(value = "user_id") Integer user_id,@RequestParam(value = "has_leared") Integer has_learned){
+        System.out.print("has_learnt  ");
+        System.out.println(has_learned);
+        UserHasChapter userHasChapter=new UserHasChapter();
+        userHasChapter.setUserHasLearned(has_learned);
+        userHasChapter.setChapterChapterId(chapter_id);
+        userHasChapter.setUserUserId(user_id);
+        userHasChapterService.setHasLearned(userHasChapter);
+        System.out.println(has_learned);
+    }
 }
