@@ -7,12 +7,13 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
+
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
     <script src="https://?ile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
-  
+
 </head>
 <div class="top-header-bar">
         <div class="container-fluid">
@@ -93,7 +94,7 @@
                                                 <!-- 模态框主体 -->
                                                 <div class="modal-body">
                                                     <div id="form-register">
-                                                        <form action="register" name="register" method="post" onsubmit="return isValidate()" >
+                                                        <form action="register" name="registerform" id="registerform" method="post" >
                                                             <label class="register-lable">用户名(12个字符以内)：</label>
                                                             <div class="input-group input-group-sm">
                                                                 <input type="text" class="form-control" minlength="1" maxlength="12" name="userName" id="username" placeholder="Username">
@@ -101,12 +102,12 @@
                                                             <br />
                                                             <label class="register-lable">设置密码(16个字符以内)：</label>
                                                             <div class="input-group input-group-sm">
-                                                                <input type="password" class="form-control" minlength="1" maxlength="16" name="userPassword" id="userpassword" placeholder="Password">
+                                                                <input type="password" class="form-control" minlength="1" maxlength="16" name="userPassword" id="userpass" placeholder="Password">
                                                             </div>
                                                             <br />
                                                             <label class="register-lable">确认密码：</label>
                                                             <div class="input-group input-group-sm">
-                                                                <input type="password" class="form-control" minlength="1" maxlength="16"name="userpass1" id="userpass1" placeholder="Password">
+                                                                <input type="password" class="form-control" minlength="1" maxlength="16" name="reuserpass" id="reuserpass" placeholder="Password">
                                                             </div>
                                                             <br />
 
@@ -114,7 +115,7 @@
                                                             <label class="radio-inline"><input type="radio" name="userIdentity" value="2">教师</label>
 
                                                             <div class="modal-footer">
-                                                                <input class="btn btn-primary" id="register-btn" type="submit" value="注册">
+                                                                <input class="btn btn-primary" id="register-btn" type="submit" value="注册" onclick="return isValidate()">
 
                                                                 <input class="btn btn-secondary" id="reset-btn" type="reset" value="重置">
                                                             </div>
@@ -135,35 +136,19 @@
         </div><!-- .container-fluid -->
     </div><!-- .top-header-bar -->
 <script type="text/javascript">
-    function isValidate(form) {
-        var username=document.getElementById("username").value;
-        var userpass=document.getElementById("userpassword").value;
-        var userpass1=document.getElementById("userpass1").value;
-        user.Identity=$('input:radio[name="Identity"]:checked').val();
-        if(userpass != userpass1){
+    function isValidate() {
+        var username = document.getElementById("username").value;
+        var userpass = document.getElementById("userpass").value;
+        var reuserpass = document.getElementById("reuserpass").value;
+        if (userpass != reuserpass) {
             alert("两次输入的密码不一致，请重新输入！");
+            registerform.reuserpass.focus();
             return false;
-        }else if(userpass.length<=0 || username.length<=0) {
+        } else if (userpass.length <= 0 || username.length <= 0) {
             alert("用户名以及密码不能为空，请重新输入！");
             return false;
-        }else{
+        } else {
             return true;
         }
-    }</script>
-
-<script type="text/javascript">
-    function isValidate(form) {
-        var username=document.getElementById("username").value;
-        var userpass=document.getElementById("userpassword").value;
-        var userpass1=document.getElementById("userpass1").value;
-        user.Identity=$('input:radio[name="Identity"]:checked').val();
-        if(userpass != userpass1){
-            alert("两次输入的密码不一致，请重新输入！");
-            return false;
-        }else if(userpass.length<=0 || username.length<=0) {
-            alert("用户名以及密码不能为空，请重新输入！");
-            return false;
-        }else{
-            return true;
-        }
-    }</script>
+    }
+</script>
