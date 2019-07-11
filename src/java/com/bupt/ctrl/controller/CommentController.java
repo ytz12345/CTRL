@@ -30,11 +30,13 @@ public class CommentController {
     private UserService userService;
 
     @RequestMapping("/leaveComment")
-    private String leaveComment(Comment comment, Model model){
+    private String leaveComment(@RequestParam("teacherId") Integer teacherId,
+            Comment comment, Model model){
         model.addAttribute("chapterId", comment.getChapterChapterId());
         System.out.println("Chapter Id : " + comment.getChapterChapterId());
         model.addAttribute("userId", comment.getUserUserId());
         System.out.println("User Id : " + comment.getUserUserId());
+        model.addAttribute("teacherId", teacherId);
         String returnPage;
         if(comment.getUserUserId() == null){
             returnPage = "no_login";

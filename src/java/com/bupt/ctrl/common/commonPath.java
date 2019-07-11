@@ -5,4 +5,5 @@ public class commonPath {
 
     public final static String imagePath = "/file/image/";
     public final static String videoPath = "/file/video/";
+    public final static String avatarPath = "/file/avatar/";
 }

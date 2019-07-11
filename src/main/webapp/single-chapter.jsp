@@ -260,6 +260,7 @@
                                                                         <input type="hidden" name="commentTo" value="${parent.parentCommentAndUser.comment.commentId}">
                                                                         <input type="hidden" name="chapterChapterId" value="${chapter.chapterId}">
                                                                         <input type="hidden" name="userUserId" value="${sessionScope.user.userId}">
+                                                                        <input type="hidden" name="teacherId" value="${teacher.userId}">
                                                                             <%--<input type="hidden" name="login_id" value="${sessionScope.user.userId}">这里的userId本来是login id--%>
                                                                         <input type="submit" value="send comment">
                                                                     </form><!-- .comment-form -->
@@ -278,7 +279,7 @@
 <%--                                                %>--%>
                                                 <c:choose>
                                                     <c:when test="${sessionScope.user.userId == parent.parentCommentAndUser.comment.userUserId or sessionScope.user.userIdentity == 0}">
-                                                        <a href="deleteComment?comment_id=${parent.parentCommentAndUser.comment.commentId}" style="background:red;color:#fff">delete</a><%--这里的userId本来是login id--%>
+                                                        <a href="deleteComment?comment_id=${parent.parentCommentAndUser.comment.commentId}&teacher_id=${sessionScope.teacher_id}" style="background:red;color:#fff">delete</a><%--这里的userId本来是login id--%>
                                                     </c:when>
                                                 </c:choose>
 <%--                                                <%--%>
@@ -312,7 +313,7 @@
                                                     <li class="comment">
                                                         <article class="comment-body">
                                                             <figure class="comment-author-avatar">
-                                                                <img data-src="${son.user.userAvatar}" alt="">
+                                                                <img src="${son.user.userAvatar}" alt="">
                                                             </figure>
 
                                                             <div class="comment-wrap">
@@ -350,6 +351,7 @@
                                                                                             <input type="hidden" name="commentTo" value="${son.comment.commentId}">
                                                                                             <input type="hidden" name="chapterChapterId" value="${chapter.chapterId}">
                                                                                             <input type="hidden" name="userUserId" value="${sessionScope.user.userId}">
+                                                                                            <input type="hidden" name="teacherId" value="${teacher.userId}">
                                                                                                 <%--<input type="hidden" name="login_id" value="${sessionScope.user.userId}">这里的userId本来是login id--%>
                                                                                             <input type="submit" value="send comment">
                                                                                         </form><!-- .comment-form -->
@@ -363,7 +365,7 @@
                                                                         <%--                                                            %>--%>
                                                                     <c:choose>
                                                                         <c:when test="${sessionScope.user.userId == son.comment.userUserId  or sessionScope.user.userIdentity == 0}">
-                                                                            <a href="deleteComment?comment_id=${son.comment.commentId}" style="background:red;color:#fff">delete</a><%--这里的userId本来是login id--%>
+                                                                            <a href="deleteComment?comment_id=${son.comment.commentId}&teacher_id=${sessionScope.teacher_id}" style="background:red;color:#fff">delete</a><%--这里的userId本来是login id--%>
                                                                         </c:when>
 
                                                                     </c:choose>
@@ -404,6 +406,7 @@
                                 <input type="hidden" name="commentTo" value="<%=0%>">
                                 <input type="hidden" name="chapterChapterId" value="${chapter.chapterId}">
                                 <input type="hidden" name="userUserId" value="${sessionScope.user.userId}">
+                                <input type="hidden" name="teacherId" value="${teacher.userId}">
                                 <%--<input type="hidden" name="login_id" value="${sessionScope.user.userId}">这里的userId本来是login id--%>
                                 <input type="submit" value="send comment">
                             </form><!-- .comment-form -->

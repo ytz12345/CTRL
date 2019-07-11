@@ -81,7 +81,7 @@
                                 <li class="comment">
                                     <article class="comment-body">
                                         <figure class="comment-author-avatar">
-                                            <img src="images/c-1.png" alt="">
+                                            <img src="${user.userAvatar}" alt="">
                                         </figure>
 
                                         <div class="comment-wrap">

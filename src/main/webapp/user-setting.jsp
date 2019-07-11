@@ -126,7 +126,7 @@
                         <div class="panel">
                             <div class="panel-body">
                                 <div class="model-box model-user">
-                                    <a class="model-img" href="/portal/setting.mooc">
+                                    <a class="model-img">
                                         <img src="${sessionScope.user.userAvatar}" class="user-max">
                                     </a>
 
@@ -740,10 +740,11 @@
 
                             <div class="main-body p-pwd-set">
 
-                                <input type="hidden" class="form-control hidden-course" id="uid2" name="uid2"
-                                       value="${sessionScope.user.userId}">
-                                <form action="avatarReset" name="avatarReset" method="post">
+
+                                <form action="avatarReset" name="avatarReset" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
+                                        <input type="hidden" class="form-control hidden-course" id="uid2" name="uid2"
+                                               value="${sessionScope.user.userId}">
                                         <label class="col-sm-4 control-label" style="padding-top: 15px">选择头像</label>
                                         <div class="col-sm-4">
                                             <input type="file" name="avatarImageFile" id="course-img"/>

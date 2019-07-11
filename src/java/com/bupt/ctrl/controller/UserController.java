@@ -227,18 +227,20 @@ public class UserController {
     }
 
     //更新用户头像
-/*    @RequestMapping(value = "/settingAvatar", method = RequestMethod.POST)
-    public String updateAvatar(@RequestParam(value = "uid2")int uid, @RequestParam("avatarImageFile") CommonsMultipartFile avatarImageFile, Course course, HttpServletRequest request) throws IOException {
+    @RequestMapping(value = "/avatarReset", method = RequestMethod.POST)
+    public String updateAvatar(@RequestParam(value = "uid2")int uid,
+                               @RequestParam("avatarImageFile") CommonsMultipartFile avatarImageFile,
+                               HttpServletRequest request) throws IOException {
 
         User user = userService.getUserByID(uid);
-        String avatarImagePath = commonPath.imagePath;
+        String avatarImagePath = commonPath.avatarPath;
 
-        String filename = avatarImageFile.getOriginalFilename();//获取文件名
+        String filename = avatarImageFile.getOriginalFilename().toString();//获取文件名
         String suffix = filename.substring(filename.lastIndexOf(".") + 1);//获取原文件后缀名
 
-        user.setUserImage(avatarImagePath + filename);
+        user.setUserAvatar(avatarImagePath + filename);
 
-        String preffix = String.valueOf(course.getCourseId());
+        String preffix = String.valueOf(uid);
         String realImageName = preffix + "." + suffix;
         String imagePath = avatarImagePath + realImageName;//图像上传完整路径
 
@@ -251,8 +253,8 @@ public class UserController {
 
         avatarImageFile.transferTo(imageFile);
 
-        user.setUserImage(imagePath);
+        user.setUserAvatar(imagePath);
         userService.updateUser(user);
         return "user-setting";
-    }*/
+    }
 }

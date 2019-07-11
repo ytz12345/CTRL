@@ -15,7 +15,7 @@
     <font color="red">
         对不起，评论失败，请不要输入表情，点击
     </font>
-    <a href="singleChapter?chapter_id=${chapterId}&user_id=${userId}">返回</a>
+    <a href="singleChapter?chapter_id=${chapterId}&user_id=${userId}&teacher_id=${teacherId}">返回</a>
 </h2>
 </body>
 </html>
