@@ -46,7 +46,7 @@
                             </c:when>
                             <c:otherwise>
                                 <ul class="flex justify-content-center align-items-center py-2 pt-md-0">
-                                    <li><a href="#" data-toggle="modal" data-target="#myModal">Login</a></li>
+                                    <li><a href="#" data-toggle="modal" data-target="#myModal" id="loginhere">Login</a></li>
                                     <div class="modal fade" id="myModal">
                                         <div class="modal-dialog modal-sm">
                                             <div class="modal-content">
