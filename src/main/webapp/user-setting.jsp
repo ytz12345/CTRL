@@ -11,14 +11,11 @@
             var oldPassword = document.getElementById("oldPassword").value;
             var newPassword = document.getElementById("newPassword").value;
             var newPassword2 = document.getElementById("newPassword2").value;
-            if (newPassword != newPassword2) {
-                alert("两次输入的密码不一致，请重新输入！");
+            if (oldPassword != ${sessionScope.user.userPassword}) {
+                alert("凑弟弟你密码输错了");
                 return false;
-            } else if (newPassword.length <= 2 || newPassword.length >= 19) {
-                alert("密码长度不合规范，请重新输入！");
-                return false;
-            } else if (oldPassword != ${sessionScope.user.userName}) {
-                alert("${sessionScope.user.userName}");
+            } else if (newPassword != newPassword2) {
+                alert("确认密码都确认不来你是真滴⑧太行");
                 return false;
             } else {
                 return true;
