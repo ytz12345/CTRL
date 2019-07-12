@@ -343,7 +343,7 @@
                                     <c:forEach items="${courses}" var="each_course">
                                         <tr>
                                             <td>${each_course.courseId}</td>
-                                            <td>${each_course.courseName}</td>
+                                            <td><a href="singleCourse?course_id=${each_course.courseId}">${each_course.courseName}</a></td>
                                             <td>
                                                 <c:choose>
                                                     <c:when test="${each_course.coursePass==0}">待审核</c:when>
