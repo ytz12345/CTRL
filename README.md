@@ -1,2 +1,2 @@
-# CTRL
-ChangTiaoRapLanqiu
+# 精品课程网站（视频网站）
+基于SSM的小学期实践项目
