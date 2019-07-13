@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class IndexController {
+public class                                IndexController {
 
     @Autowired
     private CourseService courseService;
