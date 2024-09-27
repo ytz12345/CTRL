@@ -178,6 +178,8 @@ public class CourseController {
         model.addAttribute("course", course);
         List<Chapter> chapterList = chapterService.getChapterOfCourse(course_id);
         model.addAttribute("chapterList", chapterList);
+        int chapterNum = courseService.getChapterNum(course_id);
+        model.addAttribute("chapterNum", chapterNum);
 
         int tos = -1;
         User user = (User)requset.getSession().getAttribute("user");

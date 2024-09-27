@@ -152,9 +152,9 @@
                         <h4>${teacher.userIntro}</h4>
 
                         <ul class="p-0 m-0 d-flex justify-content-center align-items-center">
-                            <li><a href="href="teacher?teacher_id=${teacher.userId}""><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="href="teacher?teacher_id=${teacher.userId}""><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="href="teacher?teacher_id=${teacher.userId}""><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="teacher?teacher_id=${teacher.userId}"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="teacher?teacher_id=${teacher.userId}"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="teacher?teacher_id=${teacher.userId}"><i class="fa fa-twitter"></i></a></li>
                         </ul>
                     </div><!-- .team-member -->
                 </div>

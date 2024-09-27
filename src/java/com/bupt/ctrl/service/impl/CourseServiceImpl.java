@@ -1,12 +1,10 @@
 package com.bupt.ctrl.service.impl;
 
+import com.bupt.ctrl.dao.ChapterMapper;
 import com.bupt.ctrl.dao.CourseMapper;
 import com.bupt.ctrl.dao.UserHasCourseMapper;
-import com.bupt.ctrl.model.Course;
-import com.bupt.ctrl.model.CourseExample;
-import com.bupt.ctrl.model.UserHasCourseExample;
+import com.bupt.ctrl.model.*;
 import com.bupt.ctrl.service.CourseService;
-import com.bupt.ctrl.model.UserHasCourse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +18,9 @@ public class CourseServiceImpl implements CourseService {
 
     @Autowired
     UserHasCourseMapper userHasCourseMapper;
+
+    @Autowired
+    ChapterMapper chapterMapper;
     //获得所有课程
     public List<Course> getAllPass() {
         CourseExample courseExample = new CourseExample();
@@ -129,5 +130,12 @@ public class CourseServiceImpl implements CourseService {
         CourseExample.Criteria criteria = courseExample.createCriteria();
         criteria.andCourseIdEqualTo(course_id);
         courseMapper.deleteByExample(courseExample);
+    }
+
+    public int getChapterNum(Integer course_id){
+        ChapterExample chapterExample = new ChapterExample();
+        ChapterExample.Criteria criteria = chapterExample.createCriteria();
+        criteria.andCourseCourseIdEqualTo(course_id);
+        return chapterMapper.countByExample(chapterExample);
     }
 }

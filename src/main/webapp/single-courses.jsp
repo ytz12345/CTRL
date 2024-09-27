@@ -373,7 +373,7 @@
                                 </c:when>
                                 <c:otherwise>
                                     <h2>Curriculum For This Course</h2>
-                                    <div class="number-of-lectures">12 Lectures</div>
+                                    <div class="number-of-lectures">${chapterNum} Lectures</div>
                                 </c:otherwise>
                             </c:choose>
 
